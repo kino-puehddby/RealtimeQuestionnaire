@@ -8,6 +8,7 @@ def install_pods
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore’
     pod 'GoogleSignIn'
+    pod 'FirebaseUI/Google'
 end
 
 target 'RealtimeQuestionnaire' do

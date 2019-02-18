@@ -9,6 +9,7 @@
 import UIKit
 
 import Firebase
+import FirebaseUI
 import GoogleSignIn
 
 @UIApplicationMain
@@ -47,9 +48,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if GIDSignIn.sharedInstance()?.handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:]) != nil {
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
             return true
         }
-        return true
+        
+//        if GIDSignIn.sharedInstance()?.handle(url, sourceApplication: sourceApplication, annotation: [:]) != nil {
+//            return true
+//        }
+        
+        return false
     }
 }

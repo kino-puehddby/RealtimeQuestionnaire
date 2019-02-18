@@ -9,6 +9,7 @@
 import UIKit
 
 import FirebaseAuth
+import FirebaseUI
 import GoogleSignIn
 import RxSwift
 import RxCocoa
@@ -27,16 +28,26 @@ class LoginViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
+    var authUI: FUIAuth {
+        return FUIAuth.defaultAuthUI()!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
         bind()
+        
+        // TODO: パスワードを変更したい
+        // TODO: 後からGoogleと連携したい
+        // TODO: ログアウトの実装
     }
     
     func setup() {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
+        self.authUI.delegate = self
+        self.authUI.providers = [FUIGoogleAuth()]
         registeringEmail.delegate = self
         registeringPassword.delegate = self
     }
@@ -76,6 +87,7 @@ class LoginViewController: UIViewController {
                 GIDSignIn.sharedInstance()?.signIn()
             } else {
                 debugPrint("*** user not found ***")
+                // TODO: エラーハンドリング
             }
         }
     }
@@ -85,17 +97,9 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        registeringEmail.resignFirstResponder()
-        registeringPassword.resignFirstResponder()
-        return true
-    }
-}
-
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        // ログインエラーの場合（キャンセルも含む）
+        // login error (include cancel)
         if let error = error {
             debugPrint(error)
             return
@@ -107,21 +111,18 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             withIDToken: authentication.idToken,
             accessToken: authentication.accessToken
         )
-        linkToFirebase(credential: credential)
-        
+        signInFirebase(with: credential)
     }
     
-    private func linkToFirebase(credential: AuthCredential) {
-        // Firebaseにログインする
+    private func signInFirebase(with credential: AuthCredential) {
         Auth.auth().signInAndRetrieveData(with: credential) { [unowned self] (_, error) in
             if let error = error {
                 debugPrint(error)
-                // ログイン失敗
-                debugPrint("*** login failure by Google ***")
+                debugPrint("*** login failure to Firebase by Google ***")
+                // TODO: エラーハンドリング
                 return
             }
-            // ログイン成功
-            debugPrint("*** login succeeded by Google ***")
+            debugPrint("*** login succeeded to Firebase by Google ***")
             self.showMain()
         }
     }
@@ -129,4 +130,16 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         debugPrint("Sign off successfully")
     }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        registeringEmail.resignFirstResponder()
+        registeringPassword.resignFirstResponder()
+        return true
+    }
+}
+
+extension LoginViewController: FUIAuthDelegate {
+    
 }

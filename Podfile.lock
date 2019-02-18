@@ -52,6 +52,11 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseUI/Auth (5.2.2):
+    - Firebase/Auth (~> 5.0)
+  - FirebaseUI/Google (5.2.2):
+    - FirebaseUI/Auth
+    - GoogleSignIn (~> 4.0)
   - GoogleAppMeasurement (5.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -119,6 +124,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - FirebaseUI/Google
   - GoogleSignIn
   - SwiftGen (~> 6.0.2)
   - SwiftLint (~> 0.27.0)
@@ -133,6 +139,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebaseUI
     - GoogleAppMeasurement
     - GoogleSignIn
     - GoogleToolboxForMac
@@ -155,6 +162,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
   FirebaseFirestore: 58043a1c2d2c91efdaa8d8f385cdbaa2ce750cfe
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebaseUI: 09519bf436a055cd696bf68687d624423150e4c0
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
@@ -168,6 +176,6 @@ SPEC CHECKSUMS:
   SwiftGen: e5b047067aa84082826a0c4f1c4c2ddc95bcf74c
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 99a70df43184a44af223c52a96501804d541e57d
+PODFILE CHECKSUM: 337c786f92f740a449cf2b0d00b505998bc36bc9
 
 COCOAPODS: 1.6.0

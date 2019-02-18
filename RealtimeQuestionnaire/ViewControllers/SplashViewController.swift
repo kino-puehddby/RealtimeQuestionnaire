@@ -22,15 +22,16 @@ class SplashViewController: UIViewController, GIDSignInUIDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        GIDSignIn.sharedInstance()?.uiDelegate = self
-        GIDSignIn.sharedInstance()?.signIn()
-        
-        // リスナーをアタッチ。ユーザーのログイン状態が変わるたびに呼び出される。
+        // リスナーをアタッチ。ユーザーのログイン状態が変わるたびに呼び出される。        
         handle = Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
             guard let vc = self else { return }
             if user != nil {
                 vc.perform(segue: StoryboardSegue.Splash.showMain)
             } else {
+                if Auth.auth().currentUser != nil {
+                    vc.perform(segue: StoryboardSegue.Splash.showMain)
+                    return
+                }
                 vc.perform(segue: StoryboardSegue.Splash.showLogin)
             }
         }

@@ -25,7 +25,7 @@ internal enum StoryboardScene {
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.MainViewController>(storyboard: Main.self)
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
   }
   internal enum Register: StoryboardType {
     internal static let storyboardName = "Register"
