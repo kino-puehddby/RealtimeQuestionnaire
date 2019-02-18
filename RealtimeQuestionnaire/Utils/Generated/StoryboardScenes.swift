@@ -17,10 +17,25 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: LaunchScreen.self)
   }
+  internal enum Login: StoryboardType {
+    internal static let storyboardName = "Login"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.LoginViewController>(storyboard: Login.self)
+  }
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.ViewController>(storyboard: Main.self)
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.MainViewController>(storyboard: Main.self)
+  }
+  internal enum Register: StoryboardType {
+    internal static let storyboardName = "Register"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.RegisterViewController>(storyboard: Register.self)
+  }
+  internal enum Splash: StoryboardType {
+    internal static let storyboardName = "Splash"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SplashViewController>(storyboard: Splash.self)
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
