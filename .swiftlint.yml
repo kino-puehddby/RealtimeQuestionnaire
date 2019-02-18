@@ -1,0 +1,76 @@
+excluded:
+  - Carthage
+  - Pods
+  - .bundle
+
+disabled_rules:
+  - line_length
+  - function_body_length
+  - function_parameter_count
+  - file_length
+  - force_cast
+  - force_try
+  - type_body_length
+  - type_name
+  - valid_docs
+  - variable_name
+
+opt_in_rules:
+  - explicit_init
+  - empty_count
+  - overridden_super_call
+  - redundant_nil_coalescing
+  - private_outlet
+
+trailing_whitespace:
+  ignores_empty_lines: true # 改行時にxcodeが自動でインデントタブ入れるので許容する
+
+type_name:
+  min_length:
+    warning: 2
+  max_length:
+    warning: 45
+    error: 60
+  excluded:
+    - X # coordinator
+    - Y # coordinator
+
+variable_name:
+  min_length:
+    warning: 2
+  max_length:
+    warning: 30
+    error: 45
+  excluded:
+    - a # sort
+    - b # sort
+    - i # loop1
+    - j # loop2
+    - k # loop3
+    - x # coordinator
+    - y # coordinator
+    - z # coordinator (3d)
+    - r # swinject resolver
+    - c # swinject storyboard controller
+    - _ # ignore
+
+cyclomatic_complexity:
+  warning: 10
+  error: 15
+  ignores_case_statements: true # Reducerの定義上、Actionに応じてswitchで分岐していくので, switchは計算しない
+
+file_length:
+  warning: 500
+  error: 800
+
+line_length:
+  ignores_urls: true
+
+type_body_length:
+  warning: 500
+
+function_body_length:
+  warning: 50
+
+large_tuple:
+  warning: 4

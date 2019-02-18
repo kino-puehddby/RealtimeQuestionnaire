@@ -1,0 +1,18 @@
+ib:
+  inputs: RealtimeQuestionnaire/UserInterface
+  outputs:
+    - templateName: scenes-swift4
+      output: RealtimeQuestionnaire/Utils/Generated/StoryboardScenes.swift
+    - templateName: segues-swift4
+      output: RealtimeQuestionnaire/Utils/Generated/StoryboardSegues.swift
+xcassets:
+  inputs:
+    - RealtimeQuestionnaire/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift4
+      output: RealtimeQuestionnaire/Utils/Generated/Assets.swift
+strings:
+    inputs: RealtimeQuestionnaire/Resources/Strings/Localizable.strings
+    outputs:
+        templateName: structured-swift4
+        output: RealtimeQuestionnaire/Utils/Generated/LocalizableStrings.swift
