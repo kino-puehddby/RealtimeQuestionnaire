@@ -9,7 +9,6 @@
 import UIKit
 
 import FirebaseAuth
-import FirebaseUI
 import GoogleSignIn
 import RxSwift
 import RxCocoa
@@ -20,17 +19,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak private var registeringPassword: UITextField!
     @IBOutlet weak private var loginButton: UIButton!
     @IBOutlet weak private var registerButton: UIButton!
-    @IBOutlet weak private var googleSignInButton: GIDSignInButton! // FIXME: サイズがおかしいから直す
+    @IBOutlet weak private var googleSignInButton: UIButton!
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         registeringEmail.resignFirstResponder()
         registeringPassword.resignFirstResponder()
     }
     
     private let disposeBag = DisposeBag()
-    
-    var authUI: FUIAuth {
-        return FUIAuth.defaultAuthUI()!
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,28 +35,25 @@ class LoginViewController: UIViewController {
         
         // TODO: パスワードを変更したい
         // TODO: 後からGoogleと連携したい
-        // TODO: ログアウトの実装
     }
     
     func setup() {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
-        self.authUI.delegate = self
-        self.authUI.providers = [FUIGoogleAuth()]
         registeringEmail.delegate = self
         registeringPassword.delegate = self
+        
+        registeringPassword.isSecureTextEntry = true
     }
     
     func bind() {
-        // TODO: 必要な項目を入力していない時に、アラートを表示する（カスタムクラス化 or Extensionにしちゃっても良さそう）
-        
         loginButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
             })
             .disposed(by: disposeBag)
         
-        googleSignInButton.rx.controlEvent(.touchUpInside)
+        googleSignInButton.rx.tap
             .subscribe(onNext: {
                 // 可能な場合はサイレントログイン
                 GIDSignIn.sharedInstance()?.signIn()
@@ -70,7 +62,7 @@ class LoginViewController: UIViewController {
         
         registerButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.showMain()
+                self.perform(segue: StoryboardSegue.Login.showRegister, sender: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -82,18 +74,14 @@ class LoginViewController: UIViewController {
             guard let vc = self else { return }
             if user != nil && error == nil {
                 debugPrint("*** login succeeded by Firebase ***")
-                vc.showMain()
-            } else if user == nil {
-                GIDSignIn.sharedInstance()?.signIn()
+                vc.perform(segue: StoryboardSegue.Login.showMain, sender: nil)
             } else {
+                vc.showAlert(type: .ok, message: L10n.Alert.invalidLoginInfo, completion: {
+                    vc.registeringPassword.text = ""
+                })
                 debugPrint("*** user not found ***")
-                // TODO: エラーハンドリング
             }
         }
-    }
-    
-    func showMain() {
-        perform(segue: StoryboardSegue.Login.showMain)
     }
 }
 
@@ -106,7 +94,6 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         }
         guard let authentication = user.authentication else { return }
         
-        // TODO: トークンをどこかに保存して、次回以降のログインを省略する
         let credential = GoogleAuthProvider.credential(
             withIDToken: authentication.idToken,
             accessToken: authentication.accessToken
@@ -118,12 +105,11 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         Auth.auth().signInAndRetrieveData(with: credential) { [unowned self] (_, error) in
             if let error = error {
                 debugPrint(error)
-                debugPrint("*** login failure to Firebase by Google ***")
-                // TODO: エラーハンドリング
+                self.showAlert(type: .ok, title: "認証に失敗しました", message: error.localizedDescription.description)
                 return
             }
             debugPrint("*** login succeeded to Firebase by Google ***")
-            self.showMain()
+            self.perform(segue: StoryboardSegue.Login.showMain, sender: nil)
         }
     }
     
@@ -138,8 +124,4 @@ extension LoginViewController: UITextFieldDelegate {
         registeringPassword.resignFirstResponder()
         return true
     }
-}
-
-extension LoginViewController: FUIAuthDelegate {
-    
 }

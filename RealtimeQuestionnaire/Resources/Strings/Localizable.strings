@@ -1,4 +1,6 @@
 // Localizable.string
+"Alert.InvalidLoginInfo"="メールアドレスまたはパスワードが間違っています。";
+"Alert.Auth.Failure"="認証に失敗しました";
 
 // Sample
 "Common.Ok"="OK";

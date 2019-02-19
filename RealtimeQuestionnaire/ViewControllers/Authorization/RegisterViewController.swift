@@ -35,6 +35,8 @@ class RegisterViewController: UIViewController {
     func setup() {
         registeringEmail.delegate = self
         registeringPassword.delegate = self
+        
+        registeringPassword.isSecureTextEntry = true
     }
     
     func bind() {
@@ -74,12 +76,18 @@ class RegisterViewController: UIViewController {
                 debugPrint("*** login succeeded ***")
                 vc.registeringEmail.text = ""
                 vc.registeringPassword.text = ""
-                vc.perform(segue: StoryboardSegue.Register.showLogin)
+                vc.showLogin()
             } else {
                 debugPrint("*** user not found ***")
                 // エラー処理
             }
         }
+    }
+    
+    func showLogin() {
+        let loginVC = StoryboardScene.Login.initialScene.instantiate()
+        guard let navi = navigationController else { return }
+        navi.setViewControllers([loginVC], animated: false)
     }
 }
 

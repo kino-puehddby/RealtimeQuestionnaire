@@ -8,9 +8,34 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+import FirebaseAuth
+
 class MainViewController: UIViewController {
 
+    @IBOutlet weak private var logoutButton: UIButton!
+    
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        logoutButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.logout()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            let loginVC = StoryboardScene.Login.initialScene.instantiate()
+            guard let navi = navigationController else { return }
+            navi.setViewControllers([loginVC], animated: false)
+        } catch {
+            print("*** failed to sign out ***")
+        }
     }
 }

@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="jwB-ZL-Hj4">
             <objects>
-                <viewController id="Hqa-mo-B1e" customClass="LoginViewController" customModule="RealtimeQuestionnaire" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="Hqa-mo-B1e" customClass="LoginViewController" customModule="RealtimeQuestionnaire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WsU-Ds-kkV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,14 +32,14 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zl-Uz-cyv" customClass="GIDSignInButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-sT-hRM">
                                         <rect key="frame" x="0.0" y="70" width="270" height="50"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="270" id="Zw5-Fm-o6N"/>
-                                            <constraint firstAttribute="height" constant="50" id="fd2-gf-URQ"/>
+                                            <constraint firstAttribute="width" constant="270" id="PbO-yL-raM"/>
+                                            <constraint firstAttribute="height" constant="50" id="vkT-Rj-0M1"/>
                                         </constraints>
-                                    </view>
+                                        <state key="normal" title="googleSignInButton"/>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-ii-FCP">
                                         <rect key="frame" x="0.0" y="140" width="270" height="50"/>
                                         <color key="backgroundColor" name="SystemBlue"/>
@@ -77,7 +77,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="8gS-IR-G4C">
-                                <rect key="frame" x="52.5" y="207.5" width="270" height="62.5"/>
+                                <rect key="frame" x="52.5" y="162.5" width="270" height="62.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Z3-pp-UXs">
                                         <rect key="frame" x="0.0" y="0.0" width="87" height="20.5"/>
@@ -105,7 +105,7 @@
                         <constraints>
                             <constraint firstItem="fg4-xM-rqy" firstAttribute="centerX" secondItem="WsU-Ds-kkV" secondAttribute="centerX" id="Dge-Mt-DhG"/>
                             <constraint firstItem="8gS-IR-G4C" firstAttribute="centerX" secondItem="WsU-Ds-kkV" secondAttribute="centerX" id="Ui4-LI-OJ6"/>
-                            <constraint firstItem="8gS-IR-G4C" firstAttribute="top" secondItem="fg4-xM-rqy" secondAttribute="bottom" constant="55" id="YRK-Td-eVQ"/>
+                            <constraint firstItem="8gS-IR-G4C" firstAttribute="top" secondItem="fg4-xM-rqy" secondAttribute="bottom" constant="10" id="YRK-Td-eVQ"/>
                             <constraint firstItem="lVj-oE-Idf" firstAttribute="bottom" secondItem="nZY-bD-Z7m" secondAttribute="bottom" constant="80" id="anA-p0-zPp"/>
                             <constraint firstItem="fg4-xM-rqy" firstAttribute="top" secondItem="lVj-oE-Idf" secondAttribute="top" constant="70" id="pqp-yk-5lt"/>
                             <constraint firstItem="nZY-bD-Z7m" firstAttribute="centerX" secondItem="WsU-Ds-kkV" secondAttribute="centerX" id="ueE-sv-OI5"/>
@@ -115,8 +115,9 @@
                             <outletCollection property="gestureRecognizers" destination="3GM-Ka-enr" appends="YES" id="gCh-Be-lhr"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="cBM-kL-yRl"/>
                     <connections>
-                        <outlet property="googleSignInButton" destination="7zl-Uz-cyv" id="bb6-ly-cxB"/>
+                        <outlet property="googleSignInButton" destination="5Ya-sT-hRM" id="EQC-SW-cZo"/>
                         <outlet property="loginButton" destination="CNd-Jd-zDU" id="gp3-yt-pD8"/>
                         <outlet property="registerButton" destination="Ekk-ii-FCP" id="SJM-Sf-WTo"/>
                         <outlet property="registeringEmail" destination="xd8-bN-7PK" id="ldO-pa-2bE"/>
@@ -132,7 +133,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="342" y="29"/>
+            <point key="canvasLocation" x="1280.8" y="28.335832083958024"/>
         </scene>
         <!--Register-->
         <scene sceneID="aRO-o1-qRr">
@@ -140,7 +141,7 @@
                 <viewControllerPlaceholder storyboardName="Register" id="k1K-9E-Z5l" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="At7-uT-dEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="119"/>
+            <point key="canvasLocation" x="2008.8" y="118.74062968515743"/>
         </scene>
         <!--Main-->
         <scene sceneID="mLJ-DJ-BEd">
@@ -148,7 +149,7 @@
                 <viewControllerPlaceholder storyboardName="Main" id="GjS-xn-Viw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JZJ-KW-FQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="-58"/>
+            <point key="canvasLocation" x="1992" y="-58.47076461769116"/>
         </scene>
     </scenes>
     <resources>
