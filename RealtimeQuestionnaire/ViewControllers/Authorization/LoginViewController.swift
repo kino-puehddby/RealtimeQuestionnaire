@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak private var loginButton: UIButton!
     @IBOutlet weak private var registerButton: UIButton!
     @IBOutlet weak private var googleSignInButton: UIButton!
+    @IBOutlet weak private var sendPasswordReset: UIButton!
+    
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         registeringEmail.resignFirstResponder()
         registeringPassword.resignFirstResponder()
@@ -33,8 +35,9 @@ class LoginViewController: UIViewController {
         setup()
         bind()
         
-        // TODO: パスワードを変更したい
-        // TODO: 後からGoogleと連携したい
+        // TODO: メールアドレスを変更できるようにする
+        // TODO: メールアドレスの認証にDynamicLinkを使う
+        // TODO: 後からGoogleと連携できるようにする
     }
     
     func setup() {
@@ -65,6 +68,12 @@ class LoginViewController: UIViewController {
                 self.perform(segue: StoryboardSegue.Login.showRegister, sender: nil)
             })
             .disposed(by: disposeBag)
+        
+        sendPasswordReset.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.showResetPasswordAlert()
+            })
+            .disposed(by: disposeBag)
     }
     
     func login(email: String?, password: String?) {
@@ -82,6 +91,32 @@ class LoginViewController: UIViewController {
                 debugPrint("*** user not found ***")
             }
         }
+    }
+    
+    func showResetPasswordAlert() {
+        let alert = UIAlertController(
+            title: L10n.Alert.Auth.resetPassword,
+            message: L10n.Alert.Auth.inputEmailAddress,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: L10n.Common.ok, style: .default) {  _ in
+            guard let textfields = alert.textFields else { return }
+            let email = textfields[0].text ?? ""
+            // パスワードのリセット
+            Auth.auth().sendPasswordReset(withEmail: email, completion: { error in
+                if let error = error {
+                    debugPrint(error)
+                }
+            })
+        }
+        let cancelAction = UIAlertAction(title: L10n.Common.cancel, style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.addTextField { textfield in
+            textfield.placeholder = L10n.Alert.Auth.inputEmailAddress
+            textfield.keyboardType = .emailAddress
+        }
+        present(alert, animated: true)
     }
 }
 

@@ -18,6 +18,10 @@ internal enum L10n {
     internal enum Auth {
       /// 認証に失敗しました
       internal static let failure = L10n.tr("Localizable", "Alert.Auth.Failure")
+      /// メールアドレスを入力してください
+      internal static let inputEmailAddress = L10n.tr("Localizable", "Alert.Auth.InputEmailAddress")
+      /// パスワードをリセットする
+      internal static let resetPassword = L10n.tr("Localizable", "Alert.Auth.ResetPassword")
     }
   }
 

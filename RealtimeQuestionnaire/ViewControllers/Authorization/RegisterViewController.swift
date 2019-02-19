@@ -39,9 +39,7 @@ class RegisterViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
-    func bind() {
-        // TODO: 必要な項目を入力していない時に、アラートを表示する（カスタムクラス化しちゃっても良さそう）
-        
+    func bind() {        
         let isPasswordValid = registeringConfirmationPassword.rx.text.orEmpty
             .map { [unowned self] text in
                 self.registeringPassword.text == text
