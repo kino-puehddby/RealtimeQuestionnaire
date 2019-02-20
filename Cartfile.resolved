@@ -1,2 +1,3 @@
 github "ReactiveX/RxSwift" "4.4.1"
 github "SnapKit/SnapKit" "4.2.0"
+github "dekatotoro/SlideMenuControllerSwift" "4.0.0"
