@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import FirebaseAuth
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     @IBOutlet weak private var logoutButton: UIButton!
     

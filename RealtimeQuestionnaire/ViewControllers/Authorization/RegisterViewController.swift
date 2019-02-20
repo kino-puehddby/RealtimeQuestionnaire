@@ -12,7 +12,7 @@ import FirebaseAuth
 import RxSwift
 import RxCocoa
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     @IBOutlet weak private var registeringEmail: UITextField!
     @IBOutlet weak private var registeringPassword: UITextField!
@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
-    func bind() {        
+    func bind() {
         let isPasswordValid = registeringConfirmationPassword.rx.text.orEmpty
             .map { [unowned self] text in
                 self.registeringPassword.text == text

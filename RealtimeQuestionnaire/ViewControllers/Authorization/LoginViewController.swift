@@ -13,7 +13,7 @@ import GoogleSignIn
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     @IBOutlet weak private var registeringEmail: UITextField!
     @IBOutlet weak private var registeringPassword: UITextField!

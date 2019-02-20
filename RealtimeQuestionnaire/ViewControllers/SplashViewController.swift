@@ -11,7 +11,7 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 
-class SplashViewController: UIViewController, GIDSignInUIDelegate {
+final class SplashViewController: UIViewController, GIDSignInUIDelegate {
     
     lazy var handle: AuthStateDidChangeListenerHandle = { preconditionFailure() }()
 
