@@ -35,6 +35,7 @@ final class LoginViewController: UIViewController {
         setup()
         bind()
         
+        // この辺のTODOはゆくゆくはって感じ
         // TODO: メールアドレスを変更できるようにする
         // TODO: メールアドレスの認証にDynamicLinkを使う
         // TODO: 後からGoogleと連携できるようにする
