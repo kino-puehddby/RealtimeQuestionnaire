@@ -12,6 +12,19 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
 
+  internal enum Alert {
+    /// メールアドレスまたはパスワードが間違っています。
+    internal static let invalidLoginInfo = L10n.tr("Localizable", "Alert.InvalidLoginInfo")
+    internal enum Auth {
+      /// 認証に失敗しました
+      internal static let failure = L10n.tr("Localizable", "Alert.Auth.Failure")
+      /// メールアドレスを入力してください
+      internal static let inputEmailAddress = L10n.tr("Localizable", "Alert.Auth.InputEmailAddress")
+      /// パスワードをリセットする
+      internal static let resetPassword = L10n.tr("Localizable", "Alert.Auth.ResetPassword")
+    }
+  }
+
   internal enum Common {
     /// キャンセル
     internal static let cancel = L10n.tr("Localizable", "Common.Cancel")
