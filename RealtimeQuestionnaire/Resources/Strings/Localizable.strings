@@ -1,5 +1,7 @@
 // Localizable.string
-"Alert.InvalidLoginInfo"="メールアドレスまたはパスワードが間違っています。";
+"Alert.InvalidLogin.Message"="メールアドレスまたはパスワードが間違っています。";
+"Alert.Logout"="ログアウト";
+"Alert.Logout.Message"="本当にログアウトしますか？";
 "Alert.Auth.Failure"="認証に失敗しました";
 "Alert.Auth.ResetPassword"="パスワードをリセットする";
 "Alert.Auth.InputEmailAddress"="メールアドレスを入力してください";
@@ -13,3 +15,6 @@
 "Common.Close.en"="CLOSE";
 "Common.Price.value"="¥%@";
 "Common.Count.value"="%@件";
+
+"Sample.Questionnaire.Community.Name"="TresInnovation";
+"Sample.Questionnaire.Community.Title"="従業員満足度の調査";

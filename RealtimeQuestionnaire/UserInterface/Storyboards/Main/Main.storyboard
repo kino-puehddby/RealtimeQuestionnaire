@@ -9,26 +9,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Menu-->
-        <scene sceneID="X7h-BG-AAX">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Menu" id="SdO-9f-Mt2" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zmd-wM-Nvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2644" y="483"/>
-        </scene>
         <!--Search-->
         <scene sceneID="f3A-5e-t7V">
             <objects>
                 <viewControllerPlaceholder storyboardName="Search" id="rab-JB-sxv" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7So-iT-a3e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3071" y="483"/>
+            <point key="canvasLocation" x="2874" y="435"/>
         </scene>
-        <!--Title-->
+        <!--Main View Controller-->
         <scene sceneID="4CN-4o-9Pp">
             <objects>
-                <viewController storyboardIdentifier="Main" id="XEf-VQ-FdZ" customClass="MainViewController" customModule="RealtimeQuestionnaire" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="XEf-VQ-FdZ" customClass="MainViewController" customModule="RealtimeQuestionnaire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XZ8-j3-7PZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,11 +34,11 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="eo0-Eh-byB">
-                                        <rect key="frame" x="0.0" y="240" width="375" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="78" id="eo0-Eh-byB">
+                                        <rect key="frame" x="0.0" y="240" width="375" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eo0-Eh-byB" id="a0h-nW-2rl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="77.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -62,12 +54,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZPo-15-0cp"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="25f-7E-so5">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="KFE-gG-bi3">
-                            <connections>
-                                <segue destination="SdO-9f-Mt2" kind="show" id="drk-LE-lw6"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" id="25f-7E-so5">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="KFE-gG-bi3"/>
                         <barButtonItem key="rightBarButtonItem" title="Search" id="Utj-HZ-b9X">
                             <connections>
                                 <segue destination="rab-JB-sxv" kind="show" id="Rkj-Ou-yEF"/>
@@ -75,6 +63,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="leftBarButton" destination="KFE-gG-bi3" id="7nv-FE-JSp"/>
+                        <outlet property="rightBarButton" destination="Utj-HZ-b9X" id="gQy-ST-eR7"/>
+                        <outlet property="tableView" destination="xWQ-in-xdo" id="yCC-6J-dL3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d8-1G-lHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

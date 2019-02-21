@@ -6,3 +6,6 @@ github "SnapKit/SnapKit" ~> 4.0.1
 
 # UI
 github "dekatotoro/SlideMenuControllerSwift"
+
+# Decode
+github "alickbass/CodableFirebase"

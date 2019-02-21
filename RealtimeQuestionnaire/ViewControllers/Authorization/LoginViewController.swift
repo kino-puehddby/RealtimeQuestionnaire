@@ -84,9 +84,9 @@ final class LoginViewController: UIViewController {
             guard let vc = self else { return }
             if user != nil && error == nil {
                 debugPrint("*** login succeeded by Firebase ***")
-                vc.perform(segue: StoryboardSegue.Login.showMain, sender: nil)
+                vc.switchMainViewController()
             } else {
-                vc.showAlert(type: .ok, message: L10n.Alert.invalidLoginInfo, completion: {
+                vc.showAlert(type: .ok, message: L10n.Alert.InvalidLogin.message, completion: {
                     vc.registeringPassword.text = ""
                 })
                 debugPrint("*** user not found ***")
@@ -145,7 +145,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 return
             }
             debugPrint("*** login succeeded to Firebase by Google ***")
-            self.perform(segue: StoryboardSegue.Login.showMain, sender: nil)
+            self.switchMainViewController()
         }
     }
     
@@ -156,8 +156,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        registeringEmail.resignFirstResponder()
-        registeringPassword.resignFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
 }

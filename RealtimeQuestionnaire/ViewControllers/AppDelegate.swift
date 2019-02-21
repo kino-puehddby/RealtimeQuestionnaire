@@ -10,6 +10,7 @@ import UIKit
 
 import Firebase
 import GoogleSignIn
+import SlideMenuControllerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase
         FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+        
+        // SlideMenuController
+        window?.rootViewController = AppRootViewController()
         
         return true
     }

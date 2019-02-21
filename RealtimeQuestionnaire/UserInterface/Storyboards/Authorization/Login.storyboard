@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--ログイン-->
         <scene sceneID="jwB-ZL-Hj4">
             <objects>
                 <viewController storyboardIdentifier="Login" id="Hqa-mo-B1e" customClass="LoginViewController" customModule="RealtimeQuestionnaire" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nZY-bD-Z7m">
-                                <rect key="frame" x="52.5" y="397" width="270" height="190"/>
+                                <rect key="frame" x="52.5" y="309" width="270" height="190"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNd-Jd-zDU">
                                         <rect key="frame" x="0.0" y="0.0" width="270" height="50"/>
@@ -28,9 +28,16 @@
                                             <constraint firstAttribute="width" constant="270" id="VZd-Cs-uYF"/>
                                             <constraint firstAttribute="height" constant="50" id="x0g-79-U7r"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-sT-hRM">
                                         <rect key="frame" x="0.0" y="70" width="270" height="50"/>
@@ -38,7 +45,14 @@
                                             <constraint firstAttribute="width" constant="270" id="PbO-yL-raM"/>
                                             <constraint firstAttribute="height" constant="50" id="vkT-Rj-0M1"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="googleSignInButton"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-ii-FCP">
                                         <rect key="frame" x="0.0" y="140" width="270" height="50"/>
@@ -47,26 +61,33 @@
                                             <constraint firstAttribute="height" constant="50" id="LMH-LY-XMm"/>
                                             <constraint firstAttribute="width" constant="270" id="yBX-Pi-0m9"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Register">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="29a-Je-FmT">
-                                <rect key="frame" x="52.5" y="90" width="270" height="175"/>
+                                <rect key="frame" x="52.5" y="94" width="270" height="165"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fg4-xM-rqy">
-                                        <rect key="frame" x="0.0" y="0.0" width="270" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="59"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="メールアドレス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQG-tI-wKg">
-                                                <rect key="frame" x="0.0" y="0.0" width="121.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xd8-bN-7PK">
-                                                <rect key="frame" x="0.0" y="32.5" width="270" height="30"/>
+                                                <rect key="frame" x="0.0" y="29" width="270" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="270" id="5Ev-DE-GMF"/>
                                                 </constraints>
@@ -80,16 +101,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="8gS-IR-G4C">
-                                        <rect key="frame" x="0.0" y="72.5" width="270" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="69" width="270" height="59"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Z3-pp-UXs">
-                                                <rect key="frame" x="0.0" y="0.0" width="87" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="71.5" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gJ-yl-lB9">
-                                                <rect key="frame" x="0.0" y="32.5" width="270" height="30"/>
+                                                <rect key="frame" x="0.0" y="29" width="270" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="270" id="9nw-bt-auN"/>
                                                 </constraints>
@@ -103,7 +124,8 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubX-8t-TgI">
-                                        <rect key="frame" x="0.0" y="145" width="270" height="30"/>
+                                        <rect key="frame" x="0.0" y="138" width="270" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="パスワードを忘れてしまった場合"/>
                                     </button>
                                 </subviews>
@@ -112,9 +134,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="29a-Je-FmT" firstAttribute="top" secondItem="lVj-oE-Idf" secondAttribute="top" constant="70" id="10b-Vx-MjU"/>
+                            <constraint firstItem="29a-Je-FmT" firstAttribute="top" secondItem="lVj-oE-Idf" secondAttribute="top" constant="30" id="10b-Vx-MjU"/>
                             <constraint firstItem="29a-Je-FmT" firstAttribute="centerX" secondItem="WsU-Ds-kkV" secondAttribute="centerX" id="4mK-X7-j9m"/>
-                            <constraint firstItem="lVj-oE-Idf" firstAttribute="bottom" secondItem="nZY-bD-Z7m" secondAttribute="bottom" constant="80" id="anA-p0-zPp"/>
+                            <constraint firstItem="nZY-bD-Z7m" firstAttribute="top" secondItem="29a-Je-FmT" secondAttribute="bottom" constant="50" id="R30-2z-Olx"/>
                             <constraint firstItem="nZY-bD-Z7m" firstAttribute="centerX" secondItem="WsU-Ds-kkV" secondAttribute="centerX" id="ueE-sv-OI5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lVj-oE-Idf"/>
@@ -122,7 +144,8 @@
                             <outletCollection property="gestureRecognizers" destination="3GM-Ka-enr" appends="YES" id="gCh-Be-lhr"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="cBM-kL-yRl"/>
+                    <navigationItem key="navigationItem" title="ログイン" id="cBM-kL-yRl"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="googleSignInButton" destination="5Ya-sT-hRM" id="EQC-SW-cZo"/>
                         <outlet property="loginButton" destination="CNd-Jd-zDU" id="gp3-yt-pD8"/>
@@ -131,7 +154,6 @@
                         <outlet property="registeringPassword" destination="0gJ-yl-lB9" id="pWK-Pg-mVl"/>
                         <outlet property="sendPasswordReset" destination="ubX-8t-TgI" id="I3v-Lu-uSG"/>
                         <segue destination="k1K-9E-Z5l" kind="show" identifier="showRegister" id="qSD-qu-bdP"/>
-                        <segue destination="GjS-xn-Viw" kind="show" identifier="showMain" id="Tqu-lC-Hr1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LhK-rm-e2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,15 +171,7 @@
                 <viewControllerPlaceholder storyboardName="Register" id="k1K-9E-Z5l" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="At7-uT-dEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008.8" y="118.74062968515743"/>
-        </scene>
-        <!--Main-->
-        <scene sceneID="mLJ-DJ-BEd">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="GjS-xn-Viw" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JZJ-KW-FQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1992" y="-58.47076461769116"/>
+            <point key="canvasLocation" x="1918" y="28"/>
         </scene>
     </scenes>
     <resources>

@@ -17,21 +17,13 @@ final class SplashViewController: UIViewController, GIDSignInUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         handle = Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
             guard let vc = self else { return }
             if user != nil {
-                // SwiftGenでinstantiateするとnavigationControllerになってしまうので、原始的な方法で対応
-                let storyboard = UIStoryboard(name: StoryboardScene.Main.storyboardName, bundle: nil)
-                let mainVC = storyboard.instantiateViewController(withIdentifier: StoryboardScene.Main.storyboardName)
-                vc.present(mainVC, animated: false)
+                vc.switchMainViewController()
             } else {
-                let loginVC = StoryboardScene.Login.initialScene.instantiate()
-                vc.present(loginVC, animated: false)
+                vc.switchLoginViewController()
             }
         }
     }
@@ -49,7 +41,7 @@ final class SplashViewController: UIViewController, GIDSignInUIDelegate {
                 return
             }
             debugPrint("*** login succeeded to Firebase by Google ***")
-            self.perform(segue: StoryboardSegue.Splash.showMain, sender: nil)
+            self.switchMainViewController()
         }
     }
 }

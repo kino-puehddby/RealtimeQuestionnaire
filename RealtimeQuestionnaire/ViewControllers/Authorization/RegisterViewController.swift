@@ -71,21 +71,15 @@ final class RegisterViewController: UIViewController {
             guard let vc = self else { return }
             
             if user != nil && error == nil {
-                debugPrint("*** login succeeded ***")
+                debugPrint("*** create user succeeded ***")
                 vc.registeringEmail.text = ""
                 vc.registeringPassword.text = ""
-                vc.showLogin()
+                vc.navigationController?.popViewController(animated: true)
             } else {
-                debugPrint("*** user not found ***")
+                debugPrint("*** create user failed ***")
                 // エラー処理
             }
         }
-    }
-    
-    func showLogin() {
-        let loginVC = StoryboardScene.Login.initialScene.instantiate()
-        guard let navi = navigationController else { return }
-        navi.setViewControllers([loginVC], animated: false)
     }
 }
 

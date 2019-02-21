@@ -36,6 +36,17 @@
 		4ED5337B221D4BBC00F4113D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5337A221D4BBC00F4113D /* SearchViewController.swift */; };
 		4ED5337D221D4BE400F4113D /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5337C221D4BE400F4113D /* Search.storyboard */; };
 		4ED5337F221D568D00F4113D /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED5337E221D568D00F4113D /* SlideMenuControllerSwift.framework */; };
+		4ED53381221E3E8600F4113D /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53380221E3E8600F4113D /* UIViewController+extension.swift */; };
+		4ED53382221E40BE00F4113D /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E09F821221AD130004A00AD /* SnapKit.framework */; };
+		4ED53384221E444C00F4113D /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53383221E444C00F4113D /* AppRootViewController.swift */; };
+		4ED53387221E462400F4113D /* AppSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53386221E462400F4113D /* AppSlideMenuController.swift */; };
+		4ED5338F221E5E0800F4113D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5338D221E5E0800F4113D /* MainTableViewCell.swift */; };
+		4ED53390221E5E0800F4113D /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5338E221E5E0800F4113D /* MainTableViewCell.xib */; };
+		4ED53392221E827000F4113D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53391221E827000F4113D /* Const.swift */; };
+		4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53394221E859600F4113D /* QuestionnaireListModel.swift */; };
+		4ED5339D221E933800F4113D /* CodableFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED5339C221E933800F4113D /* CodableFirebase.framework */; };
+		4ED5339F221E93D100F4113D /* SampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5339E221E93D100F4113D /* SampleModel.swift */; };
+		4ED533A1221E942100F4113D /* Firestore+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED533A0221E942100F4113D /* Firestore+Codable.swift */; };
 		4EF3E1A5221A8E3900839D2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EF3E1A4221A8E3900839D2B /* GoogleService-Info.plist */; };
 		DCA9F1B3A40DE798150C7CE0 /* Pods_RealtimeQuestionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +85,16 @@
 		4ED5337A221D4BBC00F4113D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4ED5337C221D4BE400F4113D /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		4ED5337E221D568D00F4113D /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
+		4ED53380221E3E8600F4113D /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
+		4ED53383221E444C00F4113D /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
+		4ED53386221E462400F4113D /* AppSlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSlideMenuController.swift; sourceTree = "<group>"; };
+		4ED5338D221E5E0800F4113D /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		4ED5338E221E5E0800F4113D /* MainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
+		4ED53391221E827000F4113D /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		4ED53394221E859600F4113D /* QuestionnaireListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireListModel.swift; sourceTree = "<group>"; };
+		4ED5339C221E933800F4113D /* CodableFirebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CodableFirebase.framework; path = Carthage/Build/iOS/CodableFirebase.framework; sourceTree = "<group>"; };
+		4ED5339E221E93D100F4113D /* SampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModel.swift; sourceTree = "<group>"; };
+		4ED533A0221E942100F4113D /* Firestore+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Codable.swift"; sourceTree = "<group>"; };
 		4EF3E1A4221A8E3900839D2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9B48EBAE828EDB2223C7DE9 /* Pods-RealtimeQuestionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtimeQuestionnaire.release.xcconfig"; path = "Target Support Files/Pods-RealtimeQuestionnaire/Pods-RealtimeQuestionnaire.release.xcconfig"; sourceTree = "<group>"; };
 		FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealtimeQuestionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ED5339D221E933800F4113D /* CodableFirebase.framework in Frameworks */,
+				4ED53382221E40BE00F4113D /* SnapKit.framework in Frameworks */,
 				4ED5337F221D568D00F4113D /* SlideMenuControllerSwift.framework in Frameworks */,
 				4E09F820221AA765004A00AD /* RxCocoa.framework in Frameworks */,
 				4E09F81D221AA0A5004A00AD /* RxAtomic.framework in Frameworks */,
@@ -119,6 +142,7 @@
 			children = (
 				4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */,
 				4E3BD56E221BB39800E357CE /* Keychain.swift */,
+				4ED53380221E3E8600F4113D /* UIViewController+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -146,6 +170,8 @@
 			children = (
 				4E920335221A6EF100C6634F /* UserInterface */,
 				4E920336221A6F0400C6634F /* ViewControllers */,
+				4ED5338C221E5DAF00F4113D /* Views */,
+				4ED53393221E856900F4113D /* Model */,
 				4E3BD56B221BA45F00E357CE /* Extension */,
 				4E920337221A6F2000C6634F /* Utils */,
 				4E920339221A6F3700C6634F /* Resources */,
@@ -157,13 +183,8 @@
 		4E920335221A6EF100C6634F /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				4E92032C221A5BB800C6634F /* LaunchScreen.storyboard */,
-				4E920327221A5BB600C6634F /* Splash.storyboard */,
-				4E09F80F221A9731004A00AD /* Main.storyboard */,
-				4E09F80C221A970C004A00AD /* Authorization */,
-				4ED5336C221D46A700F4113D /* Questionnaire */,
-				4ED53375221D4A3600F4113D /* Menu */,
-				4ED53378221D4B9A00F4113D /* Search */,
+				4ED5338A221E5D5900F4113D /* Storyboards */,
+				4ED5338B221E5D7C00F4113D /* Views */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -173,11 +194,10 @@
 			children = (
 				4E920323221A5BB600C6634F /* AppDelegate.swift */,
 				4E920325221A5BB600C6634F /* SplashViewController.swift */,
-				4E09F816221A9795004A00AD /* MainViewController.swift */,
 				4E09F811221A973F004A00AD /* Authorization */,
+				4ED53388221E553200F4113D /* Main */,
 				4ED5336D221D46C000F4113D /* Questionnaire */,
-				4ED53372221D49D600F4113D /* Menu */,
-				4ED53379221D4BA600F4113D /* Search */,
+				4ED53385221E45E700F4113D /* Common */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -185,6 +205,7 @@
 		4E920337221A6F2000C6634F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4ED53391221E827000F4113D /* Const.swift */,
 				4E920338221A6F2A00C6634F /* Generated */,
 			);
 			path = Utils;
@@ -243,36 +264,71 @@
 			path = Questionnaire;
 			sourceTree = "<group>";
 		};
-		4ED53372221D49D600F4113D /* Menu */ = {
+		4ED53385221E45E700F4113D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4ED53383221E444C00F4113D /* AppRootViewController.swift */,
+				4ED53386221E462400F4113D /* AppSlideMenuController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		4ED53388221E553200F4113D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4E09F816221A9795004A00AD /* MainViewController.swift */,
 				4ED53373221D4A0600F4113D /* MenuViewController.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		4ED53375221D4A3600F4113D /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				4ED53376221D4A4A00F4113D /* Menu.storyboard */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		4ED53378221D4B9A00F4113D /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				4ED5337C221D4BE400F4113D /* Search.storyboard */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		4ED53379221D4BA600F4113D /* Search */ = {
-			isa = PBXGroup;
-			children = (
 				4ED5337A221D4BBC00F4113D /* SearchViewController.swift */,
 			);
-			path = Search;
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4ED53389221E556800F4113D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4E09F80F221A9731004A00AD /* Main.storyboard */,
+				4ED53376221D4A4A00F4113D /* Menu.storyboard */,
+				4ED5337C221D4BE400F4113D /* Search.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4ED5338A221E5D5900F4113D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4E92032C221A5BB800C6634F /* LaunchScreen.storyboard */,
+				4E920327221A5BB600C6634F /* Splash.storyboard */,
+				4E09F80C221A970C004A00AD /* Authorization */,
+				4ED53389221E556800F4113D /* Main */,
+				4ED5336C221D46A700F4113D /* Questionnaire */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4ED5338B221E5D7C00F4113D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4ED5338E221E5E0800F4113D /* MainTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4ED5338C221E5DAF00F4113D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4ED5338D221E5E0800F4113D /* MainTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4ED53393221E856900F4113D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
+				4ED5339E221E93D100F4113D /* SampleModel.swift */,
+				4ED533A0221E942100F4113D /* Firestore+Codable.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C5F0786942C890B98BF4C673 /* Pods */ = {
@@ -287,6 +343,7 @@
 		F4AEBB3F26A8052851C67044 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4ED5339C221E933800F4113D /* CodableFirebase.framework */,
 				4ED5337E221D568D00F4113D /* SlideMenuControllerSwift.framework */,
 				4E09F821221AD130004A00AD /* SnapKit.framework */,
 				4E09F819221AA0A5004A00AD /* RxAtomic.framework */,
@@ -368,6 +425,7 @@
 				4ED5336F221D46E200F4113D /* QuestionnaireCreate.storyboard in Resources */,
 				4E09F810221A9731004A00AD /* Main.storyboard in Resources */,
 				4ED53377221D4A4A00F4113D /* Menu.storyboard in Resources */,
+				4ED53390221E5E0800F4113D /* MainTableViewCell.xib in Resources */,
 				4E09F80B221A96CE004A00AD /* Login.storyboard in Resources */,
 				4ED5337D221D4BE400F4113D /* Search.storyboard in Resources */,
 				4EF3E1A5221A8E3900839D2B /* GoogleService-Info.plist in Resources */,
@@ -433,6 +491,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CodableFirebase.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputFileListPaths = (
@@ -479,6 +539,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -493,6 +554,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -535,18 +597,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E09F813221A977B004A00AD /* LoginViewController.swift in Sources */,
+				4ED53392221E827000F4113D /* Const.swift in Sources */,
 				4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */,
 				4EA2356E221A71C500AB29A4 /* LocalizableStrings.swift in Sources */,
 				4E09F815221A9787004A00AD /* RegisterViewController.swift in Sources */,
 				4EA23570221A71C500AB29A4 /* StoryboardSegues.swift in Sources */,
+				4ED533A1221E942100F4113D /* Firestore+Codable.swift in Sources */,
 				4E3BD56F221BB39800E357CE /* Keychain.swift in Sources */,
+				4ED53381221E3E8600F4113D /* UIViewController+extension.swift in Sources */,
 				4E3BD56D221BA48700E357CE /* UIViewController+UIKit.swift in Sources */,
+				4ED53387221E462400F4113D /* AppSlideMenuController.swift in Sources */,
 				4ED53374221D4A0600F4113D /* MenuViewController.swift in Sources */,
+				4ED5338F221E5E0800F4113D /* MainTableViewCell.swift in Sources */,
 				4ED5337B221D4BBC00F4113D /* SearchViewController.swift in Sources */,
+				4ED53384221E444C00F4113D /* AppRootViewController.swift in Sources */,
 				4EA2356F221A71C500AB29A4 /* Assets.swift in Sources */,
 				4ED53371221D475D00F4113D /* QuestionnaireCreateViewController.swift in Sources */,
 				4E09F817221A9795004A00AD /* MainViewController.swift in Sources */,
+				4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */,
 				4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */,
+				4ED5339F221E93D100F4113D /* SampleModel.swift in Sources */,
 				4EA23571221A71C500AB29A4 /* StoryboardScenes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

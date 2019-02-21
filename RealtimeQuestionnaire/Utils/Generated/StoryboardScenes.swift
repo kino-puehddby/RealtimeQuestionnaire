@@ -29,12 +29,12 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
 
-    internal static let main = SceneType<RealtimeQuestionnaire.MainViewController>(storyboard: Main.self, identifier: "Main")
+    internal static let mainViewController = SceneType<RealtimeQuestionnaire.MainViewController>(storyboard: Main.self, identifier: "MainViewController")
   }
   internal enum Menu: StoryboardType {
     internal static let storyboardName = "Menu"
 
-    internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Menu.self)
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.MenuViewController>(storyboard: Menu.self)
   }
   internal enum QuestionnaireCreate: StoryboardType {
     internal static let storyboardName = "QuestionnaireCreate"
@@ -49,7 +49,7 @@ internal enum StoryboardScene {
   internal enum Search: StoryboardType {
     internal static let storyboardName = "Search"
 
-    internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Search.self)
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SearchViewController>(storyboard: Search.self)
   }
   internal enum Splash: StoryboardType {
     internal static let storyboardName = "Splash"

@@ -112,6 +112,11 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.6.1)
+  - Reusable (4.0.5):
+    - Reusable/Storyboard (= 4.0.5)
+    - Reusable/View (= 4.0.5)
+  - Reusable/Storyboard (4.0.5)
+  - Reusable/View (4.0.5)
   - SwiftGen (6.0.2)
   - SwiftLint (0.27.0)
 
@@ -120,6 +125,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - GoogleSignIn
+  - Reusable
   - SwiftGen (~> 6.0.2)
   - SwiftLint (~> 0.27.0)
 
@@ -143,6 +149,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - Reusable
     - SwiftGen
     - SwiftLint
 
@@ -165,9 +172,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
   SwiftGen: e5b047067aa84082826a0c4f1c4c2ddc95bcf74c
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 99a70df43184a44af223c52a96501804d541e57d
+PODFILE CHECKSUM: 1a375d68789280b858c21a8ca8e2307d2cdc9224
 
 COCOAPODS: 1.6.0
