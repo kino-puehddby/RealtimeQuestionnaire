@@ -48,7 +48,7 @@ class APIs {
                result = decode(modelType: modelType, data: data)
             }
         }
-        debugPrint("\n\nresult = \n\(String(describing: result))\n\n\n")
+        debugPrint("result = \(String(describing: result))")
         return result
     }
     
@@ -102,7 +102,7 @@ class APIs {
                 models.append(model)
             }
         }
-        debugPrint("\n\nresult = \n\(models)\n\n\n")
+        debugPrint("result = \(models)")
         return models
     }
     
