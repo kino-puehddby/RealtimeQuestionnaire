@@ -5,6 +5,7 @@
 "Alert.Auth.Failure"="認証に失敗しました";
 "Alert.Auth.ResetPassword"="パスワードをリセットする";
 "Alert.Auth.InputEmailAddress"="メールアドレスを入力してください";
+"Error.unknown"="不明なエラーが発生しました。";
 
 // Sample
 "Common.Ok"="OK";

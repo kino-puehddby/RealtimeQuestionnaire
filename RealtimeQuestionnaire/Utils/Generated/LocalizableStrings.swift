@@ -62,6 +62,11 @@ internal enum L10n {
     }
   }
 
+  internal enum Error {
+    /// 不明なエラーが発生しました。
+    internal static let unknown = L10n.tr("Localizable", "Error.unknown")
+  }
+
   internal enum Sample {
     internal enum Questionnaire {
       internal enum Community {

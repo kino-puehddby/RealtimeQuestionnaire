@@ -11,6 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import FirebaseAuth
+import FirebaseFirestore
 
 final class MainViewController: UIViewController {
 
@@ -19,7 +20,8 @@ final class MainViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     
     private let disposeBag = DisposeBag()
-    let questionnaireList = BehaviorRelay<[QuestionnaireListModel]?>(value: nil)
+    
+    let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +30,31 @@ final class MainViewController: UIViewController {
         
         setup()
         bind()
-        
-        let responses = APIs.getArray(
-            modelType: QuestionnaireListModel.self,
-            collectionKey: .questionnaireListGet
-        )
-        questionnaireList.accept(responses)
     }
     
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MainTableViewCell.self)
+        
+        Firestore.firestore().rx
+            .observeArray(
+                QuestionnaireListModel.Fields.self,
+                collectionKey: QuestionnaireListModel.collectionKey
+            )
+            .subscribe { [weak self] event in
+                guard let vc = self else { return }
+                switch event {
+                case .next(let list):
+                    vc.questionnaireList.accept(list)
+                    vc.tableView.reloadData()
+                case .error(let error):
+                    debugPrint(error)
+                case .completed:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     func bind() {
@@ -53,13 +68,18 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questionnaireList.value?.count ?? 0
+        return questionnaireList.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         // FIXME: Firestoreから取得したアンケート情報を入れる
-        cell.configuration(iconImage: Asset.risu.image, name: L10n.Sample.Questionnaire.Community.name, description: L10n.Sample.Questionnaire.Community.title)
+        let name = questionnaireList.value[indexPath.row].title
+        let description = questionnaireList.value[indexPath.row].description ?? ""
+        cell.configuration(
+            iconImage: Asset.risu.image,
+            name: name,
+            description: description)
         return cell
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct QuestionnaireListModel: Codable {
+struct QuestionnaireListModelOld: Codable {
     internal private(set) var title: String
     internal private(set) var description: String?
     internal private(set) var choices: [String]
@@ -17,5 +17,21 @@ struct QuestionnaireListModel: Codable {
         self.title = title
         self.description = description
         self.choices = choices
+    }
+}
+
+struct QuestionnaireListModel: DatabaseCollection {
+    static var collectionKey: CollectionKey = .questionnaireListGet
+    var id: String
+    typealias FieldType = Fields
+    var fields: QuestionnaireListModel.Fields?
+    public struct Fields: Codable {
+        public let title: String
+        public let description: String?
+        public let choices: [String]
+    }
+    public init(id: String, fields: Fields?) {
+        self.id = id
+        self.fields = fields
     }
 }

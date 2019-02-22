@@ -45,8 +45,8 @@
 		4ED53392221E827000F4113D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53391221E827000F4113D /* Const.swift */; };
 		4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53394221E859600F4113D /* QuestionnaireListModel.swift */; };
 		4ED5339D221E933800F4113D /* CodableFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED5339C221E933800F4113D /* CodableFirebase.framework */; };
-		4ED5339F221E93D100F4113D /* SampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5339E221E93D100F4113D /* SampleModel.swift */; };
 		4ED533A1221E942100F4113D /* Firestore+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED533A0221E942100F4113D /* Firestore+Codable.swift */; };
+		4ED533A7221FA2B000F4113D /* DatabaseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED533A6221FA2B000F4113D /* DatabaseCollection.swift */; };
 		4EF3E1A5221A8E3900839D2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EF3E1A4221A8E3900839D2B /* GoogleService-Info.plist */; };
 		DCA9F1B3A40DE798150C7CE0 /* Pods_RealtimeQuestionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */; };
 /* End PBXBuildFile section */
@@ -93,8 +93,8 @@
 		4ED53391221E827000F4113D /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		4ED53394221E859600F4113D /* QuestionnaireListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireListModel.swift; sourceTree = "<group>"; };
 		4ED5339C221E933800F4113D /* CodableFirebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CodableFirebase.framework; path = Carthage/Build/iOS/CodableFirebase.framework; sourceTree = "<group>"; };
-		4ED5339E221E93D100F4113D /* SampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModel.swift; sourceTree = "<group>"; };
 		4ED533A0221E942100F4113D /* Firestore+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Codable.swift"; sourceTree = "<group>"; };
+		4ED533A6221FA2B000F4113D /* DatabaseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCollection.swift; sourceTree = "<group>"; };
 		4EF3E1A4221A8E3900839D2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9B48EBAE828EDB2223C7DE9 /* Pods-RealtimeQuestionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtimeQuestionnaire.release.xcconfig"; path = "Target Support Files/Pods-RealtimeQuestionnaire/Pods-RealtimeQuestionnaire.release.xcconfig"; sourceTree = "<group>"; };
 		FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealtimeQuestionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -325,8 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
-				4ED5339E221E93D100F4113D /* SampleModel.swift */,
 				4ED533A0221E942100F4113D /* Firestore+Codable.swift */,
+				4ED533A6221FA2B000F4113D /* DatabaseCollection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -602,6 +602,7 @@
 				4EA2356E221A71C500AB29A4 /* LocalizableStrings.swift in Sources */,
 				4E09F815221A9787004A00AD /* RegisterViewController.swift in Sources */,
 				4EA23570221A71C500AB29A4 /* StoryboardSegues.swift in Sources */,
+				4ED533A7221FA2B000F4113D /* DatabaseCollection.swift in Sources */,
 				4ED533A1221E942100F4113D /* Firestore+Codable.swift in Sources */,
 				4E3BD56F221BB39800E357CE /* Keychain.swift in Sources */,
 				4ED53381221E3E8600F4113D /* UIViewController+extension.swift in Sources */,
@@ -616,7 +617,6 @@
 				4E09F817221A9795004A00AD /* MainViewController.swift in Sources */,
 				4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */,
 				4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */,
-				4ED5339F221E93D100F4113D /* SampleModel.swift in Sources */,
 				4EA23571221A71C500AB29A4 /* StoryboardScenes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
