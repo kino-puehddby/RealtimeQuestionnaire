@@ -21,7 +21,7 @@ final class MainViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
+    fileprivate let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,7 @@ final class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(cellType: MainTableViewCell.self)
         
+        // API呼び出し
         Firestore.firestore().rx
             .observeArray(
                 QuestionnaireListModel.Fields.self,
@@ -74,10 +75,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         // FIXME: Firestoreから取得したアンケート情報を入れる
-        let name = questionnaireList.value[indexPath.row].title
-        let description = questionnaireList.value[indexPath.row].description ?? ""
+        let data = questionnaireList.value[indexPath.row]
+        let name = data.title
+        let description = data.description ?? ""
         cell.configuration(
-            iconImage: Asset.risu.image,
+            iconImage: Asset.sample.image,
             name: name,
             description: description)
         return cell

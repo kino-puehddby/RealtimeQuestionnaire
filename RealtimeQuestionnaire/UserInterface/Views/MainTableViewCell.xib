@@ -19,13 +19,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ab0-hW-30K">
-                        <rect key="frame" x="20" y="5" width="69.5" height="69.5"/>
+                        <rect key="frame" x="20" y="10" width="59.5" height="59.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Ab0-hW-30K" secondAttribute="height" multiplier="1:1" id="9EC-4X-hLc"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="67W-hG-X1c">
-                        <rect key="frame" x="97.5" y="11" width="201.5" height="58"/>
+                        <rect key="frame" x="89.5" y="11" width="209.5" height="58"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コミュニティ名 or ユーザー名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-ki-RMf">
                                 <rect key="frame" x="0.0" y="0.0" width="192.5" height="28"/>
@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdF-Bg-ndG">
-                                <rect key="frame" x="0.0" y="28" width="191.5" height="30"/>
+                                <rect key="frame" x="0.0" y="28" width="202.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="z2K-xN-EeO"/>
                                 </constraints>
@@ -46,14 +46,14 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="Ab0-hW-30K" secondAttribute="bottom" constant="5" id="Czq-44-dbI"/>
+                    <constraint firstAttribute="bottom" secondItem="Ab0-hW-30K" secondAttribute="bottom" constant="10" id="Czq-44-dbI"/>
                     <constraint firstAttribute="bottomMargin" secondItem="67W-hG-X1c" secondAttribute="bottom" id="Djc-3c-8LR"/>
-                    <constraint firstItem="67W-hG-X1c" firstAttribute="leading" secondItem="Ab0-hW-30K" secondAttribute="trailing" constant="8" id="J49-aU-dHN"/>
+                    <constraint firstItem="67W-hG-X1c" firstAttribute="leading" secondItem="Ab0-hW-30K" secondAttribute="trailing" constant="10" id="J49-aU-dHN"/>
                     <constraint firstItem="Ab0-hW-30K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Otu-9g-cUk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="67W-hG-X1c" secondAttribute="trailing" constant="5" id="dS6-pv-mRT"/>
                     <constraint firstItem="Ab0-hW-30K" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eQe-j7-99j"/>
                     <constraint firstItem="67W-hG-X1c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="k5c-ZV-Gwg"/>
-                    <constraint firstItem="Ab0-hW-30K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="oCk-D7-trZ"/>
+                    <constraint firstItem="Ab0-hW-30K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="oCk-D7-trZ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

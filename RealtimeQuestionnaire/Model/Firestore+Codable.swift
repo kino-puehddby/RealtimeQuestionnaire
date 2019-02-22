@@ -23,7 +23,7 @@ public enum APIError: Error {
     case unknown(String)
 }
 
-extension Reactive where Base: Firestore {    
+extension Reactive where Base: Firestore {
     /**
      データの追加
      */
