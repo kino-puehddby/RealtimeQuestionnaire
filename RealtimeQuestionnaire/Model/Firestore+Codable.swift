@@ -17,21 +17,18 @@ public enum CollectionKey: String {
     case questionnaireListGet = "QuestionnaireList"
 }
 
-enum APIError: Error {
+public enum APIError: Error {
     case network
     case server(Int)
     case unknown(String)
 }
 
-extension Reactive where Base: Firestore {
-    // TODO: Codable -> DatabaseCollection に replace する
-    
+extension Reactive where Base: Firestore {    
     /**
      データの追加
      */
-    public func setData<T: Codable>(model: T, collectionKey: CollectionKey, documentPath: String?) -> Single<()> {
+    public func setData<T: Codable>(model: T, collectionRef: CollectionReference, documentRef: DocumentReference?) -> Single<()> {
         return Single.create { observer in
-            let db = Firestore.firestore()
             let optionalData: [String: Any]?
             do {
                 optionalData = try FirestoreEncoder().encode(model)
@@ -44,10 +41,10 @@ extension Reactive where Base: Firestore {
                 observer(.error(APIError.unknown(L10n.Error.unknown)))
                 return Disposables.create()
             }
-            if let documentPath = documentPath {
+            if let documentRef = documentRef {
                 // DocumentID を指定
-                db.collection(collectionKey.rawValue)
-                    .document(documentPath).setData(data) { error in
+                documentRef
+                    .setData(data) { error in
                         if let error = error {
                             debugPrint(error)
                             observer(.error(error))
@@ -57,7 +54,7 @@ extension Reactive where Base: Firestore {
                     }
             } else {
                 // DocumentID を自動で割り振る
-                db.collection(collectionKey.rawValue)
+                collectionRef
                     .addDocument(data: data) { error in
                         if let error = error {
                             debugPrint(error)
@@ -74,10 +71,8 @@ extension Reactive where Base: Firestore {
     /**
      データの更新
      */
-    public func update<T: Codable>(new model: T, collectionKey: CollectionKey, documentPath: String) -> Single<()> {
+    public func update<T: Codable>(new model: T, documentRef: DocumentReference) -> Single<()> {
         return Single.create { observer in
-            let db = Firestore.firestore()
-            let documentRef = db.collection(collectionKey.rawValue).document(documentPath)
             let optionalData: [String: Any]?
             do {
                 optionalData = try FirestoreEncoder().encode(model)
@@ -105,10 +100,8 @@ extension Reactive where Base: Firestore {
     /**
      データの取得（配列）
      */
-    public func getArray<T: Codable>(_ type: T.Type, collectionKey: CollectionKey) -> Single<[T]> {
+    public func getArray<T: Codable>(_ type: T.Type, collectionRef: CollectionReference) -> Single<[T]> {
         return Single.create { observer in
-            let db = Firestore.firestore()
-            let collectionRef = db.collection(collectionKey.rawValue)
             collectionRef
                 .getDocuments { snapshot, error in
                     if let error = error {
@@ -137,11 +130,8 @@ extension Reactive where Base: Firestore {
     /**
      データの取得
      */
-    public func get<T: Codable>(_ type: T.Type, collectionKey: CollectionKey) -> Single<T> {
+    public func get<T: Codable>(_ type: T.Type, documentRef: DocumentReference) -> Single<T> {
         return Single.create { observer in
-            let db = Firestore.firestore()
-            let collectionRef = db.collection(collectionKey.rawValue)
-            let documentRef = collectionRef.document("") // FIXME: 汎用化
             documentRef
                 .getDocument { snapshot, error in
                     if let error = error {
@@ -168,10 +158,8 @@ extension Reactive where Base: Firestore {
     /**
      特定の Model（配列）を監視
      */
-    public func observeArray<T: Codable>(_ type: T.Type, collectionKey: CollectionKey) -> Observable<[T]> {
+    public func observeArray<T: Codable>(_ type: T.Type, collectionRef: CollectionReference) -> Observable<[T]> {
         return Observable.create { observer in
-            let db = Firestore.firestore()
-            let collectionRef = db.collection(collectionKey.rawValue)
             collectionRef
                 .addSnapshotListener { snapshot, error in
                     if let error = error {
@@ -201,11 +189,8 @@ extension Reactive where Base: Firestore {
     /**
      特定の Model を監視
      */
-    public func observeModel<T: Codable>(_ type: T.Type, collectionKey: CollectionKey) -> Observable<T> {
+    public func observeModel<T: Codable>(_ type: T.Type, documentRef: DocumentReference) -> Observable<T> {
         return Observable.create { observer in
-            let db = Firestore.firestore()
-            let collectionRef = db.collection(collectionKey.rawValue)
-            let documentRef = collectionRef.document("") // FIXME: 汎用化
             documentRef
                 .addSnapshotListener { snapshot, error in
                     if let error = error {

@@ -40,7 +40,7 @@ final class MainViewController: UIViewController {
         Firestore.firestore().rx
             .observeArray(
                 QuestionnaireListModel.Fields.self,
-                collectionKey: QuestionnaireListModel.collectionKey
+                collectionRef: QuestionnaireListModel.makeCollectionRef()
             )
             .subscribe { [weak self] event in
                 guard let vc = self else { return }

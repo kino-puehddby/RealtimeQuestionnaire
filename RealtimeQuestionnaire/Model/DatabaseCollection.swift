@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseFirestore
+import CodableFirebase
 
 public protocol DatabaseCollection {
     associatedtype FieldType: Codable
@@ -15,7 +16,6 @@ public protocol DatabaseCollection {
     var id: String { get }
     var fields: FieldType? { get }
     init(id: String, fields: FieldType?)
-    init(id: String, json: [String: Any]) throws
     static func makeCollectionRef() -> CollectionReference
     static func makeDocumentRef(id: String) -> DocumentReference
     func makeDocumentRef() -> DocumentReference
@@ -24,17 +24,6 @@ public protocol DatabaseCollection {
 extension DatabaseCollection {
     public init(id: String) {
         self.init(id: id, fields: nil)
-    }
-    public init(id: String, json: [String: Any]) {
-        // TODO: If performance is prioritized, map by hand
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json)
-            let decoded = try JSONDecoder().decode(FieldType.self, from: data)
-            self.init(id: id, fields: decoded)
-        } catch {
-            debugPrint(error)
-            self.init(id: id)
-        }
     }
     public static func makeCollectionRef() -> CollectionReference {
         return Firestore.firestore().collection(collectionKey.rawValue)

@@ -8,18 +8,6 @@
 
 import Foundation
 
-struct QuestionnaireListModelOld: Codable {
-    internal private(set) var title: String
-    internal private(set) var description: String?
-    internal private(set) var choices: [String]
-    
-    init(title: String, description: String?, choices: [String]) {
-        self.title = title
-        self.description = description
-        self.choices = choices
-    }
-}
-
 struct QuestionnaireListModel: DatabaseCollection {
     static var collectionKey: CollectionKey = .questionnaireListGet
     var id: String

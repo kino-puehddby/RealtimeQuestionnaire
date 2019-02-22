@@ -324,11 +324,19 @@
 		4ED53393221E856900F4113D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
+				4ED533A8221FDD6600F4113D /* Questionnaire */,
 				4ED533A0221E942100F4113D /* Firestore+Codable.swift */,
 				4ED533A6221FA2B000F4113D /* DatabaseCollection.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4ED533A8221FDD6600F4113D /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
+			);
+			path = Questionnaire;
 			sourceTree = "<group>";
 		};
 		C5F0786942C890B98BF4C673 /* Pods */ = {
