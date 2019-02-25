@@ -27,18 +27,30 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="67W-hG-X1c">
                         <rect key="frame" x="89.5" y="11" width="209.5" height="58"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コミュニティ名 or ユーザー名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-ki-RMf">
-                                <rect key="frame" x="0.0" y="0.0" width="192.5" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アンケートタイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-ki-RMf">
+                                <rect key="frame" x="0.0" y="0.0" width="129" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="NRu-Z3-OrR"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdF-Bg-ndG">
-                                <rect key="frame" x="0.0" y="28" width="202.5" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コミュニティ名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zO0-22-mFS">
+                                <rect key="frame" x="0.0" y="17" width="72" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="z2K-xN-EeO"/>
+                                    <constraint firstAttribute="height" constant="17" id="dXn-0j-PSs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アンケート説明アンケート説明アンケート説明アンケート説明アンケート説明アンケート説明" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdF-Bg-ndG">
+                                <rect key="frame" x="0.0" y="34" width="202.5" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="z2K-xN-EeO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -58,9 +70,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="communityNameLabel" destination="zO0-22-mFS" id="14E-rP-y7K"/>
                 <outlet property="descriptionLabel" destination="cdF-Bg-ndG" id="Xuj-d4-8P9"/>
                 <outlet property="iconImageView" destination="Ab0-hW-30K" id="WJW-rK-ukP"/>
-                <outlet property="nameLabel" destination="Tlp-ki-RMf" id="ypW-r3-xdF"/>
+                <outlet property="titleLabel" destination="Tlp-ki-RMf" id="5Sz-Sv-SMu"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="154.72263868065968"/>
         </tableViewCell>

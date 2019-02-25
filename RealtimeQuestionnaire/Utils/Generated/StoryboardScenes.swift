@@ -12,6 +12,11 @@ import UIKit
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
+  internal enum CreateQuestionnaire: StoryboardType {
+    internal static let storyboardName = "CreateQuestionnaire"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.CreateQuestionnaireViewController>(storyboard: CreateQuestionnaire.self)
+  }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
 
@@ -36,11 +41,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.MenuViewController>(storyboard: Menu.self)
   }
-  internal enum QuestionnaireCreate: StoryboardType {
-    internal static let storyboardName = "QuestionnaireCreate"
-
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.QuestionnaireCreateViewController>(storyboard: QuestionnaireCreate.self)
-  }
   internal enum Register: StoryboardType {
     internal static let storyboardName = "Register"
 
@@ -55,6 +55,11 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Splash"
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SplashViewController>(storyboard: Splash.self)
+  }
+  internal enum UnansweredQuestionnaireList: StoryboardType {
+    internal static let storyboardName = "UnansweredQuestionnaireList"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.UnansweredQuestionnaireListViewController>(storyboard: UnansweredQuestionnaireList.self)
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

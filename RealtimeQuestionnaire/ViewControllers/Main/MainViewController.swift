@@ -19,7 +19,12 @@ final class MainViewController: UIViewController {
     @IBOutlet weak private var rightBarButton: UIBarButtonItem!
     @IBOutlet weak private var tableView: UITableView!
     
+    @IBOutlet weak private var createQuestionnaireButton: UIButton!
+    @IBOutlet weak private var answerQuestionnaireButton: UIButton!
+    
     private let disposeBag = DisposeBag()
+    
+    private let refreshControl = UIRefreshControl()
     
     fileprivate let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
     
@@ -36,8 +41,36 @@ final class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MainTableViewCell.self)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    func bind() {
+        leftBarButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.slideMenuController()?.openLeft()
+            })
+            .disposed(by: disposeBag)
         
-        // API呼び出し
+        rightBarButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.perform(segue: StoryboardSegue.Main.showSearch)
+            })
+            .disposed(by: disposeBag)
+        
+        createQuestionnaireButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.perform(segue: StoryboardSegue.Main.showCreateQuestionnaire)
+            })
+            .disposed(by: disposeBag)
+        
+        answerQuestionnaireButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+            })
+            .disposed(by: disposeBag)
+        
+        // observe QuestionnaireList on Firestore
         Firestore.firestore().rx
             .observeArray(
                 QuestionnaireListModel.Fields.self,
@@ -58,10 +91,20 @@ final class MainViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func bind() {
-        leftBarButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.slideMenuController()?.openLeft()
+    @objc func refresh(_ sender: UIRefreshControl) {
+        Firestore.firestore().rx
+            .getArray(
+                QuestionnaireListModel.Fields.self,
+                collectionRef: QuestionnaireListModel.makeCollectionRef()
+            )
+            .subscribe({ [unowned self] result in
+                switch result {
+                case .success(let list):
+                    self.questionnaireList.accept(list)
+                case .error(let error):
+                    debugPrint(error)
+                }
+                self.tableView.refreshControl!.endRefreshing()
             })
             .disposed(by: disposeBag)
     }
@@ -74,13 +117,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
-        // FIXME: Firestoreから取得したアンケート情報を入れる
         let data = questionnaireList.value[indexPath.row]
-        let name = data.title
+        let title = data.title
+        let communityName = data.communityName
         let description = data.description ?? ""
         cell.configuration(
+            // FIXME: 画像をFirebase Storageから取得するようにするZ
             iconImage: Asset.sample.image,
-            name: name,
+            title: title,
+            communityName: communityName,
             description: description)
         return cell
     }

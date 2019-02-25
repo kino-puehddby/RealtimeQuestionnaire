@@ -11,6 +11,9 @@ import SnapKit
 
 extension UIViewController {
     
+    // -----------------------
+    // - Set RootViewController
+    // -----------------------
     func switchLoginViewController() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         guard let rootViewController = appDelegate.window?.rootViewController as? AppRootViewController else { return }
@@ -30,5 +33,38 @@ extension UIViewController {
             make.edges.equalToSuperview()
         }
         vc.didMove(toParent: self)
+    }
+    
+    // -----------------------
+    // - Keyboard up & down
+    // -----------------------
+    func setupKeyboardUpDownWithTextField() {
+        let notification = NotificationCenter.default
+        notification.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        notification.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    @objc private func keyboardWillShow(_ notification: Notification?) {
+        guard let rect = (notification?.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+            let duration = notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        UIView.animate(withDuration: duration) {
+            let transform = CGAffineTransform(translationX: 0, y: -rect.size.height)
+            self.view.transform = transform
+        }
+    }
+    @objc private func keyboardWillHide(_ notification: Notification?) {
+        guard let duration = notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        UIView.animate(withDuration: duration) {
+            self.view.transform = CGAffineTransform.identity
+        }
     }
 }

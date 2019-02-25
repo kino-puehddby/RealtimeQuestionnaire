@@ -1,4 +1,5 @@
 github "ReactiveX/RxSwift" "4.4.1"
+github "SVProgressHUD/SVProgressHUD" "2.2.5"
 github "SnapKit/SnapKit" "4.2.0"
 github "alickbass/CodableFirebase" "0.2.1"
 github "dekatotoro/SlideMenuControllerSwift" "4.0.0"

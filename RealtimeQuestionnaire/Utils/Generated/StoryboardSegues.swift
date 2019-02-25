@@ -15,6 +15,11 @@ internal enum StoryboardSegue {
   internal enum Login: String, SegueType {
     case showRegister
   }
+  internal enum Main: String, SegueType {
+    case showCreateQuestionnaire
+    case showSearch
+    case showUnansweredQuestionnaireList
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 

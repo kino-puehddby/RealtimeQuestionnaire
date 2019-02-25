@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="47q-mn-Jck" customClass="ChoiceTableViewCell" customModule="RealtimeQuestionnaire" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="47q-mn-Jck" id="XaS-Ex-OEc">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cTu-Kf-CMz">
+                        <rect key="frame" x="15" y="10" width="345" height="59.5"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="テキストを入力してください。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-lx-iDC">
+                                <rect key="frame" x="0.0" y="0.0" width="280.5" height="59.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8J-uZ-zFZ">
+                                <rect key="frame" x="285.5" y="0.0" width="59.5" height="59.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="t8J-uZ-zFZ" secondAttribute="height" multiplier="1:1" id="jvy-U2-D8g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="+"/>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="cTu-Kf-CMz" secondAttribute="trailing" constant="15" id="JR4-We-hun"/>
+                    <constraint firstItem="cTu-Kf-CMz" firstAttribute="top" secondItem="XaS-Ex-OEc" secondAttribute="top" constant="10" id="Jbh-kg-rVL"/>
+                    <constraint firstAttribute="bottom" secondItem="cTu-Kf-CMz" secondAttribute="bottom" constant="10" id="P3R-Bs-qwS"/>
+                    <constraint firstItem="cTu-Kf-CMz" firstAttribute="leading" secondItem="XaS-Ex-OEc" secondAttribute="leading" constant="15" id="u6J-hr-kiW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addButton" destination="t8J-uZ-zFZ" id="Tga-dN-Nx0"/>
+                <outlet property="choiceField" destination="Y4l-lx-iDC" id="zmZ-qg-xcG"/>
+            </connections>
+            <point key="canvasLocation" x="260.80000000000001" y="144.3778110944528"/>
+        </tableViewCell>
+    </objects>
+</document>

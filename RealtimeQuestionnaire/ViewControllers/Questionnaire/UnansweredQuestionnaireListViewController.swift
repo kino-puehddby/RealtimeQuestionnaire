@@ -1,14 +1,14 @@
 //
-//  QuestionnaireCreateViewController.swift
+//  UnansweredQuestionnaireListViewController.swift
 //  RealtimeQuestionnaire
 //
-//  Created by 杉田 尚哉 on 2019/02/20.
+//  Created by HisayaSugita on 2019/02/24.
 //  Copyright © 2019 hisayasugita. All rights reserved.
 //
 
 import UIKit
 
-final class QuestionnaireCreateViewController: UIViewController {
+final class UnansweredQuestionnaireListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
