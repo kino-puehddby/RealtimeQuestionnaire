@@ -174,6 +174,7 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
     }
     
     func addAction() {
+        // FIXME: 一番下にセルを追加してカーソルを合わせるようにする
         tableView.beginUpdates()
         var newList = choicesList.value
         newList.insert("", at: 0)

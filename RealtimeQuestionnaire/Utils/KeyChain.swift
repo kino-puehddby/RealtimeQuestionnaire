@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import KeychainAccess
+
+enum KeyChainKeys {
+    case password
+    
+    static func aaa() {
+        
+    }
+}
