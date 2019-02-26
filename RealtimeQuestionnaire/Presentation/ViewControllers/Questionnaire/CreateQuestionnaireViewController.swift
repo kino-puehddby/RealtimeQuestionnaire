@@ -84,7 +84,7 @@ final class CreateQuestionnaireViewController: UIViewController {
     }
     
     func getUserCommunities() {
-        guard let user = Auth.auth().currentUser else { return }
+        guard let user = Auth.auth().currentUser else { return } // UserDefaultかKeyChainに保存しておく
         let documentRef = UserModel.makeDocumentRef(id: user.uid)
         Firestore.firestore().rx
             .get(
@@ -104,7 +104,9 @@ final class CreateQuestionnaireViewController: UIViewController {
     }
     
     func postQuestionnaire() {
+        guard let user = Auth.auth().currentUser else { return }
         let fields = QuestionnaireListModel.Fields(
+            authorId: user.uid,
             title: titleField.text ?? "",
             description: descriptionField.text,
             communityName: communityPickerField.text ?? "",

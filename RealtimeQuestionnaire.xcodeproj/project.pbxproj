@@ -21,6 +21,8 @@
 		4E3BD56F221BB39800E357CE /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD56E221BB39800E357CE /* Keychain.swift */; };
 		4E56BA7822251AD80055529B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7722251AD80055529B /* PickerTextField.swift */; };
 		4E56BA7B22251FED0055529B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7A22251FED0055529B /* UserModel.swift */; };
+		4E56BA7E22253E6E0055529B /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7D22253E6E0055529B /* KeyChain.swift */; };
+		4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56BA7F222540040055529B /* KeychainAccess.framework */; };
 		4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920323221A5BB600C6634F /* AppDelegate.swift */; };
 		4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920325221A5BB600C6634F /* SplashViewController.swift */; };
 		4E920329221A5BB600C6634F /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E920327221A5BB600C6634F /* Splash.storyboard */; };
@@ -75,6 +77,8 @@
 		4E3BD56E221BB39800E357CE /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		4E56BA7722251AD80055529B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		4E56BA7A22251FED0055529B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4E56BA7D22253E6E0055529B /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		4E56BA7F222540040055529B /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		4E920320221A5BB600C6634F /* RealtimeQuestionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealtimeQuestionnaire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E920323221A5BB600C6634F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E920325221A5BB600C6634F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */,
 				A015481E222274B000084606 /* SVProgressHUD.framework in Frameworks */,
 				4ED5339D221E933800F4113D /* CodableFirebase.framework in Frameworks */,
 				4ED53382221E40BE00F4113D /* SnapKit.framework in Frameworks */,
@@ -171,6 +176,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		4E56BA7C22253E320055529B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				4E920336221A6F0400C6634F /* ViewControllers */,
+				4ED5338C221E5DAF00F4113D /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		4E920317221A5BB600C6634F = {
 			isa = PBXGroup;
 			children = (
@@ -193,8 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				4E920335221A6EF100C6634F /* UserInterface */,
-				4E920336221A6F0400C6634F /* ViewControllers */,
-				4ED5338C221E5DAF00F4113D /* Views */,
+				4E56BA7C22253E320055529B /* Presentation */,
 				4ED53393221E856900F4113D /* Model */,
 				4E3BD56B221BA45F00E357CE /* Extension */,
 				4E920337221A6F2000C6634F /* Utils */,
@@ -231,6 +244,7 @@
 			children = (
 				4ED53391221E827000F4113D /* Const.swift */,
 				4E920338221A6F2A00C6634F /* Generated */,
+				4E56BA7D22253E6E0055529B /* KeyChain.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -372,6 +386,7 @@
 		F4AEBB3F26A8052851C67044 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E56BA7F222540040055529B /* KeychainAccess.framework */,
 				A015481D222274AF00084606 /* SVProgressHUD.framework */,
 				4ED5339C221E933800F4113D /* CodableFirebase.framework */,
 				4ED5337E221D568D00F4113D /* SlideMenuControllerSwift.framework */,
@@ -526,6 +541,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CodableFirebase.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputFileListPaths = (
@@ -654,6 +670,7 @@
 				4E09F817221A9795004A00AD /* MainViewController.swift in Sources */,
 				4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */,
 				4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */,
+				4E56BA7E22253E6E0055529B /* KeyChain.swift in Sources */,
 				4EA23571221A71C500AB29A4 /* StoryboardScenes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

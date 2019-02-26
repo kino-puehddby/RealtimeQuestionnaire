@@ -10,3 +10,6 @@ github "SVProgressHUD/SVProgressHUD"
 
 # Decode
 github "alickbass/CodableFirebase"
+
+# KeyChain
+github "kishikawakatsumi/KeychainAccess"

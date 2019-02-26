@@ -15,12 +15,14 @@ struct QuestionnaireListModel: DatabaseCollection {
     typealias FieldType = Fields
     var fields: QuestionnaireListModel.Fields?
     public struct Fields: Codable {
+        public let authorId: String // 作成者
         public let title: String // アンケート名
         public let description: String? // アンケートの説明
         public let communityName: String // コミュニティ名
         public let choices: [String] // アンケートの選択肢
         
-        public init(title: String, description: String?, communityName: String, choices: [String]) {
+        public init(authorId: String, title: String, description: String?, communityName: String, choices: [String]) {
+            self.authorId = authorId
             self.title = title
             self.description = description
             self.communityName = communityName
