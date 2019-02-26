@@ -31,6 +31,10 @@ internal enum L10n {
       /// 本当にログアウトしますか？
       internal static let message = L10n.tr("Localizable", "Alert.Logout.Message")
     }
+    internal enum Questionnaire {
+      /// アンケートの作成に失敗しました
+      internal static let failedToCreate = L10n.tr("Localizable", "Alert.Questionnaire.FailedToCreate")
+    }
   }
 
   internal enum Common {

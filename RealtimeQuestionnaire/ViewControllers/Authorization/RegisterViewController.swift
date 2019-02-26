@@ -9,6 +9,7 @@
 import UIKit
 
 import FirebaseAuth
+import FirebaseFirestore
 import RxSwift
 import RxCocoa
 
@@ -80,6 +81,30 @@ final class RegisterViewController: UIViewController {
                 // エラー処理
             }
         }
+    }
+    
+    private func postUser() {
+        let fields = UserModel.Fields(
+            nickname: "",
+            iconUrl: "",
+            communities: []
+        )
+        guard let user = Auth.auth().currentUser else { return }
+        Firestore.firestore().rx
+            .setData(
+                model: fields,
+                collectionRef: UserModel.makeCollectionRef(),
+                documentRef: UserModel.makeDocumentRef(id: user.uid)
+            )
+            .subscribe { result in
+                switch result {
+                case .success(()):
+                    break
+                case .error(let error):
+                    debugPrint(error)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
 

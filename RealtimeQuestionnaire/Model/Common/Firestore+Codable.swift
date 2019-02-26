@@ -14,7 +14,8 @@ import CodableFirebase
 import RxSwift
 
 public enum CollectionKey: String {
-    case questionnaireListGet = "QuestionnaireList"
+    case questionnaireList = "QuestionnaireList"
+    case user = "User"
 }
 
 public enum APIError: Error {
@@ -27,7 +28,7 @@ extension Reactive where Base: Firestore {
     /**
      データの追加
      */
-    public func setData<T: Codable>(model: T, collectionRef: CollectionReference, documentRef: DocumentReference?) -> Single<()> {
+    public func setData<T: Codable>(model: T, collectionRef: CollectionReference, documentRef: DocumentReference? = nil) -> Single<()> {
         return Single.create { observer in
             let optionalData: [String: Any]?
             do {

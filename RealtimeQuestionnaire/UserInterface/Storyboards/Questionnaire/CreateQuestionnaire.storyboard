@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,9 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AWK-ad-RN4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AWK-ad-RN4">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ySW-YX-3NW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="412"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -68,7 +69,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UsC-RO-V5M">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UsC-RO-V5M" customClass="PickerTextField" customModule="RealtimeQuestionnaire" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="28" width="335" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="248-wW-MAb"/>
@@ -103,7 +104,6 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="143" id="OMw-1k-Ja4"/>
                                                             </constraints>
-                                                            <string key="text">テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力してください。テキストを入力して力してください。テキストを入力力してください。テキストを入力力してください。テキストを入力</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
@@ -125,18 +125,55 @@
                                                 <constraint firstItem="tDg-VY-TG3" firstAttribute="leading" secondItem="ggt-P3-0kJ" secondAttribute="leading" id="ggk-4Y-1Dv"/>
                                             </constraints>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfY-Wo-krg">
+                                            <rect key="frame" x="320" y="357" width="40" height="40"/>
+                                            <color key="backgroundColor" name="SystemBlue"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="RVq-kg-vpH"/>
+                                                <constraint firstAttribute="height" constant="40" id="yKt-2Q-xnA"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <state key="normal" title="+">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ggt-P3-0kJ" secondAttribute="trailing" constant="20" id="5eg-OF-anS"/>
+                                        <constraint firstAttribute="bottom" secondItem="HfY-Wo-krg" secondAttribute="bottom" constant="15" id="RQL-aA-NPF"/>
+                                        <constraint firstAttribute="trailing" secondItem="HfY-Wo-krg" secondAttribute="trailing" constant="15" id="WG5-9F-38L"/>
                                         <constraint firstItem="ggt-P3-0kJ" firstAttribute="leading" secondItem="ySW-YX-3NW" secondAttribute="leading" constant="20" id="WUY-Av-Lqf"/>
                                         <constraint firstItem="ggt-P3-0kJ" firstAttribute="centerX" secondItem="ySW-YX-3NW" secondAttribute="centerX" id="aZm-G7-nWR"/>
                                         <constraint firstItem="ggt-P3-0kJ" firstAttribute="top" secondItem="ySW-YX-3NW" secondAttribute="top" constant="10" id="aiR-Uz-8il"/>
                                     </constraints>
                                 </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="T8c-QN-cgR">
+                                    <rect key="frame" x="0.0" y="565.5" width="375" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8DV-wz-3YQ">
+                                            <rect key="frame" x="52.5" y="15" width="270" height="50"/>
+                                            <color key="backgroundColor" name="SystemBlue"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="8Td-uP-gcm"/>
+                                                <constraint firstAttribute="width" constant="270" id="dWO-WJ-sjG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="14"/>
+                                            <state key="normal" title="アンケートを作成">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="8DV-wz-3YQ" firstAttribute="centerY" secondItem="T8c-QN-cgR" secondAttribute="centerY" id="8cL-2t-Eqv"/>
+                                        <constraint firstItem="8DV-wz-3YQ" firstAttribute="centerX" secondItem="T8c-QN-cgR" secondAttribute="centerX" id="Iva-X8-fWL"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="S9K-PA-0bW">
-                                        <rect key="frame" x="0.0" y="440" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="467.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S9K-PA-0bW" id="1D0-Qe-ILW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
@@ -160,7 +197,9 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="addCellButton" destination="HfY-Wo-krg" id="mz8-KE-5FY"/>
                         <outlet property="communityPickerField" destination="UsC-RO-V5M" id="ae7-71-Gx2"/>
+                        <outlet property="createQuestionnaireButton" destination="8DV-wz-3YQ" id="0uM-ZM-Lfr"/>
                         <outlet property="descriptionField" destination="N7F-hH-I4e" id="P6Y-8R-0pU"/>
                         <outlet property="tableView" destination="AWK-ad-RN4" id="CRd-2R-tVa"/>
                         <outlet property="titleField" destination="cUY-hl-JX1" id="9zy-9Z-PbJ"/>
@@ -176,4 +215,9 @@
             <point key="canvasLocation" x="-41" y="16"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="SystemBlue">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

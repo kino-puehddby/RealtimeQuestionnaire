@@ -16,6 +16,7 @@ public protocol DatabaseCollection {
     var id: String { get }
     var fields: FieldType? { get }
     init(id: String, fields: FieldType?)
+    init(fields: FieldType)
     static func makeCollectionRef() -> CollectionReference
     static func makeDocumentRef(id: String) -> DocumentReference
     func makeDocumentRef() -> DocumentReference

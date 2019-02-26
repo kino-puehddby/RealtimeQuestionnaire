@@ -9,8 +9,9 @@
 import Foundation
 
 struct QuestionnaireListModel: DatabaseCollection {
-    static var collectionKey: CollectionKey = .questionnaireListGet
-    var id: String
+    
+    static var collectionKey: CollectionKey = .questionnaireList
+    var id: String = ""
     typealias FieldType = Fields
     var fields: QuestionnaireListModel.Fields?
     public struct Fields: Codable {
@@ -18,9 +19,19 @@ struct QuestionnaireListModel: DatabaseCollection {
         public let description: String? // アンケートの説明
         public let communityName: String // コミュニティ名
         public let choices: [String] // アンケートの選択肢
+        
+        public init(title: String, description: String?, communityName: String, choices: [String]) {
+            self.title = title
+            self.description = description
+            self.communityName = communityName
+            self.choices = choices
+        }
     }
     public init(id: String, fields: Fields?) {
         self.id = id
+        self.fields = fields
+    }
+    public init(fields: QuestionnaireListModel.Fields) {
         self.fields = fields
     }
 }

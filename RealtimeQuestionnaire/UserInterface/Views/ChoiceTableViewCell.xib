@@ -17,23 +17,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cTu-Kf-CMz">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cTu-Kf-CMz">
                         <rect key="frame" x="15" y="10" width="345" height="59.5"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="テキストを入力してください。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-lx-iDC">
-                                <rect key="frame" x="0.0" y="0.0" width="280.5" height="59.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="選択肢1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vo9-J9-hJs">
+                                <rect key="frame" x="0.0" y="0.0" width="345" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-lx-iDC">
+                                <rect key="frame" x="0.0" y="21" width="345" height="38.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8J-uZ-zFZ">
-                                <rect key="frame" x="285.5" y="0.0" width="59.5" height="59.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="t8J-uZ-zFZ" secondAttribute="height" multiplier="1:1" id="jvy-U2-D8g"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="+"/>
-                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -45,8 +43,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="addButton" destination="t8J-uZ-zFZ" id="Tga-dN-Nx0"/>
                 <outlet property="choiceField" destination="Y4l-lx-iDC" id="zmZ-qg-xcG"/>
+                <outlet property="rowLabel" destination="Vo9-J9-hJs" id="UCb-Pw-tDM"/>
             </connections>
             <point key="canvasLocation" x="260.80000000000001" y="144.3778110944528"/>
         </tableViewCell>

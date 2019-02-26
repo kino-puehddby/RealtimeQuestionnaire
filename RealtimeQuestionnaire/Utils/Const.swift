@@ -15,6 +15,12 @@ public struct Main {
     }
 }
 
+public struct CreateQuestionnaire {
+    public struct TableView {
+        public static let cellHeight: CGFloat = 80
+    }
+}
+
 // Sample
 public struct Sample {
     public struct TableView {

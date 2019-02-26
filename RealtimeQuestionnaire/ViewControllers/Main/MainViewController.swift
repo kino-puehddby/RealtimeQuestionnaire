@@ -97,7 +97,7 @@ final class MainViewController: UIViewController {
                 QuestionnaireListModel.Fields.self,
                 collectionRef: QuestionnaireListModel.makeCollectionRef()
             )
-            .subscribe({ [unowned self] result in
+            .subscribe { [unowned self] result in
                 switch result {
                 case .success(let list):
                     self.questionnaireList.accept(list)
@@ -105,7 +105,7 @@ final class MainViewController: UIViewController {
                     debugPrint(error)
                 }
                 self.tableView.refreshControl!.endRefreshing()
-            })
+            }
             .disposed(by: disposeBag)
     }
 }
@@ -122,7 +122,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let communityName = data.communityName
         let description = data.description ?? ""
         cell.configuration(
-            // FIXME: 画像をFirebase Storageから取得するようにするZ
+            // FIXME: 画像をFirebase Storageから取得するようにする
             iconImage: Asset.sample.image,
             title: title,
             communityName: communityName,
