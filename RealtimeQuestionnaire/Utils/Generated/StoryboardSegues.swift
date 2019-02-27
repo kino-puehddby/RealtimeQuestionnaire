@@ -13,15 +13,12 @@ import UIKit
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardSegue {
   internal enum Login: String, SegueType {
-    case showMain
     case showRegister
   }
-  internal enum Register: String, SegueType {
-    case showLogin
-  }
-  internal enum Splash: String, SegueType {
-    case showLogin
-    case showMain
+  internal enum Main: String, SegueType {
+    case showCreateQuestionnaire
+    case showSearch
+    case showUnansweredQuestionnaireList
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

@@ -12,6 +12,11 @@ import UIKit
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
+  internal enum CreateQuestionnaire: StoryboardType {
+    internal static let storyboardName = "CreateQuestionnaire"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.CreateQuestionnaireViewController>(storyboard: CreateQuestionnaire.self)
+  }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
 
@@ -29,17 +34,32 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
 
-    internal static let main = SceneType<RealtimeQuestionnaire.MainViewController>(storyboard: Main.self, identifier: "Main")
+    internal static let mainViewController = SceneType<RealtimeQuestionnaire.MainViewController>(storyboard: Main.self, identifier: "MainViewController")
+  }
+  internal enum Menu: StoryboardType {
+    internal static let storyboardName = "Menu"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.MenuViewController>(storyboard: Menu.self)
   }
   internal enum Register: StoryboardType {
     internal static let storyboardName = "Register"
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.RegisterViewController>(storyboard: Register.self)
   }
+  internal enum Search: StoryboardType {
+    internal static let storyboardName = "Search"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SearchViewController>(storyboard: Search.self)
+  }
   internal enum Splash: StoryboardType {
     internal static let storyboardName = "Splash"
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SplashViewController>(storyboard: Splash.self)
+  }
+  internal enum UnansweredQuestionnaireList: StoryboardType {
+    internal static let storyboardName = "UnansweredQuestionnaireList"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.UnansweredQuestionnaireListViewController>(storyboard: UnansweredQuestionnaireList.self)
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

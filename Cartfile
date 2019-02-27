@@ -3,3 +3,13 @@ github "ReactiveX/RxSwift" ~> 4.3.1
 
 # AutoLayout
 github "SnapKit/SnapKit" ~> 4.0.1
+
+# UI
+github "dekatotoro/SlideMenuControllerSwift"
+github "SVProgressHUD/SVProgressHUD"
+
+# Decode
+github "alickbass/CodableFirebase"
+
+# KeyChain
+github "kishikawakatsumi/KeychainAccess"

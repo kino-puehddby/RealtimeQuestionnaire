@@ -13,8 +13,8 @@ import Foundation
 internal enum L10n {
 
   internal enum Alert {
-    /// メールアドレスまたはパスワードが間違っています。
-    internal static let invalidLoginInfo = L10n.tr("Localizable", "Alert.InvalidLoginInfo")
+    /// ログアウト
+    internal static let logout = L10n.tr("Localizable", "Alert.Logout")
     internal enum Auth {
       /// 認証に失敗しました
       internal static let failure = L10n.tr("Localizable", "Alert.Auth.Failure")
@@ -22,6 +22,18 @@ internal enum L10n {
       internal static let inputEmailAddress = L10n.tr("Localizable", "Alert.Auth.InputEmailAddress")
       /// パスワードをリセットする
       internal static let resetPassword = L10n.tr("Localizable", "Alert.Auth.ResetPassword")
+    }
+    internal enum InvalidLogin {
+      /// メールアドレスまたはパスワードが間違っています。
+      internal static let message = L10n.tr("Localizable", "Alert.InvalidLogin.Message")
+    }
+    internal enum Logout {
+      /// 本当にログアウトしますか？
+      internal static let message = L10n.tr("Localizable", "Alert.Logout.Message")
+    }
+    internal enum Questionnaire {
+      /// アンケートの作成に失敗しました
+      internal static let failedToCreate = L10n.tr("Localizable", "Alert.Questionnaire.FailedToCreate")
     }
   }
 
@@ -50,6 +62,33 @@ internal enum L10n {
       /// ¥%@
       internal static func value(_ p1: String) -> String {
         return L10n.tr("Localizable", "Common.Price.value", p1)
+      }
+    }
+  }
+
+  internal enum Error {
+    /// 不明なエラーが発生しました。
+    internal static let unknown = L10n.tr("Localizable", "Error.unknown")
+  }
+
+  internal enum Questionnaire {
+    internal enum Create {
+      internal enum Choice {
+        /// 選択肢%d
+        internal static func value(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "Questionnaire.Create.Choice.value", p1)
+        }
+      }
+    }
+  }
+
+  internal enum Sample {
+    internal enum Questionnaire {
+      internal enum Community {
+        /// TresInnovation
+        internal static let name = L10n.tr("Localizable", "Sample.Questionnaire.Community.Name")
+        /// 従業員満足度の調査
+        internal static let title = L10n.tr("Localizable", "Sample.Questionnaire.Community.Title")
       }
     }
   }
