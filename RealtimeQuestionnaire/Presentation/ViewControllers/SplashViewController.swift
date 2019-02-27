@@ -18,6 +18,15 @@ final class SplashViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(handle)
+    }
+    
+    func setup() {
         handle = Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
             guard let vc = self else { return }
             if user != nil {
@@ -26,11 +35,6 @@ final class SplashViewController: UIViewController, GIDSignInUIDelegate {
                 vc.switchLoginViewController()
             }
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(handle)
     }
     
     private func signInFirebase(with credential: AuthCredential) {

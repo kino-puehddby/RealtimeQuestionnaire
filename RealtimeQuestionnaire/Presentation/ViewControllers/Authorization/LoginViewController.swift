@@ -50,6 +50,12 @@ final class LoginViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
+    func set(uid: String) {
+        if S.getKeychain(.uid) == nil {
+            S.setKeychain(.uid, uid)
+        }
+    }
+    
     func bind() {
         loginButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -82,8 +88,9 @@ final class LoginViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
             guard let vc = self else { return }
-            if user != nil && error == nil {
+            if let user = user, error == nil {
                 debugPrint("*** login succeeded by Firebase ***")
+                vc.set(uid: user.user.uid)
                 vc.switchMainViewController()
             } else {
                 vc.showAlert(type: .ok, message: L10n.Alert.InvalidLogin.message, completion: {
@@ -138,13 +145,14 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     private func signInFirebase(with credential: AuthCredential) {
-        Auth.auth().signInAndRetrieveData(with: credential) { [unowned self] (_, error) in
+        Auth.auth().signInAndRetrieveData(with: credential) { [unowned self] (user, error) in
             if let error = error {
                 debugPrint(error)
                 self.showAlert(type: .ok, title: "認証に失敗しました", message: error.localizedDescription.description)
                 return
             }
             debugPrint("*** login succeeded to Firebase by Google ***")
+            self.set(uid: user!.user.uid)
             self.switchMainViewController()
         }
     }

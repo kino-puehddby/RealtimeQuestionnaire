@@ -71,6 +71,17 @@ internal enum L10n {
     internal static let unknown = L10n.tr("Localizable", "Error.unknown")
   }
 
+  internal enum Questionnaire {
+    internal enum Create {
+      internal enum Choice {
+        /// 選択肢%d
+        internal static func value(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "Questionnaire.Create.Choice.value", p1)
+        }
+      }
+    }
+  }
+
   internal enum Sample {
     internal enum Questionnaire {
       internal enum Community {

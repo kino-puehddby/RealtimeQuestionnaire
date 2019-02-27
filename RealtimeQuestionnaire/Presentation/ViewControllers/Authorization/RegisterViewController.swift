@@ -98,7 +98,7 @@ final class RegisterViewController: UIViewController {
             )
             .subscribe { result in
                 switch result {
-                case .success(()):
+                case .success:
                     break
                 case .error(let error):
                     debugPrint(error)

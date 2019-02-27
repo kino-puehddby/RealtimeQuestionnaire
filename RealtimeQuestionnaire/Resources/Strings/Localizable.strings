@@ -7,6 +7,7 @@
 "Alert.Auth.InputEmailAddress"="メールアドレスを入力してください";
 "Alert.Questionnaire.FailedToCreate"="アンケートの作成に失敗しました";
 "Error.unknown"="不明なエラーが発生しました。";
+"Questionnaire.Create.Choice.value"="選択肢%d";
 
 // Sample
 "Common.Ok"="OK";

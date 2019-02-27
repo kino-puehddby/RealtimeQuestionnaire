@@ -45,6 +45,7 @@ final class CreateQuestionnaireViewController: UIViewController {
         tableView.register(cellType: ChoiceTableViewCell.self)
         
         titleField.delegate = self
+        communityPickerField.delegate = self
         
         descriptionField.delegate = self
         descriptionField.textContainer.lineBreakMode = .byTruncatingTail
@@ -53,7 +54,7 @@ final class CreateQuestionnaireViewController: UIViewController {
         descriptionField.layer.cornerRadius = 5.0
         descriptionField.layer.masksToBounds = true
         
-        addCellButton.layer.cornerRadius = addCellButton.bounds.width / 2
+        addCellButton.layer.cornerRadius = addCellButton.bounds.height / 2
         addCellButton.layer.masksToBounds = true
         
         getUserCommunities()
@@ -84,8 +85,8 @@ final class CreateQuestionnaireViewController: UIViewController {
     }
     
     func getUserCommunities() {
-        guard let user = Auth.auth().currentUser else { return } // UserDefaultかKeyChainに保存しておく
-        let documentRef = UserModel.makeDocumentRef(id: user.uid)
+        guard let uid = S.getKeychain(.uid) else { return }
+        let documentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(
                 UserModel.Fields.self,
@@ -104,9 +105,9 @@ final class CreateQuestionnaireViewController: UIViewController {
     }
     
     func postQuestionnaire() {
-        guard let user = Auth.auth().currentUser else { return }
+        guard let uid = S.getKeychain(.uid) else { return }
         let fields = QuestionnaireListModel.Fields(
-            authorId: user.uid,
+            authorId: uid,
             title: titleField.text ?? "",
             description: descriptionField.text,
             communityName: communityPickerField.text ?? "",
@@ -119,7 +120,7 @@ final class CreateQuestionnaireViewController: UIViewController {
             )
             .subscribe { [unowned self] result in
                 switch result {
-                case .success(()):
+                case .success:
                     // FIXME: トースト表示したい
                     self.navigationController?.popViewController(animated: true)
                 case .error(let error):
@@ -177,9 +178,11 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
         // FIXME: 一番下にセルを追加してカーソルを合わせるようにする
         tableView.beginUpdates()
         var newList = choicesList.value
-        newList.insert("", at: 0)
+        let insertTarget = newList.count
+        newList.insert("", at: insertTarget)
         choicesList.accept(newList)
-        tableView.insertRows(at: [[0, 0]], with: .bottom)
+        let indexPath = IndexPath(row: insertTarget, section: 0)
+        tableView.insertRows(at: [indexPath], with: .bottom)
         tableView.endUpdates()
     }
     

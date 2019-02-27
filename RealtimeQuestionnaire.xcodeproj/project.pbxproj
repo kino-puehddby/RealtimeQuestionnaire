@@ -18,11 +18,11 @@
 		4E09F81F221AA0A5004A00AD /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E09F81B221AA0A5004A00AD /* RxBlocking.framework */; };
 		4E09F820221AA765004A00AD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E09F818221AA0A5004A00AD /* RxCocoa.framework */; };
 		4E3BD56D221BA48700E357CE /* UIViewController+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */; };
-		4E3BD56F221BB39800E357CE /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD56E221BB39800E357CE /* Keychain.swift */; };
 		4E56BA7822251AD80055529B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7722251AD80055529B /* PickerTextField.swift */; };
 		4E56BA7B22251FED0055529B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7A22251FED0055529B /* UserModel.swift */; };
-		4E56BA7E22253E6E0055529B /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7D22253E6E0055529B /* KeyChain.swift */; };
+		4E56BA7E22253E6E0055529B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7D22253E6E0055529B /* Service.swift */; };
 		4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56BA7F222540040055529B /* KeychainAccess.framework */; };
+		4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */; };
 		4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920323221A5BB600C6634F /* AppDelegate.swift */; };
 		4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920325221A5BB600C6634F /* SplashViewController.swift */; };
 		4E920329221A5BB600C6634F /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E920327221A5BB600C6634F /* Splash.storyboard */; };
@@ -74,11 +74,11 @@
 		4E09F81B221AA0A5004A00AD /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		4E09F821221AD130004A00AD /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIKit.swift"; sourceTree = "<group>"; };
-		4E3BD56E221BB39800E357CE /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		4E56BA7722251AD80055529B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		4E56BA7A22251FED0055529B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		4E56BA7D22253E6E0055529B /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		4E56BA7D22253E6E0055529B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		4E56BA7F222540040055529B /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
+		4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+subscript.swift"; sourceTree = "<group>"; };
 		4E920320221A5BB600C6634F /* RealtimeQuestionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealtimeQuestionnaire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E920323221A5BB600C6634F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E920325221A5BB600C6634F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -161,8 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */,
-				4E3BD56E221BB39800E357CE /* Keychain.swift */,
 				4ED53380221E3E8600F4113D /* UIViewController+extension.swift */,
+				4E56BA7D22253E6E0055529B /* Service.swift */,
+				4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -244,7 +245,6 @@
 			children = (
 				4ED53391221E827000F4113D /* Const.swift */,
 				4E920338221A6F2A00C6634F /* Generated */,
-				4E56BA7D22253E6E0055529B /* KeyChain.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -649,11 +649,11 @@
 				4ED53392221E827000F4113D /* Const.swift in Sources */,
 				4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */,
 				4EA2356E221A71C500AB29A4 /* LocalizableStrings.swift in Sources */,
+				4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */,
 				4E09F815221A9787004A00AD /* RegisterViewController.swift in Sources */,
 				4EA23570221A71C500AB29A4 /* StoryboardSegues.swift in Sources */,
 				4ED533A7221FA2B000F4113D /* DatabaseCollection.swift in Sources */,
 				4ED533A1221E942100F4113D /* Firestore+Codable.swift in Sources */,
-				4E3BD56F221BB39800E357CE /* Keychain.swift in Sources */,
 				4ED53381221E3E8600F4113D /* UIViewController+extension.swift in Sources */,
 				A01548202222AB4E00084606 /* ChoiceTableViewCell.swift in Sources */,
 				4E56BA7822251AD80055529B /* PickerTextField.swift in Sources */,
@@ -670,7 +670,7 @@
 				4E09F817221A9795004A00AD /* MainViewController.swift in Sources */,
 				4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */,
 				4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */,
-				4E56BA7E22253E6E0055529B /* KeyChain.swift in Sources */,
+				4E56BA7E22253E6E0055529B /* Service.swift in Sources */,
 				4EA23571221A71C500AB29A4 /* StoryboardScenes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

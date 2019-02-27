@@ -15,7 +15,7 @@ import RxCocoa
 final class ChoiceTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var rowLabel: UILabel!
-    @IBOutlet weak fileprivate var choiceField: UITextView!
+    @IBOutlet weak fileprivate var choiceField: UITextField!
     
     private let disposeBag = DisposeBag()
     
@@ -27,9 +27,6 @@ final class ChoiceTableViewCell: UITableViewCell, NibReusable {
     
     private func setup() {
         choiceField.delegate = self
-        choiceField.textContainer.maximumNumberOfLines = 2
-        choiceField.textContainer.lineBreakMode = .byTruncatingTail
-        choiceField.textContainer.lineBreakMode = .byTruncatingTail
         choiceField.layer.borderColor = Asset.defaultGray.color.cgColor
         choiceField.layer.borderWidth = 0.5
         choiceField.layer.cornerRadius = 5.0
@@ -37,23 +34,14 @@ final class ChoiceTableViewCell: UITableViewCell, NibReusable {
     }
     
     func configure(row: Int) {
-        rowLabel.text = "選択肢\(row)"
+        rowLabel.text = L10n.Questionnaire.Create.Choice.value(row + 1)
     }
 }
 
-extension ChoiceTableViewCell: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            choiceField.resignFirstResponder()
-            return false
-        }
+extension ChoiceTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        choiceField.resignFirstResponder()
         return true
-    }
-}
-
-extension ChoiceTableViewCell {
-    var choiceText: String {
-        return choiceField.text
     }
 }
 
