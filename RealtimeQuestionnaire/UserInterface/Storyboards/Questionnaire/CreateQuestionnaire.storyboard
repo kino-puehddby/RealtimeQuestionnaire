@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Create Questionnaire View Controller-->
+        <!--アンケート作成-->
         <scene sceneID="b7L-J6-Nmv">
             <objects>
                 <viewController id="zph-Qd-lxc" customClass="CreateQuestionnaireViewController" customModule="RealtimeQuestionnaire" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,27 +19,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AWK-ad-RN4">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ySW-YX-3NW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="412"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ggt-P3-0kJ">
-                                            <rect key="frame" x="20" y="10" width="335" height="307"/>
+                                            <rect key="frame" x="20" y="10" width="335" height="357"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dad-1g-bzZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="58"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アンケート名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdI-hY-7Mq">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kCy-0O-99x">
                                                             <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="18" id="7Bg-Fe-0kh"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アンケート名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdI-hY-7Mq">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="18"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="7Bg-Fe-0kh"/>
+                                                                        <constraint firstAttribute="width" constant="100" id="AZV-Uk-UEc"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※入力してください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ne9-85-pmQ">
+                                                                    <rect key="frame" x="110" y="2" width="225" height="14.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cUY-hl-JX1">
                                                             <rect key="frame" x="0.0" y="28" width="335" height="30"/>
                                                             <constraints>
@@ -52,23 +64,35 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="cUY-hl-JX1" firstAttribute="leading" secondItem="Dad-1g-bzZ" secondAttribute="leading" id="9Zg-Ps-jRX"/>
-                                                        <constraint firstItem="HdI-hY-7Mq" firstAttribute="leading" secondItem="Dad-1g-bzZ" secondAttribute="leading" id="Oyc-kB-DJv"/>
+                                                        <constraint firstAttribute="trailing" secondItem="kCy-0O-99x" secondAttribute="trailing" id="KC7-98-4Du"/>
+                                                        <constraint firstItem="kCy-0O-99x" firstAttribute="leading" secondItem="Dad-1g-bzZ" secondAttribute="leading" id="Xvx-bE-NoA"/>
                                                         <constraint firstAttribute="trailing" secondItem="cUY-hl-JX1" secondAttribute="trailing" id="gAc-bA-707"/>
-                                                        <constraint firstAttribute="trailing" secondItem="HdI-hY-7Mq" secondAttribute="trailing" id="r3J-6b-NXF"/>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NV0-76-nPn">
                                                     <rect key="frame" x="0.0" y="68" width="335" height="58"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コミュニティ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0a-Dg-DpB">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CFa-aY-GP7">
                                                             <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="18" id="qhn-x5-rVb"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コミュニティ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0a-Dg-DpB">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="18"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="100" id="L5g-j7-fk7"/>
+                                                                        <constraint firstAttribute="height" constant="18" id="qhn-x5-rVb"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※入力してください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXV-KO-npt">
+                                                                    <rect key="frame" x="110" y="2" width="225" height="14.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UsC-RO-V5M" customClass="PickerTextField" customModule="RealtimeQuestionnaire" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="28" width="335" height="30"/>
                                                             <constraints>
@@ -81,9 +105,9 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="UsC-RO-V5M" firstAttribute="leading" secondItem="NV0-76-nPn" secondAttribute="leading" id="55d-q7-puP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="CFa-aY-GP7" secondAttribute="trailing" id="EwD-B0-iN6"/>
                                                         <constraint firstAttribute="trailing" secondItem="UsC-RO-V5M" secondAttribute="trailing" id="eJ6-ns-3Mr"/>
-                                                        <constraint firstAttribute="trailing" secondItem="z0a-Dg-DpB" secondAttribute="trailing" id="sCf-ia-Sse"/>
-                                                        <constraint firstItem="z0a-Dg-DpB" firstAttribute="leading" secondItem="NV0-76-nPn" secondAttribute="leading" id="xCM-97-ibz"/>
+                                                        <constraint firstItem="CFa-aY-GP7" firstAttribute="leading" secondItem="NV0-76-nPn" secondAttribute="leading" id="vny-fU-1bM"/>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tDg-VY-TG3">
@@ -115,34 +139,60 @@
                                                         <constraint firstItem="N7F-hH-I4e" firstAttribute="leading" secondItem="tDg-VY-TG3" secondAttribute="leading" id="xFE-AJ-jQg"/>
                                                     </constraints>
                                                 </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6zd-Ea-jlb">
+                                                    <rect key="frame" x="0.0" y="317" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="選択肢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v81-sO-POq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="80" id="BG4-wc-VXI"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※選択肢を2つ以上追加してください" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUF-9S-8Kk">
+                                                            <rect key="frame" x="80" y="0.0" width="215" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfY-Wo-krg">
+                                                            <rect key="frame" x="295" y="0.0" width="40" height="40"/>
+                                                            <color key="backgroundColor" name="SystemBlue"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="RVq-kg-vpH"/>
+                                                                <constraint firstAttribute="height" constant="40" id="yKt-2Q-xnA"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <state key="normal" title="＋">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="20"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="NV0-76-nPn" firstAttribute="leading" secondItem="ggt-P3-0kJ" secondAttribute="leading" id="0od-VR-7b8"/>
                                                 <constraint firstAttribute="trailing" secondItem="NV0-76-nPn" secondAttribute="trailing" id="D4U-7r-Yf2"/>
+                                                <constraint firstAttribute="trailing" secondItem="6zd-Ea-jlb" secondAttribute="trailing" id="DMP-Fv-S4p"/>
                                                 <constraint firstItem="Dad-1g-bzZ" firstAttribute="leading" secondItem="ggt-P3-0kJ" secondAttribute="leading" id="HzC-w1-On8"/>
                                                 <constraint firstAttribute="trailing" secondItem="Dad-1g-bzZ" secondAttribute="trailing" id="IVQ-bz-NFS"/>
                                                 <constraint firstAttribute="trailing" secondItem="tDg-VY-TG3" secondAttribute="trailing" id="cMc-ur-Awr"/>
                                                 <constraint firstItem="tDg-VY-TG3" firstAttribute="leading" secondItem="ggt-P3-0kJ" secondAttribute="leading" id="ggk-4Y-1Dv"/>
+                                                <constraint firstItem="6zd-Ea-jlb" firstAttribute="leading" secondItem="ggt-P3-0kJ" secondAttribute="leading" id="nsi-s1-Zbm"/>
                                             </constraints>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfY-Wo-krg">
-                                            <rect key="frame" x="320" y="357" width="40" height="40"/>
-                                            <color key="backgroundColor" name="SystemBlue"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="RVq-kg-vpH"/>
-                                                <constraint firstAttribute="height" constant="40" id="yKt-2Q-xnA"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                            <state key="normal" title="+">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ggt-P3-0kJ" secondAttribute="trailing" constant="20" id="5eg-OF-anS"/>
-                                        <constraint firstAttribute="bottom" secondItem="HfY-Wo-krg" secondAttribute="bottom" constant="15" id="RQL-aA-NPF"/>
-                                        <constraint firstAttribute="trailing" secondItem="HfY-Wo-krg" secondAttribute="trailing" constant="15" id="WG5-9F-38L"/>
                                         <constraint firstItem="ggt-P3-0kJ" firstAttribute="leading" secondItem="ySW-YX-3NW" secondAttribute="leading" constant="20" id="WUY-Av-Lqf"/>
                                         <constraint firstItem="ggt-P3-0kJ" firstAttribute="centerX" secondItem="ySW-YX-3NW" secondAttribute="centerX" id="aZm-G7-nWR"/>
                                         <constraint firstItem="ggt-P3-0kJ" firstAttribute="top" secondItem="ySW-YX-3NW" secondAttribute="top" constant="10" id="aiR-Uz-8il"/>
@@ -153,8 +203,8 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8DV-wz-3YQ">
-                                            <rect key="frame" x="52.5" y="15" width="270" height="50"/>
-                                            <color key="backgroundColor" name="SystemBlue"/>
+                                            <rect key="frame" x="25" y="15" width="270" height="50"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="8Td-uP-gcm"/>
                                                 <constraint firstAttribute="width" constant="270" id="dWO-WJ-sjG"/>
@@ -163,6 +213,12 @@
                                             <state key="normal" title="アンケートを作成">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="12"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -196,23 +252,25 @@
                             <outletCollection property="gestureRecognizers" destination="XX1-rm-5XA" appends="YES" id="L2D-ob-w17"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" title="アンケート作成" id="lXT-Yy-O1r"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="addCellButton" destination="HfY-Wo-krg" id="mz8-KE-5FY"/>
+                        <outlet property="choicesInvalidLabel" destination="HUF-9S-8Kk" id="RSf-3K-uJs"/>
+                        <outlet property="communityInvalidLabel" destination="sXV-KO-npt" id="bB6-82-IzG"/>
                         <outlet property="communityPickerField" destination="UsC-RO-V5M" id="ae7-71-Gx2"/>
                         <outlet property="createQuestionnaireButton" destination="8DV-wz-3YQ" id="0uM-ZM-Lfr"/>
                         <outlet property="descriptionField" destination="N7F-hH-I4e" id="P6Y-8R-0pU"/>
                         <outlet property="tableView" destination="AWK-ad-RN4" id="CRd-2R-tVa"/>
                         <outlet property="titleField" destination="cUY-hl-JX1" id="9zy-9Z-PbJ"/>
+                        <outlet property="titleInvalidLabel" destination="Ne9-85-pmQ" id="6yD-cw-3YB"/>
+                        <outlet property="viewTapped" destination="XX1-rm-5XA" id="ksy-Xh-Y4y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aF-Gv-4RD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="XX1-rm-5XA">
-                    <connections>
-                        <action selector="viewTapped:" destination="zph-Qd-lxc" id="CTQ-lA-MJo"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="XX1-rm-5XA"/>
             </objects>
-            <point key="canvasLocation" x="-41" y="16"/>
+            <point key="canvasLocation" x="-42.399999999999999" y="15.742128935532236"/>
         </scene>
     </scenes>
     <resources>

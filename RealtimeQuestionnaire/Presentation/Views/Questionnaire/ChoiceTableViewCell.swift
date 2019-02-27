@@ -14,15 +14,19 @@ import RxCocoa
 
 final class ChoiceTableViewCell: UITableViewCell, NibReusable {
 
-    @IBOutlet weak private var rowLabel: UILabel!
     @IBOutlet weak fileprivate var choiceField: UITextField!
+    @IBOutlet weak private var invalidLabel: UILabel!
     
     private let disposeBag = DisposeBag()
+    
+    let viewTap = PublishSubject<Void>()
+    let valid = BehaviorRelay<Bool>(value: false)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setup()
+        bind()
     }
     
     private func setup() {
@@ -33,8 +37,22 @@ final class ChoiceTableViewCell: UITableViewCell, NibReusable {
         choiceField.layer.masksToBounds = true
     }
     
-    func configure(row: Int) {
-        rowLabel.text = L10n.Questionnaire.Create.Choice.value(row + 1)
+    private func bind() {
+        viewTap
+            .subscribe(onNext: { [unowned self] in
+                self.choiceField.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
+        
+        let textValid = choiceField.rx.text
+            .map { $0 != "" && $0 != nil  }
+            .share(replay: 1)
+        textValid
+            .bind(to: valid)
+            .disposed(by: disposeBag)
+        textValid
+            .bind(to: invalidLabel.rx.isHidden)
+            .disposed(by: disposeBag)
     }
 }
 

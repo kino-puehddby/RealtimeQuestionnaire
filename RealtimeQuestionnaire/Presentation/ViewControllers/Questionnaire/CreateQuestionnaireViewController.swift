@@ -17,18 +17,19 @@ final class CreateQuestionnaireViewController: UIViewController {
 
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var titleField: UITextField!
+    @IBOutlet weak private var titleInvalidLabel: UILabel!
     @IBOutlet weak private var communityPickerField: PickerTextField!
+    @IBOutlet weak private var communityInvalidLabel: UILabel!
     @IBOutlet weak private var descriptionField: UITextView!
     @IBOutlet weak private var addCellButton: UIButton!
+    @IBOutlet weak private var choicesInvalidLabel: UILabel!
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
-    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
-        titleField.resignFirstResponder()
-        communityPickerField.resignFirstResponder()
-        descriptionField.resignFirstResponder()
-    }
+    @IBOutlet private var viewTapped: UITapGestureRecognizer!
     
     let choicesList = BehaviorRelay<[String]>(value: [])
     let communities = BehaviorRelay<[String]>(value: [])
+    let viewTap = PublishSubject<Void>()
+    let cellTextFieldValid = BehaviorRelay<Bool>(value: false)
     
     private let disposeBag = DisposeBag()
     
@@ -54,12 +55,9 @@ final class CreateQuestionnaireViewController: UIViewController {
         descriptionField.layer.cornerRadius = 5.0
         descriptionField.layer.masksToBounds = true
         
-        addCellButton.layer.cornerRadius = addCellButton.bounds.height / 2
-        addCellButton.layer.masksToBounds = true
-        
         getUserCommunities()
         
-        setupKeyboardUpDownWithTextField()
+        bindScrollTextFieldWhenShowKeyboard()
     }
     
     func bind() {
@@ -81,6 +79,60 @@ final class CreateQuestionnaireViewController: UIViewController {
             .subscribe(onNext: { [unowned self] list in
                 self.communityPickerField.setup(dataList: list)
             })
+            .disposed(by: disposeBag)
+        
+        let isTitleFieldValid = titleField.rx.text
+            .distinctUntilChanged()
+            .map { $0 != "" && $0 != nil }
+            .share(replay: 1)
+        isTitleFieldValid
+            .bind(to: titleInvalidLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        let isCommunityFieldValid = communityPickerField.rx.text
+            .distinctUntilChanged()
+            .map { $0 != "" && $0 != nil }
+            .share(replay: 1)
+        isCommunityFieldValid
+            .bind(to: communityInvalidLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        let choicesListValid = choicesList
+            .map { $0.count >= 2 }
+        choicesListValid
+            .bind(to: choicesInvalidLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        let isValid = Observable
+            .combineLatest(
+                isTitleFieldValid,
+                isCommunityFieldValid,
+                choicesListValid,
+                cellTextFieldValid
+            )
+            .map { $0 && $1 && $2 && $3 }
+            .share(replay: 1)
+        isValid
+            .bind(to: createQuestionnaireButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        isValid
+            .subscribe(onNext: { [unowned self] isValid in
+                self.createQuestionnaireButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
+            })
+            .disposed(by: disposeBag)
+        
+        let tapEvent = viewTapped.rx.event
+            .map { _ in }
+            .share(replay: 1)
+        tapEvent
+            .subscribe(onNext: { [unowned self] in
+                self.titleField.resignFirstResponder()
+                self.communityPickerField.resignFirstResponder()
+                self.descriptionField.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
+        tapEvent
+            .bind(to: viewTap)
             .disposed(by: disposeBag)
     }
     
@@ -137,6 +189,12 @@ final class CreateQuestionnaireViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
+    
+    func validCells() {
+        guard let cells = tableView.visibleCells as? [ChoiceTableViewCell] else { return }
+        let invalid = cells.contains { $0.valid.value == false }
+        cellTextFieldValid.accept(!invalid)
+    }
 }
 
 extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDataSource {
@@ -147,15 +205,7 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ChoiceTableViewCell.self)
-        cell.configure(row: indexPath.row)
-        cell.rx.choiceText.asObservable()
-            .map { [unowned self] text in
-                var list = self.choicesList.value
-                list[indexPath.row] = text ?? ""
-                return list
-            }
-            .bind(to: choicesList)
-            .disposed(by: disposeBag)
+        bind(cell: cell, row: indexPath.row)
         return cell
     }
     
@@ -174,8 +224,30 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
         return [delete]
     }
     
-    func addAction() {
-        // FIXME: 一番下にセルを追加してカーソルを合わせるようにする
+    private func bind(cell: ChoiceTableViewCell, row: Int) {
+        let choiceText = cell.rx.choiceText
+            .distinctUntilChanged()
+            .share(replay: 1)
+        choiceText
+            .map { [unowned self] text in
+                var list = self.choicesList.value
+                list[row] = text ?? ""
+                return list
+            }
+            .bind(to: choicesList)
+            .disposed(by: disposeBag)
+        choiceText
+            .subscribe(onNext: { [unowned self] _ in
+                self.validCells()
+            })
+            .disposed(by: disposeBag)
+        
+        viewTap
+            .bind(to: cell.viewTap)
+            .disposed(by: disposeBag)
+    }
+    
+    private func addAction() {
         tableView.beginUpdates()
         var newList = choicesList.value
         let insertTarget = newList.count
@@ -186,7 +258,7 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
         tableView.endUpdates()
     }
     
-    func deleteAction(indexPath: IndexPath) {
+    private func deleteAction(indexPath: IndexPath) {
         tableView.beginUpdates()
         var newList = choicesList.value
         newList.remove(at: indexPath.row)

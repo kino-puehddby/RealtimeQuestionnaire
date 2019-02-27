@@ -24,14 +24,11 @@ final class MainViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    private let refreshControl = UIRefreshControl()
-    
     fileprivate let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
+    let communities = BehaviorRelay<[String]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // tableViewに参加中のアンケート一覧を表示する
         
         setup()
         bind()
@@ -41,8 +38,6 @@ final class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MainTableViewCell.self)
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
     }
     
     func bind() {
@@ -70,6 +65,27 @@ final class MainViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        // observe User on Firestore
+        guard let uid = S.getKeychain(.uid) else { return }
+        let userDocumentRef = UserModel.makeDocumentRef(id: uid)
+        Firestore.firestore().rx
+            .observeModel(
+                UserModel.Fields.self,
+                documentRef: userDocumentRef
+            )
+            .subscribe { [weak self] event in
+                guard let vc = self else { return }
+                switch event {
+                case .next(let user):
+                    vc.communities.accept(user.communities)
+                case .error(let error):
+                    debugPrint(error)
+                case .completed:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+        
         // observe QuestionnaireList on Firestore
         Firestore.firestore().rx
             .observeArray(
@@ -80,31 +96,17 @@ final class MainViewController: UIViewController {
                 guard let vc = self else { return }
                 switch event {
                 case .next(let list):
-                    vc.questionnaireList.accept(list)
+                    // 参加中コミュニティのアンケートのみ表示
+                    let newList = list.filter { model in
+                        vc.communities.value.contains(model.communityName)
+                    }
+                    vc.questionnaireList.accept(newList)
                     vc.tableView.reloadData()
                 case .error(let error):
                     debugPrint(error)
                 case .completed:
                     break
                 }
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    @objc func refresh(_ sender: UIRefreshControl) {
-        Firestore.firestore().rx
-            .getArray(
-                QuestionnaireListModel.Fields.self,
-                collectionRef: QuestionnaireListModel.makeCollectionRef()
-            )
-            .subscribe { [unowned self] result in
-                switch result {
-                case .success(let list):
-                    self.questionnaireList.accept(list)
-                case .error(let error):
-                    debugPrint(error)
-                }
-                self.tableView.refreshControl!.endRefreshing()
             }
             .disposed(by: disposeBag)
     }

@@ -186,6 +186,46 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		4E56BA8322266BF10055529B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4ED5338E221E5E0800F4113D /* MainTableViewCell.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4E56BA8422266BFF0055529B /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				A01548212222C52C00084606 /* ChoiceTableViewCell.xib */,
+			);
+			path = Questionnaire;
+			sourceTree = "<group>";
+		};
+		4E56BA8522266C130055529B /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				A015481F2222AB4E00084606 /* ChoiceTableViewCell.swift */,
+			);
+			path = Questionnaire;
+			sourceTree = "<group>";
+		};
+		4E56BA8622266C1A0055529B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4ED5338D221E5E0800F4113D /* MainTableViewCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4E56BA8722266C2D0055529B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				4E56BA7722251AD80055529B /* PickerTextField.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		4E920317221A5BB600C6634F = {
 			isa = PBXGroup;
 			children = (
@@ -348,8 +388,8 @@
 		4ED5338B221E5D7C00F4113D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4ED5338E221E5E0800F4113D /* MainTableViewCell.xib */,
-				A01548212222C52C00084606 /* ChoiceTableViewCell.xib */,
+				4E56BA8322266BF10055529B /* Main */,
+				4E56BA8422266BFF0055529B /* Questionnaire */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,9 +397,9 @@
 		4ED5338C221E5DAF00F4113D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4ED5338D221E5E0800F4113D /* MainTableViewCell.swift */,
-				A015481F2222AB4E00084606 /* ChoiceTableViewCell.swift */,
-				4E56BA7722251AD80055529B /* PickerTextField.swift */,
+				4E56BA8622266C1A0055529B /* Main */,
+				4E56BA8522266C130055529B /* Questionnaire */,
+				4E56BA8722266C2D0055529B /* Common */,
 			);
 			path = Views;
 			sourceTree = "<group>";
