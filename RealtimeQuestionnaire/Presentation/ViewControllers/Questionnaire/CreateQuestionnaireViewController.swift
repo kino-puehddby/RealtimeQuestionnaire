@@ -158,17 +158,16 @@ final class CreateQuestionnaireViewController: UIViewController {
     
     func postQuestionnaire() {
         guard let uid = S.getKeychain(.uid) else { return }
-        let fields = QuestionnaireListModel.Fields(
+        let fields = QuestionnaireModel.Fields(
             authorId: uid,
             title: titleField.text ?? "",
-            description: descriptionField.text,
-            communityName: communityPickerField.text ?? "",
+            description: descriptionField.text ,
             choices: choicesList.value
         )
         Firestore.firestore().rx
             .setData(
                 model: fields,
-                collectionRef: QuestionnaireListModel.makeCollectionRef()
+                collectionRef: QuestionnaireModel.makeCollectionRef()
             )
             .subscribe { [unowned self] result in
                 switch result {

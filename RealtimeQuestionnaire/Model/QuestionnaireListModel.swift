@@ -8,24 +8,22 @@
 
 import Foundation
 
-struct QuestionnaireListModel: DatabaseCollection {
+struct QuestionnaireModel: DatabaseCollection {
     
-    static var collectionKey: CollectionKey = .questionnaireList
+    static var collectionKey: CollectionKey = .questionnaire
     var id: String = ""
     typealias FieldType = Fields
-    var fields: QuestionnaireListModel.Fields?
+    var fields: QuestionnaireModel.Fields?
     public struct Fields: Codable {
         public let authorId: String // 作成者
         public let title: String // アンケート名
         public let description: String? // アンケートの説明
-        public let communityName: String // コミュニティ名
         public let choices: [String] // アンケートの選択肢
         
-        public init(authorId: String, title: String, description: String?, communityName: String, choices: [String]) {
+        public init(authorId: String, title: String, description: String?, choices: [String]) {
             self.authorId = authorId
             self.title = title
             self.description = description
-            self.communityName = communityName
             self.choices = choices
         }
     }
@@ -33,7 +31,7 @@ struct QuestionnaireListModel: DatabaseCollection {
         self.id = id
         self.fields = fields
     }
-    public init(fields: QuestionnaireListModel.Fields) {
+    public init(fields: QuestionnaireModel.Fields) {
         self.fields = fields
     }
 }

@@ -23,6 +23,7 @@
 		4E56BA7E22253E6E0055529B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7D22253E6E0055529B /* Service.swift */; };
 		4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56BA7F222540040055529B /* KeychainAccess.framework */; };
 		4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */; };
+		4E56BA892226AE130055529B /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA882226AE130055529B /* CommunityModel.swift */; };
 		4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920323221A5BB600C6634F /* AppDelegate.swift */; };
 		4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920325221A5BB600C6634F /* SplashViewController.swift */; };
 		4E920329221A5BB600C6634F /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E920327221A5BB600C6634F /* Splash.storyboard */; };
@@ -79,6 +80,7 @@
 		4E56BA7D22253E6E0055529B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		4E56BA7F222540040055529B /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+subscript.swift"; sourceTree = "<group>"; };
+		4E56BA882226AE130055529B /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		4E920320221A5BB600C6634F /* RealtimeQuestionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealtimeQuestionnaire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E920323221A5BB600C6634F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E920325221A5BB600C6634F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				4E56BA7922251FC90055529B /* Common */,
 				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
 				4E56BA7A22251FED0055529B /* UserModel.swift */,
+				4E56BA882226AE130055529B /* CommunityModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				4E56BA7B22251FED0055529B /* UserModel.swift in Sources */,
 				A015481C22226D4100084606 /* UnansweredQuestionnaireListViewController.swift in Sources */,
 				4EA2356F221A71C500AB29A4 /* Assets.swift in Sources */,
+				4E56BA892226AE130055529B /* CommunityModel.swift in Sources */,
 				4ED53371221D475D00F4113D /* CreateQuestionnaireViewController.swift in Sources */,
 				4E09F817221A9795004A00AD /* MainViewController.swift in Sources */,
 				4ED53395221E859600F4113D /* QuestionnaireListModel.swift in Sources */,

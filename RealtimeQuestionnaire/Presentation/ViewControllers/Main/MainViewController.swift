@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    fileprivate let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
+    fileprivate let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [[]])
     let communities = BehaviorRelay<[String]>(value: [])
     
     override func viewDidLoad() {
@@ -65,7 +65,7 @@ final class MainViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        // observe User on Firestore
+        // observe User
         guard let uid = S.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
@@ -86,20 +86,30 @@ final class MainViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        // observe QuestionnaireList on Firestore
+        communities
+            .subscribe(onNext: { [weak self] communitieIds in
+                guard let vc = self else { return }
+                communitieIds.forEach { id in
+                    vc.observeQuestionnaire(on: id)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func observeQuestionnaire(on communityId: String) {
+        // observe Questionnaire
         Firestore.firestore().rx
             .observeArray(
-                QuestionnaireListModel.Fields.self,
-                collectionRef: QuestionnaireListModel.makeCollectionRef()
+                QuestionnaireModel.Fields.self,
+                collectionRef: CommunityModel.makeCollectionRef().document(communityId).collection(CollectionKey.questionnaire.rawValue)
             )
             .subscribe { [weak self] event in
                 guard let vc = self else { return }
                 switch event {
                 case .next(let list):
-                    // 参加中コミュニティのアンケートのみ表示
-                    let newList = list.filter { model in
-                        vc.communities.value.contains(model.communityName)
-                    }
+                    debugPrint(list)
+                    var oldList = vc.questionnaireList.value
+                    let newList = oldList.append(list)
                     vc.questionnaireList.accept(newList)
                     vc.tableView.reloadData()
                 case .error(let error):
@@ -121,13 +131,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         let data = questionnaireList.value[indexPath.row]
         let title = data.title
-        let communityName = data.communityName
         let description = data.description ?? ""
         cell.configuration(
             // FIXME: 画像をFirebase Storageから取得するようにする
             iconImage: Asset.sample.image,
             title: title,
-            communityName: communityName,
             description: description)
         return cell
     }
