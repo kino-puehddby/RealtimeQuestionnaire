@@ -20,6 +20,9 @@ internal enum StoryboardSegue {
     case showSearch
     case showUnansweredQuestionnaireList
   }
+  internal enum Menu: String, SegueType {
+    case showCreateCommunity
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 

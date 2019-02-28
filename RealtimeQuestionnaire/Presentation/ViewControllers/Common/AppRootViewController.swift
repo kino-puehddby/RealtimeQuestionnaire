@@ -34,7 +34,7 @@ final class AppRootViewController: UIViewController {
         guard let currentRootViewController = children.first else { return }
         
         let mainVC = StoryboardScene.Main.mainViewController.instantiate()
-        let menuVC = StoryboardScene.Menu.initialScene.instantiate()
+        let menuVC = StoryboardScene.Menu.menuViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: mainVC)
         
         let slideMenuController = AppSlideMenuController(

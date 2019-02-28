@@ -116,3 +116,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return Main.TableView.cellHeight
     }
 }
+
+extension MainViewController {
+    func pushCreateCommunity() {
+        guard let navi = navigationController else { return }
+        let createCommunityVC = StoryboardScene.CreateCommunity.initialScene.instantiate()
+        navi.setViewControllers([self, createCommunityVC], animated: true)
+    }
+}

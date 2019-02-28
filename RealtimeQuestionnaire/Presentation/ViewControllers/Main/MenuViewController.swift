@@ -14,9 +14,23 @@ import FirebaseAuth
 
 final class MenuViewController: UIViewController {
     
-    @IBOutlet weak private var logoutButton: UIButton!
+    @IBOutlet weak private var tableView: UITableView!
     
     private let disposeBag = DisposeBag()
+    
+    enum Menu: Int, CaseIterable {
+        case createCommunity
+        case logout
+        
+        var text: String {
+            switch self {
+            case .createCommunity:
+                return L10n.Menu.createCommunity
+            case .logout:
+                return L10n.Menu.logout
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +39,9 @@ final class MenuViewController: UIViewController {
     }
     
     func setup() {
-        logoutButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.logout()
-            })
-            .disposed(by: disposeBag)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(cellType: MenuTableViewCell.self)
     }
     
     func logout() {
@@ -41,6 +53,30 @@ final class MenuViewController: UIViewController {
             }
         } catch {
             print("*** failed to sign out ***")
+        }
+    }
+}
+
+extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Menu.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MenuTableViewCell.self)
+        cell.configure(text: Menu.allCases[indexPath.row].text)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let menu = Menu(rawValue: indexPath.row) else { return }
+        switch menu {
+        case .createCommunity:
+            closeLeft()
+            guard let mainVC = slideMenuController()?.mainViewController as? MainViewController else { return }
+            mainVC.pushCreateCommunity()
+        case .logout:
+            logout()
         }
     }
 }

@@ -9,6 +9,9 @@
 "Error.unknown"="不明なエラーが発生しました。";
 "Questionnaire.Create.Choice.value"="選択肢%d";
 
+"Menu.CreateCommunity"="コミュニティをつくる";
+"Menu.Logout"="ログアウト";
+
 // Sample
 "Common.Ok"="OK";
 "Common.Cancel"="キャンセル";

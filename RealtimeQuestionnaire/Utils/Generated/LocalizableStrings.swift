@@ -71,6 +71,13 @@ internal enum L10n {
     internal static let unknown = L10n.tr("Localizable", "Error.unknown")
   }
 
+  internal enum Menu {
+    /// コミュニティをつくる
+    internal static let createCommunity = L10n.tr("Localizable", "Menu.CreateCommunity")
+    /// ログアウト
+    internal static let logout = L10n.tr("Localizable", "Menu.Logout")
+  }
+
   internal enum Questionnaire {
     internal enum Create {
       internal enum Choice {
