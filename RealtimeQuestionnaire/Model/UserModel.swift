@@ -10,12 +10,12 @@ import Foundation
 
 import FirebaseFirestore
 
-enum UsersCommunity: String {
+enum UsersCommunityKey: String {
     case id
     case name
 }
 
-enum UsersQuestionnaire: String {
+enum UsersQuestionnaireKey: String {
     case answer
     case id
 }

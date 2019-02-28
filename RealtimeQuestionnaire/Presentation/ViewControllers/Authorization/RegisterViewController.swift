@@ -87,7 +87,8 @@ final class RegisterViewController: UIViewController {
         let fields = UserModel.Fields(
             nickname: "",
             iconUrl: "",
-            communities: []
+            communities: [],
+            questionnaires: []
         )
         guard let user = Auth.auth().currentUser else { return }
         Firestore.firestore().rx

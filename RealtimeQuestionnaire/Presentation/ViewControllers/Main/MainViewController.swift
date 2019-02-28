@@ -60,7 +60,8 @@ final class MainViewController: UIViewController {
         
         answerQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+//                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
@@ -85,7 +86,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let user = viewModel.user.value,
-            let name = user.communities[section][UsersCommunity.name.rawValue] else {
+            let name = user.communities[section][UsersCommunityKey.name.rawValue] else {
             return nil
         }
         return name

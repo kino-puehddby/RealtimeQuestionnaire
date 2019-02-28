@@ -14,9 +14,13 @@ import FirebaseFirestore
 
 final class MainViewModel {
     
+    // - アンケートリスト
+    // - コミュニティリスト > アンケートリスト
     let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [])
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
     var communityNames = BehaviorRelay<[String]?>(value: nil)
+    
+    var stashList: [[QuestionnaireModel.Fields]] = []
     
     private let disposeBag = DisposeBag()
     
@@ -55,22 +59,31 @@ final class MainViewModel {
     }
     
     func observeQuestionnaires(on communityIds: [[String: String]]) {
-        questionnaireList.accept([])
-        var newList: [[QuestionnaireModel.Fields]] = []
         communityIds.forEach { dic in
             // observe Questionnaire
-            guard let id = dic[UsersCommunity.id.rawValue] else { return }
+            guard let id = dic[UsersCommunityKey.id.rawValue] else { return }
             Firestore.firestore().rx
                 .observeArray(
                     QuestionnaireModel.Fields.self,
                     collectionRef: CommunityModel.makeCollectionRef().document(id).collection(CollectionKey.questionnaire.rawValue)
                 )
                 .subscribe { [weak self] event in
-                    guard let vc = self else { return }
+                    guard let vm = self else { return }
                     switch event {
                     case .next(let list):
-                        newList.append(list)
-                        vc.questionnaireList.accept(newList)
+                        // FIXME: ちょっと汚い
+                        var target: Int = 0
+                        for (index, data) in communityIds.enumerated() where data["id"] == id {
+                            target = index
+                        }
+                        // すでに同じコミュニティのアンケートリストがあったら置き換え、なければ追加
+                        if vm.stashList.indices.contains(target) {
+                            vm.stashList.remove(at: target)
+                            vm.stashList.insert(list, at: target)
+                        } else {
+                            vm.stashList.append(list)
+                        }
+                        vm.questionnaireList.accept(vm.stashList)
                     case .error(let error):
                         debugPrint(error)
                     case .completed:
@@ -84,7 +97,7 @@ final class MainViewModel {
     func observeCommunities(on communityIds: [[String: String]]) {
         var newList: [String] = []
         communityIds.forEach { dic in
-            guard let id = dic[UsersCommunity.id.rawValue] else { return }
+            guard let id = dic[UsersCommunityKey.id.rawValue] else { return }
             Firestore.firestore().rx
                 .observeModel(
                     CommunityModel.Fields.self,

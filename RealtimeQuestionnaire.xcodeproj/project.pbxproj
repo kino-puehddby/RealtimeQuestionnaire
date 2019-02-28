@@ -25,6 +25,7 @@
 		4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */; };
 		4E56BA892226AE130055529B /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA882226AE130055529B /* CommunityModel.swift */; };
 		4E56BA8D222798BE0055529B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA8C222798BE0055529B /* MainViewModel.swift */; };
+		4E56BA902227B19F0055529B /* CreateQuestionnaireViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA8F2227B19F0055529B /* CreateQuestionnaireViewModel.swift */; };
 		4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920323221A5BB600C6634F /* AppDelegate.swift */; };
 		4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E920325221A5BB600C6634F /* SplashViewController.swift */; };
 		4E920329221A5BB600C6634F /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E920327221A5BB600C6634F /* Splash.storyboard */; };
@@ -83,6 +84,7 @@
 		4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+subscript.swift"; sourceTree = "<group>"; };
 		4E56BA882226AE130055529B /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		4E56BA8C222798BE0055529B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4E56BA8F2227B19F0055529B /* CreateQuestionnaireViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionnaireViewModel.swift; sourceTree = "<group>"; };
 		4E920320221A5BB600C6634F /* RealtimeQuestionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealtimeQuestionnaire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E920323221A5BB600C6634F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E920325221A5BB600C6634F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				4E56BA8B222798B10055529B /* Main */,
+				4E56BA8E2227B17A0055529B /* Questionnaire */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -244,6 +247,14 @@
 				4E56BA8C222798BE0055529B /* MainViewModel.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		4E56BA8E2227B17A0055529B /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				4E56BA8F2227B19F0055529B /* CreateQuestionnaireViewModel.swift */,
+			);
+			path = Questionnaire;
 			sourceTree = "<group>";
 		};
 		4E920317221A5BB600C6634F = {
@@ -707,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E56BA902227B19F0055529B /* CreateQuestionnaireViewModel.swift in Sources */,
 				4E09F813221A977B004A00AD /* LoginViewController.swift in Sources */,
 				4ED53392221E827000F4113D /* Const.swift in Sources */,
 				4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */,
