@@ -15,6 +15,11 @@ enum UsersCommunity: String {
     case name
 }
 
+enum UsersQuestionnaire: String {
+    case answer
+    case id
+}
+
 struct UserModel: DatabaseCollection {
     static var collectionKey: CollectionKey = .user
     var id: String = ""
@@ -24,11 +29,13 @@ struct UserModel: DatabaseCollection {
         public let nickname: String? // ニックネーム
         public let iconUrl: String? // アイコンURL
         public let communities: [[String: String]] // 参加中のコミュニティ
+        public let questionnaires: [[String: String]] // ユーザーが回答したアンケート
         
-        public init(nickname: String?, iconUrl: String?, communities: [[String: String]]) {
+        public init(nickname: String?, iconUrl: String?, communities: [[String: String]], questionnaires: [[String: String]]) {
             self.nickname = nickname
             self.iconUrl = iconUrl
             self.communities = communities
+            self.questionnaires = questionnaires
         }
     }
     public init(id: String, fields: Fields?) {
