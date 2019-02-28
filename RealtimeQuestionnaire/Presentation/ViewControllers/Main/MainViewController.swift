@@ -10,7 +10,6 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import FirebaseAuth
 import FirebaseFirestore
 
 final class MainViewController: UIViewController {
@@ -22,13 +21,13 @@ final class MainViewController: UIViewController {
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
     @IBOutlet weak private var answerQuestionnaireButton: UIButton!
     
+    private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
-    
-    fileprivate let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [[]])
-    let communities = BehaviorRelay<[String]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO: ViewModelで必要なデータの管理をするようにする
         
         setup()
         bind()
@@ -65,71 +64,44 @@ final class MainViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        // observe User
-        guard let uid = S.getKeychain(.uid) else { return }
-        let userDocumentRef = UserModel.makeDocumentRef(id: uid)
-        Firestore.firestore().rx
-            .observeModel(
-                UserModel.Fields.self,
-                documentRef: userDocumentRef
+        Observable
+            .combineLatest(
+                viewModel.questionnaireList,
+                viewModel.user,
+                viewModel.communityNames
             )
-            .subscribe { [weak self] event in
-                guard let vc = self else { return }
-                switch event {
-                case .next(let user):
-                    vc.communities.accept(user.communities)
-                case .error(let error):
-                    debugPrint(error)
-                case .completed:
-                    break
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        communities
-            .subscribe(onNext: { [weak self] communitieIds in
-                guard let vc = self else { return }
-                communitieIds.forEach { id in
-                    vc.observeQuestionnaire(on: id)
-                }
+            .subscribe(onNext: { [unowned self] _ in
+                self.tableView.reloadData()
             })
-            .disposed(by: disposeBag)
-    }
-    
-    func observeQuestionnaire(on communityId: String) {
-        // observe Questionnaire
-        Firestore.firestore().rx
-            .observeArray(
-                QuestionnaireModel.Fields.self,
-                collectionRef: CommunityModel.makeCollectionRef().document(communityId).collection(CollectionKey.questionnaire.rawValue)
-            )
-            .subscribe { [weak self] event in
-                guard let vc = self else { return }
-                switch event {
-                case .next(let list):
-                    debugPrint(list)
-                    var oldList = vc.questionnaireList.value
-                    let newList = oldList.append(list)
-                    vc.questionnaireList.accept(newList)
-                    vc.tableView.reloadData()
-                case .error(let error):
-                    debugPrint(error)
-                case .completed:
-                    break
-                }
-            }
             .disposed(by: disposeBag)
     }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.questionnaireList.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let user = viewModel.user.value,
+            let name = user.communities[section][UsersCommunity.name.rawValue] else {
+            return nil
+        }
+        return name
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questionnaireList.value.count
+        return viewModel.questionnaireList.value[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
-        let data = questionnaireList.value[indexPath.row]
+        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
         let title = data.title
         let description = data.description ?? ""
         cell.configuration(

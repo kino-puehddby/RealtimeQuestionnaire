@@ -13,7 +13,6 @@ class MainTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var iconImageView: UIImageView!
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var communityNameLabel: UILabel!
     @IBOutlet weak private var descriptionLabel: UILabel!
     
     override func awakeFromNib() {

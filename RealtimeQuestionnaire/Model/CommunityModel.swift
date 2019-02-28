@@ -10,6 +10,8 @@ import Foundation
 
 import FirebaseFirestore
 
+
+
 struct CommunityModel: DatabaseCollection {
     static var collectionKey: CollectionKey = .community
     var id: String = ""

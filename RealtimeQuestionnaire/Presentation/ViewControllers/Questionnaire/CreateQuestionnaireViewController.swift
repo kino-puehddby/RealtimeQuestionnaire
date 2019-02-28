@@ -27,7 +27,7 @@ final class CreateQuestionnaireViewController: UIViewController {
     @IBOutlet private var viewTapped: UITapGestureRecognizer!
     
     let choicesList = BehaviorRelay<[String]>(value: [])
-    let communities = BehaviorRelay<[String]>(value: [])
+    let communities = BehaviorRelay<[[String: String]]>(value: [])
     let viewTap = PublishSubject<Void>()
     let cellTextFieldValid = BehaviorRelay<Bool>(value: false)
     
@@ -76,6 +76,11 @@ final class CreateQuestionnaireViewController: UIViewController {
         communities
             .skip(1)
             .distinctUntilChanged()
+            .map { dics in
+                dics.map { dic in
+                    dic[UsersCommunity.name.rawValue] ?? ""
+                }
+            }
             .subscribe(onNext: { [unowned self] list in
                 self.communityPickerField.setup(dataList: list)
             })

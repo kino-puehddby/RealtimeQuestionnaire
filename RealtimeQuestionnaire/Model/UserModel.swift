@@ -10,6 +10,11 @@ import Foundation
 
 import FirebaseFirestore
 
+enum UsersCommunity: String {
+    case id
+    case name
+}
+
 struct UserModel: DatabaseCollection {
     static var collectionKey: CollectionKey = .user
     var id: String = ""
@@ -18,9 +23,9 @@ struct UserModel: DatabaseCollection {
     public struct Fields: Codable {
         public let nickname: String? // ニックネーム
         public let iconUrl: String? // アイコンURL
-        public let communities: [String] // 参加中のコミュニティ
+        public let communities: [[String: String]] // 参加中のコミュニティ
         
-        public init(nickname: String?, iconUrl: String?, communities: [String]) {
+        public init(nickname: String?, iconUrl: String?, communities: [[String: String]]) {
             self.nickname = nickname
             self.iconUrl = iconUrl
             self.communities = communities
