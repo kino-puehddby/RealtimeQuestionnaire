@@ -60,8 +60,7 @@ final class MainViewController: UIViewController {
         
         answerQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-//                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
-                self.tableView.reloadData()
+                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
             })
             .disposed(by: disposeBag)
         
