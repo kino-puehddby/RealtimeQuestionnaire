@@ -20,6 +20,8 @@
 internal enum Asset {
   internal static let defaultGray = ColorAsset(name: "DefaultGray")
   internal static let systemBlue = ColorAsset(name: "SystemBlue")
+  internal static let camera = ImageAsset(name: "camera")
+  internal static let picture = ImageAsset(name: "picture")
   internal static let risu = ImageAsset(name: "risu")
   internal static let sample = ImageAsset(name: "sample")
 }

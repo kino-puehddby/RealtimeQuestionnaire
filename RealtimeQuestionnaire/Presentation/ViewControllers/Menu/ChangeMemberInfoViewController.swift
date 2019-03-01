@@ -1,17 +1,16 @@
 //
-//  CreateCommunityViewController.swift
+//  ChangeMemberInfoViewController.swift
 //  RealtimeQuestionnaire
 //
-//  Created by 杉田 尚哉 on 2019/02/28.
+//  Created by 杉田 尚哉 on 2019/03/01.
 //  Copyright © 2019 hisayasugita. All rights reserved.
 //
 
 import UIKit
 
-class CreateCommunityViewController: UIViewController {
+final class ChangeMemberInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }

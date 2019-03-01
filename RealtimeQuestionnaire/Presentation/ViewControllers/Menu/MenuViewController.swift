@@ -20,12 +20,15 @@ final class MenuViewController: UIViewController {
     
     enum Menu: Int, CaseIterable {
         case createCommunity
+        case changeMemberInfo
         case logout
         
         var text: String {
             switch self {
             case .createCommunity:
                 return L10n.Menu.createCommunity
+            case .changeMemberInfo:
+                return L10n.Menu.changeMemberInfo
             case .logout:
                 return L10n.Menu.logout
             }
@@ -72,11 +75,20 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         guard let menu = Menu(rawValue: indexPath.row) else { return }
         switch menu {
         case .createCommunity:
-            closeLeft()
-            guard let mainVC = slideMenuController()?.mainViewController as? MainViewController else { return }
-            mainVC.pushCreateCommunity()
+            let createCommunityVC = StoryboardScene.CreateCommunity.initialScene.instantiate()
+            popTo(target: createCommunityVC)
+        case .changeMemberInfo:
+            let changeMemberInfoVC = StoryboardScene.ChangeMemberInfo.initialScene.instantiate()
+            popTo(target: changeMemberInfoVC)
         case .logout:
             logout()
         }
+    }
+    
+    private func popTo(target: UIViewController) {
+        guard let navi = slideMenuController()?.mainViewController as? UINavigationController else { return }
+        let mainVC = StoryboardScene.Main.mainViewController.instantiate()
+        navi.setViewControllers([mainVC, target], animated: true)
+        closeLeft()
     }
 }

@@ -6,11 +6,15 @@
 "Alert.Auth.ResetPassword"="パスワードをリセットする";
 "Alert.Auth.InputEmailAddress"="メールアドレスを入力してください";
 "Alert.Questionnaire.FailedToCreate"="アンケートの作成に失敗しました";
+"Alert.RequestPictureAuth.Title"="写真へのアクセスを許可";
+"Alert.RequestPictureAuth.SubTitle"="写真へのアクセスを許可する必要があります。設定を変更してください。";
+"Alert.RequestPictureAuth.ActionTitle"="設定変更";
 "Error.unknown"="不明なエラーが発生しました。";
 "Questionnaire.Create.Choice.value"="選択肢%d";
 
 "Menu.CreateCommunity"="コミュニティをつくる";
 "Menu.Logout"="ログアウト";
+"Menu.ChangeMemberInfo"="会員情報変更";
 
 // Sample
 "Common.Ok"="OK";

@@ -35,6 +35,14 @@ internal enum L10n {
       /// アンケートの作成に失敗しました
       internal static let failedToCreate = L10n.tr("Localizable", "Alert.Questionnaire.FailedToCreate")
     }
+    internal enum RequestPictureAuth {
+      /// 設定変更
+      internal static let actionTitle = L10n.tr("Localizable", "Alert.RequestPictureAuth.ActionTitle")
+      /// 写真へのアクセスを許可する必要があります。設定を変更してください。
+      internal static let subTitle = L10n.tr("Localizable", "Alert.RequestPictureAuth.SubTitle")
+      /// 写真へのアクセスを許可
+      internal static let title = L10n.tr("Localizable", "Alert.RequestPictureAuth.Title")
+    }
   }
 
   internal enum Common {
@@ -72,6 +80,8 @@ internal enum L10n {
   }
 
   internal enum Menu {
+    /// 会員情報変更
+    internal static let changeMemberInfo = L10n.tr("Localizable", "Menu.ChangeMemberInfo")
     /// コミュニティをつくる
     internal static let createCommunity = L10n.tr("Localizable", "Menu.CreateCommunity")
     /// ログアウト

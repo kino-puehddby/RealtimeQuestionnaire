@@ -12,6 +12,11 @@ import UIKit
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
+  internal enum ChangeMemberInfo: StoryboardType {
+    internal static let storyboardName = "ChangeMemberInfo"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.ChangeMemberInfoViewController>(storyboard: ChangeMemberInfo.self)
+  }
   internal enum CreateCommunity: StoryboardType {
     internal static let storyboardName = "CreateCommunity"
 
@@ -44,7 +49,7 @@ internal enum StoryboardScene {
   internal enum Menu: StoryboardType {
     internal static let storyboardName = "Menu"
 
-    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Menu.self)
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.MenuViewController>(storyboard: Menu.self)
 
     internal static let menuViewController = SceneType<RealtimeQuestionnaire.MenuViewController>(storyboard: Menu.self, identifier: "MenuViewController")
   }
@@ -62,6 +67,13 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Splash"
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SplashViewController>(storyboard: Splash.self)
+  }
+  internal enum TrimImage: StoryboardType {
+    internal static let storyboardName = "TrimImage"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.TrimImageViewController>(storyboard: TrimImage.self)
+
+    internal static let trimImageViewController = SceneType<RealtimeQuestionnaire.TrimImageViewController>(storyboard: TrimImage.self, identifier: "TrimImageViewController")
   }
   internal enum UnansweredQuestionnaireList: StoryboardType {
     internal static let storyboardName = "UnansweredQuestionnaireList"
