@@ -15,7 +15,10 @@ import FirebaseAuth
 final class MenuViewController: UIViewController {
     
     @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak private var iconUrl: UIImageView!
+    @IBOutlet weak private var nicknameLabel: UILabel!
     
+    private let viewModel = MenuViewModel()
     private let disposeBag = DisposeBag()
     
     enum Menu: Int, CaseIterable {
@@ -39,12 +42,20 @@ final class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        bind()
     }
     
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MenuTableViewCell.self)
+    }
+    
+    func bind() {
+        viewModel.user
+            .map { $0?.nickname }
+            .bind(to: nicknameLabel.rx.text)
+            .disposed(by: disposeBag)
     }
     
     func logout() {

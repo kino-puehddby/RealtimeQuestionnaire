@@ -16,7 +16,7 @@ import RxSwift
 public enum CollectionKey: String {
     case questionnaire = "Questionnaire"
     case user = "User"
-    case community = "Commynity"
+    case community = "Community"
 }
 
 public enum APIError: Error {

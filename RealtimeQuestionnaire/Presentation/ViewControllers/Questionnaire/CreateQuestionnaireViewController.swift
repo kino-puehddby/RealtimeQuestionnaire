@@ -67,15 +67,13 @@ final class CreateQuestionnaireViewController: UIViewController {
             .map { [unowned self] selected in
                 // 選択されたコミュニティ名をコミュニティIDに変換する
                 let targetIndex: Int? = {
-                    for (index, community) in self.viewModel.communities.value.enumerated() {
-                        if community[UsersCommunityKey.name.rawValue] == selected {
-                            return index
-                        }
+                    for (index, community) in self.viewModel.communities.value.enumerated() where community["name"] == selected {
+                        return index
                     }
                     return nil
                 }()
                 guard let index = targetIndex else { return "" }
-                return self.viewModel.communities.value[index][UsersCommunityKey.id.rawValue] ?? ""
+                return self.viewModel.communities.value[index]["id"] ?? ""
             }
             .bind(to: viewModel.selectedCommunityId)
             .disposed(by: disposeBag)
@@ -84,6 +82,7 @@ final class CreateQuestionnaireViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 guard let uid = S.getKeychain(.uid) else { return }
                 let fields = QuestionnaireModel.Fields(
+                    id: "",
                     authorId: uid,
                     title: self.titleField.text ?? "",
                     description: self.descriptionField.text ,
@@ -98,7 +97,7 @@ final class CreateQuestionnaireViewController: UIViewController {
             .distinctUntilChanged()
             .map { dics in
                 dics.map { dic in
-                    dic[UsersCommunityKey.name.rawValue] ?? ""
+                    dic["name"] ?? ""
                 }
             }
             .subscribe(onNext: { [unowned self] list in

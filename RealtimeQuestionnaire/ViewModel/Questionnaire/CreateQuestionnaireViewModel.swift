@@ -12,11 +12,6 @@ import RxSwift
 import RxCocoa
 import FirebaseFirestore
 
-enum CompletedStatus {
-    case success
-    case error(Error)
-}
-
 final class CreateQuestionnaireViewModel {
     
     let choicesList = BehaviorRelay<[String]>(value: [])
@@ -26,7 +21,7 @@ final class CreateQuestionnaireViewModel {
     
     let selectedCommunityId = BehaviorRelay<String>(value: "")
     
-    let postCompleted = PublishSubject<CompletedStatus>()
+    let postCompleted = PublishSubject<CompleteStatus>()
     
     private let disposeBag = DisposeBag()
     

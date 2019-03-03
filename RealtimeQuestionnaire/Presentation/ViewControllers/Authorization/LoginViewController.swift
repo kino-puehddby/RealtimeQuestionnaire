@@ -35,6 +35,8 @@ final class LoginViewController: UIViewController {
         setup()
         bind()
         
+        // 全体的にローディングを入れる -> SVProgressHUD
+        
         // この辺のTODOはゆくゆくはって感じ
         // TODO: メールアドレスを変更できるようにする
         // TODO: メールアドレスの認証にDynamicLinkを使う

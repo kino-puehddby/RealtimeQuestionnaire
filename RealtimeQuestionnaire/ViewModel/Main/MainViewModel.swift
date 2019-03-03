@@ -10,14 +10,14 @@ import Foundation
 
 import RxCocoa
 import RxSwift
+import FirebaseAuth
 import FirebaseFirestore
 
 final class MainViewModel {
     
-    // - アンケートリスト
-    // - コミュニティリスト > アンケートリスト
     let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [])
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
+    let communities = BehaviorRelay<[CommunityModel.Fields]>(value: [])
     var communityNames = BehaviorRelay<[String]?>(value: nil)
     
     var stashList: [[QuestionnaireModel.Fields]] = []
@@ -46,6 +46,25 @@ final class MainViewModel {
             }
             .disposed(by: disposeBag)
         
+        // observe Community
+        Firestore.firestore().rx
+            .observeArray(
+                CommunityModel.Fields.self,
+                collectionRef: CommunityModel.makeCollectionRef()
+            )
+            .subscribe { [weak self] event in
+                guard let vc = self else { return }
+                switch event {
+                case .next(let communities):
+                    vc.communities.accept(communities)
+                case .error(let error):
+                    debugPrint(error)
+                case .completed:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+        
         // observe Questionnaires associated with User
         user
             .skip(1)
@@ -61,7 +80,8 @@ final class MainViewModel {
     func observeQuestionnaires(on communityIds: [[String: String]]) {
         communityIds.forEach { dic in
             // observe Questionnaire
-            guard let id = dic[UsersCommunityKey.id.rawValue] else { return }
+            guard let id = dic["id"],
+                id != "" else { return }
             Firestore.firestore().rx
                 .observeArray(
                     QuestionnaireModel.Fields.self,
@@ -97,7 +117,7 @@ final class MainViewModel {
     func observeCommunities(on communityIds: [[String: String]]) {
         var newList: [String] = []
         communityIds.forEach { dic in
-            guard let id = dic[UsersCommunityKey.id.rawValue] else { return }
+            guard let id = dic["id"] else { return }
             Firestore.firestore().rx
                 .observeModel(
                     CommunityModel.Fields.self,

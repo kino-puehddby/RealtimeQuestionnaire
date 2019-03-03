@@ -73,6 +73,15 @@
 		A015481E222274B000084606 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A015481D222274AF00084606 /* SVProgressHUD.framework */; };
 		A01548202222AB4E00084606 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A015481F2222AB4E00084606 /* ChoiceTableViewCell.swift */; };
 		A01548222222C52C00084606 /* ChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01548212222C52C00084606 /* ChoiceTableViewCell.xib */; };
+		A0588B60222AB45900912FAB /* ManageConpleteStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0588B5F222AB45900912FAB /* ManageConpleteStatus.swift */; };
+		A0588B62222ABF6A00912FAB /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0588B61222ABF6A00912FAB /* MenuViewModel.swift */; };
+		A0588B65222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0588B63222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.swift */; };
+		A0588B66222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0588B64222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib */; };
+		A0588B68222B0B4A00912FAB /* SearchUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0588B67222B0B4A00912FAB /* SearchUser.storyboard */; };
+		A0588B6A222B0B9B00912FAB /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0588B69222B0B9B00912FAB /* SearchUserViewController.swift */; };
+		A0588B6D222B0DCC00912FAB /* SearchUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0588B6B222B0DCC00912FAB /* SearchUserTableViewCell.swift */; };
+		A0588B6E222B0DCC00912FAB /* SearchUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0588B6C222B0DCC00912FAB /* SearchUserTableViewCell.xib */; };
+		A0E44C35222BF1FA00AE21F5 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C34222BF1FA00AE21F5 /* SearchUserViewModel.swift */; };
 		DCA9F1B3A40DE798150C7CE0 /* Pods_RealtimeQuestionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +156,15 @@
 		A015481D222274AF00084606 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A015481F2222AB4E00084606 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
 		A01548212222C52C00084606 /* ChoiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceTableViewCell.xib; sourceTree = "<group>"; };
+		A0588B5F222AB45900912FAB /* ManageConpleteStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageConpleteStatus.swift; sourceTree = "<group>"; };
+		A0588B61222ABF6A00912FAB /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		A0588B63222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemberInfoTableViewCell.swift; sourceTree = "<group>"; };
+		A0588B64222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeMemberInfoTableViewCell.xib; sourceTree = "<group>"; };
+		A0588B67222B0B4A00912FAB /* SearchUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchUser.storyboard; sourceTree = "<group>"; };
+		A0588B69222B0B9B00912FAB /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
+		A0588B6B222B0DCC00912FAB /* SearchUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewCell.swift; sourceTree = "<group>"; };
+		A0588B6C222B0DCC00912FAB /* SearchUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUserTableViewCell.xib; sourceTree = "<group>"; };
+		A0E44C34222BF1FA00AE21F5 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
 		F9B48EBAE828EDB2223C7DE9 /* Pods-RealtimeQuestionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtimeQuestionnaire.release.xcconfig"; path = "Target Support Files/Pods-RealtimeQuestionnaire/Pods-RealtimeQuestionnaire.release.xcconfig"; sourceTree = "<group>"; };
 		FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealtimeQuestionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -263,6 +281,7 @@
 		4E56BA8A222798A00055529B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A0588B5F222AB45900912FAB /* ManageConpleteStatus.swift */,
 				4E56BA8B222798B10055529B /* Main */,
 				4E56BA8E2227B17A0055529B /* Questionnaire */,
 				4E819206222959BA00FFB6F9 /* Menu */,
@@ -292,6 +311,7 @@
 				4ED53376221D4A4A00F4113D /* Menu.storyboard */,
 				4E56BA9A2227E90E0055529B /* CreateCommunity.storyboard */,
 				4E56BA9C2228DCF30055529B /* ChangeMemberInfo.storyboard */,
+				A0588B67222B0B4A00912FAB /* SearchUser.storyboard */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -302,6 +322,7 @@
 				4ED53373221D4A0600F4113D /* MenuViewController.swift */,
 				4E56BA982227E8ED0055529B /* CreateCommunityViewController.swift */,
 				4E56BA9E2228DD460055529B /* ChangeMemberInfoViewController.swift */,
+				A0588B69222B0B9B00912FAB /* SearchUserViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -311,6 +332,8 @@
 			children = (
 				4E56BA922227E4A30055529B /* MenuTableViewCell.xib */,
 				4E56BAA32228E5B10055529B /* CreateCommunityTableViewCell.xib */,
+				A0588B64222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib */,
+				A0588B6C222B0DCC00912FAB /* SearchUserTableViewCell.xib */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -320,6 +343,8 @@
 			children = (
 				4E56BA912227E4A30055529B /* MenuTableViewCell.swift */,
 				4E56BAA22228E5B10055529B /* CreateCommunityTableViewCell.swift */,
+				A0588B63222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.swift */,
+				A0588B6B222B0DCC00912FAB /* SearchUserTableViewCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -336,6 +361,8 @@
 			isa = PBXGroup;
 			children = (
 				4E819207222959D200FFB6F9 /* CreateCommunityViewModel.swift */,
+				A0588B61222ABF6A00912FAB /* MenuViewModel.swift */,
+				A0E44C34222BF1FA00AE21F5 /* SearchUserViewModel.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -529,8 +556,8 @@
 			children = (
 				4E56BA7922251FC90055529B /* Common */,
 				4E56BA7A22251FED0055529B /* UserModel.swift */,
-				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
 				4E56BA882226AE130055529B /* CommunityModel.swift */,
+				4ED53394221E859600F4113D /* QuestionnaireListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -630,11 +657,14 @@
 				4E92033C221A6F8100C6634F /* Localizable.strings in Resources */,
 				4E56BAA52228E5B10055529B /* CreateCommunityTableViewCell.xib in Resources */,
 				A015481A22226CCA00084606 /* UnansweredQuestionnaireList.storyboard in Resources */,
+				A0588B68222B0B4A00912FAB /* SearchUser.storyboard in Resources */,
 				4E56BA942227E4A30055529B /* MenuTableViewCell.xib in Resources */,
 				4E09F80E221A9723004A00AD /* Register.storyboard in Resources */,
 				4ED5336F221D46E200F4113D /* CreateQuestionnaire.storyboard in Resources */,
 				4E09F810221A9731004A00AD /* Main.storyboard in Resources */,
 				4E8191FB2228F57100FFB6F9 /* TrimImage.storyboard in Resources */,
+				A0588B6E222B0DCC00912FAB /* SearchUserTableViewCell.xib in Resources */,
+				A0588B66222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib in Resources */,
 				A01548222222C52C00084606 /* ChoiceTableViewCell.xib in Resources */,
 				4E56BA9D2228DCF30055529B /* ChangeMemberInfo.storyboard in Resources */,
 				4ED53377221D4A4A00F4113D /* Menu.storyboard in Resources */,
@@ -816,6 +846,7 @@
 				4E09F813221A977B004A00AD /* LoginViewController.swift in Sources */,
 				4ED53392221E827000F4113D /* Const.swift in Sources */,
 				4E920326221A5BB600C6634F /* SplashViewController.swift in Sources */,
+				A0588B65222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.swift in Sources */,
 				4EA2356E221A71C500AB29A4 /* LocalizableStrings.swift in Sources */,
 				4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */,
 				4E56BA992227E8ED0055529B /* CreateCommunityViewController.swift in Sources */,
@@ -828,6 +859,7 @@
 				A01548202222AB4E00084606 /* ChoiceTableViewCell.swift in Sources */,
 				4E56BA7822251AD80055529B /* PickerTextField.swift in Sources */,
 				4E3BD56D221BA48700E357CE /* UIViewController+UIKit.swift in Sources */,
+				A0E44C35222BF1FA00AE21F5 /* SearchUserViewModel.swift in Sources */,
 				4E819201222922F900FFB6F9 /* UIImage+Trimming.swift in Sources */,
 				4ED53387221E462400F4113D /* AppSlideMenuController.swift in Sources */,
 				4E56BA9F2228DD460055529B /* ChangeMemberInfoViewController.swift in Sources */,
@@ -835,11 +867,15 @@
 				4E56BAA42228E5B10055529B /* CreateCommunityTableViewCell.swift in Sources */,
 				4ED5338F221E5E0800F4113D /* MainTableViewCell.swift in Sources */,
 				4E819208222959D200FFB6F9 /* CreateCommunityViewModel.swift in Sources */,
+				A0588B6D222B0DCC00912FAB /* SearchUserTableViewCell.swift in Sources */,
+				A0588B62222ABF6A00912FAB /* MenuViewModel.swift in Sources */,
+				A0588B60222AB45900912FAB /* ManageConpleteStatus.swift in Sources */,
 				4ED5337B221D4BBC00F4113D /* SearchViewController.swift in Sources */,
 				4E56BA932227E4A30055529B /* MenuTableViewCell.swift in Sources */,
 				4ED53384221E444C00F4113D /* AppRootViewController.swift in Sources */,
 				4E56BA7B22251FED0055529B /* UserModel.swift in Sources */,
 				A015481C22226D4100084606 /* UnansweredQuestionnaireListViewController.swift in Sources */,
+				A0588B6A222B0B9B00912FAB /* SearchUserViewController.swift in Sources */,
 				4EA2356F221A71C500AB29A4 /* Assets.swift in Sources */,
 				4E56BA892226AE130055529B /* CommunityModel.swift in Sources */,
 				4ED53371221D475D00F4113D /* CreateQuestionnaireViewController.swift in Sources */,

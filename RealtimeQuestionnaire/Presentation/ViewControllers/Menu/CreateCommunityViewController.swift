@@ -57,9 +57,42 @@ final class CreateCommunityViewController: UIViewController {
         
         createButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                guard let image = self.changeImageButton.imageView?.image else { return }
-                self.uploadFirebaseStorage(image: image)
-                // TODO: コミュニティを登録する（Firestore）
+                self.viewModel.generateCommunityId()
+            })
+            .disposed(by: disposeBag)
+        
+        inviteButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.perform(segue: StoryboardSegue.CreateCommunity.showSearchUser)
+            })
+            .disposed(by: disposeBag)
+        
+        communityNameLabel.rx.text.orEmpty
+            .distinctUntilChanged()
+            .bind(to: viewModel.communityName)
+            .disposed(by: disposeBag)
+        
+        viewModel.postCompleted
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    guard let image = self.changeImageButton.imageView?.image else { return }
+                    self.uploadFirebaseStorage(image: image)
+                case .error(let error):
+                    debugPrint(error)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.userUpdated
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    guard let navi = self.navigationController else { return }
+                    navi.popViewController(animated: true)
+                case .error(let error):
+                    debugPrint(error)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -76,11 +109,6 @@ final class CreateCommunityViewController: UIViewController {
             .subscribe(onNext: { [unowned self] isValid in
                 self.createButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
             })
-            .disposed(by: disposeBag)
-        
-        communityNameLabel.rx.text.orEmpty
-            .distinctUntilChanged()
-            .bind(to: viewModel.communityName)
             .disposed(by: disposeBag)
     }
     

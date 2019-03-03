@@ -10,7 +10,12 @@ import UIKit
 
 final class ChangeMemberInfoViewController: UIViewController {
 
+    @IBOutlet weak private var iconImageView: UIButton!
+    @IBOutlet weak private var nicknameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
 }

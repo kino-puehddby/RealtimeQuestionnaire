@@ -85,7 +85,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let user = viewModel.user.value,
-            let name = user.communities[section][UsersCommunityKey.name.rawValue] else {
+            let name = user.communities[section]["name"] else {
             return nil
         }
         return name

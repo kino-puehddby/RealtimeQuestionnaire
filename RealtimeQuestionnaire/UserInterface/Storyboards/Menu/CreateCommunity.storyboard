@@ -27,11 +27,12 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU2-7D-YSD">
                                             <rect key="frame" x="147.5" y="35" width="80" height="80"/>
+                                            <color key="backgroundColor" name="SystemBlue"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="MU2-7D-YSD" secondAttribute="height" multiplier="1:1" id="Pvw-2q-gbB"/>
                                                 <constraint firstAttribute="width" constant="80" id="X5f-hP-OJ9"/>
                                             </constraints>
-                                            <state key="normal" title="Button" image="picture"/>
+                                            <state key="normal" title="画像"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -168,15 +169,23 @@
                         <outlet property="createButton" destination="wNE-oe-bK3" id="9VL-Rk-BrD"/>
                         <outlet property="inviteButton" destination="Bsl-Xu-DTO" id="KBp-UY-E2u"/>
                         <outlet property="tableView" destination="Zxj-ge-OFn" id="Fmr-s5-Yxx"/>
+                        <segue destination="ZU3-7B-Bu2" kind="show" identifier="showSearchUser" id="N2N-al-Khu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eFn-CF-GOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="56.799999999999997" y="26.53673163418291"/>
         </scene>
+        <!--SearchUser-->
+        <scene sceneID="MeH-VH-fju">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchUser" id="ZU3-7B-Bu2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UI1-MO-qfN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="623" y="26"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="picture" width="64" height="64"/>
         <namedColor name="SystemBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

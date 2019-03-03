@@ -86,6 +86,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="gzD-JU-u8H"/>
                     <connections>
+                        <outlet property="iconUrl" destination="hZr-F0-QVI" id="lbt-nH-R7l"/>
+                        <outlet property="nicknameLabel" destination="ozP-Do-u4C" id="83j-dE-ZCy"/>
                         <outlet property="tableView" destination="REh-du-oq5" id="MHQ-mc-X1B"/>
                         <segue destination="gXV-5j-dut" kind="show" identifier="showCreateCommunity" id="7mt-Qs-jWf"/>
                     </connections>

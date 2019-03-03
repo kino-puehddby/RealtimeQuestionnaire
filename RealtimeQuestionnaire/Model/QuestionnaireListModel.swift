@@ -14,17 +14,22 @@ struct QuestionnaireModel: DatabaseCollection {
     var id: String = ""
     typealias FieldType = Fields
     var fields: QuestionnaireModel.Fields?
-    public struct Fields: Codable {
+    public struct Fields: Codable, Equatable {
+        public let id: String // ID
         public let authorId: String // 作成者
         public let title: String // アンケート名
         public let description: String? // アンケートの説明
         public let choices: [String] // アンケートの選択肢
         
-        public init(authorId: String, title: String, description: String?, choices: [String]) {
+        public init(id: String, authorId: String, title: String, description: String?, choices: [String]) {
+            self.id = id
             self.authorId = authorId
             self.title = title
             self.description = description
             self.choices = choices
+        }
+        static func ==(lhs: Fields, rhs: Fields) -> Bool {
+            return lhs.id == rhs.id
         }
     }
     public init(id: String, fields: Fields?) {

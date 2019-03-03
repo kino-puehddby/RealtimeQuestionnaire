@@ -84,13 +84,14 @@ final class RegisterViewController: UIViewController {
     }
     
     private func postUser() {
+        guard let user = Auth.auth().currentUser else { return }
         let fields = UserModel.Fields(
+            id: user.uid,
             nickname: "",
             iconUrl: "",
             communities: [],
             questionnaires: []
         )
-        guard let user = Auth.auth().currentUser else { return }
         Firestore.firestore().rx
             .setData(
                 model: fields,
@@ -101,6 +102,7 @@ final class RegisterViewController: UIViewController {
                 switch result {
                 case .success:
                     break
+                    // TODO: ユーザー情報設定画面へ遷移させる
                 case .error(let error):
                     debugPrint(error)
                 }
