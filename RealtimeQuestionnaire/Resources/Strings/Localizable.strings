@@ -11,6 +11,8 @@
 "Alert.RequestPictureAuth.ActionTitle"="設定変更";
 "Error.unknown"="不明なエラーが発生しました。";
 "Questionnaire.Create.Choice.value"="選択肢%d";
+"Questionnaire.Detail.Answer"="アンケート回答";
+"Questionnaire.Detail.Result"="アンケート結果";
 
 "Menu.CreateCommunity"="コミュニティをつくる";
 "Menu.Logout"="ログアウト";

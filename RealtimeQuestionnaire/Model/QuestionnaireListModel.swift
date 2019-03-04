@@ -18,14 +18,12 @@ struct QuestionnaireModel: DatabaseCollection {
         public let id: String // ID
         public let authorId: String // 作成者
         public let title: String // アンケート名
-        public let description: String? // アンケートの説明
         public let choices: [String] // アンケートの選択肢
         
-        public init(id: String, authorId: String, title: String, description: String?, choices: [String]) {
+        public init(id: String, authorId: String, title: String, choices: [String]) {
             self.id = id
             self.authorId = authorId
             self.title = title
-            self.description = description
             self.choices = choices
         }
         static func == (lhs: QuestionnaireModel.Fields, rhs: QuestionnaireModel.Fields) -> Bool {

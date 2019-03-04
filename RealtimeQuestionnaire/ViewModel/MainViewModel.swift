@@ -24,6 +24,8 @@ final class MainViewModel {
     
     var stashList: [[QuestionnaireModel.Fields]] = []
     
+    var selectedCellData = BehaviorRelay<QuestionnaireModel.Fields?>(value: nil)
+    
     private let disposeBag = DisposeBag()
     
     init() {

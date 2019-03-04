@@ -20,7 +20,6 @@ final class CreateQuestionnaireViewController: UIViewController {
     @IBOutlet weak private var titleInvalidLabel: UILabel!
     @IBOutlet weak private var communityPickerField: PickerTextField!
     @IBOutlet weak private var communityInvalidLabel: UILabel!
-    @IBOutlet weak private var descriptionField: UITextView!
     @IBOutlet weak private var addCellButton: UIButton!
     @IBOutlet weak private var choicesInvalidLabel: UILabel!
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
@@ -44,13 +43,6 @@ final class CreateQuestionnaireViewController: UIViewController {
         
         titleField.delegate = self
         communityPickerField.delegate = self
-        
-        descriptionField.delegate = self
-        descriptionField.textContainer.lineBreakMode = .byTruncatingTail
-        descriptionField.layer.borderColor = Asset.defaultGray.color.cgColor
-        descriptionField.layer.borderWidth = 0.5
-        descriptionField.layer.cornerRadius = 5.0
-        descriptionField.layer.masksToBounds = true
         
         bindScrollTextFieldWhenShowKeyboard()
     }
@@ -85,7 +77,6 @@ final class CreateQuestionnaireViewController: UIViewController {
                     id: "",
                     authorId: uid,
                     title: self.titleField.text ?? "",
-                    description: self.descriptionField.text ,
                     choices: self.viewModel.choicesList.value
                 )
                 self.viewModel.postQuestionnaire(fields: fields)
@@ -169,7 +160,6 @@ final class CreateQuestionnaireViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 self.titleField.resignFirstResponder()
                 self.communityPickerField.resignFirstResponder()
-                self.descriptionField.resignFirstResponder()
             })
             .disposed(by: disposeBag)
         tapEvent
@@ -252,16 +242,6 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
         viewModel.choicesList.accept(newList)
         tableView.deleteRows(at: [indexPath], with: .left)
         tableView.endUpdates()
-    }
-}
-
-extension CreateQuestionnaireViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            descriptionField.resignFirstResponder()
-            return false
-        }
-        return true
     }
 }
 

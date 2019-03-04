@@ -97,6 +97,12 @@ internal enum L10n {
         }
       }
     }
+    internal enum Detail {
+      /// アンケート回答
+      internal static let answer = L10n.tr("Localizable", "Questionnaire.Detail.Answer")
+      /// アンケート結果
+      internal static let result = L10n.tr("Localizable", "Questionnaire.Detail.Result")
+    }
   }
 
   internal enum Sample {

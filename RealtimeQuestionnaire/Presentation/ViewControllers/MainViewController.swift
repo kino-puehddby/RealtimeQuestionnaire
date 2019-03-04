@@ -39,6 +39,17 @@ final class MainViewController: UIViewController {
         deselectTableView()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == StoryboardSegue.Main.showQuestionnaireDetail.rawValue {
+            let vc = segue.destination as! QuestionnaireDetailContainerViewController
+            if let data = viewModel.selectedCellData.value,
+                let user = viewModel.user.value {
+                vc.data = data
+                vc.user = user
+            }
+        }
+    }
+    
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -109,17 +120,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
         let title = data.title
-        let description = data.description ?? ""
         cell.configuration(
             // FIXME: 画像をFirebase Storageから取得する
             iconImage: Asset.sample.image,
-            title: title,
-            description: description)
+            title: title)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Main.TableView.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
+        viewModel.selectedCellData.accept(data)
+        perform(segue: StoryboardSegue.Main.showQuestionnaireDetail)
     }
     
     func deselectTableView() {

@@ -21,7 +21,7 @@ final class CreateCommunityViewModel {
     let completed = PublishSubject<CompleteStatus>()
     let isCommunityIdExist = PublishSubject<Bool>()
     
-    var communityDocumentId: String = ""
+    var communityId: String = ""
     var userDocumentRef: DocumentReference?
     
     private let disposeBag = DisposeBag()
@@ -54,7 +54,7 @@ final class CreateCommunityViewModel {
     func generateCommunityId() {
         isLoading.onNext(true)
         // コミュニティIDの生成
-        communityDocumentId = Database.generate(length: 20)
+        communityId = Database.generate(length: 20)
         Firestore.firestore().rx
             .getArray(
                 CommunityModel.Fields.self,
@@ -64,7 +64,7 @@ final class CreateCommunityViewModel {
                 switch event {
                 case .success(let communities):
                     let valids = communities.map { community in
-                        community.id == self.communityDocumentId
+                        community.id == self.communityId
                     }
                     // 存在チェック
                     self.isCommunityIdExist.onNext(valids.contains(true))
@@ -77,7 +77,7 @@ final class CreateCommunityViewModel {
     
     private func createCommunity() {
         let model = CommunityModel.Fields(
-            id: communityDocumentId,
+            id: communityId,
             iconUrl: "アイコンURL", // TODO: アイコンURLを設定
             name: communityName.value
         )
@@ -85,7 +85,7 @@ final class CreateCommunityViewModel {
             .setData(
                 model: model,
                 collectionRef: CommunityModel.makeCollectionRef(),
-                documentRef: CommunityModel.makeDocumentRef(id: communityDocumentId)
+                documentRef: CommunityModel.makeDocumentRef(id: communityId)
             )
             .subscribe { [unowned self] result in
                 switch result {
@@ -103,7 +103,7 @@ final class CreateCommunityViewModel {
     private func updateUser() {
         guard let user = user.value else { return }
         var communities = user.communities
-        communities.append(["id": communityDocumentId, "name": communityName.value])
+        communities.append(["id": communityId, "name": communityName.value])
         let newModel = UserModel.Fields(
             id: user.id,
             nickname: user.nickname,

@@ -16,7 +16,7 @@
                 <viewControllerPlaceholder storyboardName="Search" id="rab-JB-sxv" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7So-iT-a3e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2874" y="449"/>
+            <point key="canvasLocation" x="2874" y="467"/>
         </scene>
         <!--TOP-->
         <scene sceneID="4CN-4o-9Pp">
@@ -130,6 +130,7 @@
                         <outlet property="tableView" destination="xWQ-in-xdo" id="yCC-6J-dL3"/>
                         <segue destination="sl6-9X-qdR" kind="show" identifier="showUnansweredQuestionnaireList" id="UoN-Rb-nUF"/>
                         <segue destination="3BL-Tj-H9h" kind="show" identifier="showCreateQuestionnaire" id="eMn-SR-qkh"/>
+                        <segue destination="wRq-sK-ydh" kind="show" identifier="showQuestionnaireDetail" id="VcE-E9-6Km"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d8-1G-lHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -168,7 +169,15 @@
                 <viewControllerPlaceholder storyboardName="CreateQuestionnaire" id="3BL-Tj-H9h" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Gn-8W-F7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3640" y="94"/>
+            <point key="canvasLocation" x="3640" y="26"/>
+        </scene>
+        <!--QuestionnaireDetail-->
+        <scene sceneID="D0k-Be-flA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QuestionnaireDetail" id="wRq-sK-ydh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fPG-c8-rbZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3640" y="93"/>
         </scene>
     </scenes>
     <resources>

@@ -110,7 +110,7 @@ final class CreateCommunityViewController: UIViewController {
         let storageRef = Storage.storage().reference()
         
         if let data = image.pngData() {
-            let reference = storageRef.child("images/" + viewModel.communityName.value + ".jpg")
+            let reference = storageRef.child("images/" + viewModel.communityId + ".jpg")
             reference.putData(data)
         }
     }
