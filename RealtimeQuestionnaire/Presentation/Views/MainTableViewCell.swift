@@ -13,7 +13,6 @@ class MainTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var iconImageView: UIImageView!
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var communityNameLabel: UILabel!
     @IBOutlet weak private var descriptionLabel: UILabel!
     
     override func awakeFromNib() {
@@ -23,10 +22,9 @@ class MainTableViewCell: UITableViewCell, NibReusable {
         iconImageView.layer.cornerRadius = iconImageView.bounds.width / 2
     }
     
-    func configuration(iconImage: UIImage, title: String, communityName: String, description: String) {
+    func configuration(iconImage: UIImage, title: String, description: String) {
         iconImageView.image = iconImage
         titleLabel.text = title
-        communityNameLabel.text = communityName
         descriptionLabel.text = description
     }
 }

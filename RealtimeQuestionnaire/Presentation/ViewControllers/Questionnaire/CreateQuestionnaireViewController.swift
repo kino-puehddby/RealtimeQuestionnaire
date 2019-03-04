@@ -26,10 +26,7 @@ final class CreateQuestionnaireViewController: UIViewController {
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
     @IBOutlet private var viewTapped: UITapGestureRecognizer!
     
-    let choicesList = BehaviorRelay<[String]>(value: [])
-    let communities = BehaviorRelay<[String]>(value: [])
-    let viewTap = PublishSubject<Void>()
-    let cellTextFieldValid = BehaviorRelay<Bool>(value: false)
+    fileprivate let viewModel = CreateQuestionnaireViewModel()
     
     private let disposeBag = DisposeBag()
     
@@ -55,8 +52,6 @@ final class CreateQuestionnaireViewController: UIViewController {
         descriptionField.layer.cornerRadius = 5.0
         descriptionField.layer.masksToBounds = true
         
-        getUserCommunities()
-        
         bindScrollTextFieldWhenShowKeyboard()
     }
     
@@ -67,17 +62,63 @@ final class CreateQuestionnaireViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        communityPickerField.rx.text.orEmpty
+            .distinctUntilChanged()
+            .map { [unowned self] selected in
+                // 選択されたコミュニティ名をコミュニティIDに変換する
+                let targetIndex: Int? = {
+                    for (index, community) in self.viewModel.communities.value.enumerated() where community["name"] == selected {
+                        return index
+                    }
+                    return nil
+                }()
+                guard let index = targetIndex else { return "" }
+                return self.viewModel.communities.value[index]["id"] ?? ""
+            }
+            .bind(to: viewModel.selectedCommunityId)
+            .disposed(by: disposeBag)
+        
         createQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.postQuestionnaire()
+                guard let uid = S.getKeychain(.uid) else { return }
+                let fields = QuestionnaireModel.Fields(
+                    id: "",
+                    authorId: uid,
+                    title: self.titleField.text ?? "",
+                    description: self.descriptionField.text ,
+                    choices: self.viewModel.choicesList.value
+                )
+                self.viewModel.postQuestionnaire(fields: fields)
             })
             .disposed(by: disposeBag)
         
-        communities
+        viewModel.communities
             .skip(1)
             .distinctUntilChanged()
+            .map { dics in
+                dics.map { dic in
+                    dic["name"] ?? ""
+                }
+            }
             .subscribe(onNext: { [unowned self] list in
                 self.communityPickerField.setup(dataList: list)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.postCompleted
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    // FIXME: トースト表示したい
+                    self.navigationController?.popViewController(animated: true)
+                case .error(let error):
+                    self.showAlert(
+                        type: .custom,
+                        title: L10n.Alert.Questionnaire.failedToCreate,
+                        actionTitle: L10n.Common.retry
+                    )
+                    debugPrint(error)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -97,7 +138,7 @@ final class CreateQuestionnaireViewController: UIViewController {
             .bind(to: communityInvalidLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
-        let choicesListValid = choicesList
+        let choicesListValid = viewModel.choicesList
             .map { $0.count >= 2 }
         choicesListValid
             .bind(to: choicesInvalidLabel.rx.isHidden)
@@ -108,7 +149,7 @@ final class CreateQuestionnaireViewController: UIViewController {
                 isTitleFieldValid,
                 isCommunityFieldValid,
                 choicesListValid,
-                cellTextFieldValid
+                viewModel.cellTextFieldValid
             )
             .map { $0 && $1 && $2 && $3 }
             .share(replay: 1)
@@ -132,75 +173,21 @@ final class CreateQuestionnaireViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         tapEvent
-            .bind(to: viewTap)
-            .disposed(by: disposeBag)
-    }
-    
-    func getUserCommunities() {
-        guard let uid = S.getKeychain(.uid) else { return }
-        let documentRef = UserModel.makeDocumentRef(id: uid)
-        Firestore.firestore().rx
-            .get(
-                UserModel.Fields.self,
-                documentRef: documentRef
-            )
-            .subscribe { [unowned self] result in
-                switch result {
-                case .success(let user):
-                    self.communities.accept(user.communities)
-                case .error(let error):
-                    debugPrint(error)
-                    self.communities.accept([])
-                }
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func postQuestionnaire() {
-        guard let uid = S.getKeychain(.uid) else { return }
-        let fields = QuestionnaireListModel.Fields(
-            authorId: uid,
-            title: titleField.text ?? "",
-            description: descriptionField.text,
-            communityName: communityPickerField.text ?? "",
-            choices: choicesList.value
-        )
-        Firestore.firestore().rx
-            .setData(
-                model: fields,
-                collectionRef: QuestionnaireListModel.makeCollectionRef()
-            )
-            .subscribe { [unowned self] result in
-                switch result {
-                case .success:
-                    // FIXME: トースト表示したい
-                    self.navigationController?.popViewController(animated: true)
-                case .error(let error):
-                    self.showAlert(
-                        type: .custom,
-                        title: L10n.Alert.Questionnaire.failedToCreate,
-                        actionTitle: L10n.Common.retry,
-                        completion: {
-                            self.postQuestionnaire()
-                        }
-                    )
-                    debugPrint(error)
-                }
-            }
+            .bind(to: viewModel.viewTap)
             .disposed(by: disposeBag)
     }
     
     func validCells() {
         guard let cells = tableView.visibleCells as? [ChoiceTableViewCell] else { return }
         let invalid = cells.contains { $0.valid.value == false }
-        cellTextFieldValid.accept(!invalid)
+        viewModel.cellTextFieldValid.accept(!invalid)
     }
 }
 
 extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return choicesList.value.count
+        return viewModel.choicesList.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,11 +217,11 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
             .share(replay: 1)
         choiceText
             .map { [unowned self] text in
-                var list = self.choicesList.value
+                var list = self.viewModel.choicesList.value
                 list[row] = text ?? ""
                 return list
             }
-            .bind(to: choicesList)
+            .bind(to: viewModel.choicesList)
             .disposed(by: disposeBag)
         choiceText
             .subscribe(onNext: { [unowned self] _ in
@@ -242,17 +229,17 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
             })
             .disposed(by: disposeBag)
         
-        viewTap
+        viewModel.viewTap
             .bind(to: cell.viewTap)
             .disposed(by: disposeBag)
     }
     
     private func addAction() {
         tableView.beginUpdates()
-        var newList = choicesList.value
+        var newList = viewModel.choicesList.value
         let insertTarget = newList.count
         newList.insert("", at: insertTarget)
-        choicesList.accept(newList)
+        viewModel.choicesList.accept(newList)
         let indexPath = IndexPath(row: insertTarget, section: 0)
         tableView.insertRows(at: [indexPath], with: .bottom)
         tableView.endUpdates()
@@ -260,9 +247,9 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
     
     private func deleteAction(indexPath: IndexPath) {
         tableView.beginUpdates()
-        var newList = choicesList.value
+        var newList = viewModel.choicesList.value
         newList.remove(at: indexPath.row)
-        choicesList.accept(newList)
+        viewModel.choicesList.accept(newList)
         tableView.deleteRows(at: [indexPath], with: .left)
         tableView.endUpdates()
     }

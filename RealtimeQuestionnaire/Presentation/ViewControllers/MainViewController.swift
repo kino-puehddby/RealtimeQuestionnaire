@@ -10,7 +10,6 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import FirebaseAuth
 import FirebaseFirestore
 
 final class MainViewController: UIViewController {
@@ -22,16 +21,22 @@ final class MainViewController: UIViewController {
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
     @IBOutlet weak private var answerQuestionnaireButton: UIButton!
     
+    private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
-    
-    fileprivate let questionnaireList = BehaviorRelay<[QuestionnaireListModel.Fields]>(value: [])
-    let communities = BehaviorRelay<[String]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // TODO: ViewModelで必要なデータの管理をするようにする
+        
         setup()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        deselectTableView()
     }
     
     func setup() {
@@ -65,74 +70,69 @@ final class MainViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        // observe User on Firestore
-        guard let uid = S.getKeychain(.uid) else { return }
-        let userDocumentRef = UserModel.makeDocumentRef(id: uid)
-        Firestore.firestore().rx
-            .observeModel(
-                UserModel.Fields.self,
-                documentRef: userDocumentRef
+        Observable
+            .combineLatest(
+                viewModel.questionnaireList,
+                viewModel.user,
+                viewModel.communityNames
             )
-            .subscribe { [weak self] event in
-                guard let vc = self else { return }
-                switch event {
-                case .next(let user):
-                    vc.communities.accept(user.communities)
-                case .error(let error):
-                    debugPrint(error)
-                case .completed:
-                    break
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // observe QuestionnaireList on Firestore
-        Firestore.firestore().rx
-            .observeArray(
-                QuestionnaireListModel.Fields.self,
-                collectionRef: QuestionnaireListModel.makeCollectionRef()
-            )
-            .subscribe { [weak self] event in
-                guard let vc = self else { return }
-                switch event {
-                case .next(let list):
-                    // 参加中コミュニティのアンケートのみ表示
-                    let newList = list.filter { model in
-                        vc.communities.value.contains(model.communityName)
-                    }
-                    vc.questionnaireList.accept(newList)
-                    vc.tableView.reloadData()
-                case .error(let error):
-                    debugPrint(error)
-                case .completed:
-                    break
-                }
-            }
+            .subscribe(onNext: { [unowned self] _ in
+                self.tableView.reloadData()
+            })
             .disposed(by: disposeBag)
     }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.questionnaireList.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let user = viewModel.user.value,
+            let name = user.communities[section]["name"] else {
+            return nil
+        }
+        return name
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questionnaireList.value.count
+        return viewModel.questionnaireList.value[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
-        let data = questionnaireList.value[indexPath.row]
+        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
         let title = data.title
-        let communityName = data.communityName
         let description = data.description ?? ""
         cell.configuration(
-            // FIXME: 画像をFirebase Storageから取得するようにする
+            // FIXME: 画像をFirebase Storageから取得する
             iconImage: Asset.sample.image,
             title: title,
-            communityName: communityName,
             description: description)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Main.TableView.cellHeight
+    }
+    
+    func deselectTableView() {
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+    }
+}
+
+extension MainViewController {
+    func pushCreateCommunity() {
+        guard let navi = navigationController else { return }
+        let createCommunityVC = StoryboardScene.CreateCommunity.initialScene.instantiate()
+        navi.setViewControllers([self, createCommunityVC], animated: true)
     }
 }

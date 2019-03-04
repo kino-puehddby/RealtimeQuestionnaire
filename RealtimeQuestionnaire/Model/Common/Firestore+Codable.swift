@@ -14,8 +14,9 @@ import CodableFirebase
 import RxSwift
 
 public enum CollectionKey: String {
-    case questionnaireList = "QuestionnaireList"
+    case questionnaire = "Questionnaire"
     case user = "User"
+    case community = "Community"
 }
 
 public enum APIError: Error {
