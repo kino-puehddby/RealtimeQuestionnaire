@@ -16,6 +16,5 @@ final class ChangeMemberInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
 }

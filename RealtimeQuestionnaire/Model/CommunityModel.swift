@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 struct CommunityModel: DatabaseCollection {
     static var collectionKey: CollectionKey = .community
-    var id: String = ""
+    var id: String = "" // ドキュメントID
     typealias FieldType = Fields
     var fields: CommunityModel.Fields?
     public struct Fields: Codable, Equatable {
@@ -25,7 +25,7 @@ struct CommunityModel: DatabaseCollection {
             self.iconUrl = iconUrl
             self.name = name
         }
-        static func ==(lhs: Fields, rhs: Fields) -> Bool {
+        static func == (lhs: CommunityModel.Fields, rhs: CommunityModel.Fields) -> Bool {
             return lhs.id == rhs.id
         }
     }

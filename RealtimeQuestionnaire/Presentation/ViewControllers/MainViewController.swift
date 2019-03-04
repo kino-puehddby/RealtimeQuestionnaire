@@ -33,6 +33,12 @@ final class MainViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        deselectTableView()
+    }
+    
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -105,7 +111,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let title = data.title
         let description = data.description ?? ""
         cell.configuration(
-            // FIXME: 画像をFirebase Storageから取得するようにする
+            // FIXME: 画像をFirebase Storageから取得する
             iconImage: Asset.sample.image,
             title: title,
             description: description)
@@ -114,6 +120,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Main.TableView.cellHeight
+    }
+    
+    func deselectTableView() {
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
     }
 }
 

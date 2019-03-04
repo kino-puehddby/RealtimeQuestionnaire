@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 final class MenuViewModel {
     
+    // TODO: ローディング
+    
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
     
     private let disposeBag = DisposeBag()

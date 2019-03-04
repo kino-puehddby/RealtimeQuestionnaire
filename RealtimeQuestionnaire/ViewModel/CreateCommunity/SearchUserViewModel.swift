@@ -14,27 +14,31 @@ import FirebaseFirestore
 
 final class SearchUserViewModel {
     
+    // TODO: ローディング
+    
     let checkedUserInfo = PublishSubject<(id: String, index: Int)>()
     let userList = BehaviorRelay<[UserModel.Fields]>(value: [])
+    let filteredUserList = BehaviorRelay<[UserModel.Fields]>(value: [])
     let checkList = BehaviorRelay<[UserModel.Fields]>(value: [])
+    
+    let filterTrigger = PublishSubject<String?>()
     
     private let disposeBag = DisposeBag()
     
     init() {
         Firestore.firestore().rx
-            .observeArray(
+            .getArray(
                 UserModel.Fields.self,
                 collectionRef: UserModel.makeCollectionRef()
             )
             .subscribe { [weak self] event in
-                guard let vc = self else { return }
+                guard let vm = self else { return }
                 switch event {
-                case .next(let list):
-                    vc.userList.accept(list)
+                case .success(let list):
+                    vm.userList.accept(list)
+                    vm.filteredUserList.accept(list)
                 case .error(let error):
                     debugPrint(error)
-                case .completed:
-                    break
                 }
             }
             .disposed(by: disposeBag)
@@ -51,11 +55,22 @@ final class SearchUserViewModel {
                     return new
                 } else {
                     var new = self.checkList.value
-                    new.append(self.userList.value[arg.index])
+                    new.append(self.filteredUserList.value[arg.index])
                     return new
                 }
             }
             .bind(to: checkList)
+            .disposed(by: disposeBag)
+        
+        filterTrigger
+            .subscribe(onNext: { [unowned self] text in
+                if let text = text {
+                    let filteredList = self.userList.value.filter { $0.nickname?.contains(text) ?? false }
+                    self.filteredUserList.accept(filteredList)
+                } else {
+                    self.filteredUserList.accept(self.userList.value)
+                }
+            })
             .disposed(by: disposeBag)
     }
 }

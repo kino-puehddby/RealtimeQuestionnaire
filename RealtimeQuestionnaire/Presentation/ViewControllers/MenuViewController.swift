@@ -83,6 +83,8 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         guard let menu = Menu(rawValue: indexPath.row) else { return }
         switch menu {
         case .createCommunity:

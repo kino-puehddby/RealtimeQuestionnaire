@@ -11,7 +11,7 @@ import Foundation
 struct QuestionnaireModel: DatabaseCollection {
     
     static var collectionKey: CollectionKey = .questionnaire
-    var id: String = ""
+    var id: String = "" // ドキュメントID
     typealias FieldType = Fields
     var fields: QuestionnaireModel.Fields?
     public struct Fields: Codable, Equatable {
@@ -28,7 +28,7 @@ struct QuestionnaireModel: DatabaseCollection {
             self.description = description
             self.choices = choices
         }
-        static func ==(lhs: Fields, rhs: Fields) -> Bool {
+        static func == (lhs: QuestionnaireModel.Fields, rhs: QuestionnaireModel.Fields) -> Bool {
             return lhs.id == rhs.id
         }
     }

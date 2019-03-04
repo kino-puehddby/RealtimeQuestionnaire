@@ -24,6 +24,8 @@ final class CreateCommunityViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = CreateCommunityViewModel()
     
+    var checkList = BehaviorRelay<[UserModel.Fields]>(value: [])
+    
     lazy var photoLibraryManager: PhotoLibraryManager = { preconditionFailure() }()
 
     override func viewDidLoad() {
@@ -36,6 +38,7 @@ final class CreateCommunityViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        tableView.reloadData()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         changeImageButton.setImage(appDelegate.photoLibraryImage, for: .normal)
     }
@@ -72,23 +75,13 @@ final class CreateCommunityViewController: UIViewController {
             .bind(to: viewModel.communityName)
             .disposed(by: disposeBag)
         
-        viewModel.postCompleted
+        viewModel.completed
             .subscribe(onNext: { [unowned self] status in
                 switch status {
                 case .success:
-                    guard let image = self.changeImageButton.imageView?.image else { return }
+                    guard let image = self.changeImageButton.imageView?.image,
+                        let navi = self.navigationController else { return }
                     self.uploadFirebaseStorage(image: image)
-                case .error(let error):
-                    debugPrint(error)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.userUpdated
-            .subscribe(onNext: { [unowned self] status in
-                switch status {
-                case .success:
-                    guard let navi = self.navigationController else { return }
                     navi.popViewController(animated: true)
                 case .error(let error):
                     debugPrint(error)
@@ -125,11 +118,16 @@ final class CreateCommunityViewController: UIViewController {
 
 extension CreateCommunityViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return checkList.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CreateCommunityTableViewCell.self)
+        cell.configure(
+            image: Asset.picture.image, // FIXME: サンプル
+            nickname: checkList.value[indexPath.row].nickname ?? "",
+            id: checkList.value[indexPath.row].id
+        )
         return cell
     }
     

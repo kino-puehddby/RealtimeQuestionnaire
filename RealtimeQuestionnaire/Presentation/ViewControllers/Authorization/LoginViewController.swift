@@ -12,6 +12,7 @@ import FirebaseAuth
 import GoogleSignIn
 import RxSwift
 import RxCocoa
+import SVProgressHUD
 
 final class LoginViewController: UIViewController {
     
@@ -27,6 +28,7 @@ final class LoginViewController: UIViewController {
         registeringPassword.resignFirstResponder()
     }
     
+    private let viewModel = LoginViewModel()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -34,8 +36,6 @@ final class LoginViewController: UIViewController {
         
         setup()
         bind()
-        
-        // 全体的にローディングを入れる -> SVProgressHUD
         
         // この辺のTODOはゆくゆくはって感じ
         // TODO: メールアドレスを変更できるようにする
@@ -52,22 +52,17 @@ final class LoginViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
-    func set(uid: String) {
-        if S.getKeychain(.uid) == nil {
-            S.setKeychain(.uid, uid)
-        }
-    }
-    
     func bind() {
         loginButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
+                self.viewModel.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
             })
             .disposed(by: disposeBag)
         
         googleSignInButton.rx.tap
             .subscribe(onNext: {
                 // 可能な場合はサイレントログイン
+                self.viewModel.isLoading.onNext(true)
                 GIDSignIn.sharedInstance()?.signIn()
             })
             .disposed(by: disposeBag)
@@ -83,24 +78,25 @@ final class LoginViewController: UIViewController {
                 self.showResetPasswordAlert()
             })
             .disposed(by: disposeBag)
-    }
-    
-    func login(email: String?, password: String?) {
-        guard let email = email, let password = password else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
-            guard let vc = self else { return }
-            if let user = user, error == nil {
-                debugPrint("*** login succeeded by Firebase ***")
-                vc.set(uid: user.user.uid)
-                vc.switchMainViewController()
-            } else {
-                vc.showAlert(type: .ok, message: L10n.Alert.InvalidLogin.message, completion: {
-                    vc.registeringPassword.text = ""
-                })
-                debugPrint("*** user not found ***")
-            }
-        }
+        viewModel.isLoading
+            .bind(to: rx.hud)
+            .disposed(by: disposeBag)
+        
+        viewModel.completed
+            .subscribe(onNext: { [unowned self] status in
+                self.viewModel.isLoading.onNext(false)
+                switch status {
+                case .success:
+                    self.switchMainViewController()
+                case .error(let error):
+                    self.showAlert(type: .ok, message: L10n.Alert.InvalidLogin.message, completion: {
+                        self.registeringPassword.text = ""
+                    })
+                    debugPrint(error)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func showResetPasswordAlert() {
@@ -131,6 +127,8 @@ final class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
+    
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         // login error (include cancel)
         if let error = error {
@@ -148,19 +146,18 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     
     private func signInFirebase(with credential: AuthCredential) {
         Auth.auth().signInAndRetrieveData(with: credential) { [unowned self] (user, error) in
+            self.viewModel.isLoading.onNext(false)
             if let error = error {
                 debugPrint(error)
-                self.showAlert(type: .ok, title: "認証に失敗しました", message: error.localizedDescription.description)
+                self.showAlert(type: .ok, title: L10n.Alert.Auth.failure, message: error.localizedDescription.description)
                 return
             }
-            debugPrint("*** login succeeded to Firebase by Google ***")
-            self.set(uid: user!.user.uid)
+            self.viewModel.set(uid: user!.user.uid)
             self.switchMainViewController()
         }
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        debugPrint("Sign off successfully")
     }
 }
 

@@ -14,6 +14,8 @@ import FirebaseFirestore
 
 final class CreateQuestionnaireViewModel {
     
+    let isLoading = PublishSubject<Bool>()
+    
     let choicesList = BehaviorRelay<[String]>(value: [])
     let communities = BehaviorRelay<[[String: String]]>(value: [])
     let viewTap = PublishSubject<Void>()
@@ -46,6 +48,7 @@ final class CreateQuestionnaireViewModel {
     }
     
     func postQuestionnaire(fields: QuestionnaireModel.Fields) {
+        isLoading.onNext(true)
         if selectedCommunityId.value == "" {
             return
         }
@@ -58,6 +61,7 @@ final class CreateQuestionnaireViewModel {
                 collectionRef: collectionRef
             )
             .subscribe { [unowned self] result in
+                self.isLoading.onNext(false)
                 switch result {
                 case .success:
                     self.postCompleted.onNext(.success)

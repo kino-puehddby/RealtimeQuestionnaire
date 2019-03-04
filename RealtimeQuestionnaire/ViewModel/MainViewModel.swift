@@ -15,6 +15,8 @@ import FirebaseFirestore
 
 final class MainViewModel {
     
+    // TODO: ローディング
+    
     let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [])
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
     let communities = BehaviorRelay<[CommunityModel.Fields]>(value: [])
@@ -25,6 +27,7 @@ final class MainViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
+        
         // observe User
         guard let uid = S.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
@@ -34,10 +37,10 @@ final class MainViewModel {
                 documentRef: userDocumentRef
             )
             .subscribe { [weak self] event in
-                guard let vc = self else { return }
+                guard let vm = self else { return }
                 switch event {
                 case .next(let user):
-                    vc.user.accept(user)
+                    vm.user.accept(user)
                 case .error(let error):
                     debugPrint(error)
                 case .completed:
@@ -53,10 +56,10 @@ final class MainViewModel {
                 collectionRef: CommunityModel.makeCollectionRef()
             )
             .subscribe { [weak self] event in
-                guard let vc = self else { return }
+                guard let vm = self else { return }
                 switch event {
                 case .next(let communities):
-                    vc.communities.accept(communities)
+                    vm.communities.accept(communities)
                 case .error(let error):
                     debugPrint(error)
                 case .completed:

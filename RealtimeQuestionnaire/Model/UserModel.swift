@@ -12,11 +12,11 @@ import FirebaseFirestore
 
 struct UserModel: DatabaseCollection {
     static var collectionKey: CollectionKey = .user
-    var id: String = ""
+    var id: String = "" // ドキュメントID
     typealias FieldType = Fields
     var fields: UserModel.Fields?
     public struct Fields: Codable, Equatable {
-        public let id: String
+        public let id: String // ID
         public let nickname: String? // ニックネーム
         public let iconUrl: String? // アイコンURL
         public let communities: [[String: String]] // 参加中のコミュニティ
@@ -29,7 +29,7 @@ struct UserModel: DatabaseCollection {
             self.communities = communities
             self.questionnaires = questionnaires
         }
-        static func ==(lhs: Fields, rhs: Fields) -> Bool {
+        static func == (lhs: UserModel.Fields, rhs: UserModel.Fields) -> Bool {
             return lhs.id == rhs.id
         }
     }

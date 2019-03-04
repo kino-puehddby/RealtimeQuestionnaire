@@ -14,10 +14,11 @@ import FirebaseFirestore
 
 final class CreateCommunityViewModel {
     
+    let isLoading = PublishSubject<Bool>()
+    
     let communityName = BehaviorRelay<String>(value: "")
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
-    let postCompleted = PublishSubject<CompleteStatus>()
-    let userUpdated = PublishSubject<CompleteStatus>()
+    let completed = PublishSubject<CompleteStatus>()
     let isCommunityIdExist = PublishSubject<Bool>()
     
     var communityDocumentId: String = ""
@@ -50,32 +51,8 @@ final class CreateCommunityViewModel {
             .disposed(by: disposeBag)
     }
     
-    func createCommunity() {
-        let model = CommunityModel.Fields(
-            id: communityDocumentId,
-            iconUrl: "アイコンURL", // TODO: アイコンURLを設定
-            name: communityName.value
-        )
-        Firestore.firestore().rx
-            .setData(
-                model: model,
-                collectionRef: CommunityModel.makeCollectionRef(),
-                documentRef: CommunityModel.makeDocumentRef(id: communityDocumentId)
-            )
-            .subscribe { [unowned self] result in
-                switch result {
-                case .success:
-                    self.postCompleted.onNext(.success)
-                    // TODO: UserModelのcommunitiesにも情報を登録しないといけない
-                    self.updateUser()
-                case .error(let error):
-                    self.postCompleted.onNext(.error(error))
-                }
-            }
-            .disposed(by: disposeBag)
-    }
-    
     func generateCommunityId() {
+        isLoading.onNext(true)
         // コミュニティIDの生成
         communityDocumentId = Database.generate(length: 20)
         Firestore.firestore().rx
@@ -92,6 +69,31 @@ final class CreateCommunityViewModel {
                     // 存在チェック
                     self.isCommunityIdExist.onNext(valids.contains(true))
                 case .error(let error):
+                    debugPrint(error)
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func createCommunity() {
+        let model = CommunityModel.Fields(
+            id: communityDocumentId,
+            iconUrl: "アイコンURL", // TODO: アイコンURLを設定
+            name: communityName.value
+        )
+        Firestore.firestore().rx
+            .setData(
+                model: model,
+                collectionRef: CommunityModel.makeCollectionRef(),
+                documentRef: CommunityModel.makeDocumentRef(id: communityDocumentId)
+            )
+            .subscribe { [unowned self] result in
+                switch result {
+                case .success:
+                    // UserModelのcommunitiesの情報も更新しないといけない
+                    self.updateUser()
+                case .error(let error):
+                    self.isLoading.onNext(false)
                     debugPrint(error)
                 }
             }
@@ -115,11 +117,12 @@ final class CreateCommunityViewModel {
                 documentRef: userDocumentRef!
             )
             .subscribe { [unowned self] result in
+                self.isLoading.onNext(false)
                 switch result {
                 case .success:
-                    self.userUpdated.onNext(.success)
+                    self.completed.onNext(.success)
                 case .error(let error):
-                    self.userUpdated.onNext(.error(error))
+                    self.completed.onNext(.error(error))
                 }
             }
             .disposed(by: disposeBag)
