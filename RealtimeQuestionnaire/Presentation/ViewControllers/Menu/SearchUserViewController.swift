@@ -33,7 +33,15 @@ final class SearchUserViewController: UIViewController {
     }
     
     func bind() {
-        
+        viewModel.checkList
+            .subscribe(onNext: { [unowned self] list in
+                guard let cells = self.tableView.visibleCells as? [SearchUserTableViewCell] else { return }
+                let checkListIds = list.map { $0.id }
+                cells.forEach { cell in
+                    checkListIds.contains(cell.id ?? "") ? cell.checked(true) : cell.checked(false)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -44,7 +52,12 @@ extension SearchUserViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SearchUserTableViewCell.self)
-        cell.configure()
+        let user = viewModel.userList.value[indexPath.row]
+        cell.configure(
+            id: user.id,
+            nickname: user.nickname ?? "",
+            iconImage: Asset.picture.image // FIXME: Firebase Storageから取得する
+        )
         bind(cell: cell, indexPath: indexPath)
         return cell
     }
