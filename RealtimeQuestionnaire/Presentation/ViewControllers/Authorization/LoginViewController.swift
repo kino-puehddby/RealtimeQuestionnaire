@@ -79,6 +79,23 @@ final class LoginViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        let emailValid = registeringEmail.rx.text
+            .map { $0 != nil && $0 != "" }
+        let passwordValid = registeringPassword.rx.text
+            .map { $0 != nil && $0 != "" }
+        let isValid = Observable
+            .combineLatest(emailValid, passwordValid)
+            .map { $0 && $1 }
+            .share(replay: 1)
+        isValid
+            .bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        isValid
+            .subscribe(onNext: { [unowned self] isValid in
+                self.loginButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isLoading
             .bind(to: rx.hud)
             .disposed(by: disposeBag)

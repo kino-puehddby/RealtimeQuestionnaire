@@ -61,8 +61,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="voh-vZ-hEI">
                                 <rect key="frame" x="52.5" y="208" width="270" height="59"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新しいパスワード" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jER-ya-cqw">
-                                        <rect key="frame" x="0.0" y="0.0" width="114.5" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jER-ya-cqw">
+                                        <rect key="frame" x="0.0" y="0.0" width="71.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -84,8 +84,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="wfa-cc-mgA">
                                 <rect key="frame" x="52.5" y="322" width="270" height="59"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新しいパスワード（確認用）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGT-i5-WVS">
-                                        <rect key="frame" x="0.0" y="0.0" width="186" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード（確認用）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGT-i5-WVS">
+                                        <rect key="frame" x="0.0" y="0.0" width="143" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

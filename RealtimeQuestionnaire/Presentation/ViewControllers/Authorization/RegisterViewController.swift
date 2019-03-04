@@ -38,6 +38,7 @@ final class RegisterViewController: UIViewController {
         registeringPassword.delegate = self
         
         registeringPassword.isSecureTextEntry = true
+        registeringConfirmationPassword.isSecureTextEntry = true
     }
     
     func bind() {
