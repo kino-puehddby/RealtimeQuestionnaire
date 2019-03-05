@@ -34,7 +34,7 @@ final class AnswerQuestionnaireViewModel {
             self.uid = uid
         }
         
-        // QuestionnaireModel.FieldsにCommunityIDがあったほうが嬉しい
+        // TODO: QuestionnaireModel.FieldsにCommunityIDがあったほうが嬉しい？
         
         Firestore.firestore().rx
             .getArray(
