@@ -154,7 +154,7 @@ extension Reactive where Base: Firestore {
     }
     
     /**
-     特定の Model（配列）を監視
+     特定の Model（配列）を監視（リアルタイム反映）
      */
     public func observeArray<T: Codable>(_ type: T.Type, collectionRef: CollectionReference) -> Observable<[T]> {
         return Observable.create { observer in
@@ -184,7 +184,7 @@ extension Reactive where Base: Firestore {
     }
     
     /**
-     特定の Model を監視
+     特定の Model を監視（リアルタイム反映）
      */
     public func observeModel<T: Codable>(_ type: T.Type, documentRef: DocumentReference) -> Observable<T> {
         return Observable.create { observer in

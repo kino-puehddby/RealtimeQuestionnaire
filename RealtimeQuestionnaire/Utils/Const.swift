@@ -33,6 +33,11 @@ public struct QuestionnaireDetail {
             public static let cellHeight: CGFloat = 60
         }
     }
+    public struct QuestionnaireResult {
+        public struct TableView {
+            public static let cellHeight: CGFloat = 55
+        }
+    }
 }
 
 // Sample

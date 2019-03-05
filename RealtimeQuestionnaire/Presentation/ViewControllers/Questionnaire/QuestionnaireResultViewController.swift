@@ -14,20 +14,13 @@ import Charts
 
 final class QuestionnaireResultViewController: UIViewController {
     
-    @IBOutlet weak var communityIconImageView: UIImageView!
-    @IBOutlet weak var communityNameLabel: UILabel!
+    @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak private var communityIconImageView: UIImageView!
+    @IBOutlet weak private var communityNameLabel: UILabel!
+    @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak fileprivate var pieChartView: PieChartView!
     
     lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
-    
-    // サンプル
-    let pieChartEntries = [
-        PieChartDataEntry(value: 1, label: "A"),
-        PieChartDataEntry(value: 20, label: "B"),
-        PieChartDataEntry(value: 30, label: "C"),
-        PieChartDataEntry(value: 40, label: "D"),
-        PieChartDataEntry(value: 50, label: "E")
-    ]
     
     private lazy var viewModel: QuestionnaireResultViewModel = { preconditionFailure() }()
     private let disposeBag = DisposeBag()
@@ -36,20 +29,72 @@ final class QuestionnaireResultViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        setupPieChartView()
+        bind()
     }
     
     func setup() {
         viewModel = QuestionnaireResultViewModel(questionnaireData: data)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(cellType: QuestionnaireResultTableViewCell.self)
+        
+        titleLabel.text = data.title
+    }
+    
+    func bind() {
+        viewModel.percentValues
+            .subscribe(onNext: { [unowned self] values in
+                var pieChartEntries: [PieChartDataEntry] = []
+                for (index, value) in values.enumerated() {
+                    let entry = PieChartDataEntry(value: value, label: self.data.choices[index])
+                    pieChartEntries.append(entry)
+                }
+                self.refreshPieChartView(dataList: pieChartEntries)
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.communityIconImage
+            .bind(to: communityIconImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.communityName
+            .bind(to: communityNameLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    func refreshPieChartView(dataList: [PieChartDataEntry]) {
+        let pieSet = PieChartDataSet(values: dataList, label: nil)
+        pieSet.colors = ChartColorTemplates.vordiplom()
+        let pieChartData = PieChartData(dataSet: pieSet)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 1
+        formatter.multiplier = 1
+        formatter.percentSymbol = " %"
+        pieChartData.setValueFormatter(DefaultValueFormatter(formatter: formatter))
+        pieChartData.setValueFont(.systemFont(ofSize: 11, weight: .light))
+        pieChartData.setValueTextColor(.black)
+        
+        pieChartView.data = pieChartData
+        pieChartView.drawHoleEnabled = false
+        pieChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
     }
 }
 
-extension QuestionnaireResultViewController: ChartViewDelegate {
-    func setupPieChartView() {
-        let pieSet = PieChartDataSet(values: pieChartEntries, label: "Data")
-        pieSet.colors = ChartColorTemplates.vordiplom()
-        pieChartView.data = PieChartData(dataSet: pieSet)
-        pieChartView.drawHoleEnabled = false
-        pieChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+extension QuestionnaireResultViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.percentValues.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: QuestionnaireResultTableViewCell.self)
+        cell.configure(choice: data.choices[indexPath.row], percent: viewModel.percentValues.value[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return QuestionnaireDetail.QuestionnaireResult.TableView.cellHeight
     }
 }
