@@ -47,7 +47,6 @@ final class QuestionnaireResultViewController: UIViewController {
     func bind() {
         viewModel.percentValues
             .subscribe(onNext: { [unowned self] values in
-                self.votesCountLabel.text = values.count.description
                 var pieChartEntries: [PieChartDataEntry] = []
                 for (index, value) in values.enumerated() {
                     let entry: PieChartDataEntry = {
@@ -70,6 +69,11 @@ final class QuestionnaireResultViewController: UIViewController {
         
         viewModel.communityName
             .bind(to: communityNameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.votesCount
+            .map { $0.description }
+            .bind(to: votesCountLabel.rx.text)
             .disposed(by: disposeBag)
     }
     

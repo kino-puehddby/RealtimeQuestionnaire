@@ -23,6 +23,7 @@ final class QuestionnaireResultViewModel {
     let communityIconImage = BehaviorRelay<UIImage?>(value: nil)
     let percentValues = BehaviorRelay<[Double]>(value: [])
     let communityName = BehaviorRelay<String>(value: "")
+    let votesCount = BehaviorRelay<Int>(value: 0)
     lazy var choices: [String] = { preconditionFailure() }()
     
     init(questionnaireData: QuestionnaireModel.Fields) {
@@ -83,6 +84,7 @@ final class QuestionnaireResultViewModel {
                     countList.append(Double(count))
                 }
                 let sum = countList.reduce(0) { $0 + $1 }
+                self.votesCount.accept(Int(sum))
                 let percentList: [Double] = countList
                     .map { Double($0) }
                     .map { $0 / sum * 100.0 }
