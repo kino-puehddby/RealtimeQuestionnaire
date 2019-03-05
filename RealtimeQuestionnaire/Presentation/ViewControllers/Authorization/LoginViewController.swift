@@ -175,7 +175,9 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 )
                 return
             }
-            self.viewModel.set(uid: user!.user.uid)
+            if let user = user {
+                self.viewModel.set(uid: user.user.uid)
+            }
             self.switchMainViewController()
         }
     }
