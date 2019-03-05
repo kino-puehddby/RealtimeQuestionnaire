@@ -47,7 +47,13 @@ final class QuestionnaireResultViewController: UIViewController {
             .subscribe(onNext: { [unowned self] values in
                 var pieChartEntries: [PieChartDataEntry] = []
                 for (index, value) in values.enumerated() {
-                    let entry = PieChartDataEntry(value: value, label: self.data.choices[index])
+                    let entry: PieChartDataEntry = {
+                        if value == 0 {
+                            return PieChartDataEntry(value: value, label: "その他")
+                        } else {
+                            return PieChartDataEntry(value: value, label: self.data.choices[index])
+                        }
+                    }()
                     pieChartEntries.append(entry)
                 }
                 self.refreshPieChartView(dataList: pieChartEntries)
@@ -74,10 +80,11 @@ final class QuestionnaireResultViewController: UIViewController {
         formatter.multiplier = 1
         formatter.percentSymbol = " %"
         pieChartData.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        pieChartData.setValueFont(.systemFont(ofSize: 11, weight: .light))
+        pieChartData.setValueFont(.systemFont(ofSize: 12, weight: .regular))
         pieChartData.setValueTextColor(.black)
         
         pieChartView.data = pieChartData
+        pieChartView.legend.enabled = false // 注釈を非表示
         pieChartView.drawHoleEnabled = false
         pieChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
     }
@@ -90,7 +97,11 @@ extension QuestionnaireResultViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: QuestionnaireResultTableViewCell.self)
-        cell.configure(choice: data.choices[indexPath.row], percent: viewModel.percentValues.value[indexPath.row])
+        cell.configure(
+            color: ChartColorTemplates.vordiplom()[indexPath.row],
+            choice: data.choices[indexPath.row],
+            percent: viewModel.percentValues.value[indexPath.row]
+        )
         return cell
     }
     

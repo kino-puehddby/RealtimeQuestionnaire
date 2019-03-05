@@ -19,16 +19,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2W8-DT-zn5">
-                        <rect key="frame" x="16" y="19" width="288" height="17"/>
+                        <rect key="frame" x="16" y="10.5" width="288" height="34"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JN-Au-hdh">
+                                <rect key="frame" x="0.0" y="0.0" width="35" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="IWT-jw-VNQ"/>
+                                    <constraint firstAttribute="width" secondItem="4JN-Au-hdh" secondAttribute="height" multiplier="1:1" constant="1" id="yvB-HK-q4c"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="17.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="選択肢" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efo-07-BPB">
-                                <rect key="frame" x="0.0" y="0.0" width="218" height="17"/>
+                                <rect key="frame" x="45" y="0.0" width="173" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 %" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umS-Xp-fYP">
-                                <rect key="frame" x="228" y="0.0" width="60" height="17"/>
+                                <rect key="frame" x="228" y="0.0" width="60" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="lhW-c0-N7E"/>
                                 </constraints>
@@ -48,6 +62,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="choiceLabel" destination="efo-07-BPB" id="tHc-Hg-hMt"/>
+                <outlet property="colorView" destination="4JN-Au-hdh" id="T97-ax-BBW"/>
                 <outlet property="percentLabel" destination="umS-Xp-fYP" id="Sia-Dg-fAW"/>
             </connections>
             <point key="canvasLocation" x="112" y="48.125937031484263"/>

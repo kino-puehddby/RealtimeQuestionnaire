@@ -221,11 +221,11 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="P2d-LQ-w6v">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="420"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9dD-uq-URc">
-                                            <rect key="frame" x="20" y="20" width="335" height="440"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9dD-uq-URc">
+                                            <rect key="frame" x="20" y="20" width="335" height="100"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nyF-Dj-YZr">
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -265,23 +265,23 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bla-tI-LvD">
-                                                    <rect key="frame" x="0.0" y="50" width="335" height="70"/>
+                                                    <rect key="frame" x="0.0" y="40" width="335" height="60"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cF0-pv-j7z">
-                                                            <rect key="frame" x="0.0" y="0.0" width="37.5" height="70"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="37.5" height="60"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXy-Bl-TOP">
-                                                            <rect key="frame" x="37.5" y="0.0" width="260" height="70"/>
+                                                            <rect key="frame" x="37.5" y="0.0" width="260" height="60"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="70" id="oVm-2i-4B5"/>
+                                                                <constraint firstAttribute="height" constant="60" id="oVm-2i-4B5"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tpu-yt-LEF">
-                                                            <rect key="frame" x="297.5" y="0.0" width="37.5" height="70"/>
+                                                            <rect key="frame" x="297.5" y="0.0" width="37.5" height="60"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                     </subviews>
@@ -289,35 +289,36 @@
                                                         <constraint firstItem="Tpu-yt-LEF" firstAttribute="width" secondItem="cF0-pv-j7z" secondAttribute="width" id="Lv4-96-O35"/>
                                                     </constraints>
                                                 </stackView>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2C-Vg-2Mh" customClass="PieChartView" customModule="Charts">
-                                                    <rect key="frame" x="0.0" y="140" width="335" height="300"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="300" id="u1t-p5-12u"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Bla-tI-LvD" secondAttribute="trailing" id="5nb-bp-DQs"/>
                                                 <constraint firstItem="Bla-tI-LvD" firstAttribute="leading" secondItem="9dD-uq-URc" secondAttribute="leading" id="Eda-WL-ZhG"/>
-                                                <constraint firstItem="J2C-Vg-2Mh" firstAttribute="leading" secondItem="9dD-uq-URc" secondAttribute="leading" id="KEB-KB-Ca9"/>
-                                                <constraint firstAttribute="trailing" secondItem="J2C-Vg-2Mh" secondAttribute="trailing" id="OTu-eG-nfm"/>
                                                 <constraint firstAttribute="trailing" secondItem="nyF-Dj-YZr" secondAttribute="trailing" id="iRk-Ij-774"/>
                                                 <constraint firstItem="nyF-Dj-YZr" firstAttribute="leading" secondItem="9dD-uq-URc" secondAttribute="leading" id="wIp-De-TIC"/>
                                             </constraints>
                                         </stackView>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2C-Vg-2Mh" customClass="PieChartView" customModule="Charts">
+                                            <rect key="frame" x="0.0" y="130" width="375" height="280"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="280" id="u1t-p5-12u"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="J2C-Vg-2Mh" firstAttribute="leading" secondItem="P2d-LQ-w6v" secondAttribute="leading" id="2tR-2H-GZ4"/>
                                         <constraint firstItem="cF0-pv-j7z" firstAttribute="width" secondItem="P2d-LQ-w6v" secondAttribute="width" multiplier="0.1" id="AFP-B8-J0R"/>
                                         <constraint firstItem="9dD-uq-URc" firstAttribute="top" secondItem="P2d-LQ-w6v" secondAttribute="top" constant="20" id="MW8-hk-m2h"/>
+                                        <constraint firstAttribute="trailing" secondItem="J2C-Vg-2Mh" secondAttribute="trailing" id="Rtm-Ui-cCB"/>
                                         <constraint firstAttribute="trailing" secondItem="9dD-uq-URc" secondAttribute="trailing" constant="20" id="Ruw-D8-xfL"/>
+                                        <constraint firstItem="J2C-Vg-2Mh" firstAttribute="top" secondItem="9dD-uq-URc" secondAttribute="bottom" constant="10" id="dox-Wb-gcX"/>
                                         <constraint firstItem="9dD-uq-URc" firstAttribute="leading" secondItem="P2d-LQ-w6v" secondAttribute="leading" constant="20" id="zLh-h7-YzG"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="64" id="073-fh-rl6">
-                                        <rect key="frame" x="0.0" y="518" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="448" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="073-fh-rl6" id="snQ-TZ-ZzF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>

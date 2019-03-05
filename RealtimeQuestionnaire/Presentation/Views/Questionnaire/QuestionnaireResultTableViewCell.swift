@@ -12,6 +12,7 @@ import Reusable
 
 class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak private var colorView: UIView!
     @IBOutlet weak private var choiceLabel: UILabel!
     @IBOutlet weak private var percentLabel: UILabel!
     
@@ -20,9 +21,10 @@ class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
         
     }
     
-    func configure(choice: String, percent: Double) {
-        self.choiceLabel.text = choice
+    func configure(color: UIColor, choice: String, percent: Double) {
+        choiceLabel.text = choice
         let rounded = round(percent * 10) / 10
-        self.percentLabel.text = rounded.description + " %"
+        percentLabel.text = rounded.description + " %"
+        colorView.backgroundColor = color
     }
 }
