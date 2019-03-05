@@ -152,11 +152,7 @@ final class MainViewModel {
         for (index, community) in communities.enumerated() {
             let storageRef = Storage.storage().reference()
             let imageRef = storageRef.child("images/" + community.id + ".jpg")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImages] (data, error) in
-                if let error = error {
-                    debugPrint(error)
-                    return
-                }
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImages] (data, _) in
                 if let data = data,
                     let image = UIImage(data: data),
                     !communityIconImages.value.indices.contains(index) {

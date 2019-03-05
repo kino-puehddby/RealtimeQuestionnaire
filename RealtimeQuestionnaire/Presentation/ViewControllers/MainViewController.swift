@@ -104,17 +104,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        // FIXME: おかしい
         let headerView = MainHeaderView.loadFromNib()
         guard let user = viewModel.user.value,
             let name = user.communities[section]["name"] else { return nil }
-        if user.communities.indices.contains(section) && viewModel.communityIconImages.value.indices.contains(section) {
-            headerView.setup(image: viewModel.communityIconImages.value[section], text: name)
+        if user.communities.indices.contains(section) {
+            headerView.set(text: name)
+        }
+        if viewModel.communityIconImages.value.indices.contains(section) {
+            headerView.set(image: viewModel.communityIconImages.value[section])
         }
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Main.TableView.sectionHeaderHeight
     }
     

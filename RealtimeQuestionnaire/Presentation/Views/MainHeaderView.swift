@@ -15,8 +15,11 @@ final class MainHeaderView: UIView, NibLoadable {
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var label: UILabel!
     
-    func setup(image: UIImage, text: String) {
+    func set(image: UIImage) {
         imageView.image = image
+    }
+    
+    func set(text: String) {
         label.text = text
     }
 }
