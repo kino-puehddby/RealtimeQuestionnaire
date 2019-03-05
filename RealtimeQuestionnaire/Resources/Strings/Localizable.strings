@@ -20,6 +20,7 @@
 
 // Sample
 "Common.Ok"="OK";
+"Common.Error"="エラー";
 "Common.Cancel"="キャンセル";
 "Common.Done"="完了";
 "Common.Retry"="リトライ";

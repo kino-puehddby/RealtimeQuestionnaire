@@ -145,11 +145,14 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     
-    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         // login error (include cancel)
         if let error = error {
-            debugPrint(error)
+            showAlert(
+                type: .ok,
+                title: "エラー",
+                message: error.localizedDescription
+            )
             return
         }
         guard let authentication = user.authentication else { return }
@@ -165,8 +168,11 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         Auth.auth().signInAndRetrieveData(with: credential) { [unowned self] (user, error) in
             self.viewModel.isLoading.onNext(false)
             if let error = error {
-                debugPrint(error)
-                self.showAlert(type: .ok, title: L10n.Alert.Auth.failure, message: error.localizedDescription.description)
+                self.showAlert(
+                    type: .ok,
+                    title: L10n.Alert.Auth.failure,
+                    message: error.localizedDescription.description
+                )
                 return
             }
             self.viewModel.set(uid: user!.user.uid)

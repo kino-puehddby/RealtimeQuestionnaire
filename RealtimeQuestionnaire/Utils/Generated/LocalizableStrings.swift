@@ -50,6 +50,8 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "Common.Cancel")
     /// 完了
     internal static let done = L10n.tr("Localizable", "Common.Done")
+    /// エラー
+    internal static let error = L10n.tr("Localizable", "Common.Error")
     /// OK
     internal static let ok = L10n.tr("Localizable", "Common.Ok")
     /// リトライ

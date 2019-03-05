@@ -18,6 +18,7 @@ final class RegisterViewController: UIViewController {
     @IBOutlet weak private var registeringEmail: UITextField!
     @IBOutlet weak private var registeringPassword: UITextField!
     @IBOutlet weak private var registeringConfirmationPassword: UITextField!
+    @IBOutlet weak private var passwordInvalidLabel: UILabel!
     @IBOutlet weak private var registerButton: UIButton!
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         registeringEmail.resignFirstResponder()
@@ -42,9 +43,9 @@ final class RegisterViewController: UIViewController {
     }
     
     func bind() {
-        let isPasswordValid = registeringConfirmationPassword.rx.text.orEmpty
+        let isPasswordValid = registeringConfirmationPassword.rx.text
             .map { [unowned self] text in
-                self.registeringPassword.text == text
+                text != "" && text != nil && self.registeringPassword.text == text
             }
             .share(replay: 1)
         isPasswordValid
@@ -54,6 +55,9 @@ final class RegisterViewController: UIViewController {
             .subscribe(onNext: { [unowned self] isValid in
                 self.registerButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
             })
+            .disposed(by: disposeBag)
+        isPasswordValid
+            .bind(to: passwordInvalidLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
         registerButton.rx.tap
@@ -72,7 +76,11 @@ final class RegisterViewController: UIViewController {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
             guard let vc = self else { return }
             if let error = error {
-                debugPrint(error)
+                vc.showAlert(
+                    type: .ok,
+                    title: L10n.Common.error,
+                    message: error.localizedDescription
+                )
                 return
             }
             

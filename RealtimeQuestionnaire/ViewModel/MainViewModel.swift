@@ -29,7 +29,6 @@ final class MainViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        
         // observe User
         guard let uid = S.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
