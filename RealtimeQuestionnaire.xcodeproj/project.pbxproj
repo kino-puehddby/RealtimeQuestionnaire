@@ -28,6 +28,7 @@
 		4E35F4E6222D1A6200E1130E /* QuestionnaireResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E35F4E5222D1A6200E1130E /* QuestionnaireResultViewModel.swift */; };
 		4E35F4E9222D1AEA00E1130E /* AnswerQuestionnaireTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E35F4E7222D1AEA00E1130E /* AnswerQuestionnaireTableViewCell.swift */; };
 		4E35F4EA222D1AEA00E1130E /* AnswerQuestionnaireTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E35F4E8222D1AEA00E1130E /* AnswerQuestionnaireTableViewCell.xib */; };
+		4E35F4EC222E1CAB00E1130E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E35F4EB222E1CAB00E1130E /* Charts.framework */; };
 		4E3BD56D221BA48700E357CE /* UIViewController+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */; };
 		4E56BA7822251AD80055529B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7722251AD80055529B /* PickerTextField.swift */; };
 		4E56BA7B22251FED0055529B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7A22251FED0055529B /* UserModel.swift */; };
@@ -120,6 +121,7 @@
 		4E35F4E5222D1A6200E1130E /* QuestionnaireResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireResultViewModel.swift; sourceTree = "<group>"; };
 		4E35F4E7222D1AEA00E1130E /* AnswerQuestionnaireTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerQuestionnaireTableViewCell.swift; sourceTree = "<group>"; };
 		4E35F4E8222D1AEA00E1130E /* AnswerQuestionnaireTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerQuestionnaireTableViewCell.xib; sourceTree = "<group>"; };
+		4E35F4EB222E1CAB00E1130E /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIKit.swift"; sourceTree = "<group>"; };
 		4E56BA7722251AD80055529B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		4E56BA7A22251FED0055529B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E35F4EC222E1CAB00E1130E /* Charts.framework in Frameworks */,
 				4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */,
 				A015481E222274B000084606 /* SVProgressHUD.framework in Frameworks */,
 				4ED5339D221E933800F4113D /* CodableFirebase.framework in Frameworks */,
@@ -623,6 +626,7 @@
 		F4AEBB3F26A8052851C67044 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E35F4EB222E1CAB00E1130E /* Charts.framework */,
 				4E81920222294A7500FFB6F9 /* Kingfisher.framework */,
 				4E56BA7F222540040055529B /* KeychainAccess.framework */,
 				A015481D222274AF00084606 /* SVProgressHUD.framework */,
@@ -790,6 +794,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CodableFirebase.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputFileListPaths = (
