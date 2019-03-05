@@ -18,6 +18,8 @@ final class QuestionnaireResultViewController: UIViewController {
     @IBOutlet weak private var communityIconImageView: UIImageView!
     @IBOutlet weak private var communityNameLabel: UILabel!
     @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var votesCountLabel: UILabel!
+    @IBOutlet weak private var remainingTimeLabel: UILabel! // TODO: 回答締め切り機能
     @IBOutlet weak fileprivate var pieChartView: PieChartView!
     
     lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
@@ -45,6 +47,7 @@ final class QuestionnaireResultViewController: UIViewController {
     func bind() {
         viewModel.percentValues
             .subscribe(onNext: { [unowned self] values in
+                self.votesCountLabel.text = values.count.description
                 var pieChartEntries: [PieChartDataEntry] = []
                 for (index, value) in values.enumerated() {
                     let entry: PieChartDataEntry = {

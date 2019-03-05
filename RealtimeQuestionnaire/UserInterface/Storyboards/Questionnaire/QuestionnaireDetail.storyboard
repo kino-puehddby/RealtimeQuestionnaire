@@ -221,7 +221,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="P2d-LQ-w6v">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="420"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="440"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9dD-uq-URc">
@@ -304,6 +304,29 @@
                                                 <constraint firstAttribute="height" constant="280" id="u1t-p5-12u"/>
                                             </constraints>
                                         </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pZo-T2-yG5">
+                                            <rect key="frame" x="20" y="410" width="177" height="14.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="〇〇" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaG-Ck-HVO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="票  -  残り" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7Y-Dq-Ecl">
+                                                    <rect key="frame" x="30" y="0.0" width="56" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="〇〇時間〇〇分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k51-9M-fxr">
+                                                    <rect key="frame" x="91" y="0.0" width="86" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -313,12 +336,14 @@
                                         <constraint firstAttribute="trailing" secondItem="J2C-Vg-2Mh" secondAttribute="trailing" id="Rtm-Ui-cCB"/>
                                         <constraint firstAttribute="trailing" secondItem="9dD-uq-URc" secondAttribute="trailing" constant="20" id="Ruw-D8-xfL"/>
                                         <constraint firstItem="J2C-Vg-2Mh" firstAttribute="top" secondItem="9dD-uq-URc" secondAttribute="bottom" constant="10" id="dox-Wb-gcX"/>
+                                        <constraint firstItem="pZo-T2-yG5" firstAttribute="leading" secondItem="P2d-LQ-w6v" secondAttribute="leading" constant="20" id="gsM-nS-7hi"/>
+                                        <constraint firstItem="pZo-T2-yG5" firstAttribute="top" secondItem="J2C-Vg-2Mh" secondAttribute="bottom" id="j2M-QP-DNc"/>
                                         <constraint firstItem="9dD-uq-URc" firstAttribute="leading" secondItem="P2d-LQ-w6v" secondAttribute="leading" constant="20" id="zLh-h7-YzG"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="64" id="073-fh-rl6">
-                                        <rect key="frame" x="0.0" y="448" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="468" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="073-fh-rl6" id="snQ-TZ-ZzF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -342,8 +367,10 @@
                         <outlet property="communityIconImageView" destination="0rq-Xr-aYa" id="5DS-is-rrs"/>
                         <outlet property="communityNameLabel" destination="n5a-WL-Xm9" id="tzd-ow-QzB"/>
                         <outlet property="pieChartView" destination="J2C-Vg-2Mh" id="tlU-DZ-ejA"/>
+                        <outlet property="remainingTimeLabel" destination="k51-9M-fxr" id="NVD-zK-GRd"/>
                         <outlet property="tableView" destination="FU9-Tr-WF8" id="dYc-uI-6al"/>
                         <outlet property="titleLabel" destination="LXy-Bl-TOP" id="eyW-xh-9Az"/>
+                        <outlet property="votesCountLabel" destination="GaG-Ck-HVO" id="NVa-Mo-hUJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Je-Bc-riT" userLabel="First Responder" sceneMemberID="firstResponder"/>
