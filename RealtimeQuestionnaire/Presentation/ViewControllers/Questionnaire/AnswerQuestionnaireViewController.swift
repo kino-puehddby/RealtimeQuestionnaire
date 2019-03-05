@@ -56,9 +56,24 @@ final class AnswerQuestionnaireViewController: UIViewController {
             .bind(to: authorNameLabel.rx.text)
             .disposed(by: disposeBag)
         
+        viewModel.answerCompleted
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    guard let navi = self.navigationController else { return }
+                    navi.popViewController(animated: true)
+                case .error(let error):
+                    debugPrint(error)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         answerButton.rx.tap
-            .subscribe(onNext: {
-                // TODO: 回答処理
+            .subscribe(onNext: { [unowned self] in
+                guard let cells = self.tableView.visibleCells as? [AnswerQuestionnaireTableViewCell] else { return }
+                for (index, cell) in cells.enumerated() where cell.isChecked {
+                    self.viewModel.answer(index: index)
+                }
             })
             .disposed(by: disposeBag)
     }

@@ -18,13 +18,24 @@ final class AnswerQuestionnaireViewModel {
     let communityIconImage = BehaviorRelay<UIImage?>(value: nil)
     let communityName = BehaviorRelay<String>(value: "")
     let authorName = BehaviorRelay<String>(value: "")
+    let answerCompleted = PublishSubject<CompleteStatus>()
     
     private let communityList = BehaviorRelay<[CommunityModel.Fields]>(value: [])
     private let userList = BehaviorRelay<[UserModel.Fields]>(value: [])
+    private let user = BehaviorRelay<UserModel.Fields?>(value: nil)
+    private var data: QuestionnaireModel.Fields?
+    private var uid: String = ""
     
     private let disposeBag = DisposeBag()
     
     init(questionnaireData: QuestionnaireModel.Fields) {
+        data = questionnaireData
+        if let uid = S.getKeychain(.uid) {
+            self.uid = uid
+        }
+        
+        // QuestionnaireModel.FieldsにCommunityIDがあったほうが嬉しい
+        
         Firestore.firestore().rx
             .getArray(
                 CommunityModel.Fields.self,
@@ -49,6 +60,11 @@ final class AnswerQuestionnaireViewModel {
                 switch event {
                 case .success(let list):
                     self.userList.accept(list)
+                    list.forEach({ user in
+                        if user.id == self.uid {
+                            self.user.accept(user)
+                        }
+                    })
                 case .error(let error):
                     debugPrint(error)
                 }
@@ -71,6 +87,38 @@ final class AnswerQuestionnaireViewModel {
                     }
                 }
             })
+            .disposed(by: disposeBag)
+    }
+    
+    func answer(index: Int) {
+        guard let user = user.value,
+            let data = data else { return }
+        var questionnaires = user.questionnaires
+        questionnaires.append([
+            "answer": index.description,
+            "id": data.id
+            ])
+        let model = UserModel.Fields(
+            id: user.id,
+            nickname: user.nickname,
+            iconUrl: user.iconUrl,
+            communities: user.communities,
+            questionnaires: questionnaires
+        )
+        Firestore.firestore().rx
+            .setData(
+                model: model,
+                collectionRef: UserModel.makeCollectionRef(),
+                documentRef: UserModel.makeDocumentRef(id: uid)
+            )
+            .subscribe { [unowned self] event in
+                switch event {
+                case .success:
+                    self.answerCompleted.onNext(.success)
+                case .error(let error):
+                    self.answerCompleted.onNext(.error(error))
+                }
+            }
             .disposed(by: disposeBag)
     }
     
