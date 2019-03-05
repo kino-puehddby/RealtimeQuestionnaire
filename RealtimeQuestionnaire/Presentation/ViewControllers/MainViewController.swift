@@ -11,6 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import SnapKit
 
 final class MainViewController: UIViewController {
 
@@ -77,7 +78,8 @@ final class MainViewController: UIViewController {
         
         answerQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+//                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
@@ -85,7 +87,8 @@ final class MainViewController: UIViewController {
             .combineLatest(
                 viewModel.questionnaireList,
                 viewModel.user,
-                viewModel.communityNames
+                viewModel.communityNames,
+                viewModel.communityIconImages
             )
             .subscribe(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
@@ -100,16 +103,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return viewModel.questionnaireList.value.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // FIXME: おかしい
+        let headerView = MainHeaderView.loadFromNib()
         guard let user = viewModel.user.value,
-            let name = user.communities[section]["name"] else {
-            return nil
+            let name = user.communities[section]["name"] else { return nil }
+        if user.communities.indices.contains(section) && viewModel.communityIconImages.value.indices.contains(section) {
+            headerView.setup(image: viewModel.communityIconImages.value[section], text: name)
         }
-        return name
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return Main.TableView.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -120,10 +126,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
         let title = data.title
-        cell.configuration(
-            // FIXME: 画像をFirebase Storageから取得する
-            iconImage: Asset.sample.image,
-            title: title)
+        cell.configuration(title: title)
         return cell
     }
     

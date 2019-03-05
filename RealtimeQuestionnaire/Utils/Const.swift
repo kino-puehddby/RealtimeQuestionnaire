@@ -11,7 +11,8 @@ import UIKit
 
 public struct Main {
     public struct TableView {
-        public static let cellHeight: CGFloat = 80
+        public static let cellHeight: CGFloat = 50
+        public static let sectionHeaderHeight: CGFloat = 50
     }
 }
 

@@ -11,18 +11,13 @@ import Reusable
 
 class MainTableViewCell: UITableViewCell, NibReusable {
 
-    @IBOutlet weak private var iconImageView: UIImageView!
     @IBOutlet weak private var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        iconImageView.layer.masksToBounds = true
-        iconImageView.layer.cornerRadius = iconImageView.bounds.width / 2
     }
     
-    func configuration(iconImage: UIImage, title: String) {
-        iconImageView.image = iconImage
+    func configuration(title: String) {
         titleLabel.text = title
     }
 }
