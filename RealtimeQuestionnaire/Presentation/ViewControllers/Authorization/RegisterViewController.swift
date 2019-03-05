@@ -71,15 +71,15 @@ final class RegisterViewController: UIViewController {
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
             guard let vc = self else { return }
+            if let error = error {
+                debugPrint(error)
+                return
+            }
             
-            if user != nil && error == nil {
-                debugPrint("*** create user succeeded ***")
+            if user != nil {
                 vc.registeringEmail.text = ""
                 vc.registeringPassword.text = ""
                 vc.navigationController?.popViewController(animated: true)
-            } else {
-                debugPrint("*** create user failed ***")
-                // エラー処理
             }
         }
     }

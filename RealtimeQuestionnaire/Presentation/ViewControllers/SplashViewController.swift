@@ -44,7 +44,6 @@ final class SplashViewController: UIViewController, GIDSignInUIDelegate {
                 self.showAlert(type: .ok, title: L10n.Alert.Auth.failure, message: error.localizedDescription.description)
                 return
             }
-            debugPrint("*** login succeeded to Firebase by Google ***")
             self.switchMainViewController()
         }
     }
