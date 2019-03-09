@@ -64,7 +64,7 @@ final class SearchUserViewModel {
         
         filterTrigger
             .subscribe(onNext: { [unowned self] text in
-                if let text = text {
+                if let text = text, text != "" {
                     let filteredList = self.userList.value.filter { $0.nickname?.contains(text) ?? false }
                     self.filteredUserList.accept(filteredList)
                 } else {

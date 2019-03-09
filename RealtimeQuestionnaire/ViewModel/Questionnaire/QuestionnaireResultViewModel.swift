@@ -119,7 +119,7 @@ final class QuestionnaireResultViewModel {
     
     private func downloadImage(communityId: String) {
         let storageRef = Storage.storage().reference()
-        let imageRef = storageRef.child("images/" + communityId + ".jpg")
+        let imageRef = storageRef.child("images/community/" + communityId + ".jpg")
         imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImage] (data, error) in
             if let error = error {
                 debugPrint(error)

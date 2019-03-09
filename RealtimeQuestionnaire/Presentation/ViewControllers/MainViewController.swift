@@ -106,9 +106,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // FIXME: デザイン修正
         let headerView = MainHeaderView.loadFromNib()
-        guard let user = viewModel.user.value,
-            let name = user.communities[section]["name"] else { return nil }
+        guard let user = viewModel.user.value else { return nil }
         if user.communities.indices.contains(section) {
+            guard let name = user.communities[section]["name"] else { return nil }
             headerView.set(text: name)
         }
         if viewModel.communityIconImages.value.indices.contains(section) {

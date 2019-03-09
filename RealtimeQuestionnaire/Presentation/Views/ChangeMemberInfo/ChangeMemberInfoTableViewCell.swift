@@ -22,8 +22,9 @@ final class ChangeMemberInfoTableViewCell: UITableViewCell, NibReusable {
         
     }
     
-    func configure(image: UIImage, communityName: String) {
+    func configure(image: UIImage, communityName: String, id: String) {
         self.iconImageView.image = image
         communityNameLabel.text = communityName
+        // TODO: idを追加
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import FirebaseStorage
 
 final class CreateCommunityViewModel {
     
@@ -22,7 +23,7 @@ final class CreateCommunityViewModel {
     let isCommunityIdExist = PublishSubject<Bool>()
     
     var communityId: String = ""
-    var userDocumentRef: DocumentReference?
+    private lazy var userDocumentRef: DocumentReference = { preconditionFailure() }()
     
     private let disposeBag = DisposeBag()
     
@@ -32,7 +33,7 @@ final class CreateCommunityViewModel {
         Firestore.firestore().rx
             .get(
                 UserModel.Fields.self,
-                documentRef: userDocumentRef!
+                documentRef: userDocumentRef
             )
             .subscribe { [unowned self] result in
                 switch result {
@@ -75,6 +76,16 @@ final class CreateCommunityViewModel {
             .disposed(by: disposeBag)
     }
     
+    func uploadFirebaseStorage(image: UIImage) {
+        // 保存したイメージをFirebaseStorageに保存する
+        let storageRef = Storage.storage().reference()
+        
+        if let data = image.pngData() {
+            let reference = storageRef.child("images/community/" + communityId + ".jpg")
+            reference.putData(data)
+        }
+    }
+    
     private func createCommunity() {
         let model = CommunityModel.Fields(
             id: communityId,
@@ -114,7 +125,7 @@ final class CreateCommunityViewModel {
         Firestore.firestore().rx
             .update(
                 new: newModel,
-                documentRef: userDocumentRef!
+                documentRef: userDocumentRef
             )
             .subscribe { [unowned self] result in
                 self.isLoading.onNext(false)

@@ -10,7 +10,6 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import FirebaseStorage
 
 final class CreateCommunityViewController: UIViewController {
     
@@ -81,7 +80,7 @@ final class CreateCommunityViewController: UIViewController {
                 case .success:
                     guard let image = self.changeImageButton.imageView?.image,
                         let navi = self.navigationController else { return }
-                    self.uploadFirebaseStorage(image: image)
+                    self.viewModel.uploadFirebaseStorage(image: image)
                     navi.popViewController(animated: true)
                 case .error(let error):
                     debugPrint(error)
@@ -103,16 +102,6 @@ final class CreateCommunityViewController: UIViewController {
                 self.createButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
             })
             .disposed(by: disposeBag)
-    }
-    
-    func uploadFirebaseStorage(image: UIImage) {
-        // 保存したイメージをFirebaseStorageに保存する
-        let storageRef = Storage.storage().reference()
-        
-        if let data = image.pngData() {
-            let reference = storageRef.child("images/" + viewModel.communityId + ".jpg")
-            reference.putData(data)
-        }
     }
 }
 

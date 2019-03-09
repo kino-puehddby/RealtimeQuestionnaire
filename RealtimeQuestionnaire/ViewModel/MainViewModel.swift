@@ -24,7 +24,7 @@ final class MainViewModel {
     let communityNames = BehaviorRelay<[String]>(value: [])
     let communityIconImages = BehaviorRelay<[UIImage]>(value: [])
     
-    var stashList: [[QuestionnaireModel.Fields]] = []
+//    var stashList: [[QuestionnaireModel.Fields]] = []
     var imageStashList: [UIImage] = []
     
     var selectedCellData = BehaviorRelay<QuestionnaireModel.Fields?>(value: nil)
@@ -77,10 +77,10 @@ final class MainViewModel {
         user
             .skip(1)
             .subscribe(onNext: { [weak self] user in
-                guard let vc = self,
+                guard let vm = self,
                     let user = user else { return }
-                vc.observeQuestionnaires(on: user.communities)
-                vc.observeCommunities(on: user.communities)
+                vm.observeQuestionnaires(on: user.communities)
+                vm.observeCommunities(on: user.communities)
             })
             .disposed(by: disposeBag)
     }
@@ -105,19 +105,17 @@ final class MainViewModel {
                     guard let vm = self else { return }
                     switch event {
                     case .next(let list):
-                        // FIXME: ちょっと汚い
-                        var target: Int = 0
-                        for (index, data) in communityIds.enumerated() where data["id"] == id {
-                            target = index
-                        }
+                        var stashList = vm.questionnaireList.value
+                        let ids = communityIds.map { $0["id"] }
+                        guard let index = ids.firstIndex(of: id) else { return }
                         // すでに同じコミュニティのアンケートリストがあったら置き換え、なければ追加
-                        if vm.stashList.indices.contains(target) {
-                            vm.stashList.remove(at: target)
-                            vm.stashList.insert(list, at: target)
+                        if stashList.indices.contains(index) {
+                            stashList.remove(at: index)
+                            stashList.insert(list, at: index)
                         } else {
-                            vm.stashList.append(list)
+                            stashList.append(list)
                         }
-                        vm.questionnaireList.accept(vm.stashList)
+                        vm.questionnaireList.accept(stashList)
                     case .error(let error):
                         debugPrint(error)
                     case .completed:
@@ -138,11 +136,11 @@ final class MainViewModel {
                     documentRef: CommunityModel.makeCollectionRef().document(id)
                 )
                 .subscribe { [weak self] event in
-                    guard let vc = self else { return }
+                    guard let vm = self else { return }
                     switch event {
                     case .next(let community):
                         newList.append(community.name)
-                        vc.communityNames.accept(newList)
+                        vm.communityNames.accept(newList)
                     case .error(let error):
                         debugPrint(error)
                     case .completed:
@@ -157,7 +155,7 @@ final class MainViewModel {
         imageStashList = []
         for (index, community) in communities.enumerated() {
             let storageRef = Storage.storage().reference()
-            let imageRef = storageRef.child("images/" + community.id + ".jpg")
+            let imageRef = storageRef.child("images/community/" + community.id + ".jpg")
             imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImages] (data, _) in
                 if let data = data,
                     let image = UIImage(data: data),

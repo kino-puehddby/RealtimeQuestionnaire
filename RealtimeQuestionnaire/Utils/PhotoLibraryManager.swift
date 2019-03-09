@@ -32,7 +32,7 @@ struct PhotoLibraryManager {
                 }
             }
             alert.addAction(settingsAction)
-            alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+            alert.addAction(UIAlertAction(title: L10n.Common.cancel, style: .cancel))
             self.parentViewController.present(alert, animated: true)
         }
     }

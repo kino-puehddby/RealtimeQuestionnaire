@@ -42,7 +42,6 @@ final class SearchUserViewController: UIViewController {
             .disposed(by: disposeBag)
         
         filterTextField.rx.text
-            .distinctUntilChanged()
             .bind(to: viewModel.filterTrigger)
             .disposed(by: disposeBag)
         
@@ -64,9 +63,9 @@ final class SearchUserViewController: UIViewController {
     }
     
     func pop() {
-        guard let navi = navigationController else { return }
-        let createCommunityVC = navi.viewControllers[navi.viewControllers.count - 2] as? CreateCommunityViewController
-        createCommunityVC?.checkList.accept(viewModel.checkList.value)
+        guard let navi = navigationController,
+            let createCommunityVC = navi.viewControllers[navi.viewControllers.count - 2] as? CreateCommunityViewController else { return }
+        createCommunityVC.checkList.accept(viewModel.checkList.value)
         navi.popViewController(animated: true)
     }
 }

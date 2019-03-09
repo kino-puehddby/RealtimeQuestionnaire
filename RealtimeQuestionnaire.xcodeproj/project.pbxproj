@@ -98,6 +98,12 @@
 		A0E44C35222BF1FA00AE21F5 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C34222BF1FA00AE21F5 /* SearchUserViewModel.swift */; };
 		A0E44C37222ED7F200AE21F5 /* MainHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E44C36222ED7F200AE21F5 /* MainHeaderView.xib */; };
 		A0E44C39222ED89800AE21F5 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C38222ED89800AE21F5 /* MainHeaderView.swift */; };
+		A0E44C3C2233783E00AE21F5 /* ChangeMemberInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C3B2233783E00AE21F5 /* ChangeMemberInfoViewModel.swift */; };
+		A0E44C3E2233842500AE21F5 /* SearchCommunity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0E44C3D2233842500AE21F5 /* SearchCommunity.storyboard */; };
+		A0E44C402233845100AE21F5 /* SearchCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C3F2233845100AE21F5 /* SearchCommunityViewController.swift */; };
+		A0E44C422233878600AE21F5 /* SearchCommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C412233878600AE21F5 /* SearchCommunityViewModel.swift */; };
+		A0E44C45223389C200AE21F5 /* SearchCommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C43223389C200AE21F5 /* SearchCommunityTableViewCell.swift */; };
+		A0E44C46223389C200AE21F5 /* SearchCommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E44C44223389C200AE21F5 /* SearchCommunityTableViewCell.xib */; };
 		DCA9F1B3A40DE798150C7CE0 /* Pods_RealtimeQuestionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */; };
 /* End PBXBuildFile section */
 
@@ -197,6 +203,12 @@
 		A0E44C34222BF1FA00AE21F5 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
 		A0E44C36222ED7F200AE21F5 /* MainHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainHeaderView.xib; sourceTree = "<group>"; };
 		A0E44C38222ED89800AE21F5 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		A0E44C3B2233783E00AE21F5 /* ChangeMemberInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemberInfoViewModel.swift; sourceTree = "<group>"; };
+		A0E44C3D2233842500AE21F5 /* SearchCommunity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchCommunity.storyboard; sourceTree = "<group>"; };
+		A0E44C3F2233845100AE21F5 /* SearchCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommunityViewController.swift; sourceTree = "<group>"; };
+		A0E44C412233878600AE21F5 /* SearchCommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommunityViewModel.swift; sourceTree = "<group>"; };
+		A0E44C43223389C200AE21F5 /* SearchCommunityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommunityTableViewCell.swift; sourceTree = "<group>"; };
+		A0E44C44223389C200AE21F5 /* SearchCommunityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCommunityTableViewCell.xib; sourceTree = "<group>"; };
 		F9B48EBAE828EDB2223C7DE9 /* Pods-RealtimeQuestionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtimeQuestionnaire.release.xcconfig"; path = "Target Support Files/Pods-RealtimeQuestionnaire/Pods-RealtimeQuestionnaire.release.xcconfig"; sourceTree = "<group>"; };
 		FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealtimeQuestionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -271,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				A0588B63222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.swift */,
+				A0E44C43223389C200AE21F5 /* SearchCommunityTableViewCell.swift */,
 			);
 			path = ChangeMemberInfo;
 			sourceTree = "<group>";
@@ -279,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				A0588B64222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib */,
+				A0E44C44223389C200AE21F5 /* SearchCommunityTableViewCell.xib */,
 			);
 			path = ChangeMemberInfo;
 			sourceTree = "<group>";
@@ -287,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				4E56BA9C2228DCF30055529B /* ChangeMemberInfo.storyboard */,
+				A0E44C3D2233842500AE21F5 /* SearchCommunity.storyboard */,
 			);
 			path = ChangeMemberInfo;
 			sourceTree = "<group>";
@@ -359,6 +374,7 @@
 				4E35F4D1222CD56800E1130E /* Authentication */,
 				4E56BA8E2227B17A0055529B /* Questionnaire */,
 				4E35F4D5222CFC5500E1130E /* CreateCommunity */,
+				A0E44C3A2233782500AE21F5 /* ChangeMemberInfo */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -387,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				4E56BA9E2228DD460055529B /* ChangeMemberInfoViewController.swift */,
+				A0E44C3F2233845100AE21F5 /* SearchCommunityViewController.swift */,
 			);
 			path = ChangeMemberInfo;
 			sourceTree = "<group>";
@@ -469,8 +486,8 @@
 				4E09F811221A973F004A00AD /* Authorization */,
 				4ED53388221E553200F4113D /* Search */,
 				4ED5336D221D46C000F4113D /* Questionnaire */,
-				4E56BA962227E8B70055529B /* ChangeMemberInfo */,
 				4E35F4D4222CFC3A00E1130E /* CreateCommunity */,
+				4E56BA962227E8B70055529B /* ChangeMemberInfo */,
 				4ED53385221E45E700F4113D /* Common */,
 			);
 			path = ViewControllers;
@@ -626,6 +643,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A0E44C3A2233782500AE21F5 /* ChangeMemberInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A0E44C3B2233783E00AE21F5 /* ChangeMemberInfoViewModel.swift */,
+				A0E44C412233878600AE21F5 /* SearchCommunityViewModel.swift */,
+			);
+			path = ChangeMemberInfo;
+			sourceTree = "<group>";
+		};
 		C5F0786942C890B98BF4C673 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,6 +754,7 @@
 				4ED5336F221D46E200F4113D /* CreateQuestionnaire.storyboard in Resources */,
 				4E09F810221A9731004A00AD /* Main.storyboard in Resources */,
 				4E8191FB2228F57100FFB6F9 /* TrimImage.storyboard in Resources */,
+				A0E44C46223389C200AE21F5 /* SearchCommunityTableViewCell.xib in Resources */,
 				4E35F4F0222E43A200E1130E /* QuestionnaireResultTableViewCell.xib in Resources */,
 				A0588B6E222B0DCC00912FAB /* SearchUserTableViewCell.xib in Resources */,
 				A0588B66222AC2AB00912FAB /* ChangeMemberInfoTableViewCell.xib in Resources */,
@@ -737,6 +764,7 @@
 				A0E44C37222ED7F200AE21F5 /* MainHeaderView.xib in Resources */,
 				4ED53390221E5E0800F4113D /* MainTableViewCell.xib in Resources */,
 				4E56BA9B2227E90E0055529B /* CreateCommunity.storyboard in Resources */,
+				A0E44C3E2233842500AE21F5 /* SearchCommunity.storyboard in Resources */,
 				4E09F80B221A96CE004A00AD /* Login.storyboard in Resources */,
 				4ED5337D221D4BE400F4113D /* Search.storyboard in Resources */,
 				4E35F4DA222D097E00E1130E /* QuestionnaireDetail.storyboard in Resources */,
@@ -924,8 +952,10 @@
 				4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */,
 				4E56BA992227E8ED0055529B /* CreateCommunityViewController.swift in Sources */,
 				4E09F815221A9787004A00AD /* RegisterViewController.swift in Sources */,
+				A0E44C422233878600AE21F5 /* SearchCommunityViewModel.swift in Sources */,
 				4E35F4E6222D1A6200E1130E /* QuestionnaireResultViewModel.swift in Sources */,
 				4EA23570221A71C500AB29A4 /* StoryboardSegues.swift in Sources */,
+				A0E44C45223389C200AE21F5 /* SearchCommunityTableViewCell.swift in Sources */,
 				4ED533A7221FA2B000F4113D /* DatabaseCollection.swift in Sources */,
 				4E56BA8D222798BE0055529B /* MainViewModel.swift in Sources */,
 				4ED533A1221E942100F4113D /* Firestore+Codable.swift in Sources */,
@@ -936,6 +966,7 @@
 				A0E44C35222BF1FA00AE21F5 /* SearchUserViewModel.swift in Sources */,
 				4E819201222922F900FFB6F9 /* UIImage+Trimming.swift in Sources */,
 				4E35F4E4222D1A0A00E1130E /* AnswerQuestionnaireViewModel.swift in Sources */,
+				A0E44C3C2233783E00AE21F5 /* ChangeMemberInfoViewModel.swift in Sources */,
 				4ED53387221E462400F4113D /* AppSlideMenuController.swift in Sources */,
 				4E56BA9F2228DD460055529B /* ChangeMemberInfoViewController.swift in Sources */,
 				4ED53374221D4A0600F4113D /* MenuViewController.swift in Sources */,
@@ -945,6 +976,7 @@
 				4E819208222959D200FFB6F9 /* CreateCommunityViewModel.swift in Sources */,
 				A0588B6D222B0DCC00912FAB /* SearchUserTableViewCell.swift in Sources */,
 				A0588B62222ABF6A00912FAB /* MenuViewModel.swift in Sources */,
+				A0E44C402233845100AE21F5 /* SearchCommunityViewController.swift in Sources */,
 				4E35F4D0222CD4EF00E1130E /* UIKit+Rx.swift in Sources */,
 				A0588B60222AB45900912FAB /* ManageConpleteStatus.swift in Sources */,
 				4ED5337B221D4BBC00F4113D /* SearchViewController.swift in Sources */,
