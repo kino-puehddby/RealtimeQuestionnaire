@@ -53,6 +53,15 @@ internal enum StoryboardScene {
 
     internal static let menuViewController = SceneType<RealtimeQuestionnaire.MenuViewController>(storyboard: Menu.self, identifier: "MenuViewController")
   }
+  internal enum QuestionnaireDetail: StoryboardType {
+    internal static let storyboardName = "QuestionnaireDetail"
+
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.QuestionnaireDetailContainerViewController>(storyboard: QuestionnaireDetail.self)
+
+    internal static let answerQuestionnaireViewController = SceneType<RealtimeQuestionnaire.AnswerQuestionnaireViewController>(storyboard: QuestionnaireDetail.self, identifier: "AnswerQuestionnaireViewController")
+
+    internal static let questionnaireResultViewController = SceneType<RealtimeQuestionnaire.QuestionnaireResultViewController>(storyboard: QuestionnaireDetail.self, identifier: "QuestionnaireResultViewController")
+  }
   internal enum Register: StoryboardType {
     internal static let storyboardName = "Register"
 

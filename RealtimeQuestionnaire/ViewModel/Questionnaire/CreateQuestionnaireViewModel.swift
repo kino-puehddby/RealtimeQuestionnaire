@@ -41,7 +41,6 @@ final class CreateQuestionnaireViewModel {
                     self.communities.accept(user.communities)
                 case .error(let error):
                     debugPrint(error)
-                    self.communities.accept([])
                 }
             }
             .disposed(by: disposeBag)

@@ -29,7 +29,7 @@
                                             <constraint firstAttribute="height" constant="50" id="x0g-79-U7r"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Login">
+                                        <state key="normal" title="ログイン">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -41,12 +41,15 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-sT-hRM">
                                         <rect key="frame" x="0.0" y="70" width="270" height="50"/>
+                                        <color key="backgroundColor" name="SystemBlue"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="270" id="PbO-yL-raM"/>
                                             <constraint firstAttribute="height" constant="50" id="vkT-Rj-0M1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="googleSignInButton"/>
+                                        <state key="normal" title="Google">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -62,7 +65,7 @@
                                             <constraint firstAttribute="width" constant="270" id="yBX-Pi-0m9"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Register">
+                                        <state key="normal" title="新規登録">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -176,7 +179,7 @@
     </scenes>
     <resources>
         <namedColor name="SystemBlue">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

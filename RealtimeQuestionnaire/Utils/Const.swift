@@ -11,7 +11,8 @@ import UIKit
 
 public struct Main {
     public struct TableView {
-        public static let cellHeight: CGFloat = 80
+        public static let cellHeight: CGFloat = 50
+        public static let sectionHeaderHeight: CGFloat = 30
     }
 }
 
@@ -24,6 +25,19 @@ public struct CreateQuestionnaire {
 public struct CreateCommunity {
     public struct TableView {
         public static let cellHeight: CGFloat = 50
+    }
+}
+
+public struct QuestionnaireDetail {
+    public struct AnswerQuestionnaire {
+        public struct TableView {
+            public static let cellHeight: CGFloat = 60
+        }
+    }
+    public struct QuestionnaireResult {
+        public struct TableView {
+            public static let cellHeight: CGFloat = 55
+        }
     }
 }
 

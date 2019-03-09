@@ -11,20 +11,15 @@ import Reusable
 
 class MainTableViewCell: UITableViewCell, NibReusable {
 
-    @IBOutlet weak private var iconImageView: UIImageView!
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var descriptionLabel: UILabel!
+    @IBOutlet weak private var unansweredFlug: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        iconImageView.layer.masksToBounds = true
-        iconImageView.layer.cornerRadius = iconImageView.bounds.width / 2
     }
     
-    func configuration(iconImage: UIImage, title: String, description: String) {
-        iconImageView.image = iconImage
+    func configuration(title: String, answered: Bool) {
         titleLabel.text = title
-        descriptionLabel.text = description
+        unansweredFlug.isHidden = answered
     }
 }

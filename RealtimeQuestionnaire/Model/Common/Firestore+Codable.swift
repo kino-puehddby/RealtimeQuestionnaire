@@ -23,6 +23,7 @@ public enum APIError: Error {
     case network
     case server(Int)
     case unknown(String)
+    case decodeError
 }
 
 extension Reactive where Base: Firestore {
@@ -35,7 +36,7 @@ extension Reactive where Base: Firestore {
             do {
                 optionalData = try FirestoreEncoder().encode(model)
             } catch {
-                debugPrint(error)
+                debugPrint(APIError.decodeError)
                 observer(.error(error))
                 optionalData = nil
             }
@@ -48,7 +49,6 @@ extension Reactive where Base: Firestore {
                 documentRef
                     .setData(data) { error in
                         if let error = error {
-                            debugPrint(error)
                             observer(.error(error))
                         } else {
                             observer(.success(()))
@@ -59,7 +59,6 @@ extension Reactive where Base: Firestore {
                 collectionRef
                     .addDocument(data: data) { error in
                         if let error = error {
-                            debugPrint(error)
                             observer(.error(error))
                         } else {
                             observer(.success(()))
@@ -79,7 +78,7 @@ extension Reactive where Base: Firestore {
             do {
                 optionalData = try FirestoreEncoder().encode(model)
             } catch {
-                debugPrint(error)
+                debugPrint(APIError.decodeError)
                 observer(.error(error))
                 optionalData = nil
             }
@@ -89,7 +88,6 @@ extension Reactive where Base: Firestore {
             }
             documentRef.updateData(data) { error in
                 if let error = error {
-                    debugPrint(error)
                     observer(.error(error))
                 } else {
                     observer(.success(()))
@@ -107,7 +105,6 @@ extension Reactive where Base: Firestore {
             collectionRef
                 .getDocuments { snapshot, error in
                     if let error = error {
-                        debugPrint(error)
                         observer(.error(error))
                         return
                     }
@@ -119,7 +116,7 @@ extension Reactive where Base: Firestore {
                         do {
                             return try FirebaseDecoder().decode(type, from: document.data())
                         } catch {
-                            debugPrint(error)
+                            debugPrint(APIError.decodeError)
                             return nil
                         }
                     })
@@ -137,7 +134,6 @@ extension Reactive where Base: Firestore {
             documentRef
                 .getDocument { snapshot, error in
                     if let error = error {
-                        debugPrint(error)
                         observer(.error(error))
                         return
                     }
@@ -149,7 +145,7 @@ extension Reactive where Base: Firestore {
                         let result = try FirebaseDecoder().decode(type, from: data)
                         observer(.success(result))
                     } catch {
-                        debugPrint(error)
+                        debugPrint(APIError.decodeError)
                         observer(.error(error))
                     }
             }
@@ -158,14 +154,13 @@ extension Reactive where Base: Firestore {
     }
     
     /**
-     特定の Model（配列）を監視
+     特定の Model（配列）を監視（リアルタイム反映）
      */
     public func observeArray<T: Codable>(_ type: T.Type, collectionRef: CollectionReference) -> Observable<[T]> {
         return Observable.create { observer in
             collectionRef
                 .addSnapshotListener { snapshot, error in
                     if let error = error {
-                        debugPrint(error)
                         observer.on(.error(error))
                         return
                     }
@@ -178,7 +173,7 @@ extension Reactive where Base: Firestore {
                             return try FirestoreDecoder().decode(type, from: document.data())
                         } catch {
                             // TODO: error handling
-                            debugPrint(error)
+                            debugPrint(APIError.decodeError)
                             return nil
                         }
                     }
@@ -189,14 +184,13 @@ extension Reactive where Base: Firestore {
     }
     
     /**
-     特定の Model を監視
+     特定の Model を監視（リアルタイム反映）
      */
     public func observeModel<T: Codable>(_ type: T.Type, documentRef: DocumentReference) -> Observable<T> {
         return Observable.create { observer in
             documentRef
                 .addSnapshotListener { snapshot, error in
                     if let error = error {
-                        debugPrint(error)
                         observer.on(.error(error))
                         return
                     }
@@ -208,7 +202,7 @@ extension Reactive where Base: Firestore {
                         let result = try FirestoreDecoder().decode(type, from: data)
                         observer.on(.next(result))
                     } catch {
-                        debugPrint(error)
+                        debugPrint(APIError.decodeError)
                         observer.on(.error(error))
                     }
             }

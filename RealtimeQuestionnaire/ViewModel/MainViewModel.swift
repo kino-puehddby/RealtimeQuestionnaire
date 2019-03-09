@@ -12,6 +12,7 @@ import RxCocoa
 import RxSwift
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 final class MainViewModel {
     
@@ -20,14 +21,17 @@ final class MainViewModel {
     let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [])
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
     let communities = BehaviorRelay<[CommunityModel.Fields]>(value: [])
-    var communityNames = BehaviorRelay<[String]?>(value: nil)
+    let communityNames = BehaviorRelay<[String]>(value: [])
+    let communityIconImages = BehaviorRelay<[UIImage]>(value: [])
     
     var stashList: [[QuestionnaireModel.Fields]] = []
+    var imageStashList: [UIImage] = []
+    
+    var selectedCellData = BehaviorRelay<QuestionnaireModel.Fields?>(value: nil)
     
     private let disposeBag = DisposeBag()
     
     init() {
-        
         // observe User
         guard let uid = S.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
@@ -59,6 +63,7 @@ final class MainViewModel {
                 guard let vm = self else { return }
                 switch event {
                 case .next(let communities):
+                    vm.downloadImage(communities: communities)
                     vm.communities.accept(communities)
                 case .error(let error):
                     debugPrint(error)
@@ -80,7 +85,13 @@ final class MainViewModel {
             .disposed(by: disposeBag)
     }
     
-    func observeQuestionnaires(on communityIds: [[String: String]]) {
+    func answered(id: String) -> Bool {
+        guard let user = user.value else { return false }
+        let usersQuestionnairesIds = user.questionnaires.map { $0["id"] }
+        return usersQuestionnairesIds.contains(id)
+    }
+    
+    private func observeQuestionnaires(on communityIds: [[String: String]]) {
         communityIds.forEach { dic in
             // observe Questionnaire
             guard let id = dic["id"],
@@ -117,7 +128,7 @@ final class MainViewModel {
         }
     }
     
-    func observeCommunities(on communityIds: [[String: String]]) {
+    private func observeCommunities(on communityIds: [[String: String]]) {
         var newList: [String] = []
         communityIds.forEach { dic in
             guard let id = dic["id"] else { return }
@@ -139,6 +150,24 @@ final class MainViewModel {
                     }
                 }
                 .disposed(by: disposeBag)
+        }
+    }
+    
+    private func downloadImage(communities: [CommunityModel.Fields]) {
+        imageStashList = []
+        for (index, community) in communities.enumerated() {
+            let storageRef = Storage.storage().reference()
+            let imageRef = storageRef.child("images/" + community.id + ".jpg")
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImages] (data, _) in
+                if let data = data,
+                    let image = UIImage(data: data),
+                    !communityIconImages.value.indices.contains(index) {
+                    self.imageStashList.append(image)
+                } else {
+                    self.imageStashList.append(Asset.picture.image)
+                }
+                self.communityIconImages.accept(self.imageStashList)
+            }
         }
     }
 }

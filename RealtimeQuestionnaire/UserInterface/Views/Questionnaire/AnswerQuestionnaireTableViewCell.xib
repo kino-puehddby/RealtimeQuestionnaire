@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AnswerQuestionnaireTableViewCell" customModule="RealtimeQuestionnaire" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-yb-p5F">
+                        <rect key="frame" x="21" y="21.5" width="233" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nonChecked" translatesAutoresizingMaskIntoConstraints="NO" id="IQM-Sk-yxa">
+                        <rect key="frame" x="264" y="15" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="IQM-Sk-yxa" secondAttribute="height" multiplier="1:1" id="Ayc-fX-gul"/>
+                            <constraint firstAttribute="height" constant="30" id="atu-Fx-gSc"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iDT-yb-p5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="0ll-NM-Bcm"/>
+                    <constraint firstItem="IQM-Sk-yxa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Icx-J5-N9X"/>
+                    <constraint firstItem="IQM-Sk-yxa" firstAttribute="leading" secondItem="iDT-yb-p5F" secondAttribute="trailing" constant="10" id="KXb-7E-E6U"/>
+                    <constraint firstItem="iDT-yb-p5F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aEh-xf-wtF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="IQM-Sk-yxa" secondAttribute="trailing" constant="10" id="hAr-H0-p1T"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkImage" destination="IQM-Sk-yxa" id="iRT-oR-tsa"/>
+                <outlet property="choiceLabel" destination="iDT-yb-p5F" id="ePe-HV-Dzj"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="nonChecked" width="1000" height="1000"/>
+    </resources>
+</document>

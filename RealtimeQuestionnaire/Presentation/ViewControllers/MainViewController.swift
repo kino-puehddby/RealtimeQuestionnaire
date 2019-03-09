@@ -11,6 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import SnapKit
 
 final class MainViewController: UIViewController {
 
@@ -37,6 +38,17 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         deselectTableView()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == StoryboardSegue.Main.showQuestionnaireDetail.rawValue {
+            let vc = segue.destination as! QuestionnaireDetailContainerViewController
+            if let data = viewModel.selectedCellData.value,
+                let user = viewModel.user.value {
+                vc.data = data
+                vc.user = user
+            }
+        }
     }
     
     func setup() {
@@ -66,7 +78,8 @@ final class MainViewController: UIViewController {
         
         answerQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+//                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
+                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
@@ -74,7 +87,8 @@ final class MainViewController: UIViewController {
             .combineLatest(
                 viewModel.questionnaireList,
                 viewModel.user,
-                viewModel.communityNames
+                viewModel.communityNames,
+                viewModel.communityIconImages
             )
             .subscribe(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
@@ -89,16 +103,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return viewModel.questionnaireList.value.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // FIXME: デザイン修正
+        let headerView = MainHeaderView.loadFromNib()
         guard let user = viewModel.user.value,
-            let name = user.communities[section]["name"] else {
-            return nil
+            let name = user.communities[section]["name"] else { return nil }
+        if user.communities.indices.contains(section) {
+            headerView.set(text: name)
         }
-        return name
+        if viewModel.communityIconImages.value.indices.contains(section) {
+            headerView.set(image: viewModel.communityIconImages.value[section])
+        }
+        return headerView
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Main.TableView.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,17 +129,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
         let title = data.title
-        let description = data.description ?? ""
-        cell.configuration(
-            // FIXME: 画像をFirebase Storageから取得する
-            iconImage: Asset.sample.image,
-            title: title,
-            description: description)
+        let answered = viewModel.answered(id: data.id)
+        cell.configuration(title: title, answered: answered)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Main.TableView.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
+        viewModel.selectedCellData.accept(data)
+        perform(segue: StoryboardSegue.Main.showQuestionnaireDetail)
     }
     
     func deselectTableView() {
