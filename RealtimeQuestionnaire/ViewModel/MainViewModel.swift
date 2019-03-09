@@ -85,7 +85,13 @@ final class MainViewModel {
             .disposed(by: disposeBag)
     }
     
-    func observeQuestionnaires(on communityIds: [[String: String]]) {
+    func answered(id: String) -> Bool {
+        guard let user = user.value else { return false }
+        let usersQuestionnairesIds = user.questionnaires.map { $0["id"] }
+        return usersQuestionnairesIds.contains(id)
+    }
+    
+    private func observeQuestionnaires(on communityIds: [[String: String]]) {
         communityIds.forEach { dic in
             // observe Questionnaire
             guard let id = dic["id"],
@@ -122,7 +128,7 @@ final class MainViewModel {
         }
     }
     
-    func observeCommunities(on communityIds: [[String: String]]) {
+    private func observeCommunities(on communityIds: [[String: String]]) {
         var newList: [String] = []
         communityIds.forEach { dic in
             guard let id = dic["id"] else { return }

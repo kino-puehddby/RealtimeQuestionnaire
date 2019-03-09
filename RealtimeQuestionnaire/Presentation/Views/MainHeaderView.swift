@@ -15,6 +15,13 @@ final class MainHeaderView: UIView, NibLoadable {
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var label: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = imageView.bounds.height / 2
+    }
+    
     func set(image: UIImage) {
         imageView.image = image
     }

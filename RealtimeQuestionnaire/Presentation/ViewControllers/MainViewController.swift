@@ -104,6 +104,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // FIXME: デザイン修正
         let headerView = MainHeaderView.loadFromNib()
         guard let user = viewModel.user.value,
             let name = user.communities[section]["name"] else { return nil }
@@ -128,7 +129,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
         let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
         let title = data.title
-        cell.configuration(title: title)
+        let answered = viewModel.answered(id: data.id)
+        cell.configuration(title: title, answered: answered)
         return cell
     }
     

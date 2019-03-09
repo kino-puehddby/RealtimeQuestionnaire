@@ -12,12 +12,14 @@ import Reusable
 class MainTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var unansweredFlug: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func configuration(title: String) {
+    func configuration(title: String, answered: Bool) {
         titleLabel.text = title
+        unansweredFlug.isHidden = answered
     }
 }
