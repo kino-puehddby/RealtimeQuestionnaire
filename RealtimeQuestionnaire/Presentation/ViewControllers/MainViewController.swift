@@ -78,18 +78,11 @@ final class MainViewController: UIViewController {
         
         answerQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-//                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
-                self.tableView.reloadData()
+                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
             })
             .disposed(by: disposeBag)
         
-        Observable
-            .combineLatest(
-                viewModel.questionnaireList,
-                viewModel.user,
-                viewModel.communityNames,
-                viewModel.communityIconImages
-            )
+        viewModel.summary
             .subscribe(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
             })
@@ -100,19 +93,16 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.questionnaireList.value.count
+        return viewModel.summary.value.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // FIXME: デザイン修正
         let headerView = MainHeaderView.loadFromNib()
-        guard let user = viewModel.user.value else { return nil }
-        if user.communities.indices.contains(section) {
-            guard let name = user.communities[section]["name"] else { return nil }
-            headerView.set(text: name)
-        }
-        if viewModel.communityIconImages.value.indices.contains(section) {
-            headerView.set(image: viewModel.communityIconImages.value[section])
+        if viewModel.summary.value.indices.contains(section) {
+            let image = viewModel.summary.value[section].image
+            let name = viewModel.summary.value[section].name
+            headerView.set(name: name, image: image)
         }
         return headerView
     }
@@ -122,12 +112,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.questionnaireList.value[section].count
+        return viewModel.summary.value[section].questionnaires.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
-        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
+        let data = viewModel.summary.value[indexPath.section].questionnaires[indexPath.row]
         let title = data.title
         let answered = viewModel.answered(id: data.id)
         cell.configuration(title: title, answered: answered)
@@ -139,7 +129,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
+        let data = (
+            communityName: viewModel.summary.value[indexPath.section].name,
+            communityIconImage: viewModel.summary.value[indexPath.section].image,
+            questionnaire: viewModel.summary.value[indexPath.section].questionnaires[indexPath.row]
+        )
         viewModel.selectedCellData.accept(data)
         perform(segue: StoryboardSegue.Main.showQuestionnaireDetail)
     }

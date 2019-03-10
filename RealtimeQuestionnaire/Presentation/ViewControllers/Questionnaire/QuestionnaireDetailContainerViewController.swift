@@ -15,7 +15,7 @@ final class QuestionnaireDetailContainerViewController: UIViewController {
     
     @IBOutlet weak private var navigationBarItem: UINavigationItem!
     
-    lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
+    lazy var data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields) = { preconditionFailure() }()
     lazy var user: UserModel.Fields = { preconditionFailure() }()
     
     private lazy var viewModel: QuestionnaireDetailViewModel = { preconditionFailure() }()
@@ -31,7 +31,7 @@ final class QuestionnaireDetailContainerViewController: UIViewController {
     
     func setup() {
         viewModel = QuestionnaireDetailViewModel(
-            questionnaireData: data,
+            data: data,
             user: user
         )
     }

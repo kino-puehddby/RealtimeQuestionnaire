@@ -22,7 +22,7 @@ final class QuestionnaireResultViewController: UIViewController {
     @IBOutlet weak private var remainingTimeLabel: UILabel! // TODO: 回答締め切り機能
     @IBOutlet weak fileprivate var pieChartView: PieChartView!
     
-    lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
+    lazy var data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields) = { preconditionFailure() }()
     
     private lazy var viewModel: QuestionnaireResultViewModel = { preconditionFailure() }()
     private let disposeBag = DisposeBag()
@@ -35,13 +35,15 @@ final class QuestionnaireResultViewController: UIViewController {
     }
     
     func setup() {
-        viewModel = QuestionnaireResultViewModel(questionnaireData: data)
+        viewModel = QuestionnaireResultViewModel(data: data)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: QuestionnaireResultTableViewCell.self)
         
-        titleLabel.text = data.title
+        communityIconImageView.image = data.communityIconImage
+        communityNameLabel.text = data.communityName
+        titleLabel.text = data.questionnaire.title
     }
     
     func bind() {
@@ -53,7 +55,7 @@ final class QuestionnaireResultViewController: UIViewController {
                         if value == 0 {
                             return PieChartDataEntry(value: value, label: "その他")
                         } else {
-                            return PieChartDataEntry(value: value, label: self.data.choices[index])
+                            return PieChartDataEntry(value: value, label: self.data.questionnaire.choices[index])
                         }
                     }()
                     pieChartEntries.append(entry)
@@ -61,14 +63,6 @@ final class QuestionnaireResultViewController: UIViewController {
                 self.refreshPieChartView(dataList: pieChartEntries)
                 self.tableView.reloadData()
             })
-            .disposed(by: disposeBag)
-        
-        viewModel.communityIconImage
-            .bind(to: communityIconImageView.rx.image)
-            .disposed(by: disposeBag)
-        
-        viewModel.communityName
-            .bind(to: communityNameLabel.rx.text)
             .disposed(by: disposeBag)
         
         viewModel.votesCount
@@ -106,7 +100,7 @@ extension QuestionnaireResultViewController: UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: QuestionnaireResultTableViewCell.self)
         cell.configure(
             color: ChartColorTemplates.vordiplom()[indexPath.row],
-            choice: data.choices[indexPath.row],
+            choice: data.questionnaire.choices[indexPath.row],
             percent: viewModel.percentValues.value[indexPath.row]
         )
         return cell

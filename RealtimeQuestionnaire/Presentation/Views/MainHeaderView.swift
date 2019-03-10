@@ -22,11 +22,8 @@ final class MainHeaderView: UIView, NibLoadable {
         imageView.layer.cornerRadius = imageView.bounds.height / 2
     }
     
-    func set(image: UIImage) {
+    func set(name: String, image: UIImage) {
+        label.text = name
         imageView.image = image
-    }
-    
-    func set(text: String) {
-        label.text = text
     }
 }

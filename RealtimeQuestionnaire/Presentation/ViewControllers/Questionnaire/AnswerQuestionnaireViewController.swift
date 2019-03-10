@@ -20,7 +20,7 @@ final class AnswerQuestionnaireViewController: UIViewController {
     @IBOutlet weak private var authorNameLabel: UILabel!
     @IBOutlet weak private var answerButton: UIButton!
     
-    lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
+    lazy var data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields) = { preconditionFailure() }()
     
     private lazy var viewModel: AnswerQuestionnaireViewModel = { preconditionFailure() }()
     
@@ -34,24 +34,18 @@ final class AnswerQuestionnaireViewController: UIViewController {
     }
     
     func setup() {
-        viewModel = AnswerQuestionnaireViewModel(questionnaireData: data)
+        viewModel = AnswerQuestionnaireViewModel(data: data)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: AnswerQuestionnaireTableViewCell.self)
         
-        titleLabel.text = data.title
+        communityIconImageView.image = data.communityIconImage
+        communityNameLabel.text = data.communityName
+        titleLabel.text = data.questionnaire.title
     }
     
     func bind() {
-        viewModel.communityIconImage
-            .bind(to: communityIconImageView.rx.image)
-            .disposed(by: disposeBag)
-        
-        viewModel.communityName
-            .bind(to: communityNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
         viewModel.authorName
             .bind(to: authorNameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -81,12 +75,12 @@ final class AnswerQuestionnaireViewController: UIViewController {
 
 extension AnswerQuestionnaireViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.choices.count
+        return data.questionnaire.choices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AnswerQuestionnaireTableViewCell.self)
-        cell.configure(choice: data.choices[indexPath.row])
+        cell.configure(choice: data.questionnaire.choices[indexPath.row])
         return cell
     }
     
