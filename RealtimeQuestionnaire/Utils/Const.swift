@@ -28,6 +28,24 @@ public struct CreateCommunity {
     }
 }
 
+public struct SearchUser {
+    public struct TableView {
+        public static let cellHeight: CGFloat = 50
+    }
+}
+
+public struct ChangeMemberInfo {
+    public struct TableView {
+        public static let cellHeight: CGFloat = 65
+    }
+}
+
+public struct SearchCommunity {
+    public struct TableView {
+        public static let cellHeight: CGFloat = 50
+    }
+}
+
 public struct QuestionnaireDetail {
     public struct AnswerQuestionnaire {
         public struct TableView {

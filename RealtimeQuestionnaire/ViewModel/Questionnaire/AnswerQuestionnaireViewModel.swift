@@ -75,7 +75,6 @@ final class AnswerQuestionnaireViewModel {
         let model = UserModel.Fields(
             id: user.id,
             nickname: user.nickname,
-            iconUrl: user.iconUrl,
             communities: user.communities,
             questionnaires: questionnaires
         )

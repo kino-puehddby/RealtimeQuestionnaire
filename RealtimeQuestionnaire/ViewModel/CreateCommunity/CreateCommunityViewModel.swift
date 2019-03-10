@@ -89,7 +89,6 @@ final class CreateCommunityViewModel {
     private func createCommunity() {
         let model = CommunityModel.Fields(
             id: communityId,
-            iconUrl: "アイコンURL", // TODO: アイコンURLを設定
             name: communityName.value
         )
         Firestore.firestore().rx
@@ -118,7 +117,6 @@ final class CreateCommunityViewModel {
         let newModel = UserModel.Fields(
             id: user.id,
             nickname: user.nickname,
-            iconUrl: user.iconUrl,
             communities: communities,
             questionnaires: user.questionnaires
         )

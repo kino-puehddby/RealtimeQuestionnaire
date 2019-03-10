@@ -133,8 +133,6 @@ extension CreateCommunityViewController: UINavigationControllerDelegate, UIImage
             appdelegate.photoLibraryImage = pickedImage
         }
         
-        let trimImageVC = StoryboardScene.TrimImage.trimImageViewController.instantiate()
-        trimImageVC.postDissmissionAction = { picker.dismiss(animated: true) } // コールバックを受け取る
-        picker.present(trimImageVC, animated: true)
+        picker.dismiss(animated: true)
     }
 }

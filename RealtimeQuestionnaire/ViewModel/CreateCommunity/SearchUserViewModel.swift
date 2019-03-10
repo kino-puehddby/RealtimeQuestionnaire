@@ -11,10 +11,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import SVProgressHUD
 
 final class SearchUserViewModel {
-    
-    // TODO: ローディング
     
     let checkedUserInfo = PublishSubject<(id: String, index: Int)>()
     let userList = BehaviorRelay<[UserModel.Fields]>(value: [])
@@ -26,12 +25,14 @@ final class SearchUserViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
+        SVProgressHUD.show()
         Firestore.firestore().rx
             .getArray(
                 UserModel.Fields.self,
                 collectionRef: UserModel.makeCollectionRef()
             )
             .subscribe { [weak self] event in
+                SVProgressHUD.dismiss()
                 guard let vm = self else { return }
                 switch event {
                 case .success(let list):

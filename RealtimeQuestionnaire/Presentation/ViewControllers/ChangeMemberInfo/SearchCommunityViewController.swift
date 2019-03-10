@@ -16,9 +16,9 @@ final class SearchCommunityViewController: UIViewController {
     @IBOutlet weak private var decideButton: UIButton!
     @IBOutlet weak private var filterTextField: UITextField!
     
-    private let viewModel = SearchCommunityViewModel()
+    private lazy var viewModel: SearchCommunityViewModel = { preconditionFailure() }()
     
-    var belongingList: [CommunityModel.Fields]!
+    lazy var belongingCommunityInfos: [(id: String, name: String, image: UIImage)] = { preconditionFailure() }()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -29,6 +29,8 @@ final class SearchCommunityViewController: UIViewController {
     }
     
     func setup() {
+        viewModel = SearchCommunityViewModel(infos: belongingCommunityInfos)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: SearchCommunityTableViewCell.self)
@@ -49,16 +51,17 @@ final class SearchCommunityViewController: UIViewController {
             .bind(to: viewModel.filterTrigger)
             .disposed(by: disposeBag)
         
-        viewModel.checkList
+        viewModel.communityInfos
             .skip(1)
             .subscribe(onNext: { [unowned self] _ in
-                self.pop()
+                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
-        viewModel.filteredCommunityList
+        viewModel.belongingCommunityInfos
+            .skip(2)
             .subscribe(onNext: { [unowned self] _ in
-                self.tableView.reloadData()
+                self.pop()
             })
             .disposed(by: disposeBag)
     }
@@ -66,7 +69,7 @@ final class SearchCommunityViewController: UIViewController {
     func pop() {
         guard let navi = navigationController,
             let changeMemberInfoVC = navi.viewControllers[navi.viewControllers.count - 2] as? ChangeMemberInfoViewController else { return }
-        changeMemberInfoVC.viewModel.belongingList.accept(viewModel.checkList.value)
+        changeMemberInfoVC.viewModel.belongingCommunityInfos.accept(viewModel.belongingCommunityInfos.value)
         navi.popViewController(animated: true)
     }
 }
@@ -74,45 +77,35 @@ final class SearchCommunityViewController: UIViewController {
 extension SearchCommunityViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filterTextField.text == nil || filterTextField.text == "" {
-            return viewModel.communityList.value.count
+            return viewModel.communityInfos.value.count
         }
-        return viewModel.filteredCommunityList.value.count
+        return viewModel.filteredCommunityInfos.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SearchCommunityTableViewCell.self)
-        let community: CommunityModel.Fields = {
+        let community: (id: String, name: String, image: UIImage) = {
             if filterTextField.text == nil || filterTextField.text == "" {
-                return viewModel.communityList.value[indexPath.row]
+                return viewModel.communityInfos.value[indexPath.row]
             } else {
-                return viewModel.filteredCommunityList.value[indexPath.row]
+                return viewModel.filteredCommunityInfos.value[indexPath.row]
             }
         }()
         cell.configure(
             id: community.id,
             name: community.name,
-            iconImage: Asset.picture.image // FIXME: 画像をFirebase Storageから取得する
+            iconImage: community.image
         )
-        let ids = belongingList.map { $0.id }
+        let ids = belongingCommunityInfos.map { $0.id }
         if ids.contains(community.id) {
             cell.checked(true)
         } else {
             cell.checked(false)
         }
-        bind(cell: cell, indexPath: indexPath)
         return cell
     }
     
-    func bind(cell: SearchCommunityTableViewCell, indexPath: IndexPath) {
-//        cell.rx.checkTapped
-//            .map { [unowned self] _ in
-//                if self.filterTextField.text == nil || self.filterTextField.text == "" {
-//                    return (self.viewModel.communityList.value[indexPath.row].id, indexPath.row)
-//                } else {
-//                    return (self.viewModel.filteredCommunityList.value[indexPath.row].id, indexPath.row)
-//                }
-//            }
-//            .drive(viewModel.checkedCommunityInfo)
-//            .disposed(by: disposeBag)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return SearchCommunity.TableView.cellHeight
     }
 }

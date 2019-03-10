@@ -87,13 +87,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SplashViewController>(storyboard: Splash.self)
   }
-  internal enum TrimImage: StoryboardType {
-    internal static let storyboardName = "TrimImage"
-
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.TrimImageViewController>(storyboard: TrimImage.self)
-
-    internal static let trimImageViewController = SceneType<RealtimeQuestionnaire.TrimImageViewController>(storyboard: TrimImage.self, identifier: "TrimImageViewController")
-  }
   internal enum UnansweredQuestionnaireList: StoryboardType {
     internal static let storyboardName = "UnansweredQuestionnaireList"
 

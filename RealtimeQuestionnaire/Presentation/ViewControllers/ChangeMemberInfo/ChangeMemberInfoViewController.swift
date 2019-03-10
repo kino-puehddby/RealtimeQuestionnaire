@@ -21,7 +21,9 @@ final class ChangeMemberInfoViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     lazy var photoLibraryManager: PhotoLibraryManager = { preconditionFailure() }()
-    let viewModel = ChangeMemberInfoViewModel()
+    lazy var viewModel: ChangeMemberInfoViewModel = { preconditionFailure() }()
+    
+    lazy var belongingCommunityInfos: [(id: String, name: String, image: UIImage)] = { preconditionFailure() }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +41,13 @@ final class ChangeMemberInfoViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == StoryboardSegue.ChangeMemberInfo.showSearchCommunity.rawValue {
             guard let vc = segue.destination as? SearchCommunityViewController else { return }
-            vc.belongingList = viewModel.belongingList.value
+            vc.belongingCommunityInfos = viewModel.belongingCommunityInfos.value
         }
     }
     
     private func setup() {
+        viewModel = ChangeMemberInfoViewModel(belongingCommunityInfos: belongingCommunityInfos)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: ChangeMemberInfoTableViewCell.self)
@@ -75,19 +79,13 @@ final class ChangeMemberInfoViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.iconImage
+            .skip(1)
             .subscribe(onNext: { [unowned self] image in
                 if let image = image {
                     self.changeImageButton.setImage(image, for: .normal)
                 } else {
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    self.changeImageButton.setImage(appDelegate.photoLibraryImage, for: .normal)
+                    self.changeImageButton.setImage(Asset.picture.image, for: .normal)
                 }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.belongingList
-            .subscribe(onNext: { [unowned self] _ in
-                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
@@ -100,7 +98,6 @@ final class ChangeMemberInfoViewController: UIViewController {
                 switch event {
                 case .success:
                     guard let navi = self.navigationController else { return }
-                    self.viewModel.uploadFirebaseStorage()
                     navi.popViewController(animated: true)
                 case .error(let error):
                     debugPrint(error)
@@ -112,21 +109,21 @@ final class ChangeMemberInfoViewController: UIViewController {
 
 extension ChangeMemberInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.belongingList.value.count
+        return viewModel.belongingCommunityInfos.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ChangeMemberInfoTableViewCell.self)
         cell.configure(
-            image: Asset.picture.image, // FIXME: サンプル
-            communityName: viewModel.belongingList.value[indexPath.row].name,
-            id: viewModel.belongingList.value[indexPath.row].id
+            image: viewModel.belongingCommunityInfos.value[indexPath.row].image,
+            communityName: viewModel.belongingCommunityInfos.value[indexPath.row].name,
+            id: viewModel.belongingCommunityInfos.value[indexPath.row].id
         )
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CreateCommunity.TableView.cellHeight
+        return ChangeMemberInfo.TableView.cellHeight
     }
 }
 
@@ -137,10 +134,13 @@ extension ChangeMemberInfoViewController: UINavigationControllerDelegate, UIImag
             let appdelegate = UIApplication.shared.delegate as! AppDelegate
             appdelegate.photoLibraryImage = pickedImage
             changeImageButton.setImage(pickedImage, for: .normal)
+            viewModel.iconImage.accept(pickedImage)
         }
+        picker.dismiss(animated: true)
         
-        let trimImageVC = StoryboardScene.TrimImage.trimImageViewController.instantiate()
-        trimImageVC.postDissmissionAction = { picker.dismiss(animated: true) } // コールバックを受け取る
-        picker.present(trimImageVC, animated: true)
+        // TODO: おかしい
+//        let trimImageVC = StoryboardScene.TrimImage.trimImageViewController.instantiate()
+//        trimImageVC.postDissmissionAction = { picker.dismiss(animated: true) } // コールバックを受け取る
+//        picker.present(trimImageVC, animated: true)
     }
 }

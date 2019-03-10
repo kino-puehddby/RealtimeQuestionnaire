@@ -27,9 +27,7 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: ViewModelで必要なデータの管理をするようにする
-        
+                
         setup()
         bind()
     }
@@ -38,6 +36,14 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         deselectTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // TODO: Menuのアイコン画像の更新タイミングがおかしいのでどうにかする
+        guard let menuVC = slideMenuController()?.leftViewController as? MenuViewController else { return }
+        menuVC.viewModel.downloadIconImage()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

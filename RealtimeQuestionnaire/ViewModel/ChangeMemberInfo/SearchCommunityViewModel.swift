@@ -11,22 +11,23 @@ import Foundation
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import FirebaseStorage
 import SVProgressHUD
 
 final class SearchCommunityViewModel {
     
-    let checkedCommunityInfo = PublishSubject<(id: String, index: Int)>()
     let decideAction = PublishSubject<(isCheckedList: [Bool], isFilttered: Bool)>()
-    let communityList = BehaviorRelay<[CommunityModel.Fields]>(value: [])
-    let filteredCommunityList = BehaviorRelay<[CommunityModel.Fields]>(value: [])
-    let checkList = BehaviorRelay<[CommunityModel.Fields]>(value: [])
-    
+    let communityInfos = BehaviorRelay<[(id: String, name: String, image: UIImage)]>(value: [])
+    let filteredCommunityInfos = BehaviorRelay<[(id: String, name: String, image: UIImage)]>(value: [])
+    let belongingCommunityInfos = BehaviorRelay<[(id: String, name: String, image: UIImage)]>(value: [])
     let filterTrigger = PublishSubject<String?>()
     
+    private let communityList = BehaviorRelay<[CommunityModel.Fields]>(value: [])
     private let disposeBag = DisposeBag()
     
-    init() {
+    init(infos: [(id: String, name: String, image: UIImage)]) {
         SVProgressHUD.show()
+        belongingCommunityInfos.accept(infos)
         
         Firestore.firestore().rx
             .getArray(
@@ -38,8 +39,8 @@ final class SearchCommunityViewModel {
                 guard let vm = self else { return }
                 switch event {
                 case .success(let list):
+                    SVProgressHUD.show()
                     vm.communityList.accept(list)
-                    vm.filteredCommunityList.accept(list)
                 case .error(let error):
                     debugPrint(error)
                 }
@@ -49,31 +50,67 @@ final class SearchCommunityViewModel {
         decideAction
             .map { arg in
                 if arg.isFilttered {
-                    var list: [CommunityModel.Fields] = []
+                    var list: [(id: String, name: String, image: UIImage)] = []
                     for (index, isChecked) in arg.isCheckedList.enumerated() where isChecked {
-                        list.append(self.filteredCommunityList.value[index])
+                        list.append(self.filteredCommunityInfos.value[index])
                     }
                     return list
                 } else {
-                    var list: [CommunityModel.Fields] = []
+                    var list: [(id: String, name: String, image: UIImage)] = []
                     for (index, isChecked) in arg.isCheckedList.enumerated() where isChecked {
-                        list.append(self.communityList.value[index])
+                        list.append(self.communityInfos.value[index])
                     }
                     return list
                 }
             }
-            .bind(to: checkList)
+            .bind(to: belongingCommunityInfos)
             .disposed(by: disposeBag)
         
         filterTrigger
             .subscribe(onNext: { [unowned self] text in
                 if let text = text, text != "" {
-                    let filteredList = self.communityList.value.filter { $0.name.contains(text) }
-                    self.filteredCommunityList.accept(filteredList)
+                    let filteredInfos = self.communityInfos.value.filter { $0.name.contains(text) }
+                    self.filteredCommunityInfos.accept(filteredInfos)
                 } else {
-                    self.filteredCommunityList.accept(self.communityList.value)
+                    self.filteredCommunityInfos.accept(self.communityInfos.value)
                 }
             })
             .disposed(by: disposeBag)
+        
+        communityList
+            .subscribe(onNext: { [unowned self] communities in
+                self.downloadIconImage(communities: communities)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func downloadIconImage(communities: [CommunityModel.Fields]) {
+        var stashList: [(id: String, name: String, image: UIImage)] = []
+        communities.forEach { community in
+            let storageRef = Storage.storage().reference()
+            let imageRef = storageRef.child("images/community/" + community.id + ".jpg")
+            imageRef.getData(maxSize: 10 * 1024 * 1024) { [unowned self] (data, error) in
+                if let error = error {
+                    debugPrint(error)
+                    stashList.append((
+                        id: community.id,
+                        name: community.name,
+                        image: Asset.picture.image
+                    ))
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    stashList.append((
+                        id: community.id,
+                        name: community.name,
+                        image: image
+                    ))
+                }
+                if self.communityList.value.count == stashList.count {
+                    SVProgressHUD.dismiss()
+                    self.communityInfos.accept(stashList)
+                    self.filteredCommunityInfos.accept(stashList)
+                }
+            }
+        }
     }
 }

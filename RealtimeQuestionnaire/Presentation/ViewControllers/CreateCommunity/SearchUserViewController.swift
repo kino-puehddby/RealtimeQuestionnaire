@@ -96,6 +96,10 @@ extension SearchUserViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return SearchUser.TableView.cellHeight
+    }
+    
     func bind(cell: SearchUserTableViewCell, indexPath: IndexPath) {
         cell.rx.checkTapped
             .map { [unowned self] _ in

@@ -19,7 +19,7 @@ class AppSlideMenuController: SlideMenuController, SlideMenuControllerDelegate {
         SlideMenuOptions.contentViewScale = 1
         delegate = self
     }
-    
+        
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return mainViewController?.preferredStatusBarStyle ?? .default
     }

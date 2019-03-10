@@ -97,7 +97,6 @@ final class RegisterViewController: UIViewController {
         let fields = UserModel.Fields(
             id: user.uid,
             nickname: "",
-            iconUrl: "",
             communities: [],
             questionnaires: []
         )

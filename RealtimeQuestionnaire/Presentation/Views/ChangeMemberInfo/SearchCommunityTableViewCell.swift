@@ -26,8 +26,17 @@ final class SearchCommunityTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setup()
+        bind()
+    }
+    
+    private func setup() {
+        iconImageView.layer.cornerRadius = iconImageView.bounds.width / 2
+        iconImageView.layer.masksToBounds = true
         checkButton.setImage(Asset.nonChecked.image, for: .normal)
-        
+    }
+    
+    private func bind() {
         checkButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.checked(!self.isChecked)

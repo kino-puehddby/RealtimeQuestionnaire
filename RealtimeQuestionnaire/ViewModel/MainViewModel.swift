@@ -110,7 +110,7 @@ final class MainViewModel {
         communityNameWithIds.forEach { community in
             let storageRef = Storage.storage().reference()
             let imageRef = storageRef.child("images/community/" + community.id + ".jpg")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [unowned self] (data, error) in
+            imageRef.getData(maxSize: 10 * 1024 * 1024) { [unowned self] (data, error) in
                 if let error = error {
                     debugPrint(error)
                     communityInfoStashList.append((id: community.id, name: community.name, image: Asset.picture.image))

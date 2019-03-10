@@ -24,7 +24,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="hZr-F0-QVI">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hZr-F0-QVI">
                                             <rect key="frame" x="20" y="16.5" width="70" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="D0J-f9-AJF"/>
@@ -86,7 +86,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gzD-JU-u8H"/>
                     <connections>
-                        <outlet property="iconUrl" destination="hZr-F0-QVI" id="lbt-nH-R7l"/>
+                        <outlet property="iconImage" destination="hZr-F0-QVI" id="rdU-br-a8T"/>
                         <outlet property="nicknameLabel" destination="ozP-Do-u4C" id="83j-dE-ZCy"/>
                         <outlet property="tableView" destination="REh-du-oq5" id="MHQ-mc-X1B"/>
                         <segue destination="gXV-5j-dut" kind="show" identifier="showCreateCommunity" id="7mt-Qs-jWf"/>
@@ -105,7 +105,4 @@
             <point key="canvasLocation" x="1750.4000000000001" y="10.794602698650676"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="sample" width="670" height="443"/>
-    </resources>
 </document>
