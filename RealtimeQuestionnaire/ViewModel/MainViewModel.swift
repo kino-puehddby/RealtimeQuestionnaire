@@ -25,7 +25,7 @@ final class MainViewModel {
     let communityIconImages = BehaviorRelay<[UIImage]>(value: [])
     
 //    var stashList: [[QuestionnaireModel.Fields]] = []
-    var imageStashList: [UIImage] = []
+//    var imageStashList: [UIImage] = []
     
     var selectedCellData = BehaviorRelay<QuestionnaireModel.Fields?>(value: nil)
     
@@ -152,19 +152,23 @@ final class MainViewModel {
     }
     
     private func downloadImage(communities: [CommunityModel.Fields]) {
-        imageStashList = []
-        for (index, community) in communities.enumerated() {
+        var imageStashList: [UIImage] = []
+        communities.forEach { community in
             let storageRef = Storage.storage().reference()
             let imageRef = storageRef.child("images/community/" + community.id + ".jpg")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImages] (data, _) in
-                if let data = data,
-                    let image = UIImage(data: data),
-                    !communityIconImages.value.indices.contains(index) {
-                    self.imageStashList.append(image)
-                } else {
-                    self.imageStashList.append(Asset.picture.image)
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { [unowned self] (data, error) in
+                if let error = error {
+                    debugPrint(error)
+                    imageStashList.append(Asset.picture.image)
+                    return
                 }
-                self.communityIconImages.accept(self.imageStashList)
+                if let data = data,
+                    let image = UIImage(data: data) {
+                    imageStashList.append(image)
+                }
+                if imageStashList.count == communities.count {
+                    self.communityIconImages.accept(imageStashList)
+                }
             }
         }
     }
