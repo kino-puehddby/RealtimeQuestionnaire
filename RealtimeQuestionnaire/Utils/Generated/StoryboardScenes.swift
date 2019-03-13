@@ -67,11 +67,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.RegisterViewController>(storyboard: Register.self)
   }
-  internal enum Search: StoryboardType {
-    internal static let storyboardName = "Search"
-
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SearchViewController>(storyboard: Search.self)
-  }
   internal enum SearchCommunity: StoryboardType {
     internal static let storyboardName = "SearchCommunity"
 

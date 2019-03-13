@@ -24,7 +24,6 @@ internal enum StoryboardSegue {
   internal enum Main: String, SegueType {
     case showCreateQuestionnaire
     case showQuestionnaireDetail
-    case showSearch
     case showUnansweredQuestionnaireList
   }
   internal enum Menu: String, SegueType {

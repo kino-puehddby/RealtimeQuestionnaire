@@ -26,36 +26,36 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aRX-k7-ax4">
-                        <rect key="frame" x="10" y="2.5" width="45" height="45"/>
+                        <rect key="frame" x="10" y="7.5" width="35" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="aRX-k7-ax4" secondAttribute="height" multiplier="1:1" id="JhE-T8-fQT"/>
-                            <constraint firstAttribute="width" constant="45" id="mg2-nR-reE"/>
+                            <constraint firstAttribute="width" constant="35" id="mg2-nR-reE"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="9kJ-hI-qFv">
-                        <rect key="frame" x="65" y="9" width="245" height="31.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="9kJ-hI-qFv">
+                        <rect key="frame" x="55" y="10.5" width="255" height="29"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ニックネーム" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-FF-xYm">
-                                <rect key="frame" x="0.0" y="0.0" width="245" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="0.0" y="0.0" width="255" height="14"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-Ce-KRG">
-                                <rect key="frame" x="0.0" y="17" width="245" height="14.5"/>
+                                <rect key="frame" x="0.0" y="17" width="255" height="12"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLe-KA-Ryr">
-                                        <rect key="frame" x="0.0" y="0.0" width="19" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="19" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="19" id="KYD-Qf-1cP"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vp9-N5-sUH">
-                                        <rect key="frame" x="19" y="0.0" width="226" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <rect key="frame" x="19" y="0.0" width="236" height="12"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

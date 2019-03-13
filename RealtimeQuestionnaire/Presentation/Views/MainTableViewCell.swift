@@ -12,7 +12,7 @@ import Reusable
 class MainTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var unansweredFlug: UILabel!
+    @IBOutlet weak private var unansweredFlug: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -18,8 +18,7 @@ final class MainHeaderView: UIView, NibLoadable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = imageView.bounds.height / 2
+        imageView.alpha = 0.2
     }
     
     func set(name: String, image: UIImage) {

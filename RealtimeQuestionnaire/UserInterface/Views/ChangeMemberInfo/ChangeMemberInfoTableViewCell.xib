@@ -19,22 +19,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="clD-X1-eWN">
-                        <rect key="frame" x="10" y="5" width="54.5" height="54.5"/>
+                        <rect key="frame" x="12" y="12" width="40.5" height="40.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="clD-X1-eWN" secondAttribute="height" multiplier="1:1" id="XsT-aO-dVb"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-Th-lub">
-                        <rect key="frame" x="74.5" y="16.5" width="219.5" height="31.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-Th-lub">
+                        <rect key="frame" x="67.5" y="16" width="226.5" height="32.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コミュニティ名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTq-cN-mW7">
-                                <rect key="frame" x="0.0" y="0.0" width="219.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="0.0" y="0.0" width="226.5" height="13"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jI0-iB-zLm">
-                                <rect key="frame" x="0.0" y="17" width="219.5" height="14.5"/>
+                                <rect key="frame" x="0.0" y="18" width="226.5" height="14.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sw3-m2-jUE">
                                         <rect key="frame" x="0.0" y="0.0" width="23" height="14.5"/>
@@ -46,7 +46,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9my-NB-zRK">
-                                        <rect key="frame" x="23" y="0.0" width="196.5" height="14.5"/>
+                                        <rect key="frame" x="23" y="0.0" width="203.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -57,12 +57,12 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="clD-X1-eWN" secondAttribute="bottom" constant="5" id="1o4-VJ-1vx"/>
+                    <constraint firstAttribute="bottom" secondItem="clD-X1-eWN" secondAttribute="bottom" constant="12" id="1o4-VJ-1vx"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9qk-Th-lub" secondAttribute="trailing" constant="10" id="QL2-lB-y4v"/>
                     <constraint firstItem="9qk-Th-lub" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aid-QU-Rdb"/>
-                    <constraint firstItem="9qk-Th-lub" firstAttribute="leading" secondItem="clD-X1-eWN" secondAttribute="trailing" constant="10" id="ugo-Lx-MFG"/>
-                    <constraint firstItem="clD-X1-eWN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="vu1-iF-kmx"/>
-                    <constraint firstItem="clD-X1-eWN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ypD-H6-IVh"/>
+                    <constraint firstItem="9qk-Th-lub" firstAttribute="leading" secondItem="clD-X1-eWN" secondAttribute="trailing" constant="15" id="ugo-Lx-MFG"/>
+                    <constraint firstItem="clD-X1-eWN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="vu1-iF-kmx"/>
+                    <constraint firstItem="clD-X1-eWN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="ypD-H6-IVh"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

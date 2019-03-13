@@ -16,7 +16,6 @@ import SnapKit
 final class MainViewController: UIViewController {
 
     @IBOutlet weak private var leftBarButton: UIBarButtonItem!
-    @IBOutlet weak private var rightBarButton: UIBarButtonItem!
     @IBOutlet weak private var tableView: UITableView!
     
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
@@ -67,12 +66,6 @@ final class MainViewController: UIViewController {
         leftBarButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.slideMenuController()?.openLeft()
-            })
-            .disposed(by: disposeBag)
-        
-        rightBarButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.perform(segue: StoryboardSegue.Main.showSearch)
             })
             .disposed(by: disposeBag)
         

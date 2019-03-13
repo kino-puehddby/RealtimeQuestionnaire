@@ -18,30 +18,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8sb-dQ-YLs">
-                        <rect key="frame" x="54.5" y="9" width="216.5" height="31.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="8sb-dQ-YLs">
+                        <rect key="frame" x="49.5" y="11.5" width="221.5" height="27"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ニックネーム" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKQ-Xa-r5c">
-                                <rect key="frame" x="0.0" y="0.0" width="216.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="0.0" y="0.0" width="221.5" height="13"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVK-Uq-shf">
-                                <rect key="frame" x="0.0" y="17" width="216.5" height="14.5"/>
+                                <rect key="frame" x="0.0" y="16" width="221.5" height="11"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYH-cC-67e">
-                                        <rect key="frame" x="0.0" y="0.0" width="19" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="19" height="11"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="19" id="Xwv-7Q-1IU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LJ-4I-fgP">
-                                        <rect key="frame" x="19" y="0.0" width="197.5" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <rect key="frame" x="19" y="0.0" width="202.5" height="11"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -51,7 +51,7 @@
                         <viewLayoutGuide key="safeArea" id="gef-gm-yxL"/>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-5h-9sP">
-                        <rect key="frame" x="5" y="5" width="39.5" height="39.5"/>
+                        <rect key="frame" x="10" y="10" width="29.5" height="29.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="5Bn-5h-9sP" secondAttribute="height" multiplier="1:1" id="xci-SC-bnT"/>
                         </constraints>
@@ -67,13 +67,13 @@
                 <constraints>
                     <constraint firstItem="tTf-nj-6dd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="1nO-Pz-xqL"/>
                     <constraint firstItem="tTf-nj-6dd" firstAttribute="leading" secondItem="8sb-dQ-YLs" secondAttribute="trailing" constant="10" id="5FZ-YD-2Va"/>
-                    <constraint firstItem="5Bn-5h-9sP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="8UW-Lz-dp4"/>
+                    <constraint firstItem="5Bn-5h-9sP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="8UW-Lz-dp4"/>
                     <constraint firstItem="8sb-dQ-YLs" firstAttribute="leading" secondItem="5Bn-5h-9sP" secondAttribute="trailing" constant="10" id="ADR-cZ-QUL"/>
                     <constraint firstAttribute="bottomMargin" secondItem="tTf-nj-6dd" secondAttribute="bottom" constant="5" id="CD4-kq-OQa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="tTf-nj-6dd" secondAttribute="trailing" constant="5" id="HKQ-Mm-GaZ"/>
-                    <constraint firstAttribute="bottom" secondItem="5Bn-5h-9sP" secondAttribute="bottom" constant="5" id="MRG-Ux-0wd"/>
+                    <constraint firstAttribute="bottom" secondItem="5Bn-5h-9sP" secondAttribute="bottom" constant="10" id="MRG-Ux-0wd"/>
                     <constraint firstItem="8sb-dQ-YLs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aRA-PP-pOX"/>
-                    <constraint firstItem="5Bn-5h-9sP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bvt-tp-VMr"/>
+                    <constraint firstItem="5Bn-5h-9sP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="bvt-tp-VMr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

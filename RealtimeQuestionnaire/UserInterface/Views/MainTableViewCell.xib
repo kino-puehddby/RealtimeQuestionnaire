@@ -19,37 +19,41 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アンケートタイトル" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-ki-RMf">
-                        <rect key="frame" x="20" y="7.5" width="249" height="35"/>
+                        <rect key="frame" x="20" y="7.5" width="256" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="M83-8N-esR"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpS-A4-n3N">
-                        <rect key="frame" x="274" y="15" width="30" height="21"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcw-Mm-0V6">
+                        <rect key="frame" x="286" y="21" width="8" height="8"/>
+                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="NnJ-le-hgb"/>
+                            <constraint firstAttribute="width" constant="8" id="CNL-8b-Pwf"/>
+                            <constraint firstAttribute="width" secondItem="Lcw-Mm-0V6" secondAttribute="height" multiplier="1:1" id="b3H-3C-4oG"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="UpS-A4-n3N" firstAttribute="leading" secondItem="Tlp-ki-RMf" secondAttribute="trailing" constant="5" id="9JD-5F-Olx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Lcw-Mm-0V6" secondAttribute="trailing" constant="10" id="8VX-nz-XqT"/>
                     <constraint firstItem="Tlp-ki-RMf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TAQ-6D-oEc"/>
-                    <constraint firstItem="UpS-A4-n3N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="bbY-2M-DE5"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="UpS-A4-n3N" secondAttribute="trailing" id="i9U-Sd-zmZ"/>
+                    <constraint firstItem="Lcw-Mm-0V6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VXy-iz-Cch"/>
+                    <constraint firstItem="Lcw-Mm-0V6" firstAttribute="leading" secondItem="Tlp-ki-RMf" secondAttribute="trailing" constant="10" id="owC-rj-NJZ"/>
                     <constraint firstItem="Tlp-ki-RMf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="tSW-ee-rvZ"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="UpS-A4-n3N" secondAttribute="bottom" constant="3" id="yaP-yj-KUl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="titleLabel" destination="Tlp-ki-RMf" id="5Sz-Sv-SMu"/>
-                <outlet property="unansweredFlug" destination="UpS-A4-n3N" id="7wb-im-jdm"/>
+                <outlet property="unansweredFlug" destination="Lcw-Mm-0V6" id="Fif-AR-uLx"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="154.72263868065968"/>
         </tableViewCell>

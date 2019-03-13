@@ -65,8 +65,6 @@
 		4ED53371221D475D00F4113D /* CreateQuestionnaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53370221D475D00F4113D /* CreateQuestionnaireViewController.swift */; };
 		4ED53374221D4A0600F4113D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53373221D4A0600F4113D /* MenuViewController.swift */; };
 		4ED53377221D4A4A00F4113D /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED53376221D4A4A00F4113D /* Menu.storyboard */; };
-		4ED5337B221D4BBC00F4113D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5337A221D4BBC00F4113D /* SearchViewController.swift */; };
-		4ED5337D221D4BE400F4113D /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5337C221D4BE400F4113D /* Search.storyboard */; };
 		4ED5337F221D568D00F4113D /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED5337E221D568D00F4113D /* SlideMenuControllerSwift.framework */; };
 		4ED53381221E3E8600F4113D /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED53380221E3E8600F4113D /* UIViewController+extension.swift */; };
 		4ED53382221E40BE00F4113D /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E09F821221AD130004A00AD /* SnapKit.framework */; };
@@ -169,8 +167,6 @@
 		4ED53370221D475D00F4113D /* CreateQuestionnaireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionnaireViewController.swift; sourceTree = "<group>"; };
 		4ED53373221D4A0600F4113D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		4ED53376221D4A4A00F4113D /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
-		4ED5337A221D4BBC00F4113D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		4ED5337C221D4BE400F4113D /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		4ED5337E221D568D00F4113D /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
 		4ED53380221E3E8600F4113D /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		4ED53383221E444C00F4113D /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
@@ -472,7 +468,6 @@
 				4E09F816221A9795004A00AD /* MainViewController.swift */,
 				4ED53373221D4A0600F4113D /* MenuViewController.swift */,
 				4E09F811221A973F004A00AD /* Authorization */,
-				4ED53388221E553200F4113D /* Search */,
 				4ED5336D221D46C000F4113D /* Questionnaire */,
 				4E35F4D4222CFC3A00E1130E /* CreateCommunity */,
 				4E56BA962227E8B70055529B /* ChangeMemberInfo */,
@@ -559,22 +554,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		4ED53388221E553200F4113D /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				4ED5337A221D4BBC00F4113D /* SearchViewController.swift */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		4ED53389221E556800F4113D /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				4ED5337C221D4BE400F4113D /* Search.storyboard */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
 		4ED5338A221E5D5900F4113D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,7 +562,6 @@
 				4E09F80F221A9731004A00AD /* Main.storyboard */,
 				4ED53376221D4A4A00F4113D /* Menu.storyboard */,
 				4E09F80C221A970C004A00AD /* Authorization */,
-				4ED53389221E556800F4113D /* Search */,
 				4ED5336C221D46A700F4113D /* Questionnaire */,
 				4E56BA952227E89F0055529B /* CreateCommunity */,
 				4E35F4D8222CFD5F00E1130E /* ChangeMemberInfo */,
@@ -751,7 +729,6 @@
 				4E56BA9B2227E90E0055529B /* CreateCommunity.storyboard in Resources */,
 				A0E44C3E2233842500AE21F5 /* SearchCommunity.storyboard in Resources */,
 				4E09F80B221A96CE004A00AD /* Login.storyboard in Resources */,
-				4ED5337D221D4BE400F4113D /* Search.storyboard in Resources */,
 				4E35F4DA222D097E00E1130E /* QuestionnaireDetail.storyboard in Resources */,
 				4EF3E1A5221A8E3900839D2B /* GoogleService-Info.plist in Resources */,
 				4E92032B221A5BB800C6634F /* Assets.xcassets in Resources */,
@@ -964,7 +941,6 @@
 				A0E44C402233845100AE21F5 /* SearchCommunityViewController.swift in Sources */,
 				4E35F4D0222CD4EF00E1130E /* UIKit+Rx.swift in Sources */,
 				A0588B60222AB45900912FAB /* ManageConpleteStatus.swift in Sources */,
-				4ED5337B221D4BBC00F4113D /* SearchViewController.swift in Sources */,
 				4E56BA932227E4A30055529B /* MenuTableViewCell.swift in Sources */,
 				4E35F4DC222D099900E1130E /* QuestionnaireDetailContainerViewController.swift in Sources */,
 				4ED53384221E444C00F4113D /* AppRootViewController.swift in Sources */,
