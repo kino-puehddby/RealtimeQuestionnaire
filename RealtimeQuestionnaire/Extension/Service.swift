@@ -9,39 +9,51 @@
 import Foundation
 import KeychainAccess
 
-final class ServicesUtil {
+let S: Service.Type = Service.self
+
+let SERVICE_NAME = "com.hisayasugita.RealtimeQuestionnaire"
+
+struct Service {
     private init() {}
-    static let shared = ServicesUtil()
-    static let keychain = Keychain(service: "com.hisayasugita.RealtimeQuestionnaire")
+    static let keychain = Keychain(service: SERVICE_NAME)
     static let userDefaults = UserDefaults.standard
 }
 
 // MARK: Keychain
-extension ServicesUtil {
-    static func getKeychain(_ key: KeychainKeys) -> String? {
+enum Keychain_Keys: String {
+    case uid
+}
+
+extension Service {
+    static func getKeychain(_ key: Keychain_Keys) -> String? {
         return keychain[key.rawValue]
     }
     
-    static func setKeychain(_ key: KeychainKeys, _ value: String?) {
+    static func setKeychain(_ key: Keychain_Keys, _ value: String?) {
         keychain[key.rawValue] = value
     }
 }
 
 // MARK: UserDefaults
-extension ServicesUtil {
+enum UserDefaults_Keys: String {
+    // Sample
+    case isFirstLaunch
+}
+
+extension Service {
     static func setDefaultUserDefaults() {
-        userDefaults.register(defaults: [UserDefaultsKeys.isLogin.rawValue: true])
+        userDefaults.register(defaults: [UserDefaults_Keys.isFirstLaunch.rawValue: true])
     }
     
-    static func setUserDefaults<T>(_ key: UserDefaultsKeys, _ value: T) {
+    static func setUserDefaults<T>(_ key: UserDefaults_Keys, _ value: T) {
         userDefaults[key] = value
     }
     
-    static func getUserDefaults<T: Any>(_ key: UserDefaultsKeys) -> T? {
+    static func getUserDefaults<T: Any>(_ key: UserDefaults_Keys) -> T? {
         return userDefaults[key]
     }
     
-    static func removeUserDefaults(_ key: UserDefaultsKeys) {
+    static func removeUserDefaults(_ key: UserDefaults_Keys) {
         userDefaults.remove(key)
     }
 }
