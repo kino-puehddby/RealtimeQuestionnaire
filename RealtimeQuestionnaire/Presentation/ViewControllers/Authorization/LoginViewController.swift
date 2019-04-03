@@ -105,7 +105,7 @@ final class LoginViewController: UIViewController {
                 self.viewModel.isLoading.onNext(false)
                 switch status {
                 case .success:
-                    self.switchMainViewController()
+                    self.validMemberInfoAndPresent()
                 case .error(let error):
                     self.showAlert(type: .ok, message: L10n.Alert.InvalidLogin.message, completion: {
                         self.registeringPassword.text = ""
@@ -140,6 +140,15 @@ final class LoginViewController: UIViewController {
             textfield.keyboardType = .emailAddress
         }
         present(alert, animated: true)
+    }
+    
+    func validMemberInfoAndPresent() {
+        guard let user = viewModel.user.value else { return }
+        if user.nickname == nil || user.nickname == "" {
+            switchChangeMemberInfoController()
+        } else {
+            switchMainViewController()
+        }
     }
 }
 
@@ -178,7 +187,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             if let user = user {
                 self.viewModel.set(uid: user.user.uid)
             }
-            self.switchMainViewController()
+            self.validMemberInfoAndPresent()
         }
     }
     

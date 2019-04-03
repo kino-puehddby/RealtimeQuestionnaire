@@ -52,4 +52,15 @@ final class AppRootViewController: UIViewController {
         currentRootViewController.view.removeFromSuperview()
         currentRootViewController.removeFromParent()
     }
+    
+    func switchToChangeMemberInfoViewController() {
+        guard let currentRootViewController = children.first else { return }
+        let changeMemberInfoVC = StoryboardScene.ChangeMemberInfo.initialScene.instantiate()
+        let navigationController = UINavigationController(rootViewController: changeMemberInfoVC)
+        addChildVC(navigationController)
+        
+        currentRootViewController.willMove(toParent: nil)
+        currentRootViewController.view.removeFromSuperview()
+        currentRootViewController.removeFromParent()
+    }
 }

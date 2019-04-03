@@ -27,6 +27,12 @@ extension UIViewController {
         rootViewController.switchToMainViewController()
     }
     
+    func switchChangeMemberInfoController() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        guard let rootViewController = appDelegate.window?.rootViewController as? AppRootViewController else { return }
+        rootViewController.switchToChangeMemberInfoViewController()
+    }
+    
     func addChildVC(_ vc: UIViewController) {
         addChild(vc)
         view.addSubview(vc.view)

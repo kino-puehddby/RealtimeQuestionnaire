@@ -18,10 +18,16 @@ final class ChangeMemberInfoViewController: UIViewController {
     @IBOutlet weak private var searchCommunityButton: UIButton!
     @IBOutlet weak private var changeButton: UIButton!
     
+    enum ChangeMemberInfoType {
+        case register
+        case update
+    }
+    
     private let disposeBag = DisposeBag()
     
     lazy var photoLibraryManager: PhotoLibraryManager = { preconditionFailure() }()
     lazy var viewModel: ChangeMemberInfoViewModel = { preconditionFailure() }()
+    lazy var type: ChangeMemberInfoType = { preconditionFailure() }()
     
     lazy var belongingCommunityInfos: [(id: String, name: String, image: UIImage)] = { preconditionFailure() }()
     
@@ -53,6 +59,13 @@ final class ChangeMemberInfoViewController: UIViewController {
         tableView.register(cellType: ChangeMemberInfoTableViewCell.self)
         
         photoLibraryManager = PhotoLibraryManager(parentViewController: self)
+        
+        switch type {
+        case .register:
+            changeButton.setTitle(L10n.Menu.ChangeMemberInfo.ButtonTItle.register, for: .normal)
+        case .update:
+            changeButton.setTitle(L10n.Menu.ChangeMemberInfo.ButtonTItle.update, for: .normal)
+        }
     }
     
     private func bind() {
@@ -68,7 +81,12 @@ final class ChangeMemberInfoViewController: UIViewController {
         
         searchCommunityButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.perform(segue: StoryboardSegue.ChangeMemberInfo.showSearchCommunity)
+                switch self.type {
+                case .register:
+                    self.switchMainViewController()
+                case .update:
+                    self.perform(segue: StoryboardSegue.ChangeMemberInfo.showSearchCommunity)
+                }
             })
             .disposed(by: disposeBag)
         

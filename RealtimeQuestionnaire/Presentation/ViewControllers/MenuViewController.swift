@@ -29,11 +29,11 @@ final class MenuViewController: UIViewController {
         var text: String {
             switch self {
             case .createCommunity:
-                return L10n.Menu.createCommunity
+                return L10n.Menu.CreateCommunity.title
             case .changeMemberInfo:
-                return L10n.Menu.changeMemberInfo
+                return L10n.Menu.ChangeMemberInfo.title
             case .logout:
-                return L10n.Menu.logout
+                return L10n.Menu.Logout.title
             }
         }
     }
@@ -96,6 +96,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             popTo(target: createCommunityVC)
         case .changeMemberInfo:
             let changeMemberInfoVC = StoryboardScene.ChangeMemberInfo.initialScene.instantiate()
+            changeMemberInfoVC.type = .update
             popTo(target: changeMemberInfoVC)
         case .logout:
             logout()

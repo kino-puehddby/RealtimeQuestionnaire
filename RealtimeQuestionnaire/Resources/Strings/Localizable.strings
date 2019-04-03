@@ -14,9 +14,11 @@
 "Questionnaire.Detail.Answer"="アンケート回答";
 "Questionnaire.Detail.Result"="アンケート結果";
 
-"Menu.CreateCommunity"="コミュニティをつくる";
-"Menu.Logout"="ログアウト";
-"Menu.ChangeMemberInfo"="会員情報変更";
+"Menu.CreateCommunity.Title"="コミュニティをつくる";
+"Menu.Logout.Title"="ログアウト";
+"Menu.ChangeMemberInfo.Title"="会員情報変更";
+"Menu.ChangeMemberInfo.ButtonTItle.register"="次へ";
+"Menu.ChangeMemberInfo.ButtonTItle.update"="変更する";
 
 // Sample
 "Common.Ok"="OK";
