@@ -29,7 +29,7 @@ final class AnswerQuestionnaireViewModel {
     init(data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields)) {
         
         self.data = data
-        if let uid = ServicesUtil.shared.getKeychain(.uid) {
+        if let uid = KeyAccessUtil.shared.getKeychain(.uid) {
             self.uid = uid
         }
         

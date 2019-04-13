@@ -1,5 +1,5 @@
 //
-//  KeyChain.swift
+//  KeyAccessUtil.swift
 //  RealtimeQuestionnaire
 //
 //  Created by 杉田 尚哉 on 2019/02/26.
@@ -11,14 +11,14 @@ import KeychainAccess
 
 let SERVICE_NAME = "com.hisayasugita.RealtimeQuestionnaire"
 
-final class ServicesUtil {
+final class KeyAccessUtil {
     private init() {}
-    static let shared = ServicesUtil()
+    static let shared = KeyAccessUtil()
     private let keychain = Keychain(service: SERVICE_NAME)
 }
 
 // MARK: Keychain
-extension ServicesUtil {
+extension KeyAccessUtil {
     func getKeychain(_ key: KeychainKeys) -> String? {
         return keychain[key.rawValue]
     }
@@ -29,7 +29,7 @@ extension ServicesUtil {
 }
 
 // MARK: UserDefaults
-extension ServicesUtil {
+extension KeyAccessUtil {
     func setDefaultUserDefaults() {
         UserDefaults.standard.register(defaults: [UserDefaultsKeys.isFirstLaunch.rawValue: true])
     }
@@ -47,7 +47,7 @@ extension ServicesUtil {
     }
 }
 
-extension ServicesUtil {
+extension KeyAccessUtil {
     // MARK: Access Keys
     enum KeychainKeys: String {
         case uid

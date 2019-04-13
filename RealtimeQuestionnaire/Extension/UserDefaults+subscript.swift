@@ -9,7 +9,7 @@
 import Foundation
 
 extension UserDefaults {
-    subscript<T: Any>(key: ServicesUtil.UserDefaultsKeys) -> T? {
+    subscript<T: Any>(key: KeyAccessUtil.UserDefaultsKeys) -> T? {
         get {
             let value = object(forKey: key.rawValue)
             return value as? T
@@ -23,7 +23,7 @@ extension UserDefaults {
         }
     }
     
-    func remove(_ key: ServicesUtil.UserDefaultsKeys) {
+    func remove(_ key: KeyAccessUtil.UserDefaultsKeys) {
         removeObject(forKey: key.rawValue)
     }
 }

@@ -34,7 +34,7 @@
 		4E3BD56D221BA48700E357CE /* UIViewController+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */; };
 		4E56BA7822251AD80055529B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7722251AD80055529B /* PickerTextField.swift */; };
 		4E56BA7B22251FED0055529B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7A22251FED0055529B /* UserModel.swift */; };
-		4E56BA7E22253E6E0055529B /* ServicesUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7D22253E6E0055529B /* ServicesUtil.swift */; };
+		4E56BA7E22253E6E0055529B /* KeyAccessUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA7D22253E6E0055529B /* KeyAccessUtil.swift */; };
 		4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56BA7F222540040055529B /* KeychainAccess.framework */; };
 		4E56BA8222262CD00055529B /* UserDefaults+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */; };
 		4E56BA892226AE130055529B /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56BA882226AE130055529B /* CommunityModel.swift */; };
@@ -155,7 +155,7 @@
 		4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIKit.swift"; sourceTree = "<group>"; };
 		4E56BA7722251AD80055529B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		4E56BA7A22251FED0055529B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		4E56BA7D22253E6E0055529B /* ServicesUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesUtil.swift; sourceTree = "<group>"; };
+		4E56BA7D22253E6E0055529B /* KeyAccessUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAccessUtil.swift; sourceTree = "<group>"; };
 		4E56BA7F222540040055529B /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+subscript.swift"; sourceTree = "<group>"; };
 		4E56BA882226AE130055529B /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
@@ -369,7 +369,7 @@
 			children = (
 				4E3BD56C221BA48700E357CE /* UIViewController+UIKit.swift */,
 				4ED53380221E3E8600F4113D /* UIViewController+extension.swift */,
-				4E56BA7D22253E6E0055529B /* ServicesUtil.swift */,
+				4E56BA7D22253E6E0055529B /* KeyAccessUtil.swift */,
 				4E56BA8122262CD00055529B /* UserDefaults+subscript.swift */,
 				4E819200222922F900FFB6F9 /* UIImage+Trimming.swift */,
 				4E35F4CF222CD4EF00E1130E /* UIKit+Rx.swift */,
@@ -1029,7 +1029,7 @@
 				4E920324221A5BB600C6634F /* AppDelegate.swift in Sources */,
 				A0E44C39222ED89800AE21F5 /* MainHeaderView.swift in Sources */,
 				4E8191FD2228F58E00FFB6F9 /* PhotoLibraryManager.swift in Sources */,
-				4E56BA7E22253E6E0055529B /* ServicesUtil.swift in Sources */,
+				4E56BA7E22253E6E0055529B /* KeyAccessUtil.swift in Sources */,
 				4E35F4EF222E43A200E1130E /* QuestionnaireResultTableViewCell.swift in Sources */,
 				4EA23571221A71C500AB29A4 /* StoryboardScenes.swift in Sources */,
 			);

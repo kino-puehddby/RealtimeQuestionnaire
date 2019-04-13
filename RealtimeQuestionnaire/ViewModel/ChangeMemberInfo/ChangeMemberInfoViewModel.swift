@@ -30,7 +30,7 @@ final class ChangeMemberInfoViewModel {
     init(belongingCommunityInfos: [(id: String, name: String, image: UIImage)]) {
         SVProgressHUD.show()
         
-        guard let uid = ServicesUtil.shared.getKeychain(.uid) else { return }
+        guard let uid = KeyAccessUtil.shared.getKeychain(.uid) else { return }
         userDocumentRef = UserModel.makeDocumentRef(id: uid)
         self.belongingCommunityInfos.accept(belongingCommunityInfos)
         

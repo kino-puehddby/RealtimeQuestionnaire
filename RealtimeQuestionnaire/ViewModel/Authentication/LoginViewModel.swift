@@ -49,15 +49,15 @@ final class LoginViewModel {
     }
     
     func set(uid: String) {
-        if ServicesUtil.shared.getKeychain(.uid) == nil {
-            ServicesUtil.shared.setKeychain(.uid, uid)
+        if KeyAccessUtil.shared.getKeychain(.uid) == nil {
+            KeyAccessUtil.shared.setKeychain(.uid, uid)
         }
         getUserAction.onNext(())
     }
     
     func getUser() {
         // observe User
-        guard let uid = ServicesUtil.shared.getKeychain(.uid) else { return }
+        guard let uid = KeyAccessUtil.shared.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(
