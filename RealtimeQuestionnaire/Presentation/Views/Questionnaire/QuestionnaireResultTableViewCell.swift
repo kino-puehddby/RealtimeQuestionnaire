@@ -10,7 +10,7 @@ import UIKit
 
 import Reusable
 
-class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
+final class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var colorView: UIView!
     @IBOutlet weak private var choiceLabel: UILabel!

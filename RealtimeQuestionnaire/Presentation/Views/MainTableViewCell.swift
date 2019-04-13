@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class MainTableViewCell: UITableViewCell, NibReusable {
+final class MainTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var unansweredFlug: UIView!
