@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import SlideMenuControllerSwift
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // SlideMenuController
         window?.rootViewController = AppRootViewController()
+        
+        // SVProgressHUD
+        SVProgressHUD.setDefaultMaskType(.clear)
         
         return true
     }
