@@ -106,6 +106,6 @@ extension SearchCommunityViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SearchCommunity.TableView.cellHeight
+        return SearchCommunity.cellHeight
     }
 }

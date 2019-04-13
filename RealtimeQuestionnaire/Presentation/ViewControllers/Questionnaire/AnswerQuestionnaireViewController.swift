@@ -85,7 +85,7 @@ extension AnswerQuestionnaireViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return QuestionnaireDetail.AnswerQuestionnaire.TableView.cellHeight
+        return QuestionnaireDetail.AnswerQuestionnaire.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

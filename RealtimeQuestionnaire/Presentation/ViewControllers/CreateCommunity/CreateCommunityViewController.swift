@@ -121,7 +121,7 @@ extension CreateCommunityViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CreateCommunity.TableView.cellHeight
+        return CreateCommunity.cellHeight
     }
 }
 

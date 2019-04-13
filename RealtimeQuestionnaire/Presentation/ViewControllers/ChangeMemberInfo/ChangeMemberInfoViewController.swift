@@ -141,7 +141,7 @@ extension ChangeMemberInfoViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ChangeMemberInfo.TableView.cellHeight
+        return ChangeMemberInfo.cellHeight
     }
 }
 

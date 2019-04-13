@@ -23,7 +23,13 @@ final class LoginViewModel {
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
     let getUserAction = PublishSubject<Void>()
     
-    init() {}
+    init() {
+        getUserAction
+            .subscribe(onNext: { [unowned self] in
+                self.getUser()
+            })
+            .disposed(by: disposeBag)
+    }
     
     func login(email: String?, password: String?) {
         SVProgressHUD.show()
@@ -40,12 +46,6 @@ final class LoginViewModel {
             self.set(uid: user.user.uid)
             self.completed.onNext(.success)
         }
-        
-        getUserAction
-            .subscribe(onNext: { [unowned self] in
-                self.getUser()
-            })
-            .disposed(by: disposeBag)
     }
     
     func set(uid: String) {

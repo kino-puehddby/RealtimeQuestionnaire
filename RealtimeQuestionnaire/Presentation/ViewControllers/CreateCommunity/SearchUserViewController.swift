@@ -97,7 +97,7 @@ extension SearchUserViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SearchUser.TableView.cellHeight
+        return SearchUser.cellHeight
     }
     
     func bind(cell: SearchUserTableViewCell, indexPath: IndexPath) {

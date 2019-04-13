@@ -187,7 +187,7 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CreateQuestionnaire.TableView.cellHeight
+        return CreateQuestionnaire.cellHeight
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
