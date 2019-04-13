@@ -8,9 +8,16 @@ github "SnapKit/SnapKit" ~> 4.0.1
 github "dekatotoro/SlideMenuControllerSwift"
 github "SVProgressHUD/SVProgressHUD"
 github "danielgindi/Charts" ~> 3.2.2
+github "AliSoftware/Reusable"
 
 # Decode
 github "alickbass/CodableFirebase"
 
 # KeyChain
 github "kishikawakatsumi/KeychainAccess"
+
+# Firebase
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAuthBinary.json"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseFirestoreBinary.json"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseStorageBinary.json"

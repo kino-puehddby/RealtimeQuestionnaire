@@ -100,6 +100,28 @@
 		A0E44C422233878600AE21F5 /* SearchCommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C412233878600AE21F5 /* SearchCommunityViewModel.swift */; };
 		A0E44C45223389C200AE21F5 /* SearchCommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E44C43223389C200AE21F5 /* SearchCommunityTableViewCell.swift */; };
 		A0E44C46223389C200AE21F5 /* SearchCommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E44C44223389C200AE21F5 /* SearchCommunityTableViewCell.xib */; };
+		A0FBC9E72262205E00D9EEFE /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9D42262205C00D9EEFE /* FIRAnalyticsConnector.framework */; };
+		A0FBC9E82262205E00D9EEFE /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9D52262205C00D9EEFE /* FirebaseCoreDiagnostics.framework */; };
+		A0FBC9E92262205E00D9EEFE /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9D62262205C00D9EEFE /* nanopb.framework */; };
+		A0FBC9EA2262205E00D9EEFE /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9D72262205D00D9EEFE /* FirebaseInstanceID.framework */; };
+		A0FBC9EB2262205E00D9EEFE /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9D82262205D00D9EEFE /* GoogleAppMeasurement.framework */; };
+		A0FBC9EC2262205E00D9EEFE /* gRPC-C++.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9D92262205D00D9EEFE /* gRPC-C++.framework */; };
+		A0FBC9ED2262205E00D9EEFE /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9DA2262205D00D9EEFE /* Reusable.framework */; };
+		A0FBC9EE2262205E00D9EEFE /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9DB2262205D00D9EEFE /* FirebaseCore.framework */; };
+		A0FBC9F02262205E00D9EEFE /* BoringSSL-GRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9DD2262205D00D9EEFE /* BoringSSL-GRPC.framework */; };
+		A0FBC9F12262205E00D9EEFE /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9DE2262205D00D9EEFE /* GoogleUtilities.framework */; };
+		A0FBC9F22262205E00D9EEFE /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9DF2262205D00D9EEFE /* FirebaseStorage.framework */; };
+		A0FBC9F32262205E00D9EEFE /* gRPC-Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E02262205D00D9EEFE /* gRPC-Core.framework */; };
+		A0FBC9F42262205E00D9EEFE /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E12262205E00D9EEFE /* GTMSessionFetcher.framework */; };
+		A0FBC9F52262205E00D9EEFE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E22262205E00D9EEFE /* Protobuf.framework */; };
+		A0FBC9F62262205E00D9EEFE /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E32262205E00D9EEFE /* FirebaseAuth.framework */; };
+		A0FBC9F72262205E00D9EEFE /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E42262205E00D9EEFE /* FirebaseAnalytics.framework */; };
+		A0FBC9F82262205E00D9EEFE /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E52262205E00D9EEFE /* leveldb-library.framework */; };
+		A0FBC9F92262205E00D9EEFE /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9E62262205E00D9EEFE /* FirebaseFirestore.framework */; };
+		A0FBC9FB2262217500D9EEFE /* gRPCCertificates.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0FBC9FA2262217500D9EEFE /* gRPCCertificates.bundle */; };
+		A0FBC9FD2262228600D9EEFE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9FC2262228500D9EEFE /* libsqlite3.tbd */; };
+		A0FBC9FF2262229500D9EEFE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBC9FE2262229500D9EEFE /* libc++.tbd */; };
+		A0FBCA01226222A000D9EEFE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FBCA00226222A000D9EEFE /* StoreKit.framework */; };
 		DCA9F1B3A40DE798150C7CE0 /* Pods_RealtimeQuestionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +223,29 @@
 		A0E44C412233878600AE21F5 /* SearchCommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommunityViewModel.swift; sourceTree = "<group>"; };
 		A0E44C43223389C200AE21F5 /* SearchCommunityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommunityTableViewCell.swift; sourceTree = "<group>"; };
 		A0E44C44223389C200AE21F5 /* SearchCommunityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCommunityTableViewCell.xib; sourceTree = "<group>"; };
+		A0FBC9D42262205C00D9EEFE /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Carthage/Build/iOS/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		A0FBC9D52262205C00D9EEFE /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Carthage/Build/iOS/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		A0FBC9D62262205C00D9EEFE /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Carthage/Build/iOS/nanopb.framework; sourceTree = "<group>"; };
+		A0FBC9D72262205D00D9EEFE /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Carthage/Build/iOS/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		A0FBC9D82262205D00D9EEFE /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Carthage/Build/iOS/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		A0FBC9D92262205D00D9EEFE /* gRPC-C++.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "gRPC-C++.framework"; path = "Carthage/Build/iOS/gRPC-C++.framework"; sourceTree = "<group>"; };
+		A0FBC9DA2262205D00D9EEFE /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
+		A0FBC9DB2262205D00D9EEFE /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Carthage/Build/iOS/FirebaseCore.framework; sourceTree = "<group>"; };
+		A0FBC9DC2262205D00D9EEFE /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Carthage/Build/iOS/Firebase.framework; sourceTree = "<group>"; };
+		A0FBC9DD2262205D00D9EEFE /* BoringSSL-GRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "BoringSSL-GRPC.framework"; path = "Carthage/Build/iOS/BoringSSL-GRPC.framework"; sourceTree = "<group>"; };
+		A0FBC9DE2262205D00D9EEFE /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Carthage/Build/iOS/GoogleUtilities.framework; sourceTree = "<group>"; };
+		A0FBC9DF2262205D00D9EEFE /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseStorage.framework; path = Carthage/Build/iOS/FirebaseStorage.framework; sourceTree = "<group>"; };
+		A0FBC9E02262205D00D9EEFE /* gRPC-Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "gRPC-Core.framework"; path = "Carthage/Build/iOS/gRPC-Core.framework"; sourceTree = "<group>"; };
+		A0FBC9E12262205E00D9EEFE /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = Carthage/Build/iOS/GTMSessionFetcher.framework; sourceTree = "<group>"; };
+		A0FBC9E22262205E00D9EEFE /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protobuf.framework; path = Carthage/Build/iOS/Protobuf.framework; sourceTree = "<group>"; };
+		A0FBC9E32262205E00D9EEFE /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = "<group>"; };
+		A0FBC9E42262205E00D9EEFE /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Carthage/Build/iOS/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		A0FBC9E52262205E00D9EEFE /* leveldb-library.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "leveldb-library.framework"; path = "Carthage/Build/iOS/leveldb-library.framework"; sourceTree = "<group>"; };
+		A0FBC9E62262205E00D9EEFE /* FirebaseFirestore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseFirestore.framework; path = Carthage/Build/iOS/FirebaseFirestore.framework; sourceTree = "<group>"; };
+		A0FBC9FA2262217500D9EEFE /* gRPCCertificates.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = gRPCCertificates.bundle; path = Carthage/Build/iOS/FirebaseFirestore.framework/gRPCCertificates.bundle; sourceTree = "<group>"; };
+		A0FBC9FC2262228500D9EEFE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A0FBC9FE2262229500D9EEFE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A0FBCA00226222A000D9EEFE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F9B48EBAE828EDB2223C7DE9 /* Pods-RealtimeQuestionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtimeQuestionnaire.release.xcconfig"; path = "Target Support Files/Pods-RealtimeQuestionnaire/Pods-RealtimeQuestionnaire.release.xcconfig"; sourceTree = "<group>"; };
 		FE869459CD9E97BDA64A2C7C /* Pods_RealtimeQuestionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealtimeQuestionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,6 +255,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0FBCA01226222A000D9EEFE /* StoreKit.framework in Frameworks */,
+				A0FBC9FF2262229500D9EEFE /* libc++.tbd in Frameworks */,
+				A0FBC9FD2262228600D9EEFE /* libsqlite3.tbd in Frameworks */,
+				A0FBC9E72262205E00D9EEFE /* FIRAnalyticsConnector.framework in Frameworks */,
+				A0FBC9E82262205E00D9EEFE /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				A0FBC9E92262205E00D9EEFE /* nanopb.framework in Frameworks */,
+				A0FBC9EA2262205E00D9EEFE /* FirebaseInstanceID.framework in Frameworks */,
+				A0FBC9EB2262205E00D9EEFE /* GoogleAppMeasurement.framework in Frameworks */,
+				A0FBC9EC2262205E00D9EEFE /* gRPC-C++.framework in Frameworks */,
+				A0FBC9ED2262205E00D9EEFE /* Reusable.framework in Frameworks */,
+				A0FBC9EE2262205E00D9EEFE /* FirebaseCore.framework in Frameworks */,
+				A0FBC9F02262205E00D9EEFE /* BoringSSL-GRPC.framework in Frameworks */,
+				A0FBC9F12262205E00D9EEFE /* GoogleUtilities.framework in Frameworks */,
+				A0FBC9F22262205E00D9EEFE /* FirebaseStorage.framework in Frameworks */,
+				A0FBC9F32262205E00D9EEFE /* gRPC-Core.framework in Frameworks */,
+				A0FBC9F42262205E00D9EEFE /* GTMSessionFetcher.framework in Frameworks */,
+				A0FBC9F52262205E00D9EEFE /* Protobuf.framework in Frameworks */,
+				A0FBC9F62262205E00D9EEFE /* FirebaseAuth.framework in Frameworks */,
+				A0FBC9F72262205E00D9EEFE /* FirebaseAnalytics.framework in Frameworks */,
+				A0FBC9F82262205E00D9EEFE /* leveldb-library.framework in Frameworks */,
+				A0FBC9F92262205E00D9EEFE /* FirebaseFirestore.framework in Frameworks */,
 				4E35F4EC222E1CAB00E1130E /* Charts.framework in Frameworks */,
 				4E56BA80222540040055529B /* KeychainAccess.framework in Frameworks */,
 				A015481E222274B000084606 /* SVProgressHUD.framework in Frameworks */,
@@ -421,6 +487,7 @@
 		4E920317221A5BB600C6634F = {
 			isa = PBXGroup;
 			children = (
+				A0FBC9FA2262217500D9EEFE /* gRPCCertificates.bundle */,
 				4E920322221A5BB600C6634F /* RealtimeQuestionnaire */,
 				4E920321221A5BB600C6634F /* Products */,
 				C5F0786942C890B98BF4C673 /* Pods */,
@@ -628,6 +695,28 @@
 		F4AEBB3F26A8052851C67044 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0FBCA00226222A000D9EEFE /* StoreKit.framework */,
+				A0FBC9FE2262229500D9EEFE /* libc++.tbd */,
+				A0FBC9FC2262228500D9EEFE /* libsqlite3.tbd */,
+				A0FBC9DD2262205D00D9EEFE /* BoringSSL-GRPC.framework */,
+				A0FBC9D42262205C00D9EEFE /* FIRAnalyticsConnector.framework */,
+				A0FBC9DC2262205D00D9EEFE /* Firebase.framework */,
+				A0FBC9E42262205E00D9EEFE /* FirebaseAnalytics.framework */,
+				A0FBC9E32262205E00D9EEFE /* FirebaseAuth.framework */,
+				A0FBC9DB2262205D00D9EEFE /* FirebaseCore.framework */,
+				A0FBC9D52262205C00D9EEFE /* FirebaseCoreDiagnostics.framework */,
+				A0FBC9E62262205E00D9EEFE /* FirebaseFirestore.framework */,
+				A0FBC9D72262205D00D9EEFE /* FirebaseInstanceID.framework */,
+				A0FBC9DF2262205D00D9EEFE /* FirebaseStorage.framework */,
+				A0FBC9D82262205D00D9EEFE /* GoogleAppMeasurement.framework */,
+				A0FBC9DE2262205D00D9EEFE /* GoogleUtilities.framework */,
+				A0FBC9D92262205D00D9EEFE /* gRPC-C++.framework */,
+				A0FBC9E02262205D00D9EEFE /* gRPC-Core.framework */,
+				A0FBC9E12262205E00D9EEFE /* GTMSessionFetcher.framework */,
+				A0FBC9E52262205E00D9EEFE /* leveldb-library.framework */,
+				A0FBC9D62262205C00D9EEFE /* nanopb.framework */,
+				A0FBC9E22262205E00D9EEFE /* Protobuf.framework */,
+				A0FBC9DA2262205D00D9EEFE /* Reusable.framework */,
 				4E35F4EB222E1CAB00E1130E /* Charts.framework */,
 				4E81920222294A7500FFB6F9 /* Kingfisher.framework */,
 				4E56BA7F222540040055529B /* KeychainAccess.framework */,
@@ -709,6 +798,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0FBC9FB2262217500D9EEFE /* gRPCCertificates.bundle in Resources */,
 				4E92032E221A5BB800C6634F /* LaunchScreen.storyboard in Resources */,
 				4E92033C221A6F8100C6634F /* Localizable.strings in Resources */,
 				4E56BAA52228E5B10055529B /* CreateCommunityTableViewCell.xib in Resources */,
@@ -841,31 +931,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RealtimeQuestionnaire/Pods-RealtimeQuestionnaire-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
