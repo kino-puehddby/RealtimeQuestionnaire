@@ -56,6 +56,7 @@ final class AppRootViewController: UIViewController {
     func switchToChangeMemberInfoViewController() {
         guard let currentRootViewController = children.first else { return }
         let changeMemberInfoVC = StoryboardScene.ChangeMemberInfo.initialScene.instantiate()
+        changeMemberInfoVC.type = .register
         let navigationController = UINavigationController(rootViewController: changeMemberInfoVC)
         addChildVC(navigationController)
         
