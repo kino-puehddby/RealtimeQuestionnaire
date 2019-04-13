@@ -61,11 +61,11 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
         
         googleSignInButton.rx.tap.asSignal()
-            .emit(onNext: {
-                // 可能な場合はサイレントログイン
-                self.viewModel.isLoading.onNext(true)
+            .do(onNext: {
                 GIDSignIn.sharedInstance()?.signIn()
             })
+            .map { true }
+            .emit(to: viewModel.isLoading)
             .disposed(by: disposeBag)
         
         registerButton.rx.tap.asSignal()
@@ -92,9 +92,8 @@ final class LoginViewController: UIViewController {
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
         isValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.loginButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: loginButton.rx.backgroundColor)
             .disposed(by: disposeBag)
     }
     

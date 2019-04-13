@@ -52,9 +52,8 @@ final class RegisterViewController: UIViewController {
             .bind(to: registerButton.rx.isEnabled)
             .disposed(by: disposeBag)
         isPasswordValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.registerButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: registerButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         isPasswordValid
             .bind(to: passwordInvalidLabel.rx.isHidden)

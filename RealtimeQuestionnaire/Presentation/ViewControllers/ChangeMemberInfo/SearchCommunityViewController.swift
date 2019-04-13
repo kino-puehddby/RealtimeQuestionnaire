@@ -54,9 +54,9 @@ final class SearchCommunityViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.communityInfos
+        viewModel.communityInfos.asDriver()
             .skip(1)
-            .subscribe(onNext: { [unowned self] _ in
+            .drive(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)

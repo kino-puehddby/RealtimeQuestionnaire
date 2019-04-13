@@ -119,9 +119,8 @@ final class CreateQuestionnaireViewController: UIViewController {
             .bind(to: createQuestionnaireButton.rx.isEnabled)
             .disposed(by: disposeBag)
         isValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.createQuestionnaireButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: createQuestionnaireButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         
         let tapEvent = viewTapped.rx.event

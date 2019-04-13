@@ -39,19 +39,23 @@ final class QuestionnaireDetailContainerViewController: UIViewController {
     private func bindViewModel() {
         viewModel.mode
             .subscribe(onNext: { [unowned self] mode in
-                switch mode {
-                case .answer:
-                    self.navigationBarItem.title = L10n.Questionnaire.Detail.answer
-                    let vc = StoryboardScene.QuestionnaireDetail.answerQuestionnaireViewController.instantiate()
-                    vc.data = self.data
-                    self.addChildVC(vc)
-                case .result:
-                    self.navigationBarItem.title = L10n.Questionnaire.Detail.result
-                    let vc = StoryboardScene.QuestionnaireDetail.questionnaireResultViewController.instantiate()
-                    vc.data = self.data
-                    self.addChildVC(vc)
-                }
+                self.switchDisplay(mode: mode)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func switchDisplay(mode: QuestionnaireDetailViewModel.QuestionnaireDetailMode) {
+        switch mode {
+        case .answer:
+            navigationBarItem.title = L10n.Questionnaire.Detail.answer
+            let vc = StoryboardScene.QuestionnaireDetail.answerQuestionnaireViewController.instantiate()
+            vc.data = data
+            addChildVC(vc)
+        case .result:
+            self.navigationBarItem.title = L10n.Questionnaire.Detail.result
+            let vc = StoryboardScene.QuestionnaireDetail.questionnaireResultViewController.instantiate()
+            vc.data = data
+            addChildVC(vc)
+        }
     }
 }

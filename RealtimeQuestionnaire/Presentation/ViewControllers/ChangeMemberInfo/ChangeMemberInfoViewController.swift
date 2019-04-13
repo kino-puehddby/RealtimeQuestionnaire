@@ -101,12 +101,9 @@ final class ChangeMemberInfoViewController: UIViewController {
     private func bindViewModel() {
         viewModel.iconImage
             .skip(1)
+            .map { $0 != nil ? $0 : Asset.picture.image }
             .subscribe(onNext: { [unowned self] image in
-                if let image = image {
-                    self.changeImageButton.setImage(image, for: .normal)
-                } else {
-                    self.changeImageButton.setImage(Asset.picture.image, for: .normal)
-                }
+                self.changeImageButton.setImage(image, for: .normal)
             })
             .disposed(by: disposeBag)
         

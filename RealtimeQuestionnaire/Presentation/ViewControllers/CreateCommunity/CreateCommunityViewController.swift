@@ -85,9 +85,8 @@ final class CreateCommunityViewController: UIViewController {
             .bind(to: communityNameInvalidLabel.rx.isHidden)
             .disposed(by: disposeBag)
         isValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.createButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: createButton.rx.backgroundColor)
             .disposed(by: disposeBag)
     }
     

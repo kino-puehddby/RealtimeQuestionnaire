@@ -84,8 +84,8 @@ final class MainViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.summary
-            .subscribe(onNext: { [unowned self] _ in
+        viewModel.summary.asDriver()
+            .drive(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
