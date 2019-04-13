@@ -60,8 +60,8 @@ final class RegisterViewController: UIViewController {
             .bind(to: passwordInvalidLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
-        registerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        registerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.register(
                     email: self.registeringEmail.text,
                     password: self.registeringPassword.text

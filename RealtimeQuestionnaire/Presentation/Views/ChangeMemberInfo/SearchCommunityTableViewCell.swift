@@ -21,13 +21,20 @@ final class SearchCommunityTableViewCell: UITableViewCell, NibReusable {
     
     var isChecked: Bool = false
     
-    private let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setup()
         bind()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // NOTE: メモリリークを防ぐ
+        disposeBag = DisposeBag()
     }
     
     private func setup() {
@@ -37,8 +44,8 @@ final class SearchCommunityTableViewCell: UITableViewCell, NibReusable {
     }
     
     private func bind() {
-        checkButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        checkButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.checked(!self.isChecked)
             })
             .disposed(by: disposeBag)
@@ -59,11 +66,5 @@ final class SearchCommunityTableViewCell: UITableViewCell, NibReusable {
 extension SearchCommunityTableViewCell {
     var id: String? {
         return idLabel.text
-    }
-}
-
-extension Reactive where Base: SearchCommunityTableViewCell {
-    var checkTapped: Driver<Void> {
-        return base.checkButton.rx.tap.asDriver()
     }
 }

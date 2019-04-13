@@ -51,20 +51,20 @@ final class CreateCommunityViewController: UIViewController {
     }
     
     func bind() {
-        changeImageButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        changeImageButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.photoLibraryManager.callPhotoLibrary()
             })
             .disposed(by: disposeBag)
         
-        createButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        createButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.viewModel.generateCommunityId()
             })
             .disposed(by: disposeBag)
         
-        inviteButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        inviteButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.CreateCommunity.showSearchUser)
             })
             .disposed(by: disposeBag)

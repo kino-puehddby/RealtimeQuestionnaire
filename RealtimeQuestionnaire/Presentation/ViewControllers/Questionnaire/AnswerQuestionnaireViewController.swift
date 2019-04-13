@@ -62,8 +62,8 @@ final class AnswerQuestionnaireViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        answerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        answerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 guard let cells = self.tableView.visibleCells as? [AnswerQuestionnaireTableViewCell] else { return }
                 for (index, cell) in cells.enumerated() where cell.isChecked {
                     self.viewModel.answer(index: index)

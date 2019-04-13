@@ -63,20 +63,20 @@ final class MainViewController: UIViewController {
     }
     
     func bind() {
-        leftBarButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        leftBarButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.slideMenuController()?.openLeft()
             })
             .disposed(by: disposeBag)
         
-        createQuestionnaireButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        createQuestionnaireButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.Main.showCreateQuestionnaire)
             })
             .disposed(by: disposeBag)
         
-        answerQuestionnaireButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        answerQuestionnaireButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
             })
             .disposed(by: disposeBag)

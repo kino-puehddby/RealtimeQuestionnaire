@@ -35,8 +35,8 @@ final class SearchUserViewController: UIViewController {
     }
     
     func bind() {
-        decideButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        decideButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.pop()
             })
             .disposed(by: disposeBag)
@@ -110,6 +110,6 @@ extension SearchUserViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             .drive(viewModel.checkedUserInfo)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
     }
 }

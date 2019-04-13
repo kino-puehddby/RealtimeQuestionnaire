@@ -53,28 +53,28 @@ final class LoginViewController: UIViewController {
     }
     
     func bind() {
-        loginButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        loginButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.viewModel.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
             })
             .disposed(by: disposeBag)
         
-        googleSignInButton.rx.tap
-            .subscribe(onNext: {
+        googleSignInButton.rx.tap.asSignal()
+            .emit(onNext: {
                 // 可能な場合はサイレントログイン
                 self.viewModel.isLoading.onNext(true)
                 GIDSignIn.sharedInstance()?.signIn()
             })
             .disposed(by: disposeBag)
         
-        registerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        registerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.Login.showRegister, sender: nil)
             })
             .disposed(by: disposeBag)
         
-        sendPasswordReset.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        sendPasswordReset.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.showResetPasswordAlert()
             })
             .disposed(by: disposeBag)

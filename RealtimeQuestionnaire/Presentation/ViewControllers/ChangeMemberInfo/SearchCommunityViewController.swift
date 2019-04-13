@@ -37,14 +37,14 @@ final class SearchCommunityViewController: UIViewController {
     }
     
     func bind() {
-        decideButton.rx.tap
+        decideButton.rx.tap.asSignal()
             .map { [unowned self] in
                 let cells = self.tableView.visibleCells as! [SearchCommunityTableViewCell]
                 let isCheckedLIst = cells.map { $0.isChecked }
                 let isFilttered = !(self.filterTextField.text == nil || self.filterTextField.text == "")
                 return (isCheckedLIst, isFilttered)
             }
-            .bind(to: viewModel.decideAction)
+            .emit(to: viewModel.decideAction)
             .disposed(by: disposeBag)
         
         filterTextField.rx.text

@@ -48,8 +48,8 @@ final class CreateQuestionnaireViewController: UIViewController {
     }
     
     func bind() {
-        addCellButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        addCellButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.addAction()
             })
             .disposed(by: disposeBag)
@@ -70,8 +70,8 @@ final class CreateQuestionnaireViewController: UIViewController {
             .bind(to: viewModel.selectedCommunityId)
             .disposed(by: disposeBag)
         
-        createQuestionnaireButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        createQuestionnaireButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 guard let uid = ServicesUtil.shared.getKeychain(.uid) else { return }
                 let fields = QuestionnaireModel.Fields(
                     id: "",

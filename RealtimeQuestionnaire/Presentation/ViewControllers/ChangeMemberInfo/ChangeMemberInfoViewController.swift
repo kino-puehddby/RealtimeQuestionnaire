@@ -69,8 +69,8 @@ final class ChangeMemberInfoViewController: UIViewController {
     }
     
     private func bind() {
-        changeImageButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        changeImageButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.photoLibraryManager.callPhotoLibrary()
             })
             .disposed(by: disposeBag)
@@ -79,8 +79,8 @@ final class ChangeMemberInfoViewController: UIViewController {
             .bind(to: viewModel.nickname)
             .disposed(by: disposeBag)
         
-        searchCommunityButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        searchCommunityButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 switch self.type {
                 case .register:
                     self.switchMainViewController()
@@ -90,8 +90,8 @@ final class ChangeMemberInfoViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        changeButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        changeButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.viewModel.updateMemberInfo()
             })
             .disposed(by: disposeBag)
