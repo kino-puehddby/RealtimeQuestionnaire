@@ -8,9 +8,13 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
 import SnapKit
 
 final class AppRootViewController: UIViewController {
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,18 @@ final class AppRootViewController: UIViewController {
         )
         
         addChildVC(slideMenuController)
+        
+        currentRootViewController.willMove(toParent: nil)
+        currentRootViewController.view.removeFromSuperview()
+        currentRootViewController.removeFromParent()
+    }
+    
+    func switchToChangeMemberInfoViewController() {
+        guard let currentRootViewController = children.first else { return }
+        let changeMemberInfoVC = StoryboardScene.ChangeMemberInfo.initialScene.instantiate()
+        changeMemberInfoVC.type = .register
+        let navigationController = UINavigationController(rootViewController: changeMemberInfoVC)
+        addChildVC(navigationController)
         
         currentRootViewController.willMove(toParent: nil)
         currentRootViewController.view.removeFromSuperview()

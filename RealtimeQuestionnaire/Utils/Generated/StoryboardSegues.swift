@@ -12,6 +12,9 @@ import UIKit
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardSegue {
+  internal enum ChangeMemberInfo: String, SegueType {
+    case showSearchCommunity
+  }
   internal enum CreateCommunity: String, SegueType {
     case showSearchUser
   }
@@ -21,7 +24,6 @@ internal enum StoryboardSegue {
   internal enum Main: String, SegueType {
     case showCreateQuestionnaire
     case showQuestionnaireDetail
-    case showSearch
     case showUnansweredQuestionnaireList
   }
   internal enum Menu: String, SegueType {

@@ -15,10 +15,10 @@ import FirebaseAuth
 final class MenuViewController: UIViewController {
     
     @IBOutlet weak private var tableView: UITableView!
-    @IBOutlet weak private var iconUrl: UIImageView!
+    @IBOutlet weak private var iconImage: UIImageView!
     @IBOutlet weak private var nicknameLabel: UILabel!
     
-    private let viewModel = MenuViewModel()
+    let viewModel = MenuViewModel()
     private let disposeBag = DisposeBag()
     
     enum Menu: Int, CaseIterable {
@@ -29,11 +29,11 @@ final class MenuViewController: UIViewController {
         var text: String {
             switch self {
             case .createCommunity:
-                return L10n.Menu.createCommunity
+                return L10n.Menu.CreateCommunity.title
             case .changeMemberInfo:
-                return L10n.Menu.changeMemberInfo
+                return L10n.Menu.ChangeMemberInfo.title
             case .logout:
-                return L10n.Menu.logout
+                return L10n.Menu.Logout.title
             }
         }
     }
@@ -42,23 +42,27 @@ final class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViewModel()
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MenuTableViewCell.self)
     }
     
-    func bind() {
+    private func bindViewModel() {
         viewModel.user
             .map { $0?.nickname }
             .bind(to: nicknameLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        viewModel.iconImage
+            .bind(to: iconImage.rx.image)
+            .disposed(by: disposeBag)
     }
     
-    func logout() {
+    private func logout() {
         do {
             try Auth.auth().signOut()
             showAlert(type: .okCancel, title: L10n.Alert.logout, message: L10n.Alert.Logout.message) { [weak self] in
@@ -92,6 +96,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             popTo(target: createCommunityVC)
         case .changeMemberInfo:
             let changeMemberInfoVC = StoryboardScene.ChangeMemberInfo.initialScene.instantiate()
+            changeMemberInfoVC.type = .update
             popTo(target: changeMemberInfoVC)
         case .logout:
             logout()
@@ -101,6 +106,9 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     private func popTo(target: UIViewController) {
         guard let navi = slideMenuController()?.mainViewController as? UINavigationController else { return }
         let mainVC = StoryboardScene.Main.mainViewController.instantiate()
+        if let vc = target as? ChangeMemberInfoViewController {
+           vc.belongingCommunityInfos = viewModel.belongingCommunityInfos.value
+        }
         navi.setViewControllers([mainVC, target], animated: true)
         closeLeft()
     }

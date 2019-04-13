@@ -8,9 +8,11 @@
 
 import Foundation
 
+import UIKit
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import FirebaseStorage
 
 final class CreateCommunityViewModel {
     
@@ -22,17 +24,17 @@ final class CreateCommunityViewModel {
     let isCommunityIdExist = PublishSubject<Bool>()
     
     var communityId: String = ""
-    var userDocumentRef: DocumentReference?
+    private lazy var userDocumentRef: DocumentReference = { preconditionFailure() }()
     
     private let disposeBag = DisposeBag()
     
     init() {
-        guard let uid = S.getKeychain(.uid) else { return }
+        guard let uid = KeyAccessUtil.shared.getKeychain(.uid) else { return }
         userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(
                 UserModel.Fields.self,
-                documentRef: userDocumentRef!
+                documentRef: userDocumentRef
             )
             .subscribe { [unowned self] result in
                 switch result {
@@ -75,10 +77,19 @@ final class CreateCommunityViewModel {
             .disposed(by: disposeBag)
     }
     
+    func uploadFirebaseStorage(image: UIImage) {
+        // 保存したイメージをFirebaseStorageに保存する
+        let storageRef = Storage.storage().reference()
+        
+        if let data = image.pngData() {
+            let reference = storageRef.child("images/community/" + communityId + ".jpg")
+            reference.putData(data)
+        }
+    }
+    
     private func createCommunity() {
         let model = CommunityModel.Fields(
             id: communityId,
-            iconUrl: "アイコンURL", // TODO: アイコンURLを設定
             name: communityName.value
         )
         Firestore.firestore().rx
@@ -107,14 +118,13 @@ final class CreateCommunityViewModel {
         let newModel = UserModel.Fields(
             id: user.id,
             nickname: user.nickname,
-            iconUrl: user.iconUrl,
             communities: communities,
             questionnaires: user.questionnaires
         )
         Firestore.firestore().rx
             .update(
                 new: newModel,
-                documentRef: userDocumentRef!
+                documentRef: userDocumentRef
             )
             .subscribe { [unowned self] result in
                 self.isLoading.onNext(false)

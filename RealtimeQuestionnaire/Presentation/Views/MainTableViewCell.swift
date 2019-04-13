@@ -9,14 +9,10 @@
 import UIKit
 import Reusable
 
-class MainTableViewCell: UITableViewCell, NibReusable {
+final class MainTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var unansweredFlug: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    @IBOutlet weak private var unansweredFlug: UIView!
     
     func configuration(title: String, answered: Bool) {
         titleLabel.text = title

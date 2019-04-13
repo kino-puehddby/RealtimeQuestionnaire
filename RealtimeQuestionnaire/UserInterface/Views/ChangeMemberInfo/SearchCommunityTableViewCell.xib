@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SearchCommunityTableViewCell" customModule="RealtimeQuestionnaire" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="8sb-dQ-YLs">
+                        <rect key="frame" x="49.5" y="11.5" width="221.5" height="27"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ニックネーム" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKQ-Xa-r5c">
+                                <rect key="frame" x="0.0" y="0.0" width="221.5" height="13"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVK-Uq-shf">
+                                <rect key="frame" x="0.0" y="16" width="221.5" height="11"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYH-cC-67e">
+                                        <rect key="frame" x="0.0" y="0.0" width="19" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="19" id="Xwv-7Q-1IU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LJ-4I-fgP">
+                                        <rect key="frame" x="19" y="0.0" width="202.5" height="11"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gef-gm-yxL"/>
+                    </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-5h-9sP">
+                        <rect key="frame" x="10" y="10" width="29.5" height="29.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="5Bn-5h-9sP" secondAttribute="height" multiplier="1:1" id="xci-SC-bnT"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTf-nj-6dd">
+                        <rect key="frame" x="281" y="16" width="18" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="tTf-nj-6dd" secondAttribute="height" multiplier="1:1" id="1M5-zt-e2J"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="nonChecked"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tTf-nj-6dd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="1nO-Pz-xqL"/>
+                    <constraint firstItem="tTf-nj-6dd" firstAttribute="leading" secondItem="8sb-dQ-YLs" secondAttribute="trailing" constant="10" id="5FZ-YD-2Va"/>
+                    <constraint firstItem="5Bn-5h-9sP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="8UW-Lz-dp4"/>
+                    <constraint firstItem="8sb-dQ-YLs" firstAttribute="leading" secondItem="5Bn-5h-9sP" secondAttribute="trailing" constant="10" id="ADR-cZ-QUL"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tTf-nj-6dd" secondAttribute="bottom" constant="5" id="CD4-kq-OQa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tTf-nj-6dd" secondAttribute="trailing" constant="5" id="HKQ-Mm-GaZ"/>
+                    <constraint firstAttribute="bottom" secondItem="5Bn-5h-9sP" secondAttribute="bottom" constant="10" id="MRG-Ux-0wd"/>
+                    <constraint firstItem="8sb-dQ-YLs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aRA-PP-pOX"/>
+                    <constraint firstItem="5Bn-5h-9sP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="bvt-tp-VMr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkButton" destination="tTf-nj-6dd" id="irE-lm-Kc5"/>
+                <outlet property="iconImageView" destination="5Bn-5h-9sP" id="pYN-e7-zHW"/>
+                <outlet property="idLabel" destination="8LJ-4I-fgP" id="tX8-Ze-vFG"/>
+                <outlet property="nicknameLabel" destination="gKQ-Xa-r5c" id="Nmg-po-e0M"/>
+            </connections>
+            <point key="canvasLocation" x="72" y="178"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="nonChecked" width="1000" height="1000"/>
+    </resources>
+</document>

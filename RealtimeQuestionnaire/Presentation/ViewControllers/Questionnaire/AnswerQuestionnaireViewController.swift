@@ -20,7 +20,7 @@ final class AnswerQuestionnaireViewController: UIViewController {
     @IBOutlet weak private var authorNameLabel: UILabel!
     @IBOutlet weak private var answerButton: UIButton!
     
-    lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
+    lazy var data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields) = { preconditionFailure() }()
     
     private lazy var viewModel: AnswerQuestionnaireViewModel = { preconditionFailure() }()
     
@@ -30,28 +30,34 @@ final class AnswerQuestionnaireViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
-    func setup() {
-        viewModel = AnswerQuestionnaireViewModel(questionnaireData: data)
+    private func setup() {
+        viewModel = AnswerQuestionnaireViewModel(data: data)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: AnswerQuestionnaireTableViewCell.self)
         
-        titleLabel.text = data.title
+        communityIconImageView.image = data.communityIconImage
+        communityNameLabel.text = data.communityName
+        titleLabel.text = data.questionnaire.title
     }
     
-    func bind() {
-        viewModel.communityIconImage
-            .bind(to: communityIconImageView.rx.image)
+    private func bindViews() {
+        answerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
+                guard let cells = self.tableView.visibleCells as? [AnswerQuestionnaireTableViewCell] else { return }
+                for (index, cell) in cells.enumerated() where cell.isChecked {
+                    self.viewModel.answer(index: index)
+                }
+            })
             .disposed(by: disposeBag)
-        
-        viewModel.communityName
-            .bind(to: communityNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.authorName
             .bind(to: authorNameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -67,31 +73,22 @@ final class AnswerQuestionnaireViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
-        answerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                guard let cells = self.tableView.visibleCells as? [AnswerQuestionnaireTableViewCell] else { return }
-                for (index, cell) in cells.enumerated() where cell.isChecked {
-                    self.viewModel.answer(index: index)
-                }
-            })
-            .disposed(by: disposeBag)
     }
 }
 
 extension AnswerQuestionnaireViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.choices.count
+        return data.questionnaire.choices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AnswerQuestionnaireTableViewCell.self)
-        cell.configure(choice: data.choices[indexPath.row])
+        cell.configure(choice: data.questionnaire.choices[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return QuestionnaireDetail.AnswerQuestionnaire.TableView.cellHeight
+        return QuestionnaireDetail.AnswerQuestionnaire.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

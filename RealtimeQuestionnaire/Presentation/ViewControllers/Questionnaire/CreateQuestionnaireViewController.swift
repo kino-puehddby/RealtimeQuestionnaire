@@ -33,10 +33,11 @@ final class CreateQuestionnaireViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: ChoiceTableViewCell.self)
@@ -47,9 +48,9 @@ final class CreateQuestionnaireViewController: UIViewController {
         bindScrollTextFieldWhenShowKeyboard()
     }
     
-    func bind() {
-        addCellButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+    private func bindViews() {
+        addCellButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.addAction()
             })
             .disposed(by: disposeBag)
@@ -70,9 +71,9 @@ final class CreateQuestionnaireViewController: UIViewController {
             .bind(to: viewModel.selectedCommunityId)
             .disposed(by: disposeBag)
         
-        createQuestionnaireButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                guard let uid = S.getKeychain(.uid) else { return }
+        createQuestionnaireButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
+                guard let uid = KeyAccessUtil.shared.getKeychain(.uid) else { return }
                 let fields = QuestionnaireModel.Fields(
                     id: "",
                     authorId: uid,
@@ -80,36 +81,6 @@ final class CreateQuestionnaireViewController: UIViewController {
                     choices: self.viewModel.choicesList.value
                 )
                 self.viewModel.postQuestionnaire(fields: fields)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.communities
-            .skip(1)
-            .distinctUntilChanged()
-            .map { dics in
-                dics.map { dic in
-                    dic["name"] ?? ""
-                }
-            }
-            .subscribe(onNext: { [unowned self] list in
-                self.communityPickerField.setup(dataList: list)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.postCompleted
-            .subscribe(onNext: { [unowned self] status in
-                switch status {
-                case .success:
-                    // FIXME: トースト表示したい
-                    self.navigationController?.popViewController(animated: true)
-                case .error(let error):
-                    self.showAlert(
-                        type: .custom,
-                        title: L10n.Alert.Questionnaire.failedToCreate,
-                        actionTitle: L10n.Common.retry
-                    )
-                    debugPrint(error)
-                }
             })
             .disposed(by: disposeBag)
         
@@ -148,9 +119,8 @@ final class CreateQuestionnaireViewController: UIViewController {
             .bind(to: createQuestionnaireButton.rx.isEnabled)
             .disposed(by: disposeBag)
         isValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.createQuestionnaireButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: createQuestionnaireButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         
         let tapEvent = viewTapped.rx.event
@@ -167,7 +137,39 @@ final class CreateQuestionnaireViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func validCells() {
+    private func bindViewModel() {
+        viewModel.communities
+            .skip(1)
+            .distinctUntilChanged()
+            .map { dics in
+                dics.map { dic in
+                    dic["name"] ?? ""
+                }
+            }
+            .subscribe(onNext: { [unowned self] list in
+                self.communityPickerField.setup(dataList: list)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.postCompleted
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    // FIXME: トースト表示したい
+                    self.navigationController?.popViewController(animated: true)
+                case .error(let error):
+                    self.showAlert(
+                        type: .custom,
+                        title: L10n.Alert.Questionnaire.failedToCreate,
+                        actionTitle: L10n.Common.retry
+                    )
+                    debugPrint(error)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func validCells() {
         guard let cells = tableView.visibleCells as? [ChoiceTableViewCell] else { return }
         let invalid = cells.contains { $0.valid.value == false }
         viewModel.cellTextFieldValid.accept(!invalid)
@@ -187,7 +189,7 @@ extension CreateQuestionnaireViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CreateQuestionnaire.TableView.cellHeight
+        return CreateQuestionnaire.cellHeight
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

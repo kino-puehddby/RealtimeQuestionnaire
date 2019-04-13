@@ -8,6 +8,7 @@
 
 import Foundation
 
+import UIKit
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
@@ -23,10 +24,10 @@ final class QuestionnaireDetailViewModel {
         case result
     }
     
-    init(questionnaireData: QuestionnaireModel.Fields, user: UserModel.Fields) {
+    init(data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields), user: UserModel.Fields) {
         let answered = user.questionnaires
             .map { answeredQuestionnaire in
-                answeredQuestionnaire["id"] == questionnaireData.id
+                answeredQuestionnaire["id"] == data.questionnaire.id
             }
             .filter { $0 == true }
         if answered.isEmpty {

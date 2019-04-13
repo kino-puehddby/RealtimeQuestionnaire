@@ -10,34 +10,36 @@ import Foundation
 import UIKit
 
 public struct Main {
-    public struct TableView {
-        public static let cellHeight: CGFloat = 50
-        public static let sectionHeaderHeight: CGFloat = 30
-    }
+    public static let cellHeight: CGFloat = 50
+    public static let sectionHeaderHeight: CGFloat = 30
 }
 
 public struct CreateQuestionnaire {
-    public struct TableView {
-        public static let cellHeight: CGFloat = 80
-    }
+    public static let cellHeight: CGFloat = 80
 }
 
 public struct CreateCommunity {
-    public struct TableView {
-        public static let cellHeight: CGFloat = 50
-    }
+    public static let cellHeight: CGFloat = 50
+}
+
+public struct SearchUser {
+    public static let cellHeight: CGFloat = 50
+}
+
+public struct ChangeMemberInfo {
+    public static let cellHeight: CGFloat = 65
+}
+
+public struct SearchCommunity {
+    public static let cellHeight: CGFloat = 50
 }
 
 public struct QuestionnaireDetail {
     public struct AnswerQuestionnaire {
-        public struct TableView {
-            public static let cellHeight: CGFloat = 60
-        }
+        public static let cellHeight: CGFloat = 60
     }
     public struct QuestionnaireResult {
-        public struct TableView {
-            public static let cellHeight: CGFloat = 55
-        }
+        public static let cellHeight: CGFloat = 55
     }
 }
 

@@ -11,18 +11,6 @@ import UIKit
 final class PickerTextField: UITextField {
     var dataList = [String]()
     
-    init() {
-        super.init(frame: .zero)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     func setup(dataList: [String]) {
         self.dataList = dataList
         

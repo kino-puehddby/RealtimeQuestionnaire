@@ -22,7 +22,7 @@ final class QuestionnaireResultViewController: UIViewController {
     @IBOutlet weak private var remainingTimeLabel: UILabel! // TODO: 回答締め切り機能
     @IBOutlet weak fileprivate var pieChartView: PieChartView!
     
-    lazy var data: QuestionnaireModel.Fields = { preconditionFailure() }()
+    lazy var data: (communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields) = { preconditionFailure() }()
     
     private lazy var viewModel: QuestionnaireResultViewModel = { preconditionFailure() }()
     private let disposeBag = DisposeBag()
@@ -31,20 +31,22 @@ final class QuestionnaireResultViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViewModel()
     }
     
-    func setup() {
-        viewModel = QuestionnaireResultViewModel(questionnaireData: data)
+    private func setup() {
+        viewModel = QuestionnaireResultViewModel(data: data)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: QuestionnaireResultTableViewCell.self)
         
-        titleLabel.text = data.title
+        communityIconImageView.image = data.communityIconImage
+        communityNameLabel.text = data.communityName
+        titleLabel.text = data.questionnaire.title
     }
     
-    func bind() {
+    private func bindViewModel() {
         viewModel.percentValues
             .subscribe(onNext: { [unowned self] values in
                 var pieChartEntries: [PieChartDataEntry] = []
@@ -53,7 +55,7 @@ final class QuestionnaireResultViewController: UIViewController {
                         if value == 0 {
                             return PieChartDataEntry(value: value, label: "その他")
                         } else {
-                            return PieChartDataEntry(value: value, label: self.data.choices[index])
+                            return PieChartDataEntry(value: value, label: self.data.questionnaire.choices[index])
                         }
                     }()
                     pieChartEntries.append(entry)
@@ -63,21 +65,13 @@ final class QuestionnaireResultViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.communityIconImage
-            .bind(to: communityIconImageView.rx.image)
-            .disposed(by: disposeBag)
-        
-        viewModel.communityName
-            .bind(to: communityNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
         viewModel.votesCount
             .map { $0.description }
             .bind(to: votesCountLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
-    func refreshPieChartView(dataList: [PieChartDataEntry]) {
+    private func refreshPieChartView(dataList: [PieChartDataEntry]) {
         let pieSet = PieChartDataSet(values: dataList, label: nil)
         pieSet.colors = ChartColorTemplates.vordiplom()
         let pieChartData = PieChartData(dataSet: pieSet)
@@ -106,13 +100,13 @@ extension QuestionnaireResultViewController: UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: QuestionnaireResultTableViewCell.self)
         cell.configure(
             color: ChartColorTemplates.vordiplom()[indexPath.row],
-            choice: data.choices[indexPath.row],
+            choice: data.questionnaire.choices[indexPath.row],
             percent: viewModel.percentValues.value[indexPath.row]
         )
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return QuestionnaireDetail.QuestionnaireResult.TableView.cellHeight
+        return QuestionnaireDetail.QuestionnaireResult.cellHeight
     }
 }

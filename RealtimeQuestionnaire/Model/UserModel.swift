@@ -18,14 +18,12 @@ struct UserModel: DatabaseCollection {
     public struct Fields: Codable, Equatable {
         public let id: String // ID
         public let nickname: String? // ニックネーム
-        public let iconUrl: String? // アイコンURL
         public let communities: [[String: String]] // 参加中のコミュニティ
         public let questionnaires: [[String: String]] // ユーザーが回答したアンケート
         
-        public init(id: String, nickname: String?, iconUrl: String?, communities: [[String: String]], questionnaires: [[String: String]]) {
+        public init(id: String, nickname: String?, communities: [[String: String]], questionnaires: [[String: String]]) {
             self.id = id
             self.nickname = nickname
-            self.iconUrl = iconUrl
             self.communities = communities
             self.questionnaires = questionnaires
         }

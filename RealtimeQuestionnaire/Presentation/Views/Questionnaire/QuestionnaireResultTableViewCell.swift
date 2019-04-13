@@ -10,16 +10,11 @@ import UIKit
 
 import Reusable
 
-class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
+final class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var colorView: UIView!
     @IBOutlet weak private var choiceLabel: UILabel!
     @IBOutlet weak private var percentLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
     
     func configure(color: UIColor, choice: String, percent: Double) {
         choiceLabel.text = choice

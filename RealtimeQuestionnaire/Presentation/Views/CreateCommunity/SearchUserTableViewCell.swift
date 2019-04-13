@@ -19,10 +19,19 @@ final class SearchUserTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak fileprivate var idLabel: UILabel!
     @IBOutlet weak fileprivate var checkButton: UIButton!
     
+    var disposeBag = DisposeBag()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         checkButton.setImage(Asset.nonChecked.image, for: .normal)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // NOTE: メモリリークを防ぐ
+        disposeBag = DisposeBag()
     }
     
     func configure(id: String, nickname: String, iconImage: UIImage) {

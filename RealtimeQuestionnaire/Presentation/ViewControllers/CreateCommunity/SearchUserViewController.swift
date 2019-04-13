@@ -25,27 +25,29 @@ final class SearchUserViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: SearchUserTableViewCell.self)
     }
     
-    func bind() {
-        decideButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+    private func bindViews() {
+        decideButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.pop()
             })
             .disposed(by: disposeBag)
         
         filterTextField.rx.text
-            .distinctUntilChanged()
             .bind(to: viewModel.filterTrigger)
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.checkList
             .subscribe(onNext: { [unowned self] list in
                 guard let cells = self.tableView.visibleCells as? [SearchUserTableViewCell] else { return }
@@ -63,10 +65,10 @@ final class SearchUserViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func pop() {
-        guard let navi = navigationController else { return }
-        let createCommunityVC = navi.viewControllers[navi.viewControllers.count - 2] as? CreateCommunityViewController
-        createCommunityVC?.checkList.accept(viewModel.checkList.value)
+    private func pop() {
+        guard let navi = navigationController,
+            let createCommunityVC = navi.viewControllers[navi.viewControllers.count - 2] as? CreateCommunityViewController else { return }
+        createCommunityVC.checkList.accept(viewModel.checkList.value)
         navi.popViewController(animated: true)
     }
 }
@@ -97,6 +99,10 @@ extension SearchUserViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return SearchUser.cellHeight
+    }
+    
     func bind(cell: SearchUserTableViewCell, indexPath: IndexPath) {
         cell.rx.checkTapped
             .map { [unowned self] _ in
@@ -107,6 +113,6 @@ extension SearchUserViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             .drive(viewModel.checkedUserInfo)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
     }
 }

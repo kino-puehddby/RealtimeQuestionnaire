@@ -82,12 +82,24 @@ internal enum L10n {
   }
 
   internal enum Menu {
-    /// 会員情報変更
-    internal static let changeMemberInfo = L10n.tr("Localizable", "Menu.ChangeMemberInfo")
-    /// コミュニティをつくる
-    internal static let createCommunity = L10n.tr("Localizable", "Menu.CreateCommunity")
-    /// ログアウト
-    internal static let logout = L10n.tr("Localizable", "Menu.Logout")
+    internal enum ChangeMemberInfo {
+      /// 会員情報変更
+      internal static let title = L10n.tr("Localizable", "Menu.ChangeMemberInfo.Title")
+      internal enum ButtonTItle {
+        /// 次へ
+        internal static let register = L10n.tr("Localizable", "Menu.ChangeMemberInfo.ButtonTItle.register")
+        /// 変更する
+        internal static let update = L10n.tr("Localizable", "Menu.ChangeMemberInfo.ButtonTItle.update")
+      }
+    }
+    internal enum CreateCommunity {
+      /// コミュニティをつくる
+      internal static let title = L10n.tr("Localizable", "Menu.CreateCommunity.Title")
+    }
+    internal enum Logout {
+      /// ログアウト
+      internal static let title = L10n.tr("Localizable", "Menu.Logout.Title")
+    }
   }
 
   internal enum Questionnaire {

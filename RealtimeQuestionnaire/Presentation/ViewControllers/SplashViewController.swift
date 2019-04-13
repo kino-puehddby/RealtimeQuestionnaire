@@ -26,7 +26,7 @@ final class SplashViewController: UIViewController, GIDSignInUIDelegate {
         Auth.auth().removeStateDidChangeListener(handle)
     }
     
-    func setup() {
+    private func setup() {
         handle = Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
             guard let vc = self else { return }
             if user != nil {

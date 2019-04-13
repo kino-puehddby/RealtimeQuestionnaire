@@ -67,10 +67,10 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.RegisterViewController>(storyboard: Register.self)
   }
-  internal enum Search: StoryboardType {
-    internal static let storyboardName = "Search"
+  internal enum SearchCommunity: StoryboardType {
+    internal static let storyboardName = "SearchCommunity"
 
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SearchViewController>(storyboard: Search.self)
+    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SearchCommunityViewController>(storyboard: SearchCommunity.self)
   }
   internal enum SearchUser: StoryboardType {
     internal static let storyboardName = "SearchUser"
@@ -81,13 +81,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Splash"
 
     internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.SplashViewController>(storyboard: Splash.self)
-  }
-  internal enum TrimImage: StoryboardType {
-    internal static let storyboardName = "TrimImage"
-
-    internal static let initialScene = InitialSceneType<RealtimeQuestionnaire.TrimImageViewController>(storyboard: TrimImage.self)
-
-    internal static let trimImageViewController = SceneType<RealtimeQuestionnaire.TrimImageViewController>(storyboard: TrimImage.self, identifier: "TrimImageViewController")
   }
   internal enum UnansweredQuestionnaireList: StoryboardType {
     internal static let storyboardName = "UnansweredQuestionnaireList"

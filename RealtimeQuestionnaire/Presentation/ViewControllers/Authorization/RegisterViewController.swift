@@ -31,10 +31,10 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
     }
     
-    func setup() {
+    private func setup() {
         registeringEmail.delegate = self
         registeringPassword.delegate = self
         
@@ -42,7 +42,7 @@ final class RegisterViewController: UIViewController {
         registeringConfirmationPassword.isSecureTextEntry = true
     }
     
-    func bind() {
+    private func bindViews() {
         let isPasswordValid = registeringConfirmationPassword.rx.text
             .map { [unowned self] text in
                 text != "" && text != nil && self.registeringPassword.text == text
@@ -52,16 +52,15 @@ final class RegisterViewController: UIViewController {
             .bind(to: registerButton.rx.isEnabled)
             .disposed(by: disposeBag)
         isPasswordValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.registerButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: registerButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         isPasswordValid
             .bind(to: passwordInvalidLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
-        registerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        registerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.register(
                     email: self.registeringEmail.text,
                     password: self.registeringPassword.text
@@ -70,7 +69,7 @@ final class RegisterViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func register(email: String?, password: String?) {
+    private func register(email: String?, password: String?) {
         guard let email = email, let password = password else { return }
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
@@ -97,7 +96,6 @@ final class RegisterViewController: UIViewController {
         let fields = UserModel.Fields(
             id: user.uid,
             nickname: "",
-            iconUrl: "",
             communities: [],
             questionnaires: []
         )
@@ -111,7 +109,6 @@ final class RegisterViewController: UIViewController {
                 switch result {
                 case .success:
                     break
-                    // TODO: ユーザー情報設定画面へ遷移させる
                 case .error(let error):
                     debugPrint(error)
                 }

@@ -13,58 +13,34 @@ import RxSwift
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import SVProgressHUD
 
 final class MainViewModel {
     
-    // TODO: ローディング
-    
-    let questionnaireList = BehaviorRelay<[[QuestionnaireModel.Fields]]>(value: [])
     let user = BehaviorRelay<UserModel.Fields?>(value: nil)
-    let communities = BehaviorRelay<[CommunityModel.Fields]>(value: [])
-    let communityNames = BehaviorRelay<[String]>(value: [])
-    let communityIconImages = BehaviorRelay<[UIImage]>(value: [])
+    private let makeCommunityInfos = PublishSubject<[(id: String, name: String)]>()
+    private let makeCommunitySummary = PublishSubject<[(id: String, name: String, image: UIImage)]>()
+    let summary = BehaviorRelay<[(id: String, name: String, image: UIImage, questionnaires: [QuestionnaireModel.Fields])]>(value: [])
     
-    var stashList: [[QuestionnaireModel.Fields]] = []
-    var imageStashList: [UIImage] = []
-    
-    var selectedCellData = BehaviorRelay<QuestionnaireModel.Fields?>(value: nil)
+    let selectedCellData = BehaviorRelay<(communityName: String, communityIconImage: UIImage, questionnaire: QuestionnaireModel.Fields)?>(value: nil)
     
     private let disposeBag = DisposeBag()
     
     init() {
+        SVProgressHUD.show()
+        
         // observe User
-        guard let uid = S.getKeychain(.uid) else { return }
+        guard let uid = KeyAccessUtil.shared.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .observeModel(
                 UserModel.Fields.self,
                 documentRef: userDocumentRef
             )
-            .subscribe { [weak self] event in
-                guard let vm = self else { return }
+            .subscribe { [unowned self] event in
                 switch event {
                 case .next(let user):
-                    vm.user.accept(user)
-                case .error(let error):
-                    debugPrint(error)
-                case .completed:
-                    break
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // observe Community
-        Firestore.firestore().rx
-            .observeArray(
-                CommunityModel.Fields.self,
-                collectionRef: CommunityModel.makeCollectionRef()
-            )
-            .subscribe { [weak self] event in
-                guard let vm = self else { return }
-                switch event {
-                case .next(let communities):
-                    vm.downloadImage(communities: communities)
-                    vm.communities.accept(communities)
+                    self.user.accept(user)
                 case .error(let error):
                     debugPrint(error)
                 case .completed:
@@ -76,11 +52,23 @@ final class MainViewModel {
         // observe Questionnaires associated with User
         user
             .skip(1)
-            .subscribe(onNext: { [weak self] user in
-                guard let vc = self,
-                    let user = user else { return }
-                vc.observeQuestionnaires(on: user.communities)
-                vc.observeCommunities(on: user.communities)
+            .subscribe(onNext: { [unowned self] user in
+                guard let user = user else { return }
+                let communityIds = user.communities.map { $0["id"] }
+                // belonging communities
+                self.observeBelongingCommunities(on: communityIds)
+            })
+            .disposed(by: disposeBag)
+        
+        makeCommunityInfos
+            .subscribe(onNext: { [unowned self] arg in
+                self.downloadImage(communityNameWithIds: arg)
+            })
+            .disposed(by: disposeBag)
+        
+        makeCommunitySummary
+            .subscribe(onNext: { [unowned self] arg in
+                self.observeQuestionnaires(on: arg)
             })
             .disposed(by: disposeBag)
     }
@@ -91,58 +79,22 @@ final class MainViewModel {
         return usersQuestionnairesIds.contains(id)
     }
     
-    private func observeQuestionnaires(on communityIds: [[String: String]]) {
-        communityIds.forEach { dic in
-            // observe Questionnaire
-            guard let id = dic["id"],
-                id != "" else { return }
-            Firestore.firestore().rx
-                .observeArray(
-                    QuestionnaireModel.Fields.self,
-                    collectionRef: CommunityModel.makeCollectionRef().document(id).collection(CollectionKey.questionnaire.rawValue)
-                )
-                .subscribe { [weak self] event in
-                    guard let vm = self else { return }
-                    switch event {
-                    case .next(let list):
-                        // FIXME: ちょっと汚い
-                        var target: Int = 0
-                        for (index, data) in communityIds.enumerated() where data["id"] == id {
-                            target = index
-                        }
-                        // すでに同じコミュニティのアンケートリストがあったら置き換え、なければ追加
-                        if vm.stashList.indices.contains(target) {
-                            vm.stashList.remove(at: target)
-                            vm.stashList.insert(list, at: target)
-                        } else {
-                            vm.stashList.append(list)
-                        }
-                        vm.questionnaireList.accept(vm.stashList)
-                    case .error(let error):
-                        debugPrint(error)
-                    case .completed:
-                        break
-                    }
-                }
-                .disposed(by: disposeBag)
-        }
-    }
-    
-    private func observeCommunities(on communityIds: [[String: String]]) {
-        var newList: [String] = []
-        communityIds.forEach { dic in
-            guard let id = dic["id"] else { return }
+    private func observeBelongingCommunities(on communityIds: [String?]) {
+        var newList: [(id: String, name: String)] = []
+        communityIds.forEach { id in
+            guard let id = id else { return }
             Firestore.firestore().rx
                 .observeModel(
                     CommunityModel.Fields.self,
                     documentRef: CommunityModel.makeCollectionRef().document(id)
                 )
-                .subscribe { [weak self] event in
-                    guard let vc = self else { return }
+                .subscribe { [unowned self] event in
                     switch event {
                     case .next(let community):
-                        newList.append(community.name)
-                        vc.communityNames.accept(newList)
+                        newList.append((id: community.id, name: community.name))
+                        if newList.count == communityIds.count {
+                            self.makeCommunityInfos.onNext(newList)
+                        }
                     case .error(let error):
                         debugPrint(error)
                     case .completed:
@@ -153,21 +105,58 @@ final class MainViewModel {
         }
     }
     
-    private func downloadImage(communities: [CommunityModel.Fields]) {
-        imageStashList = []
-        for (index, community) in communities.enumerated() {
+    private func downloadImage(communityNameWithIds: [(id: String, name: String)]) {
+        var communityInfoStashList: [(id: String, name: String, image: UIImage)] = []
+        communityNameWithIds.forEach { community in
             let storageRef = Storage.storage().reference()
-            let imageRef = storageRef.child("images/" + community.id + ".jpg")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [communityIconImages] (data, _) in
-                if let data = data,
-                    let image = UIImage(data: data),
-                    !communityIconImages.value.indices.contains(index) {
-                    self.imageStashList.append(image)
-                } else {
-                    self.imageStashList.append(Asset.picture.image)
+            let imageRef = storageRef.child("images/community/" + community.id + ".jpg")
+            imageRef.getData(maxSize: 10 * 1024 * 1024) { [unowned self] (data, error) in
+                if let error = error {
+                    debugPrint(error)
+                    communityInfoStashList.append((id: community.id, name: community.name, image: Asset.picture.image))
                 }
-                self.communityIconImages.accept(self.imageStashList)
+                if let data = data,
+                    let image = UIImage(data: data) {
+                    communityInfoStashList.append((id: community.id, name: community.name, image: image))
+                }
+                if communityInfoStashList.count == communityNameWithIds.count {
+                    self.makeCommunitySummary.onNext(communityInfoStashList)
+                }
             }
+        }
+    }
+    
+    private func observeQuestionnaires(on infos: [(id: String, name: String, image: UIImage)]) {
+        var stashList: [(id: String, name: String, image: UIImage, questionnaires: [QuestionnaireModel.Fields])] = []
+        infos.forEach { info in
+            // observe Questionnaire
+            Firestore.firestore().rx
+                .observeArray(
+                    QuestionnaireModel.Fields.self,
+                    collectionRef: CommunityModel.makeCollectionRef().document(info.id).collection(CollectionKey.questionnaire.rawValue)
+                )
+                .subscribe { [unowned self] event in
+                    
+                    switch event {
+                    case .next(let questionnaireList):
+                        stashList.append((
+                            id: info.id,
+                            name: info.name,
+                            image: info.image,
+                            questionnaires: questionnaireList
+                        ))
+                        if stashList.count == infos.count {
+                            self.summary.accept(stashList)
+                            stashList = []
+                        }
+                        SVProgressHUD.dismiss()
+                    case .error(let error):
+                        debugPrint(error)
+                    case .completed:
+                        break
+                    }
+                }
+                .disposed(by: disposeBag)
         }
     }
 }

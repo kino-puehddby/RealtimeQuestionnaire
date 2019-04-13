@@ -28,7 +28,7 @@ final class CreateQuestionnaireViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        guard let uid = S.getKeychain(.uid) else { return }
+        guard let uid = KeyAccessUtil.shared.getKeychain(.uid) else { return }
         let documentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(

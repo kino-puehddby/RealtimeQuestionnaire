@@ -16,7 +16,6 @@ import SnapKit
 final class MainViewController: UIViewController {
 
     @IBOutlet weak private var leftBarButton: UIBarButtonItem!
-    @IBOutlet weak private var rightBarButton: UIBarButtonItem!
     @IBOutlet weak private var tableView: UITableView!
     
     @IBOutlet weak private var createQuestionnaireButton: UIButton!
@@ -27,17 +26,24 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: ViewModelで必要なデータの管理をするようにする
-        
+                
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         deselectTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // TODO: Menuのアイコン画像の更新タイミングがおかしいのでどうにかする
+        guard let menuVC = slideMenuController()?.leftViewController as? MenuViewController else { return }
+        menuVC.viewModel.downloadIconImage()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,46 +57,35 @@ final class MainViewController: UIViewController {
         }
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MainTableViewCell.self)
     }
     
-    func bind() {
-        leftBarButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+    private func bindViews() {
+        leftBarButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.slideMenuController()?.openLeft()
             })
             .disposed(by: disposeBag)
         
-        rightBarButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.perform(segue: StoryboardSegue.Main.showSearch)
-            })
-            .disposed(by: disposeBag)
-        
-        createQuestionnaireButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        createQuestionnaireButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.Main.showCreateQuestionnaire)
             })
             .disposed(by: disposeBag)
         
-        answerQuestionnaireButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-//                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
-                self.tableView.reloadData()
+        answerQuestionnaireButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
+                self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
             })
             .disposed(by: disposeBag)
-        
-        Observable
-            .combineLatest(
-                viewModel.questionnaireList,
-                viewModel.user,
-                viewModel.communityNames,
-                viewModel.communityIconImages
-            )
-            .subscribe(onNext: { [unowned self] _ in
+    }
+    
+    private func bindViewModel() {
+        viewModel.summary.asDriver()
+            .drive(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -100,34 +95,30 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.questionnaireList.value.count
+        return viewModel.summary.value.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        // FIXME: デザイン修正
         let headerView = MainHeaderView.loadFromNib()
-        guard let user = viewModel.user.value,
-            let name = user.communities[section]["name"] else { return nil }
-        if user.communities.indices.contains(section) {
-            headerView.set(text: name)
-        }
-        if viewModel.communityIconImages.value.indices.contains(section) {
-            headerView.set(image: viewModel.communityIconImages.value[section])
+        if viewModel.summary.value.indices.contains(section) {
+            let image = viewModel.summary.value[section].image
+            let name = viewModel.summary.value[section].name
+            headerView.configure(name: name, image: image)
         }
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Main.TableView.sectionHeaderHeight
+        return Main.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.questionnaireList.value[section].count
+        return viewModel.summary.value[section].questionnaires.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MainTableViewCell.self)
-        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
+        let data = viewModel.summary.value[indexPath.section].questionnaires[indexPath.row]
         let title = data.title
         let answered = viewModel.answered(id: data.id)
         cell.configuration(title: title, answered: answered)
@@ -135,11 +126,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Main.TableView.cellHeight
+        return Main.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = viewModel.questionnaireList.value[indexPath.section][indexPath.row]
+        let data = (
+            communityName: viewModel.summary.value[indexPath.section].name,
+            communityIconImage: viewModel.summary.value[indexPath.section].image,
+            questionnaire: viewModel.summary.value[indexPath.section].questionnaires[indexPath.row]
+        )
         viewModel.selectedCellData.accept(data)
         perform(segue: StoryboardSegue.Main.showQuestionnaireDetail)
     }

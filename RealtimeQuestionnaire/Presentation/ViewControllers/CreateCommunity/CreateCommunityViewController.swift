@@ -10,7 +10,6 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import FirebaseStorage
 
 final class CreateCommunityViewController: UIViewController {
     
@@ -32,7 +31,8 @@ final class CreateCommunityViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +43,7 @@ final class CreateCommunityViewController: UIViewController {
         changeImageButton.setImage(appDelegate.photoLibraryImage, for: .normal)
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: CreateCommunityTableViewCell.self)
@@ -51,21 +51,21 @@ final class CreateCommunityViewController: UIViewController {
         photoLibraryManager = PhotoLibraryManager(parentViewController: self)
     }
     
-    func bind() {
-        changeImageButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+    private func bindViews() {
+        changeImageButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.photoLibraryManager.callPhotoLibrary()
             })
             .disposed(by: disposeBag)
         
-        createButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        createButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.viewModel.generateCommunityId()
             })
             .disposed(by: disposeBag)
         
-        inviteButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        inviteButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.CreateCommunity.showSearchUser)
             })
             .disposed(by: disposeBag)
@@ -73,20 +73,6 @@ final class CreateCommunityViewController: UIViewController {
         communityNameLabel.rx.text.orEmpty
             .distinctUntilChanged()
             .bind(to: viewModel.communityName)
-            .disposed(by: disposeBag)
-        
-        viewModel.completed
-            .subscribe(onNext: { [unowned self] status in
-                switch status {
-                case .success:
-                    guard let image = self.changeImageButton.imageView?.image,
-                        let navi = self.navigationController else { return }
-                    self.uploadFirebaseStorage(image: image)
-                    navi.popViewController(animated: true)
-                case .error(let error):
-                    debugPrint(error)
-                }
-            })
             .disposed(by: disposeBag)
         
         let isValid = communityNameLabel.rx.text
@@ -99,20 +85,25 @@ final class CreateCommunityViewController: UIViewController {
             .bind(to: communityNameInvalidLabel.rx.isHidden)
             .disposed(by: disposeBag)
         isValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.createButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: createButton.rx.backgroundColor)
             .disposed(by: disposeBag)
     }
     
-    func uploadFirebaseStorage(image: UIImage) {
-        // 保存したイメージをFirebaseStorageに保存する
-        let storageRef = Storage.storage().reference()
-        
-        if let data = image.pngData() {
-            let reference = storageRef.child("images/" + viewModel.communityId + ".jpg")
-            reference.putData(data)
-        }
+    private func bindViewModel() {
+        viewModel.completed
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    guard let image = self.changeImageButton.imageView?.image,
+                        let navi = self.navigationController else { return }
+                    self.viewModel.uploadFirebaseStorage(image: image)
+                    navi.popViewController(animated: true)
+                case .error(let error):
+                    debugPrint(error)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -132,7 +123,7 @@ extension CreateCommunityViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CreateCommunity.TableView.cellHeight
+        return CreateCommunity.cellHeight
     }
 }
 
@@ -144,8 +135,6 @@ extension CreateCommunityViewController: UINavigationControllerDelegate, UIImage
             appdelegate.photoLibraryImage = pickedImage
         }
         
-        let trimImageVC = StoryboardScene.TrimImage.trimImageViewController.instantiate()
-        trimImageVC.postDissmissionAction = { picker.dismiss(animated: true) } // コールバックを受け取る
-        picker.present(trimImageVC, animated: true)
+        picker.dismiss(animated: true)
     }
 }

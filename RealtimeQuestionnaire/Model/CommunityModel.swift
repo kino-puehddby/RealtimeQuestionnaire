@@ -17,12 +17,10 @@ struct CommunityModel: DatabaseCollection {
     var fields: CommunityModel.Fields?
     public struct Fields: Codable, Equatable {
         public let id: String // ID
-        public let iconUrl: String // アイコンURL
         public let name: String // コミュニティ名
         
-        public init(id: String, iconUrl: String, name: String) {
+        public init(id: String, name: String) {
             self.id = id
-            self.iconUrl = iconUrl
             self.name = name
         }
         static func == (lhs: CommunityModel.Fields, rhs: CommunityModel.Fields) -> Bool {

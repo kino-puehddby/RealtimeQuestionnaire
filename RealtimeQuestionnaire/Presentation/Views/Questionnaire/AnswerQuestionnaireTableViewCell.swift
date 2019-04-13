@@ -10,7 +10,7 @@ import UIKit
 
 import Reusable
 
-class AnswerQuestionnaireTableViewCell: UITableViewCell, NibReusable {
+final class AnswerQuestionnaireTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var choiceLabel: UILabel!
     @IBOutlet weak private var checkImage: UIImageView!

@@ -35,7 +35,8 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
         
         // この辺のTODOはゆくゆくはって感じ
         // TODO: メールアドレスを変更できるようにする
@@ -43,7 +44,7 @@ final class LoginViewController: UIViewController {
         // TODO: 後からGoogleと連携できるようにする
     }
     
-    func setup() {
+    private func setup() {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
         registeringEmail.delegate = self
@@ -52,29 +53,29 @@ final class LoginViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
-    func bind() {
-        loginButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+    private func bindViews() {
+        loginButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.viewModel.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
             })
             .disposed(by: disposeBag)
         
-        googleSignInButton.rx.tap
-            .subscribe(onNext: {
-                // 可能な場合はサイレントログイン
-                self.viewModel.isLoading.onNext(true)
+        googleSignInButton.rx.tap.asSignal()
+            .do(onNext: {
                 GIDSignIn.sharedInstance()?.signIn()
             })
+            .map { true }
+            .emit(to: viewModel.isLoading)
             .disposed(by: disposeBag)
         
-        registerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        registerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.perform(segue: StoryboardSegue.Login.showRegister, sender: nil)
             })
             .disposed(by: disposeBag)
         
-        sendPasswordReset.rx.tap
-            .subscribe(onNext: { [unowned self] in
+        sendPasswordReset.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
                 self.showResetPasswordAlert()
             })
             .disposed(by: disposeBag)
@@ -91,11 +92,12 @@ final class LoginViewController: UIViewController {
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
         isValid
-            .subscribe(onNext: { [unowned self] isValid in
-                self.loginButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
-            })
+            .map { $0 ? Asset.systemBlue.color : .lightGray }
+            .bind(to: loginButton.rx.backgroundColor)
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.isLoading
             .bind(to: rx.hud)
             .disposed(by: disposeBag)
@@ -105,7 +107,7 @@ final class LoginViewController: UIViewController {
                 self.viewModel.isLoading.onNext(false)
                 switch status {
                 case .success:
-                    self.switchMainViewController()
+                    self.validMemberInfoAndPresent()
                 case .error(let error):
                     self.showAlert(type: .ok, message: L10n.Alert.InvalidLogin.message, completion: {
                         self.registeringPassword.text = ""
@@ -116,7 +118,7 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func showResetPasswordAlert() {
+    private func showResetPasswordAlert() {
         let alert = UIAlertController(
             title: L10n.Alert.Auth.resetPassword,
             message: L10n.Alert.Auth.inputEmailAddress,
@@ -141,6 +143,15 @@ final class LoginViewController: UIViewController {
         }
         present(alert, animated: true)
     }
+    
+    private func validMemberInfoAndPresent() {
+        guard let user = viewModel.user.value else { return }
+        if user.nickname == nil || user.nickname == "" {
+            switchChangeMemberInfoController()
+        } else {
+            switchMainViewController()
+        }
+    }
 }
 
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
@@ -150,7 +161,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         if let error = error {
             showAlert(
                 type: .ok,
-                title: "エラー",
+                title: L10n.Common.error,
                 message: error.localizedDescription
             )
             return
@@ -178,7 +189,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             if let user = user {
                 self.viewModel.set(uid: user.user.uid)
             }
-            self.switchMainViewController()
+            self.validMemberInfoAndPresent()
         }
     }
     
