@@ -54,12 +54,11 @@ final class ChangeMemberInfoViewController: UIViewController {
     
     private func setup() {
         viewModel = ChangeMemberInfoViewModel(belongingCommunityInfos: belongingCommunityInfos)
+        photoLibraryManager = PhotoLibraryManager(parentViewController: self)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: ChangeMemberInfoTableViewCell.self)
-        
-        photoLibraryManager = PhotoLibraryManager(parentViewController: self)
         
         switch type {
         case .register:
