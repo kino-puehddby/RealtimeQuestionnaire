@@ -159,7 +159,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         if let error = error {
             showAlert(
                 type: .ok,
-                title: "エラー",
+                title: L10n.Common.error,
                 message: error.localizedDescription
             )
             return

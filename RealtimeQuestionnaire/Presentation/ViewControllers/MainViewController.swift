@@ -96,7 +96,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        // FIXME: デザイン修正
         let headerView = MainHeaderView.loadFromNib()
         if viewModel.summary.value.indices.contains(section) {
             let image = viewModel.summary.value[section].image

@@ -15,7 +15,6 @@ final class ServicesUtil {
     private init() {}
     static let shared = ServicesUtil()
     private let keychain = Keychain(service: SERVICE_NAME)
-    private let userDefaults = UserDefaults.standard
 }
 
 // MARK: Keychain
@@ -29,30 +28,33 @@ extension ServicesUtil {
     }
 }
 
-enum Keychain_Keys: String {
-    case uid
-}
-
 // MARK: UserDefaults
 extension ServicesUtil {
     func setDefaultUserDefaults() {
-        userDefaults.register(defaults: [UserDefaultsKeys.isLogin.rawValue: true])
+        UserDefaults.standard.register(defaults: [UserDefaultsKeys.isFirstLaunch.rawValue: true])
     }
     
     func setUserDefaults<T>(_ key: UserDefaultsKeys, _ value: T) {
-        userDefaults[key] = value
+        UserDefaults.standard[key] = value
     }
     
     func getUserDefaults<T: Any>(_ key: UserDefaultsKeys) -> T? {
-        return userDefaults[key]
+        return UserDefaults.standard[key]
     }
     
     func removeUserDefaults(_ key: UserDefaultsKeys) {
-        userDefaults.remove(key)
+        UserDefaults.standard.remove(key)
     }
 }
 
-enum UserDefaults_Keys: String {
-    // Sample
-    case isFirstLaunch
+extension ServicesUtil {
+    // MARK: Access Keys
+    enum KeychainKeys: String {
+        case uid
+    }
+    
+    enum UserDefaultsKeys: String {
+        // Sample
+        case isFirstLaunch
+    }
 }

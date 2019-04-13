@@ -24,7 +24,7 @@ final class MenuViewModel {
     
     init() {
         SVProgressHUD.show()
-        guard let uid = S.getKeychain(.uid) else { return }
+        guard let uid = ServicesUtil.getKeychain(.uid) else { return }
         let documentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(

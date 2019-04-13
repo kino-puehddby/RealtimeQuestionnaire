@@ -49,15 +49,15 @@ final class LoginViewModel {
     }
     
     func set(uid: String) {
-        if S.getKeychain(.uid) == nil {
-            S.setKeychain(.uid, uid)
+        if ServicesUtil.getKeychain(.uid) == nil {
+            ServicesUtil.setKeychain(.uid, uid)
         }
         getUserAction.onNext(())
     }
     
     func getUser() {
         // observe User
-        guard let uid = S.getKeychain(.uid) else { return }
+        guard let uid = ServicesUtil.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(

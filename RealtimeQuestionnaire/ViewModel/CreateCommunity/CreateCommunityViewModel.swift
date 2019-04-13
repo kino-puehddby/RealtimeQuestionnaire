@@ -28,7 +28,7 @@ final class CreateCommunityViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        guard let uid = S.getKeychain(.uid) else { return }
+        guard let uid = ServicesUtil.getKeychain(.uid) else { return }
         userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .get(

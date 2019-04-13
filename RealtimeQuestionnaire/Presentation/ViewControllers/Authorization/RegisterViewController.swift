@@ -110,7 +110,6 @@ final class RegisterViewController: UIViewController {
                 switch result {
                 case .success:
                     break
-                    // TODO: ユーザー情報設定画面へ遷移させる
                 case .error(let error):
                     debugPrint(error)
                 }

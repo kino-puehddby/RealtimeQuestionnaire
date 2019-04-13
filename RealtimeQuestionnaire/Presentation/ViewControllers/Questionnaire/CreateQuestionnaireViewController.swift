@@ -72,7 +72,7 @@ final class CreateQuestionnaireViewController: UIViewController {
         
         createQuestionnaireButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                guard let uid = S.getKeychain(.uid) else { return }
+                guard let uid = ServicesUtil.getKeychain(.uid) else { return }
                 let fields = QuestionnaireModel.Fields(
                     id: "",
                     authorId: uid,

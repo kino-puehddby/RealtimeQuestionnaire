@@ -155,10 +155,5 @@ extension ChangeMemberInfoViewController: UINavigationControllerDelegate, UIImag
             viewModel.iconImage.accept(pickedImage)
         }
         picker.dismiss(animated: true)
-        
-        // TODO: おかしい
-//        let trimImageVC = StoryboardScene.TrimImage.trimImageViewController.instantiate()
-//        trimImageVC.postDissmissionAction = { picker.dismiss(animated: true) } // コールバックを受け取る
-//        picker.present(trimImageVC, animated: true)
     }
 }
