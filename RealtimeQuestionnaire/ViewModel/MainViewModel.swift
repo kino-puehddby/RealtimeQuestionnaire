@@ -30,7 +30,7 @@ final class MainViewModel {
         SVProgressHUD.show()
         
         // observe User
-        guard let uid = ServicesUtil.getKeychain(.uid) else { return }
+        guard let uid = ServicesUtil.shared.getKeychain(.uid) else { return }
         let userDocumentRef = UserModel.makeDocumentRef(id: uid)
         Firestore.firestore().rx
             .observeModel(
