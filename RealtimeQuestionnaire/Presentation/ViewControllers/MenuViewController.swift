@@ -45,13 +45,13 @@ final class MenuViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MenuTableViewCell.self)
     }
     
-    func bind() {
+    private func bind() {
         viewModel.user
             .map { $0?.nickname }
             .bind(to: nicknameLabel.rx.text)
@@ -62,7 +62,7 @@ final class MenuViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func logout() {
+    private func logout() {
         do {
             try Auth.auth().signOut()
             showAlert(type: .okCancel, title: L10n.Alert.logout, message: L10n.Alert.Logout.message) { [weak self] in

@@ -47,8 +47,8 @@ extension KeyAccessUtil {
     }
 }
 
+// MARK: Access Keys
 extension KeyAccessUtil {
-    // MARK: Access Keys
     enum KeychainKeys: String {
         case uid
     }

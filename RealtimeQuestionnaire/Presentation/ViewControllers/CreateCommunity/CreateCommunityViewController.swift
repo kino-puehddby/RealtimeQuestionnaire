@@ -42,7 +42,7 @@ final class CreateCommunityViewController: UIViewController {
         changeImageButton.setImage(appDelegate.photoLibraryImage, for: .normal)
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: CreateCommunityTableViewCell.self)
@@ -50,7 +50,7 @@ final class CreateCommunityViewController: UIViewController {
         photoLibraryManager = PhotoLibraryManager(parentViewController: self)
     }
     
-    func bind() {
+    private func bind() {
         changeImageButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.photoLibraryManager.callPhotoLibrary()

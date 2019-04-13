@@ -14,10 +14,6 @@ class MainTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var unansweredFlug: UIView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     func configuration(title: String, answered: Bool) {
         titleLabel.text = title
         unansweredFlug.isHidden = answered

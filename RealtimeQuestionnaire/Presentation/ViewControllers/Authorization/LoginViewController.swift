@@ -43,7 +43,7 @@ final class LoginViewController: UIViewController {
         // TODO: 後からGoogleと連携できるようにする
     }
     
-    func setup() {
+    private func setup() {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
         registeringEmail.delegate = self
@@ -52,7 +52,7 @@ final class LoginViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
-    func bind() {
+    private func bind() {
         loginButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.viewModel.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
@@ -116,7 +116,7 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func showResetPasswordAlert() {
+    private func showResetPasswordAlert() {
         let alert = UIAlertController(
             title: L10n.Alert.Auth.resetPassword,
             message: L10n.Alert.Auth.inputEmailAddress,
@@ -142,7 +142,7 @@ final class LoginViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func validMemberInfoAndPresent() {
+    private func validMemberInfoAndPresent() {
         guard let user = viewModel.user.value else { return }
         if user.nickname == nil || user.nickname == "" {
             switchChangeMemberInfoController()

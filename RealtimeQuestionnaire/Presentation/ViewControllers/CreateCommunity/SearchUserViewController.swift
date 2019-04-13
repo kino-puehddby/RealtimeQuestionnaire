@@ -28,13 +28,13 @@ final class SearchUserViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: SearchUserTableViewCell.self)
     }
     
-    func bind() {
+    private func bind() {
         decideButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.pop()
@@ -62,7 +62,7 @@ final class SearchUserViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func pop() {
+    private func pop() {
         guard let navi = navigationController,
             let createCommunityVC = navi.viewControllers[navi.viewControllers.count - 2] as? CreateCommunityViewController else { return }
         createCommunityVC.checkList.accept(viewModel.checkList.value)

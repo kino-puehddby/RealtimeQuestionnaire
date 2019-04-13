@@ -33,7 +33,7 @@ final class AnswerQuestionnaireViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         viewModel = AnswerQuestionnaireViewModel(data: data)
         
         tableView.delegate = self
@@ -45,7 +45,7 @@ final class AnswerQuestionnaireViewController: UIViewController {
         titleLabel.text = data.questionnaire.title
     }
     
-    func bind() {
+    private func bind() {
         viewModel.authorName
             .bind(to: authorNameLabel.rx.text)
             .disposed(by: disposeBag)

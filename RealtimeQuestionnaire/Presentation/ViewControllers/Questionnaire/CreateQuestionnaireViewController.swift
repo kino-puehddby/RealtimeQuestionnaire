@@ -36,7 +36,7 @@ final class CreateQuestionnaireViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: ChoiceTableViewCell.self)
@@ -47,7 +47,7 @@ final class CreateQuestionnaireViewController: UIViewController {
         bindScrollTextFieldWhenShowKeyboard()
     }
     
-    func bind() {
+    private func bind() {
         addCellButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.addAction()
@@ -167,7 +167,7 @@ final class CreateQuestionnaireViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func validCells() {
+    private func validCells() {
         guard let cells = tableView.visibleCells as? [ChoiceTableViewCell] else { return }
         let invalid = cells.contains { $0.valid.value == false }
         viewModel.cellTextFieldValid.accept(!invalid)

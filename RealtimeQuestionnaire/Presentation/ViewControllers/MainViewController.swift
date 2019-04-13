@@ -56,13 +56,13 @@ final class MainViewController: UIViewController {
         }
     }
     
-    func setup() {
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: MainTableViewCell.self)
     }
     
-    func bind() {
+    private func bind() {
         leftBarButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.slideMenuController()?.openLeft()
@@ -100,7 +100,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if viewModel.summary.value.indices.contains(section) {
             let image = viewModel.summary.value[section].image
             let name = viewModel.summary.value[section].name
-            headerView.set(name: name, image: image)
+            headerView.configure(name: name, image: image)
         }
         return headerView
     }

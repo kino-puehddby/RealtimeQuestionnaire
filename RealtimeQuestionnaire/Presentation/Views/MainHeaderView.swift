@@ -21,7 +21,7 @@ final class MainHeaderView: UIView, NibLoadable {
         imageView.alpha = 0.2
     }
     
-    func set(name: String, image: UIImage) {
+    func configure(name: String, image: UIImage) {
         label.text = name
         imageView.image = image
     }

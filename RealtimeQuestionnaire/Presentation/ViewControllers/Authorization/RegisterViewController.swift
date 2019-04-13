@@ -34,7 +34,7 @@ final class RegisterViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         registeringEmail.delegate = self
         registeringPassword.delegate = self
         
@@ -42,7 +42,7 @@ final class RegisterViewController: UIViewController {
         registeringConfirmationPassword.isSecureTextEntry = true
     }
     
-    func bind() {
+    private func bind() {
         let isPasswordValid = registeringConfirmationPassword.rx.text
             .map { [unowned self] text in
                 text != "" && text != nil && self.registeringPassword.text == text
@@ -70,7 +70,7 @@ final class RegisterViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func register(email: String?, password: String?) {
+    private func register(email: String?, password: String?) {
         guard let email = email, let password = password else { return }
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in

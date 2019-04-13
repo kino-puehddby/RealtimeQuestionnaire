@@ -29,14 +29,14 @@ final class QuestionnaireDetailContainerViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         viewModel = QuestionnaireDetailViewModel(
             data: data,
             user: user
         )
     }
     
-    func bind() {
+    private func bind() {
         viewModel.mode
             .subscribe(onNext: { [unowned self] mode in
                 switch mode {

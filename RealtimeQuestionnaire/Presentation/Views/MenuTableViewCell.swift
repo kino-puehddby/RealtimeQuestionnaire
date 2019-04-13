@@ -14,11 +14,6 @@ class MenuTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak private var label: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     func configure(text: String) {
         label.text = text
     }

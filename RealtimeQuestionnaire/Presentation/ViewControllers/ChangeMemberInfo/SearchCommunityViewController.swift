@@ -28,7 +28,7 @@ final class SearchCommunityViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         viewModel = SearchCommunityViewModel(infos: belongingCommunityInfos)
         
         tableView.delegate = self
@@ -36,7 +36,7 @@ final class SearchCommunityViewController: UIViewController {
         tableView.register(cellType: SearchCommunityTableViewCell.self)
     }
     
-    func bind() {
+    private func bind() {
         decideButton.rx.tap.asSignal()
             .map { [unowned self] in
                 let cells = self.tableView.visibleCells as! [SearchCommunityTableViewCell]
@@ -66,7 +66,7 @@ final class SearchCommunityViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func pop() {
+    private func pop() {
         guard let navi = navigationController,
             let changeMemberInfoVC = navi.viewControllers[navi.viewControllers.count - 2] as? ChangeMemberInfoViewController else { return }
         changeMemberInfoVC.viewModel.belongingCommunityInfos.accept(viewModel.belongingCommunityInfos.value)

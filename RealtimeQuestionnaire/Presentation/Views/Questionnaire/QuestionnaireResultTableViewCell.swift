@@ -16,11 +16,6 @@ class QuestionnaireResultTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak private var choiceLabel: UILabel!
     @IBOutlet weak private var percentLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     func configure(color: UIColor, choice: String, percent: Double) {
         choiceLabel.text = choice
         let rounded = round(percent * 10) / 10

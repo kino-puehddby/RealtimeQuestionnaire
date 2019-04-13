@@ -16,11 +16,6 @@ final class CreateCommunityTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak private var nicknameLabel: UILabel!
     @IBOutlet weak private var idLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     func configure(image: UIImage, nickname: String, id: String) {
         self.profileImageView.image = image
         nicknameLabel.text = nickname

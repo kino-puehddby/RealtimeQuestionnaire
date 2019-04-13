@@ -34,7 +34,7 @@ final class QuestionnaireResultViewController: UIViewController {
         bind()
     }
     
-    func setup() {
+    private func setup() {
         viewModel = QuestionnaireResultViewModel(data: data)
         
         tableView.delegate = self
@@ -46,7 +46,7 @@ final class QuestionnaireResultViewController: UIViewController {
         titleLabel.text = data.questionnaire.title
     }
     
-    func bind() {
+    private func bind() {
         viewModel.percentValues
             .subscribe(onNext: { [unowned self] values in
                 var pieChartEntries: [PieChartDataEntry] = []
@@ -71,7 +71,7 @@ final class QuestionnaireResultViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func refreshPieChartView(dataList: [PieChartDataEntry]) {
+    private func refreshPieChartView(dataList: [PieChartDataEntry]) {
         let pieSet = PieChartDataSet(values: dataList, label: nil)
         pieSet.colors = ChartColorTemplates.vordiplom()
         let pieChartData = PieChartData(dataSet: pieSet)
