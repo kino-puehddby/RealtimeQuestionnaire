@@ -8,6 +8,7 @@
 
 import Foundation
 
+import UIKit
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
