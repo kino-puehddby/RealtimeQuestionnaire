@@ -31,7 +31,7 @@ final class QuestionnaireResultViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViewModel()
     }
     
     private func setup() {
@@ -46,7 +46,7 @@ final class QuestionnaireResultViewController: UIViewController {
         titleLabel.text = data.questionnaire.title
     }
     
-    private func bind() {
+    private func bindViewModel() {
         viewModel.percentValues
             .subscribe(onNext: { [unowned self] values in
                 var pieChartEntries: [PieChartDataEntry] = []

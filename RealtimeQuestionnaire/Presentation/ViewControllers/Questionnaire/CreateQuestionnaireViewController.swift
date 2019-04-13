@@ -33,7 +33,8 @@ final class CreateQuestionnaireViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     private func setup() {
@@ -47,7 +48,7 @@ final class CreateQuestionnaireViewController: UIViewController {
         bindScrollTextFieldWhenShowKeyboard()
     }
     
-    private func bind() {
+    private func bindViews() {
         addCellButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.addAction()
@@ -80,36 +81,6 @@ final class CreateQuestionnaireViewController: UIViewController {
                     choices: self.viewModel.choicesList.value
                 )
                 self.viewModel.postQuestionnaire(fields: fields)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.communities
-            .skip(1)
-            .distinctUntilChanged()
-            .map { dics in
-                dics.map { dic in
-                    dic["name"] ?? ""
-                }
-            }
-            .subscribe(onNext: { [unowned self] list in
-                self.communityPickerField.setup(dataList: list)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.postCompleted
-            .subscribe(onNext: { [unowned self] status in
-                switch status {
-                case .success:
-                    // FIXME: トースト表示したい
-                    self.navigationController?.popViewController(animated: true)
-                case .error(let error):
-                    self.showAlert(
-                        type: .custom,
-                        title: L10n.Alert.Questionnaire.failedToCreate,
-                        actionTitle: L10n.Common.retry
-                    )
-                    debugPrint(error)
-                }
             })
             .disposed(by: disposeBag)
         
@@ -164,6 +135,38 @@ final class CreateQuestionnaireViewController: UIViewController {
             .disposed(by: disposeBag)
         tapEvent
             .bind(to: viewModel.viewTap)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewModel() {
+        viewModel.communities
+            .skip(1)
+            .distinctUntilChanged()
+            .map { dics in
+                dics.map { dic in
+                    dic["name"] ?? ""
+                }
+            }
+            .subscribe(onNext: { [unowned self] list in
+                self.communityPickerField.setup(dataList: list)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.postCompleted
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    // FIXME: トースト表示したい
+                    self.navigationController?.popViewController(animated: true)
+                case .error(let error):
+                    self.showAlert(
+                        type: .custom,
+                        title: L10n.Alert.Questionnaire.failedToCreate,
+                        actionTitle: L10n.Common.retry
+                    )
+                    debugPrint(error)
+                }
+            })
             .disposed(by: disposeBag)
     }
     

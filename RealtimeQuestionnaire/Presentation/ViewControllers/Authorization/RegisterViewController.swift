@@ -31,7 +31,7 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
     }
     
     private func setup() {
@@ -42,7 +42,7 @@ final class RegisterViewController: UIViewController {
         registeringConfirmationPassword.isSecureTextEntry = true
     }
     
-    private func bind() {
+    private func bindViews() {
         let isPasswordValid = registeringConfirmationPassword.rx.text
             .map { [unowned self] text in
                 text != "" && text != nil && self.registeringPassword.text == text

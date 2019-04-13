@@ -35,7 +35,8 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
         
         // この辺のTODOはゆくゆくはって感じ
         // TODO: メールアドレスを変更できるようにする
@@ -52,7 +53,7 @@ final class LoginViewController: UIViewController {
         registeringPassword.isSecureTextEntry = true
     }
     
-    private func bind() {
+    private func bindViews() {
         loginButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.viewModel.login(email: self.registeringEmail.text, password: self.registeringPassword.text)
@@ -95,7 +96,9 @@ final class LoginViewController: UIViewController {
                 self.loginButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.isLoading
             .bind(to: rx.hud)
             .disposed(by: disposeBag)

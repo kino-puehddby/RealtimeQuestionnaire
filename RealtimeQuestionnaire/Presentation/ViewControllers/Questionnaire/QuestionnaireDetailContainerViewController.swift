@@ -26,7 +26,7 @@ final class QuestionnaireDetailContainerViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViewModel()
     }
     
     private func setup() {
@@ -36,7 +36,7 @@ final class QuestionnaireDetailContainerViewController: UIViewController {
         )
     }
     
-    private func bind() {
+    private func bindViewModel() {
         viewModel.mode
             .subscribe(onNext: { [unowned self] mode in
                 switch mode {

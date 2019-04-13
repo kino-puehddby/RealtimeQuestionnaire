@@ -30,7 +30,8 @@ final class AnswerQuestionnaireViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     private func setup() {
@@ -45,7 +46,18 @@ final class AnswerQuestionnaireViewController: UIViewController {
         titleLabel.text = data.questionnaire.title
     }
     
-    private func bind() {
+    private func bindViews() {
+        answerButton.rx.tap.asSignal()
+            .emit(onNext: { [unowned self] in
+                guard let cells = self.tableView.visibleCells as? [AnswerQuestionnaireTableViewCell] else { return }
+                for (index, cell) in cells.enumerated() where cell.isChecked {
+                    self.viewModel.answer(index: index)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewModel() {
         viewModel.authorName
             .bind(to: authorNameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -58,15 +70,6 @@ final class AnswerQuestionnaireViewController: UIViewController {
                     navi.popViewController(animated: true)
                 case .error(let error):
                     debugPrint(error)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        answerButton.rx.tap.asSignal()
-            .emit(onNext: { [unowned self] in
-                guard let cells = self.tableView.visibleCells as? [AnswerQuestionnaireTableViewCell] else { return }
-                for (index, cell) in cells.enumerated() where cell.isChecked {
-                    self.viewModel.answer(index: index)
                 }
             })
             .disposed(by: disposeBag)

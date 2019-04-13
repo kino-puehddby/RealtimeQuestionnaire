@@ -25,7 +25,8 @@ final class SearchCommunityViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     private func setup() {
@@ -36,7 +37,7 @@ final class SearchCommunityViewController: UIViewController {
         tableView.register(cellType: SearchCommunityTableViewCell.self)
     }
     
-    private func bind() {
+    private func bindViews() {
         decideButton.rx.tap.asSignal()
             .map { [unowned self] in
                 let cells = self.tableView.visibleCells as! [SearchCommunityTableViewCell]
@@ -50,7 +51,9 @@ final class SearchCommunityViewController: UIViewController {
         filterTextField.rx.text
             .bind(to: viewModel.filterTrigger)
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.communityInfos
             .skip(1)
             .subscribe(onNext: { [unowned self] _ in

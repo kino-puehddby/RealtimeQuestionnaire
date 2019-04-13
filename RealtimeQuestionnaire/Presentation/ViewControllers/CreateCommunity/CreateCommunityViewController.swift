@@ -31,7 +31,8 @@ final class CreateCommunityViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +51,7 @@ final class CreateCommunityViewController: UIViewController {
         photoLibraryManager = PhotoLibraryManager(parentViewController: self)
     }
     
-    private func bind() {
+    private func bindViews() {
         changeImageButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.photoLibraryManager.callPhotoLibrary()
@@ -74,20 +75,6 @@ final class CreateCommunityViewController: UIViewController {
             .bind(to: viewModel.communityName)
             .disposed(by: disposeBag)
         
-        viewModel.completed
-            .subscribe(onNext: { [unowned self] status in
-                switch status {
-                case .success:
-                    guard let image = self.changeImageButton.imageView?.image,
-                        let navi = self.navigationController else { return }
-                    self.viewModel.uploadFirebaseStorage(image: image)
-                    navi.popViewController(animated: true)
-                case .error(let error):
-                    debugPrint(error)
-                }
-            })
-            .disposed(by: disposeBag)
-        
         let isValid = communityNameLabel.rx.text
             .map { $0 != nil && $0 != "" }
             .share(replay: 1)
@@ -100,6 +87,22 @@ final class CreateCommunityViewController: UIViewController {
         isValid
             .subscribe(onNext: { [unowned self] isValid in
                 self.createButton.backgroundColor = isValid ? Asset.systemBlue.color : .lightGray
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewModel() {
+        viewModel.completed
+            .subscribe(onNext: { [unowned self] status in
+                switch status {
+                case .success:
+                    guard let image = self.changeImageButton.imageView?.image,
+                        let navi = self.navigationController else { return }
+                    self.viewModel.uploadFirebaseStorage(image: image)
+                    navi.popViewController(animated: true)
+                case .error(let error):
+                    debugPrint(error)
+                }
             })
             .disposed(by: disposeBag)
     }

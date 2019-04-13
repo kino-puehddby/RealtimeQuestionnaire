@@ -35,7 +35,8 @@ final class ChangeMemberInfoViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +69,7 @@ final class ChangeMemberInfoViewController: UIViewController {
         }
     }
     
-    private func bind() {
+    private func bindViews() {
         changeImageButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.photoLibraryManager.callPhotoLibrary()
@@ -95,7 +96,9 @@ final class ChangeMemberInfoViewController: UIViewController {
                 self.viewModel.updateMemberInfo()
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.iconImage
             .skip(1)
             .subscribe(onNext: { [unowned self] image in

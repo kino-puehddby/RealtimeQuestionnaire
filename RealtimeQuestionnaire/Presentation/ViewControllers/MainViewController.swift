@@ -28,7 +28,8 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
                 
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +63,7 @@ final class MainViewController: UIViewController {
         tableView.register(cellType: MainTableViewCell.self)
     }
     
-    private func bind() {
+    private func bindViews() {
         leftBarButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.slideMenuController()?.openLeft()
@@ -80,7 +81,9 @@ final class MainViewController: UIViewController {
                 self.perform(segue: StoryboardSegue.Main.showUnansweredQuestionnaireList)
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.summary
             .subscribe(onNext: { [unowned self] _ in
                 self.tableView.reloadData()

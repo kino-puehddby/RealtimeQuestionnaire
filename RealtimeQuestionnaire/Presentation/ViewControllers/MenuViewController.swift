@@ -42,7 +42,7 @@ final class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViewModel()
     }
     
     private func setup() {
@@ -51,7 +51,7 @@ final class MenuViewController: UIViewController {
         tableView.register(cellType: MenuTableViewCell.self)
     }
     
-    private func bind() {
+    private func bindViewModel() {
         viewModel.user
             .map { $0?.nickname }
             .bind(to: nicknameLabel.rx.text)

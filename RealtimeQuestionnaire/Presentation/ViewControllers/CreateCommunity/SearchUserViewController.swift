@@ -25,7 +25,8 @@ final class SearchUserViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        bind()
+        bindViews()
+        bindViewModel()
     }
     
     private func setup() {
@@ -34,7 +35,7 @@ final class SearchUserViewController: UIViewController {
         tableView.register(cellType: SearchUserTableViewCell.self)
     }
     
-    private func bind() {
+    private func bindViews() {
         decideButton.rx.tap.asSignal()
             .emit(onNext: { [unowned self] in
                 self.pop()
@@ -44,7 +45,9 @@ final class SearchUserViewController: UIViewController {
         filterTextField.rx.text
             .bind(to: viewModel.filterTrigger)
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindViewModel() {
         viewModel.checkList
             .subscribe(onNext: { [unowned self] list in
                 guard let cells = self.tableView.visibleCells as? [SearchUserTableViewCell] else { return }
