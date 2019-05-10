@@ -10,6 +10,10 @@ def install_pods
     pod 'SwiftLint', '~> 0.27.0'
 
     # Firebase
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Firestore’
+    pod 'Firebase/Storage'
     pod 'GoogleSignIn'
 end
 
