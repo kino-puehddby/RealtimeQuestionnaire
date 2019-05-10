@@ -15,9 +15,3 @@ github "alickbass/CodableFirebase"
 
 # KeyChain
 github "kishikawakatsumi/KeychainAccess"
-
-# Firebase
-binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
-binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAuthBinary.json"
-binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseFirestoreBinary.json"
-binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseStorageBinary.json"
